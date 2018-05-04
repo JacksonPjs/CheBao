@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="@dimen/home_margin_top"
+    android:background="@drawable/bg_white_circular"
+    android:layout_marginLeft="@dimen/home_margin"
+    android:layout_marginRight="@dimen/home_margin"
+
+    >
+    <LinearLayout
+        android:id="@+id/gonggao"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+
+            />
+
+        <TextSwitcher
+            android:id="@+id/textview_auto_roll"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:inAnimation="@anim/push_up_in"
+            android:minHeight="40dp"
+            android:outAnimation="@anim/push_up_out"></TextSwitcher>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/go" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/bg_huise" />
+
+    <include layout="@layout/four_bottom" />
+</LinearLayout>

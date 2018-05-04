@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_huise"
+    android:orientation="vertical">
+    <include layout="@layout/activity_detatils_item1"></include>
+    <include layout="@layout/activity_details_item2"></include>
+
+
+
+
+    <TextView
+        android:id="@+id/buy"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom"
+        android:layout_weight="1"
+        android:height="50dp"
+        android:background="@color/text_org"
+        android:gravity="center"
+        android:text="立即购买"
+        android:textColor="#fff" />
+
+</LinearLayout>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_huise"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                >
+
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/title_hight"
+                    android:layout_centerInParent="true"
+                    android:background="@color/ll_nor"
+                    android:gravity="center"
+                    android:text="@string/app_name"
+                    android:textColor="@color/org_home"
+                    android:textSize="@dimen/title_size"
+                    android:textStyle="bold"
+
+                    />
+
+                <include layout="@layout/line_match_parent"></include>
+
+            </LinearLayout>
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/home_margin"
+                android:background="@drawable/elevation_home_bg">
+                <com.pvj.xlibrary.banner.Banner
+
+                    android:id="@+id/main_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="155dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    tools:background="@mipmap/banner"
+                    tools:visibility="gone"
+
+                    />
+
+                <com.pvj.xlibrary.banner.BannerIndicator
+                    android:id="@+id/indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    tools:background="@mipmap/zuobiao_dangqian_banner"
+                    android:background="#00000000" />
+
+
+            </RelativeLayout>
+
+            <include layout="@layout/home_item_three" />
+
+            <include
+                layout="@layout/home_item_four"
+                tools:visibility="gone"
+
+                />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/home_margin"
+                android:background="@drawable/elevation_home_bg"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    style="@style/Home_padding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_left_round"
+                    android:text="@string/jingppin"
+                    android:textColor="@color/white" />
+
+
+                <TextView
+                    style="@style/Home_padding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="@dimen/home_margin"
+                    android:background="@drawable/rect_rounded_left_right_arc"
+                    android:text="@string/xianshijia"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_samll_size"
+                    />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/home_margin"
+                    >
+                    <TextView
+                        android:id="@+id/xinshou"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/home_five_margin"
+                        android:text="新手专享4月"
+                        android:textColor="@color/black_home_four_midle"
+                        android:textSize="@dimen/text_midle_size" />
+
+
+                    <TextView
+                        android:id="@+id/tuijian_lilv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/xinshou"
+                        android:layout_marginTop="@dimen/home_margin"
+                        android:layout_weight="1"
+                        android:text="7.8%+2%"
+                        android:textColor="@color/black_home_four_larger"
+                        android:textSize="@dimen/text_large_size"
+                        tools:text="7.8%+2%" />
+
+                    <TextView
+                        android:id="@+id/tuijian_date"
+                        android:layout_alignBottom="@+id/tuijian_lilv"
+                        android:layout_marginLeft="180dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/home_margin"
+                        android:layout_weight="1"
+                        android:text="投资期限：15天"
+                        android:textColor="@color/black_home_four_midle"
+                        android:textSize="@dimen/text_samll_size"
+
+                        />
+
+
+                    <TextView
+                        android:id="@+id/tuijian_nianhua"
+                        android:layout_below="@+id/tuijian_lilv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/home_margin"
+                        android:layout_weight="1"
+                        android:text="年化收益"
+                        android:textColor="@color/black_home_four_midle"
+                        android:textSize="@dimen/text_samll_size" />
+
+                    <TextView
+                        android:id="@+id/tuijian_fangshi"
+                        android:layout_alignTop="@+id/tuijian_nianhua"
+                        android:layout_alignStart="@+id/tuijian_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="收益方式：满标计息，到期还本息"
+                        android:textColor="@color/black_home_four_midle"
+                        android:textSize="@dimen/text_samll_size" />
+
+                        <com.chebao.widget.ProgressSeek
+                            android:id="@+id/progressBar"
+                            android:layout_width="match_parent"
+                            android:layout_below="@+id/tuijian_fangshi"
+
+                            android:layout_height="30dp"
+                            android:layout_marginTop="@dimen/home_margin"
+                            />
+
+
+
+
+
+                </RelativeLayout>
+
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

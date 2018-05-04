@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">车宝金融</string>\
+    <string name="home">首页</string>
+    <string name="money">投资</string>
+    <string name="about">发现</string>
+    <string name="mine">我的</string>
+    <string name="xinrenhaoli">新人壕礼</string>
+    <string name="xinxi">信息披露</string>
+    <string name="anquan">安全保障</string>
+    <string name="tuijian">推荐有礼</string>
+    <string name="xianshijia">限时加息2%</string>
+    <string name="nianhuashouyi">年化收益</string>
+    <string name="linghuocunqu">灵活存取</string>
+    <string name="dangri">当日计息</string>
+    <string name="gaoxiao">高效回报</string>
+    <string name="liji">立即抢购</string>
+    <string name="jingppin">精品推荐</string>
+    <string name="touziqixian">投资期限</string>
+    <string name="shengyuyue">剩余余额</string>
+    <string name="shengyutime">剩余时间</string>
+
+
+    <string name="details_item1_1">1.存入当日即起息，次日结息</string>
+    <string name="details_item1_2">2.次日结息后，利息发放刀账户余额中</string>
+    <string name="details_item5_1">锁定期后随时赎回</string>
+
+    <string name="mine_count">我的红包</string>
+    <string name="discount_dj_item1">· 在投资时使用，只计算其额外收益；</string>
+    <string name="discount_dj_item2">· 该券最高使用比例是投资额的1%；</string>
+    <string name="discount_dj_item3">· 该券不与其他优惠券同时使用</string>
+    <string name="discount_jx_item1">· 限新手标使用，该券限用一次；</string>
+    <string name="discount_jx_item2">· 用户最终可获得其投资产生的收益；</string>
+</resources>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:orientation="vertical">
+
+    <!-- 普通底部导航 -->
+    <LinearLayout
+        android:id="@+id/main_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_bottom"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/re_weixin"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/home_bottom_bottom"
+            android:layout_marginTop="@dimen/home_bottom_top"
+            android:layout_weight="1"
+            android:onClick="onTabClicked"
+            >
+
+
+            <ImageView
+                android:id="@+id/ib_weixin"
+                style="@style/Home_bottom_imageview"
+                android:src="@drawable/tab_one" />
+
+            <TextView
+                android:id="@+id/tv_weixin"
+                android:layout_below="@id/ib_weixin"
+                android:text="@string/home"
+                style="@style/Home_bottom_textview"
+
+                />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/re_contact_list"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onTabClicked"
+            android:layout_marginBottom="@dimen/home_bottom_bottom"
+            android:layout_marginTop="@dimen/home_bottom_top"
+            >
+
+
+            <ImageView
+                android:id="@+id/ib_contact_list"
+                style="@style/Home_bottom_imageview"
+                android:src="@drawable/tab_two" />
+
+            <TextView
+                android:id="@+id/tv_contact_list"
+                android:layout_below="@id/ib_contact_list"
+                android:text="@string/money"
+                style="@style/Home_bottom_textview"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/re_find"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onTabClicked"
+            android:layout_marginBottom="@dimen/home_bottom_bottom"
+            android:layout_marginTop="@dimen/home_bottom_top"
+
+            >
+
+            <ImageView
+                android:id="@+id/ib_find"
+                style="@style/Home_bottom_imageview"
+                android:src="@drawable/tab_three" />
+
+            <TextView
+                android:id="@+id/tv_find"
+                android:layout_below="@id/ib_find"
+                android:text="@string/about"
+                style="@style/Home_bottom_textview"
+                />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/re_profile"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="onTabClicked"
+            android:layout_marginBottom="@dimen/home_bottom_bottom"
+            android:layout_marginTop="@dimen/home_bottom_top"
+            >
+
+            <ImageView
+                android:id="@+id/ib_profile"
+                style="@style/Home_bottom_imageview"
+                android:src="@drawable/tab_four" />
+
+            <TextView
+                android:id="@+id/tv_profile"
+                android:layout_below="@id/ib_profile"
+                android:text="@string/mine"
+                style="@style/Home_bottom_textview"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1.0dip"
+        android:background="#ffeeeeee" />
+
+</LinearLayout>
