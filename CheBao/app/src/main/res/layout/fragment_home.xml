@@ -76,7 +76,6 @@
 
             <include
                 layout="@layout/home_item_four"
-                tools:visibility="gone"
 
                 />
 

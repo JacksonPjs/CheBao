@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.chebao.R;
 import com.chebao.ui.activity.Activity_discount;
+import com.chebao.ui.activity.SecurityActivity;
 import com.chebao.ui.activity.login2register.LoginActivity;
 import com.chebao.utils.SharedPreferencesUtils;
 import com.pvj.xlibrary.utils.T;
@@ -135,7 +136,7 @@ public class Fragment_Mine extends BaseFragment{
                 break;
             case R.id.set:
                 //安全设置
-//                intent = new Intent(getActivity(), SecurityActivity.class);
+                intent = new Intent(getActivity(), SecurityActivity.class);
                 getActivity().startActivity(intent);
                 break;
             case R.id.touzi_to:

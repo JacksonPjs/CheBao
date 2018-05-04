@@ -188,35 +188,48 @@
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="修改交易密码"
+            android:text="交易密码"
             android:textSize="@dimen/text_size"
             android:id="@+id/chager_payword_to" />
 
         <TextView
+        android:id="@+id/gesture"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_hight"
+        android:textColor="#333"
+        android:background="@drawable/ll_selector"
+        android:drawablePadding="10dp"
+        android:drawableRight="@mipmap/go"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="手势密码"
+        android:textSize="@dimen/text_size" />
+        <TextView
+            android:id="@+id/gesture_verify"
             android:layout_width="match_parent"
             android:layout_height="@dimen/text_hight"
             android:textColor="#333"
             android:background="@drawable/ll_selector"
             android:drawablePadding="10dp"
             android:drawableRight="@mipmap/go"
-            android:visibility="gone"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="修改手势密码"
+            android:text="手势密码验证"
             android:textSize="@dimen/text_size" />
-
     </LinearLayout>
 
     <Button
         android:id="@+id/exit"
-        android:textColor="#fff"
-        android:background="@android:color/holo_red_light"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
+        android:textColor="#fff"
+        android:background="@drawable/oval_gradient_linear"
+        android:layout_margin="50dp"
         android:layout_alignParentBottom="true"
-        android:text="退出登录"/>
+        android:text="立即退出"/>
 </RelativeLayout>
 
 

@@ -22,6 +22,15 @@
         <activity android:name=".ui.activity.DetailsActivity"></activity>
         <activity android:name=".ui.activity.DetailsProductActivity"></activity>
         <activity android:name=".ui.activity.DetailsRegularActivity"></activity>
+        <activity android:name=".ui.activity.SecurityActivity"></activity>
+
+        <activity android:name=".ui.activity.security.GestureEditActivity"></activity>
+        <activity android:name=".ui.activity.security.GestureVerifyActivity"></activity>
+        <activity android:name=".ui.activity.security.CertificationActivity"></activity>
+        <activity android:name=".ui.activity.security.ChangeLoginPasswordActivity"></activity>
+        <activity android:name=".ui.activity.security.SetPayPasswordActivity"></activity>
+        <activity android:name=".ui.activity.security.ChangerPayPassWordActivity"></activity>
+        <activity android:name=".ui.activity.MyBankActivity"></activity>
     </application>
 
 </manifest>

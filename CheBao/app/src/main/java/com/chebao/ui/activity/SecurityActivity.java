@@ -9,6 +9,12 @@ import android.widget.TextView;
 
 
 import com.chebao.R;
+import com.chebao.ui.activity.security.CertificationActivity;
+import com.chebao.ui.activity.security.ChangeLoginPasswordActivity;
+import com.chebao.ui.activity.security.ChangerPayPassWordActivity;
+import com.chebao.ui.activity.security.GestureEditActivity;
+import com.chebao.ui.activity.security.GestureVerifyActivity;
+import com.chebao.ui.activity.security.SetPayPasswordActivity;
 import com.chebao.utils.SharedPreferencesUtils;
 import com.pvj.xlibrary.loadinglayout.Utils;
 
@@ -38,6 +44,8 @@ public class SecurityActivity extends BaseActivity {
     TextView changerPwdTo;
     @Bind(R.id.chager_payword_to)
     TextView chagerPaywordTo;
+    @Bind(R.id.gesture)
+    TextView gesture;
     @Bind(R.id.bank_go)
     ImageView bankGo;
     @Bind(R.id.certification_go)
@@ -113,46 +121,58 @@ public class SecurityActivity extends BaseActivity {
     }
 
     @OnClick({R.id.mail_to, R.id.certification_rl, R.id.phone_rl, R.id.bank_rl, R.id.changer_pwd_to,
-            R.id.chager_payword_to, R.id.exit})
+            R.id.chager_payword_to, R.id.exit,R.id.gesture,R.id.gesture_verify})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
-//            case R.id.mail_to:
-//                //邮箱认证
+            case R.id.mail_to:
+                //邮箱认证
 //                intent = new Intent(this, MailBoxActivity.class);
 //                startActivity(intent);
-//                break;
-//            case R.id.certification_rl:
-//                //实名认证
-//                intent = new Intent(this, CertificationActivity.class);
-//                startActivity(intent);
-//                break;
-//            case R.id.phone_rl:
-//                break;
-//            case R.id.bank_rl:
-//                //银行卡认证
-//                intent = new Intent(this, MyBankActivity.class);
-//                startActivity(intent);
-//                break;
-//            case R.id.changer_pwd_to:
-//                intent = new Intent(this, ChangeLoginPasswordActivity.class);
-//                startActivity(intent);
-//                break;
-//            case R.id.chager_payword_to:
-//                if ((Boolean) SharedPreferencesUtils.getParam(this, "payPwd", false)) {
-//                    intent = new Intent(this, ChangerPayPassWordActivity.class);
-//                    startActivity(intent);
+                break;
+            case R.id.certification_rl:
+                //实名认证
+                intent = new Intent(this, CertificationActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.phone_rl:
+                break;
+            case R.id.bank_rl:
+                //银行卡认证
+                intent = new Intent(this, MyBankActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.changer_pwd_to:
+                intent = new Intent(this, ChangeLoginPasswordActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.chager_payword_to:
+                if ((Boolean) SharedPreferencesUtils.getParam(this, "payPwd", false)) {
+                    intent = new Intent(this, ChangerPayPassWordActivity.class);
+                    startActivity(intent);
+
+                } else {
+                    intent = new Intent(this, SetPayPasswordActivity.class);
+                    startActivity(intent);
+                }
+                break;
 //
-//                } else {
-//                    intent = new Intent(this, SetPayPasswordActivity.class);
-//                    startActivity(intent);
-//                }
-//                break;
-//
-//            case R.id.exit:
-//                SharedPreferencesUtils.clearAll(this);
-//                finish();
-//                break;
+            case R.id.gesture:
+                intent = new Intent(this, GestureEditActivity.class);
+                startActivity(intent);
+                break;
+                 case R.id.gesture_verify:
+                intent = new Intent(this, GestureVerifyActivity.class);
+                startActivity(intent);
+                break;
+
+
+
+
+                case R.id.exit:
+                SharedPreferencesUtils.clearAll(this);
+                finish();
+                break;
         }
     }
 

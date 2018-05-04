@@ -1,111 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
     android:divider="@drawable/divider"
-    android:orientation="vertical"
-    android:showDividers="middle">
-
-
-    <LinearLayout
-        android:id="@+id/count_to"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:src="@mipmap/hongbao_wode"
-            />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:drawableRight="@mipmap/go"
-            android:gravity="center_vertical"
-            android:paddingLeft="15dp"
-            android:paddingRight="5dp"
-            android:text="@string/mine_count"
-            android:textSize="@dimen/text_size"
-            tools:text="我的红包" />
-    </LinearLayout>
-
+    android:scrollbars="none"
+    >
 
     <LinearLayout
-        android:id="@+id/touzi_to"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:orientation="vertical"
+        android:showDividers="middle"
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:src="@mipmap/huikuan_wode"
-            />
+        >
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/count_to"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:drawableRight="@mipmap/go"
-            android:gravity="center_vertical"
-            android:paddingLeft="15dp"
-            android:paddingRight="5dp"
-            android:text="回款查询"
-            android:textSize="@dimen/text_size" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/money_to"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:src="@mipmap/jiaoyi_wode"
-            />
+            android:padding="10dp">
 
-        <TextView
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:src="@mipmap/hongbao_wode" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableRight="@mipmap/go"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="5dp"
+                android:text="@string/mine_count"
+                android:textSize="@dimen/text_size"
+                tools:text="我的红包" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/touzi_to"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:drawableRight="@mipmap/go"
-            android:gravity="center_vertical"
-            android:paddingLeft="15dp"
-            android:paddingRight="5dp"
-            android:text="交易记录"
-            android:textSize="@dimen/text_size" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/measgg_to"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:src="@mipmap/touzi_wode"
-            />
+            android:padding="10dp">
 
-        <TextView
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:src="@mipmap/huikuan_wode" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableRight="@mipmap/go"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="5dp"
+                android:text="回款查询"
+                android:textSize="@dimen/text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/money_to"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:drawableRight="@mipmap/go"
-            android:gravity="center_vertical"
-            android:paddingLeft="15dp"
-            android:paddingRight="5dp"
-            android:text="投资记录"
-            android:textSize="@dimen/text_size" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:padding="10dp">
 
-</LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:src="@mipmap/jiaoyi_wode" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableRight="@mipmap/go"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="5dp"
+                android:text="交易记录"
+                android:textSize="@dimen/text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/measgg_to"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:src="@mipmap/touzi_wode" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableRight="@mipmap/go"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="5dp"
+                android:text="投资记录"
+                android:textSize="@dimen/text_size" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
