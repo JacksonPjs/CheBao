@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.chebao">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".MyApplication"
@@ -10,13 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.activity.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".ui.activity.login2register.LoginActivity"></activity>
         <activity android:name=".ui.activity.Activity_discount"></activity>
         <activity android:name=".ui.activity.DetailsActivity"></activity>
@@ -31,6 +34,16 @@
         <activity android:name=".ui.activity.security.SetPayPasswordActivity"></activity>
         <activity android:name=".ui.activity.security.ChangerPayPassWordActivity"></activity>
         <activity android:name=".ui.activity.MyBankActivity"></activity>
+        <activity android:name=".ui.activity.TransactionActivity"></activity>
+        <activity android:name=".ui.activity.HuiKuanActivity"></activity>
+        <activity android:name=".ui.activity.InvestmentActivity"></activity>
+        <activity android:name=".ui.activity.MyActivtity"></activity>
+        <activity android:name=".ui.activity.login2register.RegisterActivity"></activity>
+        <activity android:name=".ui.activity.login2register.ForgetPassWordActivity1"></activity>
+        <activity android:name=".ui.activity.WebActivity"></activity>
+        <activity android:name=".ui.activity.SecurityWebActivity"></activity>
+
+        <activity android:name=".ui.activity.InvestSellOutActivity"></activity>
     </application>
 
 </manifest>

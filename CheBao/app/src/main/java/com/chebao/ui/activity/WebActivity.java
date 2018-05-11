@@ -1,5 +1,6 @@
 package com.chebao.ui.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.ViewGroup;
@@ -36,7 +37,9 @@ public class WebActivity extends BaseActivity {
         ButterKnife.bind(this);
         //   title.setText();
 
-        url = getIntent().getStringExtra("url");
+//        url ="file:///android_asset/security.html";
+        url ="https://www.baidu.com";
+//        url = getIntent().getStringExtra("url");
         String title1 = getIntent().getStringExtra("title");
         if (title != null) {
             title.setText(title1);
@@ -68,7 +71,13 @@ public class WebActivity extends BaseActivity {
         webView.getSettings().setDomStorageEnabled(true);
         webView.getSettings().setDatabaseEnabled(true);
         webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+
         webView.getSettings().setAppCacheEnabled(true);
+
+//        webView.getSettings().setBlockNetworkImage(false); // 解决图片不显示
+//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ){
+//            webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+//        }
 
         webView.loadUrl(url);
     }

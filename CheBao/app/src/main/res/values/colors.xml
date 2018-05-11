@@ -10,8 +10,13 @@
     <color name="black_home_four_larger">#1c1c1c</color>
     <color name="black_home_four_midle">#555555</color>
     <color name="black_home_four_small">#303030</color>
+    <color name="black_mine_small">#aeaeae</color>
+    <color name="black_hongbao_small">#b4b4b4</color>
     <color name="org_home_btn">#ff7022</color>
     <color name="details_item_bg">#fffbf5</color>
+    <color name="red_hongbao">#eb5e5d</color>
+    <color name="white_transaction_dialog">#f7f7f7</color>
+    <color name="black_security">#1c1c1c</color>
 
 
 

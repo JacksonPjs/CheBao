@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chebao.Adapter.ViewPagerFramentAdapter;
@@ -25,7 +26,7 @@ import butterknife.OnClick;
 
 /**
  * 创建日期：2018/5/4 on 14:14
- * 描述:产品定期
+ * 描述:产品介绍
  * 作者:jackson Administrator
  */
 public class DetailsProductActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
@@ -41,6 +42,13 @@ public class DetailsProductActivity extends BaseActivity implements ViewPager.On
 
     @Bind(R.id.buy)
     TextView buy;
+
+    @Bind(R.id.putong_view)
+    ImageView putongView;
+    @Bind(R.id.month_team)
+    ImageView monthTeam;
+    @Bind(R.id.season_team)
+    ImageView seasonTeam;
 
 
     @Bind(R.id.title)
@@ -60,7 +68,8 @@ public class DetailsProductActivity extends BaseActivity implements ViewPager.On
         ButterKnife.bind(this);
         init();
     }
-    private void init(){
+
+    private void init() {
         fragmentList = new ArrayList<>();
 
         viewPagerFramentAdapter = new ViewPagerFramentAdapter(getSupportFragmentManager(), fragmentList);
@@ -71,14 +80,14 @@ public class DetailsProductActivity extends BaseActivity implements ViewPager.On
         Bundle bundle1 = new Bundle();
 //                    bundle1.putSerializable("data", (Serializable) oneBean);
         bundle1.putString("id", id);
-        bundle1.putInt("borrowStatus",borrowStatus);
+        bundle1.putInt("borrowStatus", borrowStatus);
         fragment_day1.setArguments(bundle1);
         fragmentList.add(fragment_day1);
 
         Fragment_Data fragment_day2 = new Fragment_Data();
         Bundle bundle2 = new Bundle();
         bundle2.putString("id", id);
-        bundle2.putInt("borrowStatus",borrowStatus);
+        bundle2.putInt("borrowStatus", borrowStatus);
         fragment_day2.setArguments(bundle2);
         fragmentList.add(fragment_day2);
 
@@ -86,7 +95,7 @@ public class DetailsProductActivity extends BaseActivity implements ViewPager.On
         Bundle bundle3 = new Bundle();
         bundle3.putString("id", id);
         fragment_day3.setArguments(bundle3);
-        bundle3.putInt("borrowStatus",borrowStatus);
+        bundle3.putInt("borrowStatus", borrowStatus);
         fragmentList.add(fragment_day3);
 
         viewPagerFramentAdapter.notifyDataSetChanged();
@@ -112,14 +121,22 @@ public class DetailsProductActivity extends BaseActivity implements ViewPager.On
     }
 
 
-    @OnClick({R.id.buy,R.id.back})
+    @OnClick({R.id.buy, R.id.back, R.id.month_rl, R.id.day_rl,R.id.season_rl})
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {
             case R.id.back:
                 finish();
                 break;
-
+            case R.id.day_rl:
+                viewPager.setCurrentItem(0);
+                break;
+            case R.id.month_rl:
+                viewPager.setCurrentItem(1);
+                break;
+                case R.id.season_rl:
+                viewPager.setCurrentItem(2);
+                break;
 
 
         }
@@ -133,36 +150,35 @@ public class DetailsProductActivity extends BaseActivity implements ViewPager.On
 
     @Override
     public void onPageSelected(int position) {
-        if (position == 0) {
-            dayText.setTextColor(Utils.getColor(this, R.color.colorPrimary));
-            monthText.setTextColor(Utils.getColor(this, R.color.font_color1));
-            seasonText.setTextColor(Utils.getColor(this, R.color.font_color1));
-
-
-            ObjectAnimator animator = ObjectAnimator.ofFloat(dayText, "rotation", 0, 360, 360);
-            animator.setDuration(1000);
-            animator.start();
-        } else if (position == 1) {
-            monthText.setTextColor(Utils.getColor(this, R.color.mouth));
-            dayText.setTextColor(Utils.getColor(this, R.color.font_color1));
-            seasonText.setTextColor(Utils.getColor(this, R.color.font_color1));
-
-            ObjectAnimator animator = ObjectAnimator.ofFloat(monthText, "rotation", 0, 360, 360);
-            animator.setDuration(1000);
-            animator.start();
-        } else if (position == 2) {
-            seasonText.setTextColor(Utils.getColor(this, R.color.season));
-            monthText.setTextColor(Utils.getColor(this, R.color.font_color1));
-            dayText.setTextColor(Utils.getColor(this, R.color.font_color1));
-
-            ObjectAnimator animator = ObjectAnimator.ofFloat(seasonText, "rotation", 0, 360, 360);
-            animator.setDuration(1000);
-            animator.start();
-        }
+        switchBtn(position);
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
+
+    }
+
+    private void switchBtn(int position) {
+        dayText.setTextColor(Utils.getColor(this, R.color.black_home_four_midle));
+        monthText.setTextColor(Utils.getColor(this, R.color.black_home_four_midle));
+        seasonText.setTextColor(Utils.getColor(this, R.color.black_home_four_midle));
+        putongView.setVisibility(View.INVISIBLE);
+        monthTeam.setVisibility(View.INVISIBLE);
+        seasonTeam.setVisibility(View.INVISIBLE);
+        switch (position) {
+            case 0:
+                dayText.setTextColor(Utils.getColor(this, R.color.org_home));
+                putongView.setVisibility(View.VISIBLE);
+                break;
+            case 1:
+                monthText.setTextColor(Utils.getColor(this, R.color.org_home));
+                monthTeam.setVisibility(View.VISIBLE);
+                break;
+            case 2:
+                seasonText.setTextColor(Utils.getColor(this, R.color.org_home));
+                seasonTeam.setVisibility(View.VISIBLE);
+                break;
+        }
 
     }
 }

@@ -4,6 +4,6 @@
     android:layout_height="match_parent">
     <View
         android:background="@color/xixian"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="1dp" />
 </LinearLayout>

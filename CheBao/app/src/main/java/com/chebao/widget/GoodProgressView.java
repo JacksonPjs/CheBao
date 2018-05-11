@@ -16,14 +16,14 @@ import com.pvj.xlibrary.loadinglayout.Utils;
 
 public class GoodProgressView extends View
 {
-    private int[] mColors = { R.color.org_home_btn, R.color.org_home};//进度条颜色（渐变色的2个点）
+    private int[] mColors = { getResources().getColor(R.color.org_home_btn), getResources().getColor(R.color.org_home)};//进度条颜色（渐变色的2个点）
     private int backgroundColor = Color.GRAY;//进度条默认颜色
     private int textColor = Color.GRAY;//文本颜色
 
     private Paint mPaint;//画笔
     private int progressValue=0;//进度值
 //  private RectF rect;//绘制范围
-
+    int pointColors=getResources().getColor(R.color.org_home);//小点颜色
     public GoodProgressView(Context context, AttributeSet attrs)
     {
         this(context, attrs, 0);
@@ -49,11 +49,13 @@ public class GoodProgressView extends View
             {
                 case R.styleable.GoodProgressView_startColor:
                     // 渐变色之起始颜色，默认设置为红色
-                    mColors[0] =   Utils.getColor(context,R.color.org_home_btn);
+//                    mColors[0] =  getResources().getColor(R.color.org_home);
+                    mColors[0] = a.getColor(attr, Color.RED);
                     break;
                 case R.styleable.GoodProgressView_endColor:
                     // 渐变色之结束颜色，默认设置为品红
-                    mColors[1] = Utils.getColor(context,R.color.org_home);
+//                    mColors[1] = getResources().getColor(R.color.org_home_btn);
+                    mColors[1] = a.getColor(attr, Color.MAGENTA);
                     break;
                 case R.styleable.GoodProgressView_backgroundColor:
                     // 进度条默认颜色，默认设置为灰色
@@ -82,6 +84,9 @@ public class GoodProgressView extends View
 
     public void setColors(int[] colors){
         mColors = colors;
+    }
+    public void setPointColors(int colors){
+        pointColors = colors;
     }
 
     @Override
@@ -193,19 +198,19 @@ public class GoodProgressView extends View
 
         //白色内圆
         mPaint.setShader(null);
-        mPaint.setColor(Color.WHITE);
+        mPaint.setColor(pointColors);
         canvas.drawCircle(offsetWidth+section * progressWidth, offsetHeight, innerCircleDiameter/2, mPaint);//白色内圆
 
 
-        //绘制文字--百分比
-        mPaint.setStrokeWidth(2*unit);
-        mPaint.setColor(textColor);
-        mPaint.setTextSize(wordHeight);
-        //计算坐标使文字居中
-        Paint.FontMetrics fontMetrics = mPaint.getFontMetrics();
-        float  fontHeight = fontMetrics.bottom - fontMetrics.top;
-        float baseY =  height/2 + fontHeight/2 - fontMetrics.bottom;
-        canvas.drawText(""+progressValue+"%", progressWidth+2*offsetWidth, baseY, mPaint);//略微偏下，baseline
+//        //绘制文字--百分比
+//        mPaint.setStrokeWidth(2*unit);
+//        mPaint.setColor(textColor);
+//        mPaint.setTextSize(wordHeight);
+//        //计算坐标使文字居中
+//        Paint.FontMetrics fontMetrics = mPaint.getFontMetrics();
+//        float  fontHeight = fontMetrics.bottom - fontMetrics.top;
+//        float baseY =  height/2 + fontHeight/2 - fontMetrics.bottom;
+//        canvas.drawText(""+progressValue+"%", progressWidth+2*offsetWidth, baseY, mPaint);//略微偏下，baseline
 
     }
 

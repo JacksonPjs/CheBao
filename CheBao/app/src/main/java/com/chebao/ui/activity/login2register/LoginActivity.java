@@ -11,9 +11,15 @@ import android.widget.TextView;
 import com.chebao.MainActivity;
 import com.chebao.MyApplication;
 import com.chebao.R;
+import com.chebao.bean.LoginBean;
 import com.chebao.ui.activity.BaseActivity;
 import com.chebao.bean.InfoBean;
 import com.chebao.net.NetWorks;
+import com.chebao.utils.DialogUtils;
+import com.chebao.utils.LoginRegisterUtils;
+import com.chebao.utils.SharedPreferencesUtils;
+import com.pvj.xlibrary.log.Logger;
+import com.pvj.xlibrary.utils.T;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -24,67 +30,111 @@ import rx.Subscriber;
 public class LoginActivity extends BaseActivity {
     @Bind(R.id.login_phone)
     EditText loginPhone;
-    @Bind(R.id.title)
-    TextView title;
+    @Bind(R.id.psw_phone)
+    EditText loginPassword;
+    @Bind(R.id.regist)
+    TextView regist;
 
     Dialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         MyApplication.instance.addActivity(this);
-        title.setText("登录");
     }
 
-    @OnClick({R.id.login_go})
+    @OnClick({R.id.login_go, R.id.regist, R.id.forget})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
-            case R.id.login_go:
-//                if (LoginRegisterUtils.isNullOrEmpty(loginPhone)) {
-//                    T.ShowToastForShort(this, "手机号码未输入");
-//                    return;
-//                }
-//
-//                if (!LoginRegisterUtils.isPhone(loginPhone)) {
-//                    T.ShowToastForShort(this, "手机号码不正确");
-//                    return;
-//                }
-
-
-
-                intent=new Intent(this, MainActivity.class);
+            case R.id.regist:
+                //注册
+                intent = new Intent(this, RegisterActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.forget:
+                //忘记密码
+                intent = new Intent(this, ForgetPassWordActivity1.class);
+                startActivity(intent);
+                break;
+
+
+
+            case R.id.login_go:
+                //登录
+                if (LoginRegisterUtils.isNullOrEmpty(loginPhone)) {
+                    T.ShowToastForShort(this, "手机号码未输入");
+                    return;
+                }
+
+                if (!LoginRegisterUtils.isPhone(loginPhone)) {
+                    T.ShowToastForShort(this, "手机号码不正确");
+                    return;
+                }
+                if (LoginRegisterUtils.isNullOrEmpty(loginPassword)) {
+                    T.ShowToastForShort(this, "用户密码未输入");
+                    return;
+                }
+
+                if (!LoginRegisterUtils.isPassWord(loginPassword)) {
+                    T.ShowToastForShort(this, "用户密码格式不合法");
+                    return;
+                }
+//
+//                intent = new Intent(this, MainActivity.class);
+//                startActivity(intent);
 
 //                IsRegister(loginPhone.getText().toString());
 
-
+                login(loginPhone.getText().toString(),loginPassword.getText().toString());
                 break;
 
 
         }
     }
 
+    public void login(String name ,final String  passoword) {
+        NetWorks.login(name, passoword, new Subscriber<LoginBean>() {
+            @Override
+            public void onStart() {
+                if (dialog == null) {
+                    dialog = DialogUtils.createProgressDialog(LoginActivity.this, "登陆中...");
+                } else {
+                    dialog.show();
+                }
+            }
 
-    public void IsRegister(String num){
-        NetWorks.verificationNewUserPhone(num, new Subscriber<InfoBean>() {
             @Override
             public void onCompleted() {
-
+                dialog.dismiss();
             }
 
             @Override
             public void onError(Throwable e) {
-
+                T.ShowToastForLong(LoginActivity.this,"网络异常");
+                dialog.dismiss();
+                Logger.e(e.toString());
             }
 
             @Override
-            public void onNext(InfoBean infoBean) {
+            public void onNext(LoginBean s) {
+                if (s.getState().getStatus()==0){
+
+                    SharedPreferencesUtils.savaUser(LoginActivity.this,s,passoword);
+                    finish();
+                    T.ShowToastForLong(LoginActivity.this,"登陆成功");
+                }else{
+                    T.ShowToastForLong(LoginActivity.this,s.getState().getInfo());
+                }
+
 
             }
         });
     }
+
+
 
 
 

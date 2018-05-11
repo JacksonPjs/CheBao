@@ -146,6 +146,8 @@ public class SharedPreferencesUtils {
 
 		Logger.d(nf.format(bean.getTotal1())+"total1");
 		editor.putString("total1",  nf.format(bean.getTotal1())+"");//
+		editor.putString("total2",  nf.format(bean.getTotal2())+"");//
+		editor.putString("total3",  nf.format(bean.getTotal3())+"");//
 
 		editor.putString("usableAmount", nf.format(bean.getUsableAmount())+"");//
 

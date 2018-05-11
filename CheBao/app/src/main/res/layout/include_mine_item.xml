@@ -6,6 +6,7 @@
     android:layout_marginTop="10dp"
     android:divider="@drawable/divider"
     android:scrollbars="none"
+    android:paddingBottom="@dimen/home_margin"
     >
 
     <LinearLayout
@@ -15,7 +16,27 @@
         android:showDividers="middle"
 
         >
+        <LinearLayout
+            android:id="@+id/mine_to"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:src="@mipmap/mine_mine" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="我的滴滴宝"
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/black_home_four_small"
+                tools:text="我的滴滴宝" />
+        </LinearLayout>
         <LinearLayout
             android:id="@+id/count_to"
             android:layout_width="match_parent"
@@ -32,12 +53,10 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:drawableRight="@mipmap/go"
                 android:gravity="center_vertical"
-                android:paddingLeft="15dp"
-                android:paddingRight="5dp"
                 android:text="@string/mine_count"
                 android:textSize="@dimen/text_size"
+                android:textColor="@color/black_home_four_small"
                 tools:text="我的红包" />
         </LinearLayout>
 
@@ -57,10 +76,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:drawableRight="@mipmap/go"
                 android:gravity="center_vertical"
-                android:paddingLeft="15dp"
-                android:paddingRight="5dp"
+                android:textColor="@color/black_home_four_small"
                 android:text="回款查询"
                 android:textSize="@dimen/text_size" />
         </LinearLayout>
@@ -80,10 +97,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:drawableRight="@mipmap/go"
                 android:gravity="center_vertical"
-                android:paddingLeft="15dp"
-                android:paddingRight="5dp"
+                android:textColor="@color/black_home_four_small"
                 android:text="交易记录"
                 android:textSize="@dimen/text_size" />
         </LinearLayout>
@@ -103,12 +118,51 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:drawableRight="@mipmap/go"
                 android:gravity="center_vertical"
-                android:paddingLeft="15dp"
-                android:paddingRight="5dp"
+                android:textColor="@color/black_home_four_small"
                 android:text="投资记录"
                 android:textSize="@dimen/text_size" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/home_margin"
+
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_oval_white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/text_samll_size"
+                    android:text="客服电话:  400-****-***"
+
+
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@mipmap/dianhua_wode" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="工作日：9:00-18:00  |  节假日：9:00-18:00"
+            android:textColor="@color/black_mine_small"
+            android:textSize="@dimen/text_samll_size"
+
+            />
     </LinearLayout>
 </ScrollView>

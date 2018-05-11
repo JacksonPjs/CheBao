@@ -128,7 +128,7 @@ public class GesturePoint {
 		pointState = state;
 		switch (state) {
 			case Constant.POINT_STATE_NORMAL:
-				this.image.setBackgroundResource(R.mipmap.gesture_node_normal);
+				this.image.setImageResource(R.mipmap.gesture_node_normal);
 				break;
 			case Constant.POINT_STATE_SELECTED:
 				this.image.setBackgroundResource(R.mipmap.gesture_node_pressed);

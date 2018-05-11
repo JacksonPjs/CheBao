@@ -2,16 +2,20 @@ package com.chebao.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chebao.R;
 import com.chebao.bean.BiaoBean;
+import com.chebao.ui.activity.StartActivity;
+import com.chebao.ui.activity.login2register.LoginActivity;
 import com.pvj.xlibrary.imageview.CircleProgressView;
 
 import java.text.DecimalFormat;
@@ -44,6 +48,13 @@ public class BiaoAdapter extends RecyclerView.Adapter<BiaoAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         holder.title.setText("春眠不觉晓");
+        holder.Head.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, LoginActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
 
         //  holder.circleProgressbar.setProgressNotInUiThread(80);
@@ -65,6 +76,8 @@ public class BiaoAdapter extends RecyclerView.Adapter<BiaoAdapter.ViewHolder> {
         TextView title;
         @Bind(R.id.find_item_bg)
         ImageView imageView;
+        @Bind(R.id.biao_head)
+        CardView Head;
 
         ViewHolder(View view) {
             super(view);

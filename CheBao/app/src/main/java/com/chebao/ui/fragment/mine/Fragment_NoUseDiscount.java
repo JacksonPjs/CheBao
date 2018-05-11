@@ -3,6 +3,8 @@ package com.chebao.ui.fragment.mine;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 import com.chebao.Adapter.DiscountListAdapter;
 import com.chebao.R;
 import com.chebao.bean.DiscountListBean;
+import com.chebao.widget.DividerItemDecoration;
 import com.pvj.xlibrary.loadinglayout.LoadingLayout;
 import com.pvj.xlibrary.loadinglayout.Utils;
 import com.pvj.xlibrary.loadingrecyclerview.LoadMoreRecyclerLoadingLayout;
@@ -24,11 +27,11 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Administrator on 2017/4/28.
- * 优惠券-未使用
+ * 我的红包-未使用
  */
 
 public class Fragment_NoUseDiscount extends Fragment implements LoadingLayout.OnReloadListener, LoadMoreRecyclerLoadingLayout.OnRefreshAndLoadMoreListener{
-    List<DiscountListBean.DisData> biaoBeenList;
+    List<String> biaoBeenList;
     DiscountListAdapter adapter;
 
 
@@ -36,7 +39,7 @@ public class Fragment_NoUseDiscount extends Fragment implements LoadingLayout.On
     int pagesize = 10;
 
     @Bind(R.id.public_listview)
-    LoadMoreRecyclerLoadingLayout publicLv;
+    RecyclerView publicLv;
 
 
     @Nullable
@@ -135,14 +138,24 @@ public class Fragment_NoUseDiscount extends Fragment implements LoadingLayout.On
 
     private void initView() {
         biaoBeenList = new ArrayList<>();
+        biaoBeenList.add("aaaaaaaaaaa");
+        biaoBeenList.add("aaaaaaaaaaa");
+        biaoBeenList.add("aaaaaaaaaaa");
+        biaoBeenList.add("aaaaaaaaaaa");
         adapter = new DiscountListAdapter(biaoBeenList, getActivity(),1);
+//
+//        publicLv.verticalLayoutManager(getContext())
+//                .setAdapter(adapter)
+//                .setOnReloadListener(this)
+//                .setRecycleViewBackgroundColor(Utils.getColor(getActivity(), R.color.bg_huise))
+//                .setOnRefreshAndLoadMoreListener(this);
+        LinearLayoutManager linearLayoutManager;
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        publicLv.setLayoutManager(linearLayoutManager);
+        publicLv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
 
-        publicLv.verticalLayoutManager(getContext())
-                .setAdapter(adapter)
-                .setOnReloadListener(this)
-                .setRecycleViewBackgroundColor(Utils.getColor(getActivity(), R.color.bg_huise))
-                .setOnRefreshAndLoadMoreListener(this);
-
+        publicLv.setAdapter(adapter);
     }
 
     @Override
@@ -155,7 +168,7 @@ public class Fragment_NoUseDiscount extends Fragment implements LoadingLayout.On
     @Override
     public void onReload(View v) {
         page = 1;
-        publicLv.setStatus(LoadingLayout.Loading);
+//        publicLv.setStatus(LoadingLayout.Loading);
 //        net(0,0);
     }
 
@@ -163,7 +176,7 @@ public class Fragment_NoUseDiscount extends Fragment implements LoadingLayout.On
     public void onRefresh() {
         page = 1;
 //        net(0, 0);
-        publicLv.setTextStart();
+//        publicLv.setTextStart();
     }
 
     @Override

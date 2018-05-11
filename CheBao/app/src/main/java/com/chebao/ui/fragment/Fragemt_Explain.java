@@ -11,8 +11,9 @@ import android.view.ViewGroup;
 
 /**
  * Created by Administrator on 2017/3/10.
+ * 产品介绍列表
  */
-//项目说明
+
 public class Fragemt_Explain extends BaseFragment{
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

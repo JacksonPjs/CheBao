@@ -3,9 +3,19 @@ package com.chebao;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.chebao.net.OkHttpUtils;
+import com.pvj.xlibrary.loadinglayout.LoadingLayout;
+
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.OkHttpClient;
 
 public class MyApplication extends Application {
     private static final String TAG = "MyApplication";
@@ -21,24 +31,24 @@ public class MyApplication extends Application {
         instance = this;
         activities = new ArrayList<Activity>();
 //        JPushInterface.init(this);
-//
-//        //初始化单列的OkHttpClient 对象
-//        initOkHttpUtils();
-//        //初始化Glide对象
-//        initGlide();
-//
-//        LoadingLayout.getConfig()
-//                .setLoadingPageLayout(R.layout.loading);
+
+        //初始化单列的OkHttpClient 对象
+        initOkHttpUtils();
+        //初始化Glide对象
+        initGlide();
+
+        LoadingLayout.getConfig()
+                .setLoadingPageLayout(R.layout.loading);
     }
 
     private void initGlide() {
-//        Glide.get(this).register(GlideUrl.class, InputStream.class,new OkHttpUrlLoader.Factory(OkHttpUtils.getOkHttpClient()));
+        Glide.get(this).register(GlideUrl.class, InputStream.class,new OkHttpUrlLoader.Factory(OkHttpUtils.getOkHttpClient()));
 
     }
 
     private void initOkHttpUtils() {
-//        OkHttpClient okHttpClient = OkHttpUtils.getOkHttpClient();
-//        Log.i(TAG,"---->initOkHttpUtils: "+okHttpClient.toString());
+        OkHttpClient okHttpClient = OkHttpUtils.getOkHttpClient();
+        Log.i(TAG,"---->initOkHttpUtils: "+okHttpClient.toString());
 
     }
 

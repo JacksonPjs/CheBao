@@ -8,6 +8,7 @@
     app:cardCornerRadius="@dimen/home_margin"
     app:cardElevation="@dimen/home_margin"
     android:foreground="@drawable/card_foreground"
+    android:id="@+id/invest_head"
 
     >
 

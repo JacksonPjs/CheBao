@@ -9,7 +9,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@mipmap/bg_wode">
+        android:background="@mipmap/bg_wode"
+        >
 
         <RelativeLayout
             android:id="@+id/rl_title"
@@ -149,6 +150,7 @@
             android:textSize="@dimen/text_15_size" />
 
         <TextView
+            android:id="@+id/usableamount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -159,12 +161,11 @@
     </RelativeLayout>
 
     <View
-        android:background="@color/xixian"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        />
+        android:background="@color/xixian" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -172,8 +173,7 @@
         android:background="@color/white"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="10dp"
-        >
+        android:padding="10dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -181,8 +181,8 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="15dp"
             android:layout_weight="1"
-            android:gravity="center"
             android:background="@drawable/shape_white_black"
+            android:gravity="center"
 
             android:orientation="horizontal">
 
@@ -190,8 +190,8 @@
                 android:id="@+id/chager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="充值"
                 android:background="@null"
+                android:text="充值"
                 android:textColor="@color/black_home_four_midle"
                 android:textSize="@dimen/text_15_size"
 
@@ -226,7 +226,8 @@
 
     <include
 
-        layout="@layout/include_mine_item"
-        />
+        layout="@layout/include_mine_item" />
+
+
 
 </LinearLayout>

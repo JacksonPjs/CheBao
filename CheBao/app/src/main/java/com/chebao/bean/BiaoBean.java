@@ -100,12 +100,39 @@ public class BiaoBean {
         private long investStartTime;
    //     private double mayCast;
         private double minInvestAmount;
-     //   private double progress;
+        private int progress;
    //     private int raisingPeriod;
-   //     private int remainTime;
-    //    private int repayType;
+        private int remainTime;
+        private int repayType;
     //    private long fullTime;
     //    private long repayDate;
+
+
+        public int getProgress() {
+            return progress;
+        }
+
+        public void setProgress(int progress) {
+            this.progress = progress;
+        }
+
+        public int getRemainTime() {
+            return remainTime;
+        }
+
+        public void setRemainTime(int remainTime) {
+            this.remainTime = remainTime;
+        }
+
+        public int getRepayType() {
+            return repayType;
+        }
+
+        public void setRepayType(int repayType) {
+            this.repayType = repayType;
+        }
+
+
 
         public double getAnnualRate() {
             return annualRate;

@@ -29,6 +29,15 @@ public class CenterIndexBean {
     private double usableAmount;
     private double total1;
     private double total2;
+    private double total3;
+
+    public double getTotal3() {
+        return total3;
+    }
+
+    public void setTotal3(double total3) {
+        this.total3 = total3;
+    }
 
     public double getTotal2() {
         return total2;

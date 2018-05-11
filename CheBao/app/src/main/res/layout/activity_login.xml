@@ -1,74 +1,183 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_back" />
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/bg_login">
 
-    <TextView
-        android:layout_width="160dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="40dp"
-        android:layout_gravity="center_horizontal"
-        android:text="登录/注册"
-        android:gravity="center"
-        />
+        <TextView
+            android:id="@+id/regist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:text="注册"
+            android:textColor="@color/white" />
 
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_title"
+        android:layout_margin="@dimen/home_margin"
+
+        >
+
+        <LinearLayout
+
+            android:id="@+id/ll_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/yonghuming" />
+
+                <EditText
+                    android:id="@+id/login_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:background="@null"
+                    android:hint="请输入手机号码"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:maxLines="1"
+                    android:textColor="#666"
+                    android:textColorHint="#ccc"
+                    android:textSize="@dimen/text_midle_size" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/xixian" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_pw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_name"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/home_margin"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/mima" />
+
+                <EditText
+                    android:id="@+id/psw_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:background="@null"
+                    android:hint="密码"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:maxLines="1"
+                    android:textColor="#666"
+                    android:textColorHint="#ccc"
+                    android:textSize="@dimen/text_midle_size" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/xixian" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/forget"
+            android:padding="@dimen/home_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/ll_pw"
+            android:text="忘记密码?"
+
+            />
+    </RelativeLayout>
 
     <LinearLayout
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:padding="10dp"
-            android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:gravity="center"
+        android:orientation="vertical"
 
-            <EditText
-                android:id="@+id/login_phone"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:background="@null"
-                android:hint="请输入手机号码"
-                android:textSize="@dimen/text_midle_size"
-                android:textColor="#666"
-                android:textColorHint="#ccc"
-                android:inputType="phone"
-                android:maxLength="11"
-                android:maxLines="1"
-                 />
-        </LinearLayout>
-        <TextView
+        >
+
+        <Button
+            android:id="@+id/login_go"
             android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/xixian" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/oval_gradient_linear"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="登录"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/home_margin"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="注册"
+                android:textSize="14sp"
+                android:textColor="@color/black_home_four_midle"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="立送xxx元红包"
+                android:textColor="@color/red_hongbao"
+                android:textSize="14sp"
+
+                />
+
+        </LinearLayout>
+
     </LinearLayout>
 
-
-
-
-    <Button
-        android:id="@+id/login_go"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:padding="5dp"
-        android:text="下一步"
-        android:textSize="@dimen/text_size"
-        android:textColor="#fff" />
-
-
-
-
-</LinearLayout>
+</RelativeLayout>
 
 

@@ -38,8 +38,8 @@ public class ChangerPayPassWordActivity extends BaseActivity  {
     EditText yzm;
     @Bind(R.id.login_password)
     EditText loginPassword;
-    @Bind(R.id.password2)
-    EditText password2;
+//    @Bind(R.id.password2)
+//    EditText password2;
     @Bind(R.id.login_go)
     Button loginGo;
     @Bind(R.id.getcode)
@@ -99,11 +99,11 @@ public class ChangerPayPassWordActivity extends BaseActivity  {
                     return;
                 }
 
-
-                if (!LoginRegisterUtils.equals(loginPassword, password2)) {
-                    T.ShowToastForShort(this, "二次手机密码不一致");
-                    return;
-                }
+//
+//                if (!LoginRegisterUtils.equals(loginPassword, password2)) {
+//                    T.ShowToastForShort(this, "二次手机密码不一致");
+//                    return;
+//                }
 
                 if (LoginRegisterUtils.isNullOrEmpty(yzm)) {
                     T.ShowToastForShort(this, "手机验证未输入");

@@ -15,6 +15,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 
+import com.chebao.App.Constant;
 import com.chebao.R;
 
 public class ProgressSeek extends View {
@@ -30,6 +31,10 @@ public class ProgressSeek extends View {
      * 控件的宽度
      */
     private int view_edge_width;
+    /**
+     * 控件的宽度
+     */
+    private int view_edge_height;
     /**
      * 进度
      */
@@ -51,9 +56,9 @@ public class ProgressSeek extends View {
     private int bitmapHeight;
     private Context context;
     //渐变色开始
-    private static final int DEFAULT_START_COLOR = Color.parseColor("#ff7022");
+    private static  int DEFAULT_START_COLOR = Color.parseColor("#ff7022");
     //渐变色结束
-    private static final int DEFAULT_END_COLOR = Color.parseColor("#ffa500");
+    private static  int DEFAULT_END_COLOR = Color.parseColor("#ffa500");
     /**
      * 缓存图片
      */
@@ -94,6 +99,24 @@ public class ProgressSeek extends View {
 //        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(d);
 //        view_base_width = d.widthPixels;
     }
+    public  void  setBP(int flag){
+        if (flag== Constant.INVEST_SELL_OUT){
+            bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.jindu_shouqing);
+            DEFAULT_START_COLOR = Color.parseColor("#FF4081");
+            //渐变色结束
+            DEFAULT_END_COLOR = Color.parseColor("#FF4081");
+        }else {
+            bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.dangqianjindu);
+
+            //渐变色开始
+             DEFAULT_START_COLOR = Color.parseColor("#ff7022");
+            //渐变色结束
+              DEFAULT_END_COLOR = Color.parseColor("#ffa500");
+        }
+
+    }
+
+
 
     public void init(int progress) {
         this.progress = progress;
@@ -125,20 +148,20 @@ public class ProgressSeek extends View {
         r.left = 0;
         r.top = bitmapHeight;
         r.right = view_base_width;
-        r.bottom = bitmapWidth;
+        r.bottom = bitmapWidth + 10;
         cacheCanvas.drawRoundRect(r, 5f, 5f, backgroundPaint);
+
+
         if (progress > 0) {
             LinearGradient lg = new LinearGradient(0, 0, view_width, bitmapWidth, DEFAULT_START_COLOR, DEFAULT_END_COLOR, Shader.TileMode.CLAMP);
             progressPaint.setShader(lg);
             RectF r1 = new RectF();
-            r1.left = 0;
-            r1.top = bitmapHeight;
-            r1.right = view_width;
-            r1.bottom = bitmapWidth;
-            cacheCanvas.drawRoundRect(r1, 5f, 5f, progressPaint);
-            float proHeight=r1.bottom-r1.top;
-
-            cacheCanvas.drawBitmap(bitmap, view_width - bitmapWidth / 2, bitmapHeight / 2+proHeight/2, new Paint());
+            r.left = 0;
+            r.top = bitmapHeight;
+            r.right = view_width;
+            r.bottom = bitmapWidth + 10;
+            cacheCanvas.drawRoundRect(r, 5f, 5f, progressPaint);
+            cacheCanvas.drawBitmap(bitmap, view_width - bitmapWidth+8, bitmapHeight / 2 + 6, new Paint());
         }
         invalidate();
     }
@@ -152,6 +175,7 @@ public class ProgressSeek extends View {
             canvas.drawBitmap(cacheBitmap, 0, 0, bmpPaint);
         }
         view_edge_width = this.getWidth();
+        view_edge_height=this.getHeight();
 //        Log.e("打出来看看控件的宽度:", view_edge_width + "");
         init(progress);
     }

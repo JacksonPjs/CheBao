@@ -1,10 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/home_margin"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="@dimen/home_margin"
+    app:cardCornerRadius="@dimen/home_margin"
+    app:cardElevation="@dimen/home_margin"
+    android:foreground="@drawable/card_foreground"
     android:id="@+id/invest_head"
-    >
-    <include layout="@layout/home_item_five"></include>
 
-</android.support.constraint.ConstraintLayout>
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_circular"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            style="@style/Home_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_left_round"
+            android:text="@string/jingppin"
+            android:textColor="@color/white" />
+
+
+        <TextView
+            android:id="@+id/xianshi"
+            style="@style/Home_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/home_margin"
+            android:background="@drawable/rect_rounded_left_right_arc"
+            android:text="@string/xianshijia"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_samll_size"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/home_margin"
+            >
+            <TextView
+                android:id="@+id/xinshou"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/home_five_margin"
+                android:text="新手专享4月"
+                android:textColor="@color/black_home_four_midle"
+                android:textSize="@dimen/text_midle_size" />
+
+
+            <TextView
+                android:id="@+id/tuijian_lilv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/xinshou"
+                android:layout_marginTop="@dimen/home_margin"
+                android:layout_weight="1"
+                android:text="7.8%+2%"
+                android:textColor="@color/black_home_four_larger"
+                android:textSize="@dimen/text_large_size"
+                tools:text="7.8%+2%" />
+
+            <TextView
+                android:id="@+id/tuijian_date"
+                android:layout_alignBottom="@+id/tuijian_lilv"
+                android:layout_marginLeft="180dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/home_margin"
+                android:layout_weight="1"
+                android:text="投资期限：15天"
+                android:textColor="@color/black_home_four_midle"
+                android:textSize="@dimen/text_samll_size"
+
+                />
+
+
+            <TextView
+                android:id="@+id/tuijian_nianhua"
+                android:layout_below="@+id/tuijian_lilv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/home_margin"
+                android:layout_weight="1"
+                android:text="年化收益"
+                android:textColor="@color/black_home_four_midle"
+                android:textSize="@dimen/text_samll_size" />
+
+            <TextView
+                android:id="@+id/tuijian_fangshi"
+                android:layout_alignTop="@+id/tuijian_nianhua"
+                android:layout_alignStart="@+id/tuijian_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="收益方式：满标计息，到期还本息"
+                android:textColor="@color/black_home_four_midle"
+                android:textSize="@dimen/text_samll_size" />
+
+            <com.chebao.widget.GoodProgressView
+                android:id="@+id/progressBar"
+                android:layout_below="@+id/tuijian_fangshi"
+                android:layout_width="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_height="40dp"
+                />
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

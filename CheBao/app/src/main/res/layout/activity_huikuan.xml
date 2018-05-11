@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/titlebar_back"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/home_margin"
+        >
+        <TextView
+            android:id="@+id/allmoney_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="总待收(元):  "
+            />
+        <TextView
+            android:id="@+id/allmoney"
+            android:layout_toRightOf="@+id/allmoney_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11111"
+            android:textColor="@color/org_home"
+            />
+            <TextView
+                android:id="@+id/mmoney_tv"
+                android:layout_below="@+id/allmoney_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="当月待收(元):  "
+                />
+                <TextView
+                    android:id="@+id/mmoney"
+                    android:layout_below="@+id/allmoney"
+                    android:layout_toRightOf="@+id/mmoney_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="111111"
+                    android:textColor="@color/org_home"
+                    />
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/ll_nor"
+            android:padding="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                >
+
+                <TextView
+                    android:id="@+id/putong_team"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="待收款"
+                    android:textColor="@color/org_home"
+                    android:textSize="@dimen/text_size" />
+
+                <ImageView
+                    android:id="@+id/putong_view"
+                    android:layout_width="35dp"
+                    android:layout_height="3dp"
+                    android:layout_below="@+id/putong_team"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp"
+                    android:background="@color/org_home"
+                    tools:visibility="visible"></ImageView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/xinshou_team"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="已收款"
+                    android:textColor="@color/black_home_four_midle"
+                    android:textSize="@dimen/text_size" />
+
+                <ImageView
+                    android:id="@+id/xinshou_view"
+                    android:layout_width="35dp"
+                    android:layout_height="3dp"
+                    android:layout_below="@+id/xinshou_team"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp"
+                    android:visibility="gone"
+                    android:background="@color/org_home"
+                    tools:visibility="visible"
+
+                    ></ImageView>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <include layout="@layout/line_match_parent"></include>
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/biao_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/ll_nor"></android.support.v4.view.ViewPager>
+
+</LinearLayout>

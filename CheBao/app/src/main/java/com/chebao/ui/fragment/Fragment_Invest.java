@@ -14,25 +14,35 @@ import android.widget.TextView;
 
 import com.chebao.Adapter.BiaoAdapter;
 import com.chebao.Adapter.InvestAdapter;
+import com.chebao.App.Constant;
 import com.chebao.R;
+import com.chebao.bean.BiaoBean;
+import com.chebao.net.NetWorks;
 import com.chebao.ui.activity.DetailsActivity;
+import com.chebao.ui.activity.InvestSellOutActivity;
 import com.chebao.widget.DividerItemDecoration;
 import com.chebao.widget.ScrollLinearLayoutManager;
 import com.pvj.xlibrary.loadinglayout.LoadingLayout;
+import com.pvj.xlibrary.loadinglayout.Utils;
 import com.pvj.xlibrary.loadingrecyclerview.LoadMoreRecyclerLoadingLayout;
+import com.pvj.xlibrary.log.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import rx.Subscriber;
 
 public class Fragment_Invest extends Fragment implements LoadingLayout.OnReloadListener,
         LoadMoreRecyclerLoadingLayout.OnRefreshAndLoadMoreListener {
-    List<String> biaoBeenList;
+    List<BiaoBean.DataBean> biaoBeenList;
     InvestAdapter adapter;
     @Bind(R.id.title)
     TextView tiltle;
+    @Bind(R.id.sellout)
+    TextView sellout;
 
     int page = 1;
     int pagesize = 10;
@@ -42,8 +52,7 @@ public class Fragment_Invest extends Fragment implements LoadingLayout.OnReloadL
     RelativeLayout item;
 
     @Bind(R.id.public_listview)
-//    LoadMoreRecyclerLoadingLayout publicLv;
-            RecyclerView publicLv;
+    LoadMoreRecyclerLoadingLayout publicLv;
 
     @Nullable
     @Override
@@ -56,54 +65,91 @@ public class Fragment_Invest extends Fragment implements LoadingLayout.OnReloadL
         return rootView;
     }
 
+    private void initView() {
+        biaoBeenList = new ArrayList<>();
+        adapter = new InvestAdapter(biaoBeenList, getActivity(), Constant.INVESTING);
+//        publicLv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+        publicLv.verticalLayoutManager(getContext())
+                .setAdapter(adapter)
+                .setOnReloadListener(this)
+                .setRecycleViewBackgroundColor(Utils.getColor(getActivity(), R.color.bg_huise))
+                .setOnRefreshAndLoadMoreListener(this);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (adapter!=null){
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    @OnClick({R.id.invest_item1, R.id.sellout})
+    public void onClick(View v) {
+        Intent intent = null;
+        switch (v.getId()) {
+            case R.id.invest_item1:
+
+                intent = new Intent(getActivity(), DetailsActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.sellout:
+
+                intent = new Intent(getActivity(), InvestSellOutActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
 
     /**
      * @param stype     是刷新 还是加载  0是刷新  1是加载
      * @param inrefresh 第几次刷新下的加载
      */
     private void net(final int stype, final int inrefresh) {
-//        NetWorks.selectBorrowListApp(page + "", pagesize + "","1", new Subscriber<BiaoBean>() {
-//            @Override
-//            public void onCompleted() {
-//                publicLv.setRefreshing(false);
-//                //    publicLv.setStatus(LoadingLayout.Success);
-//                if (stype==0){
-//                    publicLv.setRefreshing(false);
-//                }else{
-//                    publicLv.loadMoreComplete();
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                if (stype==0){
-//                    publicLv.setRefreshing(false);
-//                }else{
-//                    publicLv.loadMoreComplete();
-//                }
-//                if (page==1){
-//                    publicLv.setStatus(LoadingLayout.Error);
-//                }else{
-//                    publicLv.setTextEnd();
-//                }
-//
-//                Logger.e(e.toString());
-//            }
-//
-//            @Override
-//            public void onNext(BiaoBean biaoBean) {
-//
-//                if (stype == 0) {
-//                    if (biaoBean.getState().getStatus() == 0) {
-//                        biaoBeenList.clear();
-//                        biaoBeenList.addAll(biaoBean.getData());
-//                        publicLv.setStatus(LoadingLayout.Success);
-//                    } else {
-//                        publicLv.setStatus(LoadingLayout.Empty);
-//                    }
-//
-//                } else if (stype == 1) {
+        NetWorks.selectBorrowListApp(page + "", pagesize + "", new Subscriber<BiaoBean>() {
+            @Override
+            public void onCompleted() {
+                publicLv.setRefreshing(false);
+                if (stype == 0) {
+                    publicLv.setRefreshing(false);
+                } else {
+                    publicLv.loadMoreComplete();
+                }
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (stype == 0) {
+                    publicLv.setRefreshing(false);
+                } else {
+                    publicLv.loadMoreComplete();
+                }
+                if (page == 1) {
+                    publicLv.setStatus(LoadingLayout.Error);
+                } else {
+                    publicLv.setTextEnd();
+                }
+
+                Logger.e(e.toString());
+            }
+
+            @Override
+            public void onNext(BiaoBean biaoBean) {
+
+                if (stype == 0) {
+                    if (biaoBean.getState().getStatus() == 0) {
+                        biaoBeenList.clear();
+                        biaoBeenList.addAll(biaoBean.getData());
+                        publicLv.setStatus(LoadingLayout.Success);
+//                       adapter.upData();
+                    } else {
+                        publicLv.setStatus(LoadingLayout.Empty);
+                    }
+
+                }
+//                else if (stype == 1) {
 //                    if (publicLv.getRefreshCount() == inrefresh) {
 //
 //                        if (biaoBean.getState().getStatus() == 0) {
@@ -114,48 +160,14 @@ public class Fragment_Invest extends Fragment implements LoadingLayout.OnReloadL
 //
 //                    }
 //                }
-//                adapter.notifyDataSetChanged();
-//            }
-//
-//        });
-
-        item.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), DetailsActivity.class);
-                startActivity(intent);
+                adapter.notifyDataSetChanged();
             }
+
         });
 
-    }
-
-    private void initView() {
-        biaoBeenList = new ArrayList<>();
-        biaoBeenList.add("1111");
-        biaoBeenList.add("1111");
-        biaoBeenList.add("1111");
-        biaoBeenList.add("1111");
-        biaoBeenList.add("1111");
-
-
-        adapter = new InvestAdapter(biaoBeenList, getActivity());
-//        publicLv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-//        publicLv.verticalLayoutManager(getContext())
-//                .setAdapter(adapter)
-//                .setOnReloadListener(this)
-//                .setRecycleViewBackgroundColor(Utils.getColor(getActivity(), R.color.bg_huise))
-//                .setOnRefreshAndLoadMoreListener(this);
-//        LinearLayoutManager linearLayoutManager;
-//        linearLayoutManager = new LinearLayoutManager(getActivity());
-//        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        ScrollLinearLayoutManager scrollLinearLayoutManager = new ScrollLinearLayoutManager(getActivity());
-        scrollLinearLayoutManager.setScrollEnabled(false);
-        publicLv.setLayoutManager(scrollLinearLayoutManager);
-//        publicLv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-
-        publicLv.setAdapter(adapter);
 
     }
+
 
     @Override
     public void onDestroyView() {
@@ -167,7 +179,7 @@ public class Fragment_Invest extends Fragment implements LoadingLayout.OnReloadL
     @Override
     public void onReload(View v) {
         page = 1;
-//        publicLv.setStatus(LoadingLayout.Loading);
+        publicLv.setStatus(LoadingLayout.Loading);
         net(0, 0);
     }
 
@@ -175,7 +187,7 @@ public class Fragment_Invest extends Fragment implements LoadingLayout.OnReloadL
     public void onRefresh() {
         page = 1;
         net(0, 0);
-//        publicLv.setTextStart();
+        publicLv.setTextStart();
     }
 
     @Override

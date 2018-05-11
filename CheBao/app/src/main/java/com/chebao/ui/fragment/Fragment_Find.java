@@ -93,17 +93,19 @@ public class Fragment_Find extends BaseFragment implements ViewPager.OnPageChang
     }
 
     private void switchBtn(int position){
+
+        putongTeam.setTextColor(Utils.getColor(getActivity(),R.color.black_home_four_midle));
+        xinshouTeam.setTextColor(Utils.getColor(getActivity(),R.color.black_home_four_midle));
+        putongView.setVisibility(View.INVISIBLE);
+        xinshouView.setVisibility(View.INVISIBLE);
+
         if (position==0){
             putongTeam.setTextColor(Utils.getColor(getActivity(),R.color.org_home));
-            xinshouTeam.setTextColor(Utils.getColor(getActivity(),R.color.black_home_four_midle));
             putongView.setVisibility(View.VISIBLE);
-            xinshouView.setVisibility(View.GONE);
 
 
         }else{
-            putongView.setVisibility(View.GONE);
             xinshouView.setVisibility(View.VISIBLE);
-            putongTeam.setTextColor(Utils.getColor(getActivity(),R.color.black_home_four_midle));
             xinshouTeam.setTextColor(Utils.getColor(getActivity(),R.color.org_home));
         }
     }

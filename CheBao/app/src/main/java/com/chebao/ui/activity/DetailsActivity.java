@@ -35,6 +35,7 @@ import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2017/3/10.
+ * 产品详情(活期)
  */
 
 public class DetailsActivity extends BaseActivity {

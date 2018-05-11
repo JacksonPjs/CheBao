@@ -57,7 +57,7 @@ public class GestureContentView extends ViewGroup {
 	private void addChild(){
 		for (int i = 0; i < 9; i++) {
 			ImageView image = new ImageView(context);
-			image.setBackgroundResource(R.mipmap.gesture_node_normal);
+			image.setImageResource(R.mipmap.gesture_node_normal);
 			this.addView(image);
 			invalidate();
 			// 第几行

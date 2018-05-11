@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_12_size"
+            android:textColor="@color/black_home_four_small"
+            android:text="车车宝第1期" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:textSize="@dimen/text_samll_size"
+            android:textColor="@color/black_hongbao_small"
+            android:layout_marginTop="@dimen/home_margin"
+            android:text="2018-5-1" />
+
+        <TextView
+            android:id="@+id/num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="14sp"
+            android:textColor="@color/org_home"
+            android:text="100.00" />
+
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/num"
+            android:textSize="@dimen/text_samll_size"
+            android:textColor="@color/white"
+            android:text="还款中"
+            android:background="@drawable/shape_investment_1"
+            android:gravity="center"
+
+            />
+
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -37,8 +37,8 @@ public class Fragment_Find_Start extends Fragment implements LoadingLayout.OnRel
     int pagesize = 10;
 
     @Bind(R.id.public_listview)
-//    LoadMoreRecyclerLoadingLayout publicLv;
-            RecyclerView publicLv;
+    LoadMoreRecyclerLoadingLayout publicLv;
+//            RecyclerView publicLv;
 
     @Nullable
     @Override
@@ -124,19 +124,19 @@ public class Fragment_Find_Start extends Fragment implements LoadingLayout.OnRel
         biaoBeenList.add("1111");
 
         adapter = new BiaoAdapter(biaoBeenList, getActivity());
-//        publicLv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-//        publicLv.verticalLayoutManager(getContext())
-//                .setAdapter(adapter)
-//                .setOnReloadListener(this)
-//                .setRecycleViewBackgroundColor(Utils.getColor(getActivity(), R.color.bg_huise))
-//                .setOnRefreshAndLoadMoreListener(this);
-        LinearLayoutManager linearLayoutManager;
-        linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        publicLv.setLayoutManager(linearLayoutManager);
         publicLv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-
-        publicLv.setAdapter(adapter);
+        publicLv.verticalLayoutManager(getContext())
+                .setAdapter(adapter)
+                .setOnReloadListener(this)
+                .setRecycleViewBackgroundColor(Utils.getColor(getActivity(), R.color.bg_huise))
+                .setOnRefreshAndLoadMoreListener(this);
+//        LinearLayoutManager linearLayoutManager;
+//        linearLayoutManager = new LinearLayoutManager(getActivity());
+//        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        publicLv.setLayoutManager(linearLayoutManager);
+//        publicLv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+//
+//        publicLv.setAdapter(adapter);
 
     }
 

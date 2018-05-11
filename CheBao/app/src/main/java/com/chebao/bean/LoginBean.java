@@ -18,6 +18,8 @@ public class LoginBean {
      * cellPhone : 13811111111
      * usableAmount : 100000.0
      * total1 : 100000.0
+     * total2 : 100000.0
+     * total3 : 100000.0
      */
 
     private StateBean state;
@@ -33,6 +35,24 @@ public class LoginBean {
     private String bankCardNo;
     private double usableAmount;
     private double total1;
+    private double total2;
+    private double total3;
+
+    public double getTotal2() {
+        return total2;
+    }
+
+    public void setTotal2(double total2) {
+        this.total2 = total2;
+    }
+
+    public double getTotal3() {
+        return total3;
+    }
+
+    public void setTotal3(double total3) {
+        this.total3 = total3;
+    }
 
     public String getRealName() {
         return realName;

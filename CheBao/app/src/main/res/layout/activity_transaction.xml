@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/ll_nor"
+
+        >
+        <RelativeLayout
+            android:layout_width="55dp"
+            android:onClick="onBack"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="20dp"
+                android:padding="3dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/back"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:layout_marginLeft="60dp"
+            android:textSize="@dimen/title_size"
+            android:layout_centerInParent="true"
+            android:maxLines="1"
+            android:ellipsize="end"
+
+            />
+
+        <TextView
+            android:id="@+id/type_select"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="筛选"
+            android:gravity="center"
+            android:padding="@dimen/home_margin"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/text_18_size"
+            android:textColor="@color/black_home_four_small"
+
+            />
+    </RelativeLayout>
+    <View
+        android:background="@color/xixian"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ></android.support.v7.widget.RecyclerView>
+
+
+
+</LinearLayout>

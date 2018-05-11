@@ -32,9 +32,10 @@
     <dimen name="text_15_size">15sp</dimen>
     <dimen name="text_12_size">12sp</dimen>
     <dimen name="text_midle_size">14sp</dimen>
-    <dimen name="text_samll_size">10sp</dimen>
+    <dimen name="text_samll_size">12sp</dimen>
     <dimen name="text_high_size">13sp</dimen>
     <dimen name="text_large_size">23sp</dimen>
+    <dimen name="text_security">16sp</dimen>
 
 
 

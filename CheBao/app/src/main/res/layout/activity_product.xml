@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-
+                android:id="@+id/day_rl"
                 >
 
                 <TextView
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-
+                android:id="@+id/month_rl"
                 >
 
                 <TextView
@@ -64,21 +64,24 @@
                     android:gravity="center"
                     android:text="借款材料"
                     android:layout_centerHorizontal="true"
-                    android:textColor="@color/org_home"
+                    android:textColor="@color/black_home_four_midle"
                     android:textSize="@dimen/text_size" />
 
                 <ImageView
+                    android:id="@+id/month_team"
                     android:layout_width="35dp"
                     android:layout_height="3dp"
                     android:layout_below="@+id/month_text"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="3dp"
                     android:background="@color/org_home"
-                    tools:visibility="visible"></ImageView>
+                    android:visibility="invisible"></ImageView>
 
             </RelativeLayout>
 
             <RelativeLayout
+
+                android:id="@+id/season_rl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -93,17 +96,18 @@
                     android:gravity="center"
                     android:layout_centerHorizontal="true"
                     android:text="购买记录"
-                    android:textColor="@color/org_home"
+                    android:textColor="@color/black_home_four_midle"
                     android:textSize="@dimen/text_size" />
 
                 <ImageView
+                    android:id="@+id/season_team"
                     android:layout_width="35dp"
                     android:layout_height="3dp"
                     android:layout_below="@+id/season_text"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="3dp"
                     android:background="@color/org_home"
-                    tools:visibility="visible"></ImageView>
+                    android:visibility="invisible"></ImageView>
 
             </RelativeLayout>
 

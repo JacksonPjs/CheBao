@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,22 +23,28 @@ import android.widget.ViewSwitcher;
 
 import com.bumptech.glide.Glide;
 import com.chebao.R;
+import com.chebao.net.NetWorks;
 import com.chebao.ui.activity.WebActivity;
 import com.chebao.bean.AnnouncementBean;
 import com.chebao.bean.OneBean;
 import com.chebao.net.NetService;
+import com.chebao.utils.T1changerString;
+import com.chebao.widget.GoodProgressView;
 import com.chebao.widget.ProgressSeek;
 import com.pvj.xlibrary.banner.Banner;
 import com.pvj.xlibrary.banner.BannerIndicator;
+import com.pvj.xlibrary.loadinglayout.LoadingLayout;
 import com.pvj.xlibrary.loadinglayout.Utils;
 import com.pvj.xlibrary.log.Logger;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Subscriber;
 
 /**
  * Created by Administrator on 2017/3/21.
@@ -56,7 +63,32 @@ public class Fragment_Home extends BaseFragment {
     @Bind(R.id.gonggao)
     View gonggao;
     @Bind(R.id.progressBar)
-    ProgressSeek progressSeek;
+    GoodProgressView progressSeek;
+
+    @Bind(R.id.xinshou)
+    TextView xinshou;
+    @Bind(R.id.tuijian_lilv)
+    TextView lilvTv;
+    @Bind(R.id.didibao_lilv)
+    TextView didibaolilv;
+    @Bind(R.id.tuijian_date)
+    TextView tuijiandate;
+    @Bind(R.id.tuijian_fangshi)
+    TextView tuijianfangshi;
+    @Bind(R.id.yonghu)
+    TextView yonghu;
+
+    @Bind(R.id.yonghu_date)
+    TextView yonghudate;
+
+
+    @Bind(R.id.yonghu_lilv)
+    TextView yonghulilv;
+    @Bind(R.id.yonghu_fangshi)
+    TextView yonghufangshi;
+    @Bind(R.id.progressBar_yonghu)
+    GoodProgressView progressBaryonghu;
+
     private BitHandler bitHandler;
 
     List<OneBean.BannersBean> drawables;
@@ -64,6 +96,9 @@ public class Fragment_Home extends BaseFragment {
     List<OneBean.Data4Bean> data4Beens;
 
     private int index = 0;
+
+    OneBean.Data1Bean data1Bean;
+    OneBean.Data2Bean data2Bean;
 
     //公告handler
     class BitHandler extends Handler {
@@ -102,7 +137,6 @@ public class Fragment_Home extends BaseFragment {
 
     @Override
     public void initData() {
-        progressSeek.init(50);
         textSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
             @Override
             public View makeView() {
@@ -125,6 +159,11 @@ public class Fragment_Home extends BaseFragment {
 
 
         //----------------------banner start------------------------------
+        initBanner();
+    }
+
+
+    private void initBanner() {
         drawables = new ArrayList<>();
         data4Beens = new ArrayList<>();
 //        drawables.add("1");
@@ -139,12 +178,12 @@ public class Fragment_Home extends BaseFragment {
 //        params.height=width*2/5;
 //        banner.setLayoutParams(params);
 
-//        banner.setInterval(5000);
-//        banner.setPageChangeDuration(500);
+        banner.setInterval(5000);
+        banner.setPageChangeDuration(500);
 
-        List imageViewList = new ArrayList<>();
-        imageViewList.add(this.getResources().getDrawable(R.mipmap.banner));
-        imageViewList.add(this.getResources().getDrawable(R.mipmap.banner_discount));
+//        List imageViewList = new ArrayList<>();
+//        imageViewList.add(this.getResources().getDrawable(R.mipmap.banner));
+//        imageViewList.add(this.getResources().getDrawable(R.mipmap.banner_discount));
         banner.setBannerDataInit(new Banner.BannerDataInit() {
             @Override
             public ImageView initImageView() {
@@ -153,12 +192,12 @@ public class Fragment_Home extends BaseFragment {
 
             @Override
             public void initImgData(ImageView imageView, Object imgPath) {
-                imageView.setImageDrawable((Drawable) imgPath);
-//                Logger.d("initImgData" + NetService.API_SERVER_Url + ((OneBean.BannersBean) imgPath).getImgPath());
-//                Glide.with(Fragment_Home.this)
-//                        .load(NetService.API_SERVER_Url + ((OneBean.BannersBean) imgPath).getImgPath())
-//                        .error(R.mipmap.banner)
-//                        .into(imageView);
+//                imageView.setImageDrawable((Drawable) imgPath);
+                Logger.d("initImgData" + NetService.API_SERVER_Url + ((OneBean.BannersBean) imgPath).getImgPath());
+                Glide.with(Fragment_Home.this)
+                        .load(NetService.API_SERVER_Url + ((OneBean.BannersBean) imgPath).getImgPath())
+                        .error(R.mipmap.banner)
+                        .into(imageView);
             }
         });
 
@@ -169,7 +208,7 @@ public class Fragment_Home extends BaseFragment {
                 Utils.dp2px(getActivity(), 14)//widthAndHeight
         );
         banner.attachIndicator(bannerIndicator);
-        banner.setDataSource(imageViewList);
+//        banner.setDataSource(imageViewList);
 
 
         banner.setOnBannerItemClickListener(new Banner.OnBannerItemClickListener() {
@@ -197,6 +236,91 @@ public class Fragment_Home extends BaseFragment {
 
     @Override
     public void requestData() {
+        NetWorks.index(new Subscriber<OneBean>() {
+            @Override
+            public void onStart() {
+//                layoutContiant.setStatus(LoadingLayout.Loading);
+            }
+
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+
+                Logger.e(e.toString());
+//                layoutContiant.setStatus(LoadingLayout.Error);
+            }
+
+            @Override
+            public void onNext(OneBean oneBean) {
+
+                if (oneBean.getState().getStatus() == 0) {
+                    //广告
+//                    layoutContiant.setStatus(LoadingLayout.Success);
+                    drawables.clear();
+                    drawables.addAll(oneBean.getBanners());
+                    banner.setDataSource(drawables);
+
+                    // 设置 广播消息
+                    data4Beens.clear();
+                    data4Beens.addAll(oneBean.getData4());
+
+                    new myThread().start();
+
+                    didibaolilv.setText(oneBean.getBorrowhqll() + "%+2%");
+
+                    data1Bean = oneBean.getData1();
+                    //新手标数据
+                    xinshou.setText(data1Bean.getBorrowTitle());
+                    tuijiandate.setText("投资期限:" + T1changerString.t2chager(data1Bean.getDeadline(), data1Bean.getDeadlineType()));
+                    lilvTv.setText((data1Bean.getAnnualRate() - 2) + "%+2%");
+                    tuijianfangshi.setText("收益方式:" + T1changerString.t4chager(data1Bean.getRepayType()));
+
+
+                    data2Bean = oneBean.getData2();
+                    //用户标
+                    yonghu.setText(data2Bean.getBorrowTitle());
+                    yonghudate.setText("投资期限:" + T1changerString.t2chager(data2Bean.getDeadline(), data2Bean.getDeadlineType()));
+                    yonghulilv.setText((data2Bean.getAnnualRate() - 2) + "%+2%");
+                    yonghufangshi.setText("收益方式:" + T1changerString.t4chager(data2Bean.getRepayType()));
+
+                    handler.sendEmptyMessage(1);
+
+                } else {
+//                    layoutContiant.setStatus(LoadingLayout.Error);
+                }
+
+
+            }
+        });
+    }
+
+    Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            if (msg.what == 1) {
+
+                //通知view，进度值有变化
+                progressSeek.setProgressValue(data1Bean.getProgress() * 100);
+                progressSeek.postInvalidate();
+                //通知view，进度值有变化
+                progressSeek.setProgressValue(data1Bean.getProgress() * 100);
+                progressSeek.postInvalidate();
+                progressBaryonghu.setProgressValue(data2Bean.getProgress()* 100);
+
+                progressBaryonghu.postInvalidate();
+
+            }
+            super.handleMessage(msg);
+        }
+
+        ;
+    };
+
+    private void initNetData() {
 
     }
 

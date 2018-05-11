@@ -30,6 +30,11 @@ public class Constant {
 
     public static final int DEFAULT_WAVE_HEIGHT = 40;
 
+
+    public static final int INVEST_SELL_OUT=1;
+    public static final int INVESTING=0;
+
+
     /**
      * 获取屏幕分辨率
      * @param context

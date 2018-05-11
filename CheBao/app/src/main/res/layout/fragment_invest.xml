@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
-    <LinearLayout
+    android:orientation="vertical"
+    android:background="@color/bg_huise"
+    >
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <include layout="@layout/home_titile"></include>
+        android:layout_height="wrap_content"
+        android:background="@color/ll_nor"
+
+        >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/title_hight"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="#000"
+            android:textSize="@dimen/title_size"
+            />
+
+        <TextView
+            android:id="@+id/sellout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="售罄"
+            android:textColor="#000"
+            android:padding="@dimen/home_margin"
+            android:textSize="@dimen/title_size"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
+    <View
+        android:background="@color/xixian"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
 
         <RelativeLayout
             android:id="@+id/invest_item1"
@@ -133,17 +166,16 @@
 
         </RelativeLayout>
 
-        <android.support.v7.widget.RecyclerView
+        <com.pvj.xlibrary.loadingrecyclerview.LoadMoreRecyclerLoadingLayout
             android:id="@+id/public_listview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             tools:listitem="@layout/home_item_five"
             tools:layoutManager="LinearLayoutManager"
             tools:spanCount="4"
-            ></android.support.v7.widget.RecyclerView>
+            ></com.pvj.xlibrary.loadingrecyclerview.LoadMoreRecyclerLoadingLayout>
 
 
 
-    </LinearLayout>
 
-</android.support.v4.widget.NestedScrollView>
+</LinearLayout>
