@@ -304,12 +304,13 @@ public class Fragment_Home extends BaseFragment {
             if (msg.what == 1) {
 
                 //通知view，进度值有变化
-                progressSeek.setProgressValue(data1Bean.getProgress() * 100);
+                progressSeek.setProgressValue((int) (data1Bean.getProgress() * 100));
                 progressSeek.postInvalidate();
                 //通知view，进度值有变化
-                progressSeek.setProgressValue(data1Bean.getProgress() * 100);
+                progressSeek.setProgressValue((int) (data1Bean.getProgress() * 100));
                 progressSeek.postInvalidate();
-                progressBaryonghu.setProgressValue(data2Bean.getProgress()* 100);
+                double progress=data2Bean.getProgress()*100;
+                progressBaryonghu.setProgressValue((int) progress);
 
                 progressBaryonghu.postInvalidate();
 

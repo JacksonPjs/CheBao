@@ -40,7 +40,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/details_item1_1"
+            android:text="车辆抵押"
             android:textColor="@color/black_home_four_midle"
             />
 
@@ -73,7 +73,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/details_item1_1"
+            android:text="借款抵押物足额抵押，收益稳定高效"
             android:textColor="@color/black_home_four_midle"
             />
 
@@ -104,6 +104,7 @@
 
         >
         <TextView
+            android:id="@+id/interestbearingtime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/details_item1_1"
@@ -135,6 +136,7 @@
         android:padding="@dimen/home_margin"
         >
         <TextView
+            android:id="@+id/type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/details_item1_1"
@@ -164,6 +166,7 @@
         android:padding="@dimen/home_margin"
         >
         <TextView
+            android:id="@+id/mininvestamount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/details_item1_1"

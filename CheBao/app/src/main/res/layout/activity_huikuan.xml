@@ -22,7 +22,7 @@
             android:layout_toRightOf="@+id/allmoney_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="11111"
+            android:text=""
             android:textColor="@color/org_home"
             />
             <TextView
@@ -38,7 +38,7 @@
                     android:layout_toRightOf="@+id/mmoney_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="111111"
+                    tools:text="111111"
                     android:textColor="@color/org_home"
                     />
 

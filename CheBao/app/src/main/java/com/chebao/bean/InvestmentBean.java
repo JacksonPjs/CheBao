@@ -1,5 +1,6 @@
 package com.chebao.bean;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -89,19 +90,249 @@ public class InvestmentBean {
          * transferAmount : 0.0
          * userName : 13811111111
          */
+        /** 订单号 **/
+        private String ordId;
 
+        /** 订单时间 **/
+        private long ordDate;
 
-        private double investAmount;
+        /** 借款ID **/
+        private Long borrowId;
+
+        /** 投资人Id **/
+        private Long investorId;
+
+        /** 投资时间 **/
         private long investTime;
+
+        /** 实际投资额度 **/
+        private BigDecimal realAmount;
+
+        /** 投资金额 **/
+        private BigDecimal investAmount;
+
+        /** 已转让金额 **/
+        private BigDecimal transferAmount;
+
+        /** 是否投资成功（0处理中，1成功，2，投标失败） **/
+        private Integer result;
+
+        /**投资方式（1手动投资，2自动投资，3app投资，4微信投资）**/
+        private Integer investWay;
+        /** 债权Id **/
+        private Long claimId;
+
+        /** 是否转让债权（0否，1是） **/
+        private Integer isClaim;
+
+        /** 投资备注  **/
+        private String remarks;
+        private Long goodsId;
+        private BigDecimal profit;
+
+        private Long groupId;
+
+        private Long xjqId;
+
+        private BigDecimal xjqmoney;
+
+        private Long jxqId;
+
+        private BigDecimal jxqmoney;
+        /*交易密码*/
+        private String tradingPassword;
+        /*使用现金券json*/
+        private String couponId;
+
 
         private String userName;
 
-        public double getInvestAmount() {
+        private String borrowTitle;
+
+        private int borrowStatus;
+
+        public int getBorrowStatus() {
+            return borrowStatus;
+        }
+
+        public void setBorrowStatus(int borrowStatus) {
+            this.borrowStatus = borrowStatus;
+        }
+
+        public String getBorrowTitle() {
+            return borrowTitle;
+        }
+
+        public void setBorrowTitle(String borrowTitle) {
+            this.borrowTitle = borrowTitle;
+        }
+
+        public String getOrdId() {
+            return ordId;
+        }
+
+        public void setOrdId(String ordId) {
+            this.ordId = ordId;
+        }
+
+        public long getOrdDate() {
+            return ordDate;
+        }
+
+        public void setOrdDate(long ordDate) {
+            this.ordDate = ordDate;
+        }
+
+        public Long getBorrowId() {
+            return borrowId;
+        }
+
+        public void setBorrowId(Long borrowId) {
+            this.borrowId = borrowId;
+        }
+
+        public Long getInvestorId() {
+            return investorId;
+        }
+
+        public void setInvestorId(Long investorId) {
+            this.investorId = investorId;
+        }
+
+        public BigDecimal getRealAmount() {
+            return realAmount;
+        }
+
+        public void setRealAmount(BigDecimal realAmount) {
+            this.realAmount = realAmount;
+        }
+
+        public BigDecimal getInvestAmount() {
             return investAmount;
         }
 
-        public void setInvestAmount(double investAmount) {
+        public void setInvestAmount(BigDecimal investAmount) {
             this.investAmount = investAmount;
+        }
+
+        public BigDecimal getTransferAmount() {
+            return transferAmount;
+        }
+
+        public void setTransferAmount(BigDecimal transferAmount) {
+            this.transferAmount = transferAmount;
+        }
+
+        public Integer getResult() {
+            return result;
+        }
+
+        public void setResult(Integer result) {
+            this.result = result;
+        }
+
+        public Integer getInvestWay() {
+            return investWay;
+        }
+
+        public void setInvestWay(Integer investWay) {
+            this.investWay = investWay;
+        }
+
+        public Long getClaimId() {
+            return claimId;
+        }
+
+        public void setClaimId(Long claimId) {
+            this.claimId = claimId;
+        }
+
+        public Integer getIsClaim() {
+            return isClaim;
+        }
+
+        public void setIsClaim(Integer isClaim) {
+            this.isClaim = isClaim;
+        }
+
+        public String getRemarks() {
+            return remarks;
+        }
+
+        public void setRemarks(String remarks) {
+            this.remarks = remarks;
+        }
+
+        public Long getGoodsId() {
+            return goodsId;
+        }
+
+        public void setGoodsId(Long goodsId) {
+            this.goodsId = goodsId;
+        }
+
+        public BigDecimal getProfit() {
+            return profit;
+        }
+
+        public void setProfit(BigDecimal profit) {
+            this.profit = profit;
+        }
+
+        public Long getGroupId() {
+            return groupId;
+        }
+
+        public void setGroupId(Long groupId) {
+            this.groupId = groupId;
+        }
+
+        public Long getXjqId() {
+            return xjqId;
+        }
+
+        public void setXjqId(Long xjqId) {
+            this.xjqId = xjqId;
+        }
+
+        public BigDecimal getXjqmoney() {
+            return xjqmoney;
+        }
+
+        public void setXjqmoney(BigDecimal xjqmoney) {
+            this.xjqmoney = xjqmoney;
+        }
+
+        public Long getJxqId() {
+            return jxqId;
+        }
+
+        public void setJxqId(Long jxqId) {
+            this.jxqId = jxqId;
+        }
+
+        public BigDecimal getJxqmoney() {
+            return jxqmoney;
+        }
+
+        public void setJxqmoney(BigDecimal jxqmoney) {
+            this.jxqmoney = jxqmoney;
+        }
+
+        public String getTradingPassword() {
+            return tradingPassword;
+        }
+
+        public void setTradingPassword(String tradingPassword) {
+            this.tradingPassword = tradingPassword;
+        }
+
+        public String getCouponId() {
+            return couponId;
+        }
+
+        public void setCouponId(String couponId) {
+            this.couponId = couponId;
         }
 
         public long getInvestTime() {

@@ -6,10 +6,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chebao.R;
+import com.chebao.bean.InfoBean;
+import com.chebao.bean.LoginBean;
+import com.chebao.net.NetWorks;
 import com.chebao.ui.activity.BaseActivity;
+import com.chebao.ui.activity.login2register.LoginActivity;
+import com.chebao.utils.DialogUtils;
 import com.chebao.utils.LoginRegisterUtils;
 import com.chebao.utils.SharedPreferencesUtils;
 import com.pvj.xlibrary.log.Logger;
@@ -28,96 +34,139 @@ import rx.Subscriber;
 /**
  *  修改支付密码
  */
-public class ChangerPayPassWordActivity extends BaseActivity  {
-
+public class ChangerPayPassWordActivity extends BaseActivity {
     @Bind(R.id.title)
     TextView title;
-    @Bind(R.id.login_phone)
-    EditText loginPhone;
-    @Bind(R.id.yzm)
-    EditText yzm;
-    @Bind(R.id.login_password)
-    EditText loginPassword;
-//    @Bind(R.id.password2)
-//    EditText password2;
-    @Bind(R.id.login_go)
-    Button loginGo;
-    @Bind(R.id.getcode)
-    TextView getcode;
+    @Bind(R.id.fword)
+    EditText fword;
+    @Bind(R.id.firt_word)
+    LinearLayout firtWord;
+    @Bind(R.id.tword)
+    EditText tword;
+    @Bind(R.id.sword)
+    EditText sword;
+    @Bind(R.id.chagerloginpwd_go)
+    Button chagerloginpwdGo;
+
+    @Bind(R.id.firt_word_view)
+
+    View firt_word_view;
 
     Dialog dialog;
-
-    private CountDownButtonHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forget_pass_word1);
+        setContentView(R.layout.activity_changeoginpassword);
         ButterKnife.bind(this);
 
-        initView();
-
-
-
-    }
-
-    private void initView() {
-        title.setText("修改支付密码");
-        loginGo.setText("修改");
-
-
-        loginPhone.setText(SharedPreferencesUtils.getUserName(this));
-        loginPhone.setEnabled(false);
-    }
-
-
-    @OnClick({R.id.getcode, R.id.login_go})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.getcode:
-//                sdkUtils.verificationNewUserPhone(ChangerPayPassWordActivity.this, ChangerPayPassWordActivity.this, loginPhone);
-                break;
-            case R.id.login_go:
-
-                if (LoginRegisterUtils.isNullOrEmpty(loginPhone)) {
-                    T.ShowToastForShort(this, "手机号码未输入");
-                    return;
-                }
-
-                if (!LoginRegisterUtils.isPhone(loginPhone)) {
-                    T.ShowToastForShort(this, "手机号码不正确");
-                    return;
-                }
-
-                if (LoginRegisterUtils.isNullOrEmpty(loginPassword)) {
-                    T.ShowToastForShort(this, "用户密码未输入");
-                    return;
-                }
-
-                if (!LoginRegisterUtils.isPassWord(loginPassword)) {
-                    T.ShowToastForShort(this, "用户密码格式不合法");
-                    return;
-                }
-
-//
-//                if (!LoginRegisterUtils.equals(loginPassword, password2)) {
-//                    T.ShowToastForShort(this, "二次手机密码不一致");
-//                    return;
-//                }
-
-                if (LoginRegisterUtils.isNullOrEmpty(yzm)) {
-                    T.ShowToastForShort(this, "手机验证未输入");
-                    return;
-                }
-
-
-//                net(loginPhone.getText().toString(), yzm.getText().toString(), loginPassword.getText().toString());
-
-                break;
+        if ((Boolean) SharedPreferencesUtils.getParam(this, "payPwd", false)) {
+            title.setText("修改交易密码");
+        } else {
+            title.setText("设置交易密码");
+//            firtWord.setVisibility(View.GONE);
+//            firt_word_view.setVisibility(View.GONE);
         }
+        title.setText("修改交易密码");
+    }
+
+    @OnClick(R.id.chagerloginpwd_go)
+    public void onClick() {
+        if (LoginRegisterUtils.isNullOrEmpty(tword)) {
+            T.ShowToastForShort(this, "密码不能为空");
+            return;
+        }
+
+        if (!LoginRegisterUtils.equals(tword, sword)) {
+            T.ShowToastForShort(this, "二次密码不一致");
+            return;
+        }
+
+        net(tword.getText().toString(), sword.getText().toString());
+
+
     }
 
 
+    //修改交易密码
+    public void net(String p, String p2) {
+        NetWorks.updateUserPay(p, p2, new Subscriber<InfoBean>() {
+            @Override
+            public void onStart() {
+                if (dialog == null) {
+                    dialog = DialogUtils.createProgressDialog(ChangerPayPassWordActivity.this, "修改中...");
+                } else {
+                    dialog.show();
+                }
+            }
+
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Logger.e(e.toString());
+                dialog.dismiss();
+                T.ShowToastForShort(ChangerPayPassWordActivity.this, "网络异常");
+
+            }
+
+            @Override
+            public void onNext(InfoBean s) {
+                if (s.getState().getStatus() == 0) {
+                    SharedPreferencesUtils.setParam(ChangerPayPassWordActivity.this, "payPwd", true);
+                    finish();
+                    dialog.dismiss();
+                    T.ShowToastForShort(ChangerPayPassWordActivity.this, "修改成功");
+                } else if (s.getState().getStatus() == 99) {
+
+                    netLogin();
+                } else {
+                    dialog.dismiss();
+                    T.ShowToastForShort(ChangerPayPassWordActivity.this, s.getState().getInfo());
+                }
+
+
+            }
+        });
+    }
+
+
+    private void netLogin() {
+
+        NetWorks.login(SharedPreferencesUtils.getUserName(this),
+                SharedPreferencesUtils.getPassword(this), new Subscriber<LoginBean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (dialog != null & dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                        T.ShowToastForShort(ChangerPayPassWordActivity.this, "网络异常");
+                        Logger.json(e.toString());
+                    }
+
+                    @Override
+                    public void onNext(LoginBean loginBean) {
+                        if (loginBean.getState().getStatus() == 0) {
+                            net(tword.getText().toString(), sword.getText().toString());
+                        } else {
+                            if (dialog != null & dialog.isShowing()) {
+                                dialog.dismiss();
+                            }
+                            Intent intent = new Intent(ChangerPayPassWordActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                }
+        );
+    }
 
 
 }

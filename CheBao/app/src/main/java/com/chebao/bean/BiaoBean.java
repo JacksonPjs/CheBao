@@ -100,7 +100,7 @@ public class BiaoBean {
         private long investStartTime;
    //     private double mayCast;
         private double minInvestAmount;
-        private int progress;
+        private double progress;
    //     private int raisingPeriod;
         private int remainTime;
         private int repayType;
@@ -108,11 +108,11 @@ public class BiaoBean {
     //    private long repayDate;
 
 
-        public int getProgress() {
+        public double getProgress() {
             return progress;
         }
 
-        public void setProgress(int progress) {
+        public void setProgress(double progress) {
             this.progress = progress;
         }
 

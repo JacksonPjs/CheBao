@@ -37,6 +37,7 @@
                 android:gravity="center"
                 >
                 <TextView
+                    android:id="@+id/data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1个月"
@@ -64,6 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/mine"
+                    android:id="@+id/maxamount"
                     android:textSize="@dimen/text_12_size"
                     android:textColor="@color/org_home"
                     />
@@ -83,20 +85,36 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 >
-                <TextView
+                <com.chebao.widget.countdownview.CountdownView
+                    android:id="@+id/countdowntime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/mine"
-                    android:textSize="@dimen/text_12_size"
-                    android:textColor="@color/org_home"
+
+                    app:isShowDay="true"
+                    app:isShowHour="true"
+                    app:isShowMillisecond="false"
+                    app:isShowMinute="true"
+                    app:isShowSecond="true"
+                    app:suffixDay="天"
+                    app:suffixGravity="center"
+                    app:suffixHour="时"
+                    app:suffixMinute="分"
+                    app:suffixSecond="秒"
+                    app:suffixTextColor="@color/org_home"
+                    app:suffixTextSize="10sp"
+                    app:timeTextColor="@color/org_home"
+                    app:timeTextSize="@dimen/text_12_size"
+                    android:layout_marginTop="5dp"
                     />
 
                 <TextView
+                    android:layout_below="@+id/countdowntime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/shengyutime"
+                    android:layout_centerHorizontal="true"
                     android:textSize="@dimen/text_12_size"
-                    android:layout_marginTop="1dp"
+                    android:layout_marginTop="3dp"
                     />
             </LinearLayout>
         </LinearLayout>

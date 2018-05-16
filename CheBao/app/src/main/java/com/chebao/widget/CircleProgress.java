@@ -17,7 +17,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.chebao.App.Constant;
-import com.chebao.App.Contacts;
 import com.chebao.BuildConfig;
 import com.chebao.R;
 import com.chebao.utils.MiscUtil;

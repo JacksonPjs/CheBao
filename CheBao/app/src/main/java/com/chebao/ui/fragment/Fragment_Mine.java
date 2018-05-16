@@ -14,11 +14,13 @@ import com.chebao.bean.CenterIndexBean;
 import com.chebao.bean.LoginBean;
 import com.chebao.net.NetWorks;
 import com.chebao.ui.activity.Activity_discount;
+import com.chebao.ui.activity.ChagerActivity;
 import com.chebao.ui.activity.HuiKuanActivity;
 import com.chebao.ui.activity.InvestmentActivity;
 import com.chebao.ui.activity.MyActivtity;
 import com.chebao.ui.activity.SecurityActivity;
 import com.chebao.ui.activity.TransactionActivity;
+import com.chebao.ui.activity.WithdrawActivity;
 import com.chebao.ui.activity.login2register.LoginActivity;
 import com.chebao.utils.SharedPreferencesUtils;
 import com.pvj.xlibrary.log.Logger;
@@ -98,7 +100,7 @@ public class Fragment_Mine extends BaseFragment {
         eableuse.setText((String) SharedPreferencesUtils.getParam(getActivity(), "total3", "0"));
         usableamount.setText((String) SharedPreferencesUtils.getParam(getActivity(), "usableAmount", "0"));
         toatal2.setText((String) SharedPreferencesUtils.getParam(getActivity(), "toatal2", "0"));
-
+        netLogin();
 
         selectUserIndex();
 
@@ -165,14 +167,14 @@ public class Fragment_Mine extends BaseFragment {
 
             case R.id.chager:
                 //充值
-//                intent = new Intent(getActivity(), ChagerActivity.class);
+                intent = new Intent(getActivity(), ChagerActivity.class);
                 getActivity().startActivity(intent);
 
                 break;
             case R.id.withdraw:
                 //提现
                 if (SharedPreferencesUtils.getIsBank(getContext())) {
-//                    intent = new Intent(getActivity(), WithdrawActivity.class);
+                    intent = new Intent(getActivity(), WithdrawActivity.class);
                     getActivity().startActivity(intent);
                 } else {
                     T.ShowToastForShort(getContext(), "提现前，需要添加银行卡.");

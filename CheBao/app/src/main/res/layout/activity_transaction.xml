@@ -57,11 +57,11 @@
         android:layout_width="fill_parent"
         android:layout_height="1dp" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <com.pvj.xlibrary.loadingrecyclerview.LoadMoreRecyclerLoadingLayout
+        android:id="@+id/public_listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"
+        ></com.pvj.xlibrary.loadingrecyclerview.LoadMoreRecyclerLoadingLayout>
 
 
 

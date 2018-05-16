@@ -1,6 +1,8 @@
 package com.chebao.ui.activity.login2register;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.chebao.R;
+import com.chebao.bean.ForgetPassBean;
 import com.chebao.bean.InfoBean;
 import com.chebao.geetest_sdk.SdkUtils2;
 import com.chebao.net.NetWorks;
@@ -25,7 +28,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscriber;
 
-public class ForgetPassWordActivity1 extends BaseActivity implements SdkUtils2.SdkLister {
+/*
+ * 忘记密码
+ * */
+
+public class ForgetPassWordActivity1 extends BaseActivity {
 
     @Bind(R.id.title)
     TextView title;
@@ -53,10 +60,6 @@ public class ForgetPassWordActivity1 extends BaseActivity implements SdkUtils2.S
 
         initView();
 
-        if (sdkUtils == null) {
-            sdkUtils = new SdkUtils2();
-        }
-        sdkUtils.setSdkLister(this);
 
     }
 
@@ -69,19 +72,21 @@ public class ForgetPassWordActivity1 extends BaseActivity implements SdkUtils2.S
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.getcode:
-                sdkUtils.verificationNewUserPhone(ForgetPassWordActivity1.this, ForgetPassWordActivity1.this, loginPhone);
+                verificationPhone(ForgetPassWordActivity1.this, ForgetPassWordActivity1.this, loginPhone);
+
+
                 break;
             case R.id.login_go:
 
-                if (LoginRegisterUtils.isNullOrEmpty(loginPhone)) {
-                    T.ShowToastForShort(this, "手机号码未输入");
-                    return;
-                }
-
-                if (!LoginRegisterUtils.isPhone(loginPhone)) {
-                    T.ShowToastForShort(this, "手机号码不正确");
-                    return;
-                }
+//                if (LoginRegisterUtils.isNullOrEmpty(loginPhone)) {
+//                    T.ShowToastForShort(this, "手机号码未输入");
+//                    return;
+//                }
+//
+//                if (!LoginRegisterUtils.isPhone(loginPhone)) {
+//                    T.ShowToastForShort(this, "手机号码不正确");
+//                    return;
+//                }
 
                 if (LoginRegisterUtils.isNullOrEmpty(loginPassword)) {
                     T.ShowToastForShort(this, "用户密码未输入");
@@ -103,26 +108,127 @@ public class ForgetPassWordActivity1 extends BaseActivity implements SdkUtils2.S
                     T.ShowToastForShort(this, "手机验证未输入");
                     return;
                 }
+//                reFormforGetPassCode(ForgetPassWordActivity1.this, ForgetPassWordActivity1.this, loginPhone, yzm);
 
 
                 net(loginPhone.getText().toString(), yzm.getText().toString(), loginPassword.getText().toString());
-
                 break;
         }
     }
+
+
+    /**
+     * 验证手机号码
+     *
+     * @param
+     */
+    public void verificationPhone(final Context context, final Activity activity, final EditText phoneEdit) {
+        //   this.noncestr = UUIDs.uuid();
+
+        if (LoginRegisterUtils.isNullOrEmpty(phoneEdit)) {
+            T.ShowToastForShort(this, "手机号码未输入");
+            return;
+        }
+
+        if (!LoginRegisterUtils.isPhone(phoneEdit)) {
+            T.ShowToastForShort(this, "手机号码不正确");
+            return;
+        }
+
+
+        NetWorks.forGetPassPhone(phoneEdit.getText().toString(), new Subscriber<InfoBean>() {
+            @Override
+            public void onStart() {
+                if (!activity.isFinishing()) {
+                    if (dialog == null) {
+                        dialog = DialogUtils.createProgressDialog(activity, "请求中");
+                    } else {
+                        dialog.show();
+                    }
+                }
+            }
+
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+
+            {
+                dialog.dismiss();
+                T.ShowToastForShort(activity, "网络异常");
+            }
+
+            @Override
+            public void onNext(InfoBean s) {
+
+                if (s.getState().getStatus() == 0) {
+                    //设置不可编辑
+                    phoneEdit.setFocusable(false);
+                    phoneEdit.setFocusableInTouchMode(false);
+                    getPhoneCode(context, activity, phoneEdit);
+                } else {
+                    dialog.dismiss();
+
+                    T.ShowToastForShort(activity, s.getState().getInfo());
+                }
+
+            }
+        });
+    }
+
+    /**
+     * 请求发送验证码
+     *
+     * @param
+     */
+    public void getPhoneCode(final Context context, final Activity activity, final EditText phoneEdit) {
+        //   this.noncestr = UUIDs.uuid();
+
+
+        NetWorks.getPhoneCode(phoneEdit.getText().toString(), new Subscriber<ForgetPassBean>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+
+            {
+                dialog.dismiss();
+                T.ShowToastForShort(activity, "网络异常");
+            }
+
+            @Override
+            public void onNext(ForgetPassBean s) {
+
+                if (s.getState().getStatus() .equals("y")) {
+                    dialog.dismiss();
+
+                } else {
+                    dialog.dismiss();
+                    T.ShowToastForShort(activity, s.getState().getInfo());
+                }
+
+            }
+        });
+    }
+
+
 
     private void net(String phone, String telcode, String pass) {
         NetWorks.updateforGetPass(phone, telcode, pass, new Subscriber<InfoBean>() {
             @Override
             public void onStart() {
-                if (dialog == null) {
-                    dialog = DialogUtils.createProgressDialog(ForgetPassWordActivity1.this, "修改中...");
-                } else {
-                    if (dialog != null && !dialog.isShowing()) {
-                        dialog.show();
-                    }
 
-                }
             }
 
             @Override
@@ -152,36 +258,5 @@ public class ForgetPassWordActivity1 extends BaseActivity implements SdkUtils2.S
         });
     }
 
-    @Override
-    public void sdkSuccess(String r) {
-        try {
-            JSONObject json1 = new JSONObject(r);
-            JSONObject json = json1.getJSONObject("state");
-
-            int status = json.getInt("status");
-            if (status == 0) {
-                T.ShowToastForShort(ForgetPassWordActivity1.this, json.getString("info"));
-                if (helper == null) {
-                    helper = new CountDownButtonHelper(getcode,
-                            "发送验证码", 60, 1);
-                    helper.setOnFinishListener(new CountDownButtonHelper.OnFinishListener() {
-
-                        @Override
-                        public void finish() {
-                            getcode.setEnabled(true);
-                        }
-                    });
-                }
-
-                helper.start();
-            } else {
-                T.ShowToastForShort(ForgetPassWordActivity1.this, json.getString("info"));
-            }
-
-        } catch (JSONException e) {
-            T.ShowToastForShort(ForgetPassWordActivity1.this, "网络异常，请稍后试");
-            e.printStackTrace();
-        }
-    }
 
 }

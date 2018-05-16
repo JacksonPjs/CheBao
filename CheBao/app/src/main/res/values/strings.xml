@@ -41,5 +41,7 @@
     <string name="set_gesture_pattern">请设置手势密码</string>
     <string name="set_gesture_pattern_reason">设置手势密码，防止他人未经授权查看</string>
     <string name="reset_gesture_code">重新设置手势密码</string>
+    <string name="chager_tips_1">1.充值金额最小金额100元\n2.充值免手续费\n3.为了您的资金安全,平台仅支持同卡进出\n4.本站目前仅支持富友支付进行充值
+    \n5.如有任何问题请点击右上角的客服按钮,联系客服人员</string>
     <!-- End -->
 </resources>

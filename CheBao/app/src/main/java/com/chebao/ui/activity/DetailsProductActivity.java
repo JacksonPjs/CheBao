@@ -17,6 +17,7 @@ import com.chebao.ui.fragment.Fragemt_Notes;
 import com.chebao.ui.fragment.Fragment_Data;
 import com.pvj.xlibrary.loadinglayout.Utils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +72,11 @@ public class DetailsProductActivity extends BaseActivity implements ViewPager.On
 
     private void init() {
         fragmentList = new ArrayList<>();
+        Intent intent = getIntent();
 
+        id = intent.getStringExtra("id");
+        Bundle bundle = getIntent().getExtras();
+        bean= (BorrowDetailBean) bundle.getSerializable("bean");
         viewPagerFramentAdapter = new ViewPagerFramentAdapter(getSupportFragmentManager(), fragmentList);
         viewPager.setAdapter(viewPagerFramentAdapter);
         viewPager.setOnPageChangeListener(this);
@@ -121,12 +126,20 @@ public class DetailsProductActivity extends BaseActivity implements ViewPager.On
     }
 
 
-    @OnClick({R.id.buy, R.id.back, R.id.month_rl, R.id.day_rl,R.id.season_rl})
+    @OnClick({R.id.buy, R.id.back, R.id.month_rl, R.id.day_rl, R.id.season_rl})
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {
             case R.id.back:
                 finish();
+                break;
+            case R.id.buy:
+                intent=new Intent(this,PayActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("bean", (Serializable) bean);
+                bundle.putString("id", id + "");
+                intent.putExtras(bundle);
+                startActivity(intent);
                 break;
             case R.id.day_rl:
                 viewPager.setCurrentItem(0);
@@ -134,7 +147,7 @@ public class DetailsProductActivity extends BaseActivity implements ViewPager.On
             case R.id.month_rl:
                 viewPager.setCurrentItem(1);
                 break;
-                case R.id.season_rl:
+            case R.id.season_rl:
                 viewPager.setCurrentItem(2);
                 break;
 

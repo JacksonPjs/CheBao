@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_huise"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_back" />
+
+    <LinearLayout
+        android:id="@+id/loadinglayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical"
+
+
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <ImageView
+                            android:id="@+id/bank_src"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center_vertical" />
+
+
+                        <TextView
+                            android:id="@+id/bankname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="银行"
+                            android:textColor="@color/text_font"
+                            android:textSize="@dimen/text_size" />
+
+                        <TextView
+                            android:id="@+id/cardtype"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:text="信用卡"
+                            android:textColor="@color/text_font"
+                            android:textSize="@dimen/text_size" />
+
+                        <TextView
+                            android:id="@+id/cardnum"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_toRightOf="@+id/cardtype"
+                            android:paddingBottom="10dp"
+                            android:text="666"
+                            android:textSize="25sp" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                    <TextView
+
+                        android:id="@+id/money"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+
+                        android:padding="10dp"
+                        android:layout_alignParentTop="true"
+                        android:text="@string/app_name"
+                        android:textColor="@color/font_color1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/ll_nor"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:text="提现金额" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="￥"
+                            android:textColor="@color/text_newbie" />
+
+                        <EditText
+                            android:id="@+id/t_moeny"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="10dp"
+                            android:background="@null"
+                            android:hint="金额不低于100.00元"
+                            android:inputType="number"
+                            android:maxLength="11"
+                            android:maxLines="1"
+                            android:textColor="#666"
+                            android:textColorHint="#ccc"
+                            android:textSize="@dimen/text_15_size" />
+
+
+                    </LinearLayout>
+
+
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="#fff"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:text="交易密码"
+                            android:textColor="@color/font_color1"
+                            android:textSize="@dimen/text_size" />
+
+
+                        <EditText
+                            android:id="@+id/t_shouyi"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:background="@null"
+                            android:hint="请输入您的交易密码"
+                            android:inputType="textPassword"
+                            android:maxLines="1"
+                            android:padding="10dp"
+                            android:textColor="#666"
+                            android:textColorHint="#ccc"
+                            android:textSize="@dimen/text_15_size" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/calculator_go"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="50dp"
+                    android:background="@drawable/oval_gradient_linear"
+                    android:gravity="center"
+                    android:text="确认提现"
+                    android:textColor="@color/white" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="10dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="温馨提示"
+                        android:textColor="@color/text_blue"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

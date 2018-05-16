@@ -105,5 +105,17 @@ public class T1changerString {
         }
         return "？？还款" ;
     }
-
+    public static String MaritalStatusChager(int interestBearingTime){
+        switch (interestBearingTime){
+            case 0:
+                return "未婚" ;
+            case 1:
+                return "已婚" ;
+            case 2:
+                return "未知" ;
+            default:
+                break;
+        }
+        return "？？" ;
+    }
 }

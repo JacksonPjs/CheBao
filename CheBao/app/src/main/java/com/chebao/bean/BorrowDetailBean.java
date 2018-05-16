@@ -95,9 +95,9 @@ public class BorrowDetailBean implements Serializable {
          * riskrank : 1
          */
 
-        private double annualRate;
+        private double annualRate;//年化利率
       //  private long auditTime;
-        private double borrowAmount;
+        private double borrowAmount;//借款金额
         private String borrowNo;
         private int borrowStatus;
         private String borrowTitle;
@@ -107,25 +107,25 @@ public class BorrowDetailBean implements Serializable {
         private String collateralInfos;
    //     private int createId;
         private long createTime;
-        private int deadline;
-        private int deadlineType;
+        private int deadline;//借款期限
+        private int deadlineType;//借款期限类型(1.为天,2为月)
     //    private int firstAuditId;
     //    private int fullAuditId;
     //    private long fullTime;
         private double hasBorrowAmount;
         private int id;
-        private int interestBearingTime;
+        private int interestBearingTime;//1.满标计息,2,次日计息3,即日计息
         private String introductionInfos;
         private long investStartTime;
      //   private int isClaim;
-        private double maxInvestAmount;
-        private double minInvestAmount;
+        private double maxInvestAmount;//最大投标金额
+        private double minInvestAmount;//最少投标金额
      //   private String ordId;
      //   private int personBorrowerId;
      //   private int raisingPeriod;
      //   private int remainTime;
     //    private long repayDate;
-        private int repayType;
+        private int repayType;//还款方式(1,一次性还款,2.按月付息,到期还本3.等额本息)
         private String riskControlInfos;
         private int remainTime;
      //   private int riskrank;

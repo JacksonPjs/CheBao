@@ -100,8 +100,9 @@
                     android:layout_marginLeft="10dp"
                     android:background="@null"
                     android:hint="密码"
-                    android:inputType="phone"
+                    android:inputType="textPassword"
                     android:maxLength="11"
+
                     android:maxLines="1"
                     android:textColor="#666"
                     android:textColorHint="#ccc"
@@ -116,11 +117,11 @@
 
         <TextView
             android:id="@+id/forget"
-            android:padding="@dimen/home_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/ll_pw"
+            android:padding="@dimen/home_margin"
             android:text="忘记密码?"
 
             />
@@ -152,18 +153,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
             android:layout_marginTop="@dimen/home_margin"
-            >
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="注册"
-                android:textSize="14sp"
                 android:textColor="@color/black_home_four_midle"
-                />
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"

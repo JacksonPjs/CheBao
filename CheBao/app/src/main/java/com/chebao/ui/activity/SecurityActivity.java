@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 
@@ -17,6 +19,8 @@ import com.chebao.ui.activity.security.GestureVerifyActivity;
 import com.chebao.ui.activity.security.SetPayPasswordActivity;
 import com.chebao.utils.SharedPreferencesUtils;
 import com.pvj.xlibrary.loadinglayout.Utils;
+
+import java.security.Security;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,11 +35,16 @@ public class SecurityActivity extends BaseActivity {
     @Bind(R.id.title)
     TextView title;
 //
-//
-//    @Bind(R.id.certification_tip)
-//    TextView certificationTip;
-//   @Bind(R.id.bank_tip)
-//    TextView bankTip;
+
+    @Bind(R.id.certification_tip)
+    TextView certificationTip;
+    @Bind(R.id.bank_tip)
+    TextView bankTip;
+    @Bind(R.id.chager_payword_to_tip)
+    TextView chager_payword_to_tip;
+
+    @Bind(R.id.gesture_switch)
+    Switch gesture_switch;
 //
 //
 //    @Bind(R.id.changer_pwd_to)
@@ -43,8 +52,7 @@ public class SecurityActivity extends BaseActivity {
 //
 //    @Bind(R.id.gesture)
 //    TextView gesture;
-//    @Bind(R.id.bank_go)
-//    ImageView bankGo;
+
 //    @Bind(R.id.certification_go)
 //    ImageView certificationGo;
 
@@ -73,7 +81,7 @@ public class SecurityActivity extends BaseActivity {
 
 //        phoneTo.setCompoundDrawables(null, null, drawable, null);
 
-//        certificationTip.setText((String) SharedPreferencesUtils.getParam(this, "realname", ""));
+        certificationTip.setText((String) SharedPreferencesUtils.getParam(this, "realname", ""));
 //
 //        if ((Boolean) SharedPreferencesUtils.getParam(this, "tPerson", false)) {
 //            phoneGo.setImageDrawable(drawable);
@@ -81,41 +89,57 @@ public class SecurityActivity extends BaseActivity {
 //
 //        }
 
-//
-//        if ((Boolean) SharedPreferencesUtils.getParam(this, "tBankCardlist", false)) {
-//
+
+        if ((Boolean) SharedPreferencesUtils.getParam(this, "tBankCardlist", false)) {
+
 //            bankGo.setImageDrawable(drawable);
-//            String aa = (String) SharedPreferencesUtils.getParam(this, "bankcardno", "");
-//            int n = 4;
-//
-//            if (aa.length() > 4) {
-//                String b = aa.substring(aa.length() - n, aa.length());
-//
-//                bankTip.setText("**** **** **** " + b);
-//            } else {
-//                bankTip.setText("**** **** **** " + aa);
-//            }
-////            bankTip.setText((String) SharedPreferencesUtils.getParam(this, "bankcardno", ""));
-//        }
-//
+            String aa = (String) SharedPreferencesUtils.getParam(this, "bankcardno", "");
+            int n = 4;
+
+            if (aa.length() > 4) {
+                String b = aa.substring(aa.length() - n, aa.length());
+
+                bankTip.setText("**** **** **** " + b);
+            } else {
+                bankTip.setText("**** **** **** " + aa);
+            }
+            bankTip.setText((String) SharedPreferencesUtils.getParam(this, "bankcardno", ""));
+        }
+
 //        if ((Boolean) SharedPreferencesUtils.getParam(this, "tPerson", false)) {
 //            certificationGo.setImageDrawable(drawable);
 //
 //        }
 
-//        if ((Boolean) SharedPreferencesUtils.getParam(this, "payPwd", false)) {
-//            chagerPaywordTo.setText("修改交易密码");
-//
-//        } else {
-//            chagerPaywordTo.setText("设置交易密码");
-//
-//        }
+        if ((Boolean) SharedPreferencesUtils.getParam(this, "payPwd", false)) {
+            chager_payword_to_tip.setText("去修改");
+            chager_payword_to_tip.setTextColor(getResources().getColor(R.color.org_home));
+
+
+        } else {
+            chager_payword_to_tip.setText("去设置");
+            chager_payword_to_tip.setTextColor(getResources().getColor(R.color.black_home_four_midle));
+
+        }
+        boolean isCheck=SharedPreferencesUtils.getIsGesture(this);
+        gesture_switch.setChecked(isCheck);
+        gesture_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    SharedPreferencesUtils.setIsGesture(SecurityActivity.this,true);
+                }else {
+                    SharedPreferencesUtils.setIsGesture(SecurityActivity.this,false);
+
+                }
+            }
+        });
 
 
     }
 
     @OnClick({R.id.certification_rl, R.id.bank_rl, R.id.changer_pwd_to_rl,
-            R.id.chager_payword_to_rl, R.id.exit,R.id.gesture_rl,R.id.gesture_verify})
+            R.id.chager_payword_to_rl, R.id.exit, R.id.gesture_rl, R.id.gesture_verify})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -128,14 +152,22 @@ public class SecurityActivity extends BaseActivity {
 
             case R.id.bank_rl:
                 //银行卡认证
-                intent = new Intent(this, MyBankActivity.class);
-                startActivity(intent);
+
+                if ((Boolean) SharedPreferencesUtils.getParam(this, "tBankCardlist", false)) {
+                    intent = new Intent(this, MyBankActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent = new Intent(this, AddBankActivity.class);
+                    startActivity(intent);
+                }
+
                 break;
             case R.id.changer_pwd_to_rl:
                 intent = new Intent(this, ChangeLoginPasswordActivity.class);
                 startActivity(intent);
                 break;
             case R.id.chager_payword_to_rl:
+                //交易密码
                 if ((Boolean) SharedPreferencesUtils.getParam(this, "payPwd", false)) {
                     intent = new Intent(this, ChangerPayPassWordActivity.class);
                     startActivity(intent);
@@ -150,15 +182,13 @@ public class SecurityActivity extends BaseActivity {
                 intent = new Intent(this, GestureEditActivity.class);
                 startActivity(intent);
                 break;
-                 case R.id.gesture_verify:
+            case R.id.gesture_verify:
                 intent = new Intent(this, GestureVerifyActivity.class);
                 startActivity(intent);
                 break;
 
 
-
-
-                case R.id.exit:
+            case R.id.exit:
                 SharedPreferencesUtils.clearAll(this);
                 finish();
                 break;

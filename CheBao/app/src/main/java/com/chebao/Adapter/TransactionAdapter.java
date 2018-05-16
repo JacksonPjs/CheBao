@@ -5,10 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chebao.R;
+import com.chebao.bean.CaseFlowBean;
+import com.pvj.xlibrary.utils.DateUtils;
 
 import java.util.List;
 
@@ -21,11 +22,11 @@ import butterknife.ButterKnife;
  * 作者:jackson Administrator
  */
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder> {
-    private List<String> datas;
+    private List<CaseFlowBean.DataBean> datas;
     private Context context;
 
 
-    public TransactionAdapter(List<String> datas, Context context) {
+    public TransactionAdapter(List<CaseFlowBean.DataBean> datas, Context context) {
         this.datas = datas;
         this.context = context;
     }
@@ -38,8 +39,47 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     @Override
     public void onBindViewHolder(TransactionAdapter.ViewHolder holder, int position) {
+        CaseFlowBean.DataBean b = datas.get(position);
+        holder.date.setText(DateUtils.getStrTime2(b.getCreateTime() + ""));
+        holder.num.setText(b.getUsableAmount() + "");
 
-            holder.money.setText("333333333");
+        //1（收入）2（冻结）3.（解冻）4.（支出）
+
+
+        if (b.getOperType() == 1) {
+            holder.type.setText("收入");
+            holder.money.setText("+" + b.getOperAmount());
+            holder.money.setTextColor(context.getResources().getColor(R.color.text_org));
+        } else if (b.getOperType() == 2) {
+            holder.type.setText("冻结");
+
+            holder.money.setText("-" + b.getOperAmount());
+            holder.money.setTextColor(context.getResources().getColor(R.color.mouth_btn_bg));
+        } else if (b.getOperType() == 3) {
+            holder.type.setText("解冻");
+            holder.money.setTextColor(context.getResources().getColor(R.color.bg_2));
+
+            holder.money.setText("+" + b.getOperAmount());
+        } else if (b.getOperType() == 4) {
+            holder.type.setText("支出");
+            holder.money.setTextColor(context.getResources().getColor(R.color.season));
+            holder.money.setText("-" + b.getOperAmount());
+        }
+
+
+//        if(b.getFundType()==1){
+//            holder.type.setTextColor(Color.parseColor("#1Ad46e"));
+//        }else  if(b.getFundType()==4){
+//            holder.type.setTextColor(Utils.getColor(context,R.color.colorPrimary));
+//        }else{
+//            holder.type.setTextColor(Color.parseColor("#555555"));
+//        }
+//
+//        holder.type.setText(str2[b.getFundType()-1]);
+
+//        java.text.NumberFormat nf = java.text.NumberFormat.getInstance();
+//        nf.setGroupingUsed(false);
+//        holder.usebMoney.setText( nf.format(b.getUsableAmount() )+ "");
 
         //  holder.circleProgressbar.setProgressNotInUiThread(80);
 

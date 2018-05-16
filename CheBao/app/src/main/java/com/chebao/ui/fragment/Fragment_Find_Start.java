@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.chebao.Adapter.BiaoAdapter;
+import com.chebao.Adapter.FindAdapter;
 import com.chebao.R;
 import com.chebao.bean.BiaoBean;
+import com.chebao.bean.FindBean;
 import com.chebao.net.NetWorks;
 import com.chebao.widget.DividerItemDecoration;
 import com.pvj.xlibrary.loadinglayout.LoadingLayout;
@@ -29,8 +31,8 @@ import rx.Subscriber;
 
 public class Fragment_Find_Start extends Fragment implements LoadingLayout.OnReloadListener,
         LoadMoreRecyclerLoadingLayout.OnRefreshAndLoadMoreListener {
-    List<String> biaoBeenList;
-    BiaoAdapter adapter;
+    List<FindBean.DataBean> biaoBeenList;
+    FindAdapter adapter;
 
 
     int page = 1;
@@ -57,73 +59,76 @@ public class Fragment_Find_Start extends Fragment implements LoadingLayout.OnRel
      * @param inrefresh 第几次刷新下的加载
      */
     private void net(final int stype, final int inrefresh) {
-//        NetWorks.selectBorrowListApp(page + "", pagesize + "","1", new Subscriber<BiaoBean>() {
-//            @Override
-//            public void onCompleted() {
-//                publicLv.setRefreshing(false);
-//                //    publicLv.setStatus(LoadingLayout.Success);
-//                if (stype==0){
-//                    publicLv.setRefreshing(false);
-//                }else{
-//                    publicLv.loadMoreComplete();
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                if (stype==0){
-//                    publicLv.setRefreshing(false);
-//                }else{
-//                    publicLv.loadMoreComplete();
-//                }
-//                if (page==1){
-//                    publicLv.setStatus(LoadingLayout.Error);
-//                }else{
-//                    publicLv.setTextEnd();
-//                }
-//
-//                Logger.e(e.toString());
-//            }
-//
-//            @Override
-//            public void onNext(BiaoBean biaoBean) {
-//
-//                if (stype == 0) {
-//                    if (biaoBean.getState().getStatus() == 0) {
-//                        biaoBeenList.clear();
-//                        biaoBeenList.addAll(biaoBean.getData());
-//                        publicLv.setStatus(LoadingLayout.Success);
-//                    } else {
-//                        publicLv.setStatus(LoadingLayout.Empty);
-//                    }
-//
-//                } else if (stype == 1) {
-//                    if (publicLv.getRefreshCount() == inrefresh) {
-//
-//                        if (biaoBean.getState().getStatus() == 0) {
-//                            biaoBeenList.addAll(biaoBean.getData());
-//                        } else {
-//                            publicLv.setTextEnd();
-//                        }
-//
-//                    }
-//                }
-//                adapter.notifyDataSetChanged();
-//            }
-//
-//        });
+        NetWorks.selectActivitylist(0+"",""+page,new Subscriber<FindBean>(){
+
+            @Override
+            public void onCompleted() {
+                publicLv.setRefreshing(false);
+                if (stype==0){
+                    publicLv.setRefreshing(false);
+                }else{
+                    publicLv.loadMoreComplete();
+                }
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (stype==0){
+                    publicLv.setRefreshing(false);
+                }else{
+                    publicLv.loadMoreComplete();
+                }
+                if (page==1){
+                    publicLv.setStatus(LoadingLayout.Error);
+                }else{
+                    publicLv.setTextEnd();
+                }
+
+                Logger.e(e.toString());
+            }
+
+            @Override
+            public void onNext(FindBean findBean) {
+                if (stype == 0) {
+                    if (findBean.getState().getStatus() == 0) {
+                        biaoBeenList.clear();
+                        biaoBeenList.addAll(findBean.getData());
+                        publicLv.setStatus(LoadingLayout.Success);
+                    } else {
+                        publicLv.setStatus(LoadingLayout.Empty);
+                    }
+
+                }
+                else if (stype == 1) {
+                    if (publicLv.getRefreshCount() == inrefresh) {
+
+                        if (findBean.getState().getStatus() == 0) {
+
+
+                            biaoBeenList.addAll(findBean.getData());
+
+
+                        } else {
+                            publicLv.setTextEnd();
+                        }
+
+                    }
+                }
+
+                adapter.notifyDataSetChanged();
+
+            }
+        });
+
 
     }
 
     private void initView() {
         biaoBeenList = new ArrayList<>();
-        biaoBeenList.add("1111");
-        biaoBeenList.add("1111");
-        biaoBeenList.add("1111");
-        biaoBeenList.add("1111");
 
-        adapter = new BiaoAdapter(biaoBeenList, getActivity());
+
+        adapter = new FindAdapter(biaoBeenList, getActivity());
         publicLv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         publicLv.verticalLayoutManager(getContext())
                 .setAdapter(adapter)

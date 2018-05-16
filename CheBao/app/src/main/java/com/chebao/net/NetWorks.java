@@ -1,16 +1,26 @@
 package com.chebao.net;
 
 
-
-
+import com.chebao.bean.BankListBean;
 import com.chebao.bean.BiaoBean;
 import com.chebao.bean.BorrowDetailBean;
+import com.chebao.bean.CaseFlowBean;
 import com.chebao.bean.CenterIndexBean;
+import com.chebao.bean.CertificationBean;
+import com.chebao.bean.ChagerBean;
+import com.chebao.bean.DidibaoBean;
+import com.chebao.bean.DiscountListBean;
+import com.chebao.bean.FindBean;
+import com.chebao.bean.ForgetPassBean;
+import com.chebao.bean.HuiKuanBean;
 import com.chebao.bean.ImageCodeBean;
 import com.chebao.bean.InfoBean;
+import com.chebao.bean.IntroduceBean;
 import com.chebao.bean.InvestmentBean;
 import com.chebao.bean.LoginBean;
 import com.chebao.bean.OneBean;
+import com.chebao.bean.ProductDetialBean;
+import com.chebao.bean.WithdrawBean;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -23,14 +33,12 @@ public class NetWorks extends RetrofitUtils {
     protected static final NetService service = getRetrofit().create(NetService.class);
 
 
-
-
     /**
      * 开启验证码
      *
      * @param observer
      */
-    public static void startCaptcha(String noncestr , Subscriber<String> observer) {
+    public static void startCaptcha(String noncestr, Subscriber<String> observer) {
         setSubscribe(service.startCaptcha(noncestr), observer);
     }
 
@@ -40,8 +48,8 @@ public class NetWorks extends RetrofitUtils {
      *
      * @param observer
      */
-    public static void getPhoneCode(String noncestr , String cellPhone , Subscriber<String> observer) {
-        setSubscribe(service.getPhoneCode(noncestr,cellPhone), observer);
+    public static void getPhoneCode(String noncestr, String cellPhone, Subscriber<String> observer) {
+        setSubscribe(service.getPhoneCode(noncestr, cellPhone), observer);
     }
 
 
@@ -62,6 +70,23 @@ public class NetWorks extends RetrofitUtils {
     public static void forGetPassPhone(String param, Subscriber<InfoBean> observer) {
         setSubscribe(service.forGetPassPhone(param), observer);
     }
+
+    /**
+     * 找回密码-获取验证码
+     *
+     * @param observer
+     */
+    public static void getPhoneCode(String cellPhone, Subscriber<ForgetPassBean> observer) {
+        setSubscribe(service.getPhoneCode(cellPhone), observer);
+    }
+    /**
+     * 找回密码-验证手机验证码
+     *
+     * @param observer
+     */
+    public static void reFormforGetPassCode(String phone,String telCode, Subscriber<InfoBean> observer) {
+        setSubscribe(service.reFormforGetPassCode(phone,telCode), observer);
+    }
     /**
      * 获取图形验证码
      *
@@ -79,8 +104,9 @@ public class NetWorks extends RetrofitUtils {
      * @param observer
      */
     public static void getPhoneCodeByImageCode(String phoneNum, String noncestr, String param, Subscriber<InfoBean> observer) {
-        setSubscribe(service.getPhoneCodeByImageCode(param,noncestr,phoneNum), observer);
+        setSubscribe(service.getPhoneCodeByImageCode(param, noncestr, phoneNum), observer);
     }
+
     /**
      * 注册
      *
@@ -95,9 +121,10 @@ public class NetWorks extends RetrofitUtils {
      *
      * @param observer
      */
-    public static void updateforGetPass(String phone, String telCode, String forGetpassword, Subscriber<InfoBean> observer) {
+    public static void updateforGetPass(String phone, String telCode, String forGetpassword,Subscriber<InfoBean> observer) {
         setSubscribe(service.updateforGetPass(phone, telCode, forGetpassword), observer);
     }
+
     /**
      * 首页
      *
@@ -152,21 +179,171 @@ public class NetWorks extends RetrofitUtils {
     public static void queryBorrowDetail(String id, Subscriber<BorrowDetailBean> observer) {
         setSubscribe(service.queryBorrowDetail(id), observer);
     }
+
     /**
      * 投资记录
      *
      * @param observer
      */
-    public static void borrowInvestList(String id,String result, String page, String pagesize,
+    public static void borrowInvestList(String id, String page, String pagesize,
                                         Subscriber<InvestmentBean> observer) {
-        setSubscribe(service.borrowInvestList(id,result, page, pagesize), observer);
+        setSubscribe(service.borrowInvestList(id, page, pagesize), observer);
     }
 
 
+    /**
+     * 风控师意见
+     *
+     * @param observer
+     */
+    public static void queryBorrowRisk(String id, Subscriber<IntroduceBean> observer) {
+        setSubscribe(service.queryBorrowRisk(id), observer);
+    }
 
+    /**
+     * 产品信息
+     *
+     * @param observer
+     */
+    public static void queryBorrowIntroduce(String id, Subscriber<IntroduceBean> observer) {
+        setSubscribe(service.queryBorrowIntroduce(id), observer);
+    }
 
+    /**
+     * 产品资质资料
+     *
+     * @param observer
+     */
+    public static void queryBorrowData(String id, Subscriber<ProductDetialBean> observer) {
+        setSubscribe(service.queryBorrowData(id), observer);
+    }
 
+    /**
+     * 发现
+     *
+     * @param observer
+     */
+    public static void selectActivitylist(String type, String curPage, Subscriber<FindBean> observer) {
+        setSubscribe(service.selectActivitylist(type, curPage), observer);
+    }
 
+    /**
+     * 设置交易密码
+     *
+     * @param observer
+     */
+    public static void setUserPayPwd(String address, String readdress, Subscriber<InfoBean> observer) {
+        setSubscribe(service.setUserPayPwd(address, readdress), observer);
+    }
+
+    /**
+     * 修改支付密码
+     *
+     * @param observer
+     */
+    public static void updateUserPay(String address, String readdress, Subscriber<InfoBean> observer) {
+        setSubscribe(service.setUserPayPwd(address, readdress), observer);
+    }
+    /**
+     * 修改支付密码
+     *
+     * @param observer
+     */
+    public static void updateUserPass(String address, String readdress, Subscriber<InfoBean> observer) {
+        setSubscribe(service.updateUserPass(address, readdress), observer);
+    }
+    /**
+     * 获取实名信息
+     *
+     * @param observer
+     */
+    public static void userPerson(Subscriber<CertificationBean> observer) {
+        setSubscribe(service.userPerson(), observer);
+    }
+    /**
+     * 实名认证
+     *
+     * @param observer
+     */
+    public static void fysmrz(String Cookie,String name,String idCard,Subscriber<CertificationBean> observer) {
+        setSubscribe(service.fysmrz(Cookie,name,idCard), observer);
+    }
+
+    /**
+     * 银行卡列表
+     *
+     * @param observer
+     */
+    public static void selectBankCard(Subscriber<BankListBean> observer) {
+        setSubscribe(service.selectBankCard(), observer);
+    }
+    /**
+     *
+     *
+     * @param observer
+     */
+    public static void userdidibao(String Cookie,Subscriber<DidibaoBean> observer) {
+        setSubscribe(service.userdidibao(Cookie), observer);
+    }
+
+    /**
+     *优惠券列表
+     *
+     * @param observer
+     */
+    public static void CouponAndJxList(String Cookie, String type ,String curPage, Subscriber<DiscountListBean> observer) {
+        setSubscribe(service.CouponAndJxList(Cookie, type,curPage),observer);
+    }
+
+    /**
+     *优惠券列表
+     *
+     * @param observer
+     */
+    public static void userreturnrecord(String Cookie,String curPage,String repayStatus, Subscriber<HuiKuanBean> observer) {
+        setSubscribe(service.userreturnrecord( Cookie,curPage, repayStatus),observer);
+    }
+
+    /**
+     * 交易记录
+     *
+     * @param observer
+     */
+    public static void moneyFlow(String curPage, String funtype, Subscriber<CaseFlowBean> observer) {
+        setSubscribe(service.moneyFlow(curPage, funtype), observer);
+    } /**
+     * 交易记录
+     *
+     * @param observer
+     */
+    public static void selectInvestListing(String curPage, String borrowStatus, Subscriber<InvestmentBean> observer) {
+        setSubscribe(service.selectInvestListing(curPage,borrowStatus), observer);
+    }
+
+    /**
+     * 充值
+     *
+     * @param observer
+     */
+    public static void wxpay(String payway, String rechargeAmount, Subscriber<ChagerBean> observer) {
+        setSubscribe(service.wxpay( rechargeAmount), observer);
+    }
+    /**
+     * 申请提现
+     *
+     * @param observer
+     */
+    public static void userWithdraw(String cookie,Subscriber<WithdrawBean> observer) {
+        setSubscribe(service.userWithdraw(cookie), observer);
+    }
+    /**
+     * 提现
+     *
+     * @param observer
+     */
+    public static void tongLianUserWithdraw(String withdrawAmount, String pwd,Subscriber<InfoBean> observer) {
+        setSubscribe(service.tongLianUserWithdraw(withdrawAmount, pwd), observer);
+    }
 
     /**
      * 插入观察者-泛型

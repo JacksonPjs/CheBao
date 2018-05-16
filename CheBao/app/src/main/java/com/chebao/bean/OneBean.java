@@ -287,13 +287,13 @@ public class OneBean implements Serializable {
         //  private int raisingPeriod;
         //   private int remainTime;
            private int repayType;
-        private int progress;
+        private double progress;
 
-        public int getProgress() {
+        public double getProgress() {
             return progress;
         }
 
-        public void setProgress(int progress) {
+        public void setProgress(double progress) {
             this.progress = progress;
         }
 
@@ -470,16 +470,15 @@ public class OneBean implements Serializable {
         private long investStartTime;
         //   private int mayCast;
         private int minInvestAmount;
+        private double progress;
 
-        public int getProgress() {
+        public double getProgress() {
             return progress;
         }
 
-        public void setProgress(int progress) {
+        public void setProgress(double progress) {
             this.progress = progress;
         }
-
-        private int progress;
 
         public double getHasBorrowAmount() {
             return hasBorrowAmount;

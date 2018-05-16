@@ -46,87 +46,101 @@
                 />
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/textview_money"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rl_title"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:text="今日预计收益（元）"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_12_size"
-
-            />
-
-        <TextView
-            android:id="@+id/toatal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textview_money"
-            android:layout_centerHorizontal="true"
-            android:text="500000000.00"
-            android:textColor="@color/white"
-            android:textSize="29sp"
-
-            />
-
-
-        <LinearLayout
+        <com.pvj.xlibrary.loadinglayout.LoadingLayout
+            android:id="@+id/loadinglayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/toatal"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:paddingBottom="10dp">
+            android:layout_below="@+id/rl_title"
 
-            <LinearLayout
+            >
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
+
 
                 <TextView
+                    android:id="@+id/textview_money"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="总金额（元）"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="今日预计收益（元）"
                     android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/text_12_size"
+
+                    />
 
                 <TextView
-                    android:id="@+id/eableuse"
+                    android:id="@+id/zrsy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2222222.00"
+                    android:layout_below="@+id/textview_money"
+                    android:layout_centerHorizontal="true"
+                    android:text="500000000.00"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
-            </LinearLayout>
+                    android:textSize="29sp"
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                    />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="累计收益（元）"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:layout_below="@+id/zrsy"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp">
 
-                <TextView
-                    android:id="@+id/toatal2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2222222.00"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-        </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="总金额（元）"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/gmze"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2222222.00"
+                            android:textColor="@color/white"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="累计收益（元）"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/ljsy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2222222.00"
+                            android:textColor="@color/white"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </RelativeLayout>
+        </com.pvj.xlibrary.loadinglayout.LoadingLayout>
+
     </RelativeLayout>
 
 

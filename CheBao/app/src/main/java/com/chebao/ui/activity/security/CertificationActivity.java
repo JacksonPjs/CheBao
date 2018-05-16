@@ -8,7 +8,12 @@ import android.widget.TextView;
 
 import com.chebao.MyApplication;
 import com.chebao.R;
+import com.chebao.bean.CertificationBean;
+import com.chebao.bean.LoginBean;
+import com.chebao.net.NetService;
+import com.chebao.net.NetWorks;
 import com.chebao.ui.activity.BaseActivity;
+import com.chebao.utils.DialogUtils;
 import com.chebao.utils.LoginRegisterUtils;
 import com.chebao.utils.SharedPreferencesUtils;
 import com.pvj.xlibrary.loadinglayout.LoadingLayout;
@@ -25,7 +30,15 @@ import java.io.IOException;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.Callback;
+
 import rx.Subscriber;
+
+import static com.chebao.utils.edncodeUtils.getCookie;
 
 /**
  * 实名认证
@@ -41,8 +54,8 @@ public class CertificationActivity extends BaseActivity {
     EditText sfz;
     @Bind(R.id.rez_go)
     Button rezGo;
-//    @Bind(R.id.loadinglayout)
-//    LoadingLayout loadinglayout;
+    @Bind(R.id.loadinglayout)
+    LoadingLayout loadinglayout;
     Dialog dialog;
 
     @Override
@@ -51,18 +64,19 @@ public class CertificationActivity extends BaseActivity {
         setContentView(R.layout.activity_certification);
         ButterKnife.bind(this);
         title.setText("实名认证");
+        net();
 
         if ((Boolean) SharedPreferencesUtils.getParam(this, "tPerson", false)) {
+
 //            rezGo.setBackground(Utils.getDrawble(this, R.drawable.button_border_hui));
             rezGo.setEnabled(false);
             rezGo.setText("已认证");
         } else {
-//            loadinglayout.setStatus(LoadingLayout.Success);
+            loadinglayout.setStatus(LoadingLayout.Success);
         }
 
 
     }
-
 
 
     @OnClick(R.id.rez_go)
@@ -84,7 +98,40 @@ public class CertificationActivity extends BaseActivity {
 
 
     public void goShiMin(String name, String no) {
-
+//        NetWorks.fysmrz(getCookie(),name,no,new Subscriber<CertificationBean>() {
+//            @Override
+//            public void onStart() {
+//                loadinglayout.setStatus(LoadingLayout.Loading);
+//            }
+//
+//            @Override
+//            public void onCompleted() {
+//
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//                Logger.e(e.toString());
+//                loadinglayout.setStatus(LoadingLayout.Error);
+//                T.ShowToastForShort(CertificationActivity.this, "网络异常");
+//            }
+//
+//            @Override
+//            public void onNext(CertificationBean s) {
+//                if (s.getState().getStatus() == 0 | s.getState().getStatus() == 31) {
+//                    userName.setText(s.getTPerson().getRealName());
+//                    userName.setKeyListener(null);
+//                    sfz.setText(s.getTPerson().getCardNo());
+//                    sfz.setKeyListener(null);
+//                    loadinglayout.setStatus(LoadingLayout.Success);
+//
+//                } else if (s.getState().getStatus() == 99) {
+//                    netLogin(0);
+//                } else {
+//                    T.ShowToastForShort(CertificationActivity.this, s.getState().getInfo());
+//                }
+//            }
+//        });
         StringBuilder sb = new StringBuilder();
         sb.append(" _ed_token_");
         sb.append("=");
@@ -101,62 +148,140 @@ public class CertificationActivity extends BaseActivity {
         sb.append((String) SharedPreferencesUtils.getParam(MyApplication.context, "phone", ""));
         sb.append(";");
 
-//        if (dialog == null) {
-//            dialog = DialogUtils.createProgressDialog(CertificationActivity.this, "实名中...");
-//        } else {
-//            dialog.show();
-//        }
-//        OkHttpUtils
-//                .post()
-//                .url(NetService.API_SERVER + "/regPerson.html")
-//                .addHeader("Cookie", sb.toString())
-//                .addParams("realName", name)
-//                .addParams("cardNo", no)
-//                .build()
-//                .execute(new Callback<String>() {
-//
-//                    @Override
-//                    public String parseNetworkResponse(Response response) throws IOException {
-//                        return response.body().string();
-//                    }
-//
-//                    @Override
-//                    public void onError(Request request, Exception e) {
-//                        Logger.e(e.toString());
-//                        dialog.dismiss();
-//                    }
-//
-//                    @Override
-//                    public void onResponse(String o) {
-//
-//                      Logger.json(o);
-//                        try {
-//                            JSONObject json = new JSONObject((String) o.toString());
-//
-//                            JSONObject sata = json.getJSONObject("state");
-//
-//                            int s = sata.getInt("status");
-//                            if (s == 0) {
-//                                SharedPreferencesUtils.setParam(CertificationActivity.this, "tPerson", true);
-//                                dialog.dismiss();
-//                                finish();
-//                            } else if (s == 99) {
-//                                netLogin(1);
-//                            } else {
-//                                dialog.dismiss();
-//                                T.ShowToastForShort(CertificationActivity.this, sata.getString("info"));
-//                            }
-//                        } catch (JSONException e) {
-//                            //  e.printStackTrace();
-//                            dialog.dismiss();
-//                            T.ShowToastForShort(CertificationActivity.this, "数据异常，请联系客服！");
-//                        }
-//
-//                    }
-//                });
+        if (dialog == null) {
+            dialog = DialogUtils.createProgressDialog(CertificationActivity.this, "实名中...");
+        } else {
+            dialog.show();
+        }
+        OkHttpUtils
+                .post()
+                .url(NetService.API_SERVER_Url + "/fysmrz.html")
+                .addHeader("Cookie", sb.toString())
+                .addParams("name", name)
+                .addParams("idCard", no)
+                .build()
+                .execute(new Callback<String>() {
+
+                    @Override
+                    public String parseNetworkResponse(Response response) throws IOException {
+                        return response.body().string();
+                    }
+
+                    @Override
+                    public void onError(Request request, Exception e) {
+                        Logger.e(e.toString());
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void onResponse(String o) {
+
+                        Logger.json(o);
+                        String info = null;
+                        JSONObject sata = null;
+                        try {
+                            JSONObject json = new JSONObject((String) o.toString());
+
+                            sata = json.getJSONObject("state");
+
+                            int s = sata.getInt("status");
+                            info=sata.getString("info");
+                            if (s == 0) {
+                                SharedPreferencesUtils.setParam(CertificationActivity.this, "tPerson", true);
+                                dialog.dismiss();
+                                finish();
+                            } else if (s == 99) {
+                                netLogin(1);
+                            } else {
+                                dialog.dismiss();
+                                T.ShowToastForShort(CertificationActivity.this, info);
+                            }
+                        } catch (JSONException e) {
+                            //  e.printStackTrace();
+                            dialog.dismiss();
+                            T.ShowToastForShort(CertificationActivity.this, info);
+                        }
+
+                    }
+                });
 
     }
 
+    //  0 是 获取   1是设置
+    private void netLogin(final int style) {
+
+        NetWorks.login(SharedPreferencesUtils.getUserName(this),
+                SharedPreferencesUtils.getPassword(this), new Subscriber<LoginBean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (dialog != null && dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                        T.ShowToastForShort(CertificationActivity.this, "网络异常");
+                        Logger.e(e.toString());
+                    }
+
+                    @Override
+                    public void onNext(LoginBean loginBean) {
+                        if (loginBean.getState().getStatus() == 0) {
+                            if (style == 0) {
+                                net();
+                            } else {
+                                goShiMin(userName.getText().toString(), sfz.getText().toString());
+                            }
+                        } else {
+                            if (dialog != null && dialog.isShowing()) {
+                                dialog.dismiss();
+                            }
+                            SharedPreferencesUtils.setIsLogin(CertificationActivity.this, false);
+                        }
+                    }
+                }
+        );
+    }
+
+
+    private void net() {
+        NetWorks.userPerson(new Subscriber<CertificationBean>() {
+            @Override
+            public void onStart() {
+                loadinglayout.setStatus(LoadingLayout.Loading);
+            }
+
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Logger.e(e.toString());
+                loadinglayout.setStatus(LoadingLayout.Error);
+                T.ShowToastForShort(CertificationActivity.this, "网络异常");
+            }
+
+            @Override
+            public void onNext(CertificationBean s) {
+                if (s.getState().getStatus() == 0 | s.getState().getStatus() == 31) {
+                    userName.setText(s.getTPerson().getRealName());
+                    userName.setKeyListener(null);
+                    sfz.setText(s.getTPerson().getCardNo());
+                    sfz.setKeyListener(null);
+                    loadinglayout.setStatus(LoadingLayout.Success);
+
+                } else if (s.getState().getStatus() == 99) {
+                    netLogin(0);
+                } else {
+                    T.ShowToastForShort(CertificationActivity.this, s.getState().getInfo());
+                }
+            }
+        });
+    }
 
 
 }

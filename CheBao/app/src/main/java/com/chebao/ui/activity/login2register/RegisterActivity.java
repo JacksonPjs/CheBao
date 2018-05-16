@@ -3,12 +3,15 @@ package com.chebao.ui.activity.login2register;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -65,6 +68,8 @@ public class RegisterActivity extends BaseActivity {
     EditText code;
     @Bind(R.id.code_img)
     ImageView codeImageview;
+    @Bind(R.id.cbox)
+    CheckBox checkBox;
 
     Dialog dialog;
 
@@ -74,6 +79,7 @@ public class RegisterActivity extends BaseActivity {
     Bitmap bitmap;
 
     String noncestr;
+    boolean isCheck=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,14 +92,24 @@ public class RegisterActivity extends BaseActivity {
         codeUtils=CodeUtils.getInstance();
         MyApplication.instance.addActivity(this);
         getImgCode();
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isCheck=isChecked;
+            }
+        });
 
 
     }
 
 
-    @OnClick({R.id.get_regist, R.id.regist_go, R.id.code_again})
+    @OnClick({R.id.get_regist, R.id.regist_go, R.id.code_again,R.id.fuwutiaolie})
     public void onClick(View view) {
+        Intent intent=null;
         switch (view.getId()) {
+            case R.id.fuwutiaolie:
+                break;
+
             case R.id.code_again:
                 getImgCode();
 //                bitmap = codeUtils.createBitmap();
@@ -133,7 +149,11 @@ public class RegisterActivity extends BaseActivity {
                 }
 
                 if (LoginRegisterUtils.isNullOrEmpty(yzm)) {
-                    T.ShowToastForShort(this, "手机验证码未输入");
+                T.ShowToastForShort(this, "手机验证码未输入");
+                return;
+            }
+                if (!isCheck) {
+                    T.ShowToastForShort(this, "尚未阅读或同意《车宝金融注册服务协议》");
                     return;
                 }
                 regist(phone.getText().toString(),password.getText().toString(),yzm.getText().toString(),"");

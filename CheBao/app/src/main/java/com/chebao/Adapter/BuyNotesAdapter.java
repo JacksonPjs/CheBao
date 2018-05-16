@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.chebao.R;
 import com.chebao.bean.InvestmentBean;
+import com.pvj.xlibrary.utils.DateUtils;
 
 import java.util.List;
 
@@ -38,7 +39,17 @@ public class BuyNotesAdapter extends RecyclerView.Adapter<BuyNotesAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(BuyNotesAdapter.ViewHolder holder, int position) {
+        InvestmentBean.DataBean b = datas.get(position);
+        holder.num.setText(b.getInvestAmount() + "元");
+        if(b.getUserName().length()==11){
+            String str = b.getUserName();
+            String ss = str.substring(0,str.length()-(str.substring(1)).length())+"*********"+str.substring(10);
+            holder.name.setText(ss);
+        }else{
+            holder.name.setText(b.getUserName());
+        }
 
+        holder.date.setText(DateUtils.getStrTime2(b.getInvestTime() + ""));
 
         //  holder.circleProgressbar.setProgressNotInUiThread(80);
 

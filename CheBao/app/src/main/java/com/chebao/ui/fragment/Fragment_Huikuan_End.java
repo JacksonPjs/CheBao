@@ -9,17 +9,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chebao.Adapter.HuikuanAdapter;
 import com.chebao.Adapter.TransactionAdapter;
 import com.chebao.R;
+import com.chebao.bean.HuiKuanBean;
+import com.chebao.net.NetWorks;
 import com.chebao.widget.DividerItemDecoration;
 import com.pvj.xlibrary.loadinglayout.LoadingLayout;
+import com.pvj.xlibrary.loadinglayout.Utils;
 import com.pvj.xlibrary.loadingrecyclerview.LoadMoreRecyclerLoadingLayout;
+import com.pvj.xlibrary.log.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import rx.Subscriber;
+
+import static com.chebao.utils.edncodeUtils.getCookie;
 
 /**
  * 创建日期：2018/5/7 on 18:17
@@ -28,16 +36,16 @@ import butterknife.ButterKnife;
  */
 public class Fragment_Huikuan_End extends Fragment implements LoadingLayout.OnReloadListener,
         LoadMoreRecyclerLoadingLayout.OnRefreshAndLoadMoreListener {
-    List<String> biaoBeenList;
-    TransactionAdapter adapter;
+    List<HuiKuanBean.DataBean> biaoBeenList;
+    HuikuanAdapter adapter;
 
 
     int page = 1;
     int pagesize = 10;
 
     @Bind(R.id.public_listview)
-//    LoadMoreRecyclerLoadingLayout publicLv;
-            RecyclerView publicLv;
+    LoadMoreRecyclerLoadingLayout publicLv;
+//            RecyclerView publicLv;
 
     @Nullable
     @Override
@@ -56,86 +64,83 @@ public class Fragment_Huikuan_End extends Fragment implements LoadingLayout.OnRe
      * @param inrefresh 第几次刷新下的加载
      */
     private void net(final int stype, final int inrefresh) {
-//        NetWorks.selectBorrowListApp(page + "", pagesize + "","1", new Subscriber<BiaoBean>() {
-//            @Override
-//            public void onCompleted() {
-//                publicLv.setRefreshing(false);
-//                //    publicLv.setStatus(LoadingLayout.Success);
-//                if (stype==0){
-//                    publicLv.setRefreshing(false);
-//                }else{
-//                    publicLv.loadMoreComplete();
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                if (stype==0){
-//                    publicLv.setRefreshing(false);
-//                }else{
-//                    publicLv.loadMoreComplete();
-//                }
-//                if (page==1){
-//                    publicLv.setStatus(LoadingLayout.Error);
-//                }else{
-//                    publicLv.setTextEnd();
-//                }
-//
-//                Logger.e(e.toString());
-//            }
-//
-//            @Override
-//            public void onNext(BiaoBean biaoBean) {
-//
-//                if (stype == 0) {
-//                    if (biaoBean.getState().getStatus() == 0) {
-//                        biaoBeenList.clear();
-//                        biaoBeenList.addAll(biaoBean.getData());
-//                        publicLv.setStatus(LoadingLayout.Success);
-//                    } else {
-//                        publicLv.setStatus(LoadingLayout.Empty);
-//                    }
-//
-//                } else if (stype == 1) {
-//                    if (publicLv.getRefreshCount() == inrefresh) {
-//
-//                        if (biaoBean.getState().getStatus() == 0) {
-//                            biaoBeenList.addAll(biaoBean.getData());
-//                        } else {
-//                            publicLv.setTextEnd();
-//                        }
-//
-//                    }
-//                }
-//                adapter.notifyDataSetChanged();
-//            }
-//
-//        });
+        NetWorks.userreturnrecord(getCookie(),page+"",2 + "" , new Subscriber<HuiKuanBean>() {
+            @Override
+            public void onCompleted() {
+                publicLv.setRefreshing(false);
+                //    publicLv.setStatus(LoadingLayout.Success);
+                if (stype==0){
+                    publicLv.setRefreshing(false);
+                }else{
+                    publicLv.loadMoreComplete();
+                }
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                if (stype==0){
+                    publicLv.setRefreshing(false);
+                }else{
+                    publicLv.loadMoreComplete();
+                }
+                if (page==1){
+                    publicLv.setStatus(LoadingLayout.Error);
+                }else{
+                    publicLv.setTextEnd();
+                }
+
+                Logger.e(e.toString());
+            }
+
+            @Override
+            public void onNext(HuiKuanBean biaoBean) {
+
+                if (stype == 0) {
+                    if (biaoBean.getState().getStatus() == 0) {
+                        biaoBeenList.clear();
+                        biaoBeenList.addAll(biaoBean.getData());
+                        publicLv.setStatus(LoadingLayout.Success);
+                    } else {
+                        publicLv.setStatus(LoadingLayout.Empty);
+                    }
+
+                } else if (stype == 1) {
+                    if (publicLv.getRefreshCount() == inrefresh) {
+
+                        if (biaoBean.getState().getStatus() == 0) {
+                            biaoBeenList.addAll(biaoBean.getData());
+                        } else {
+                            publicLv.setTextEnd();
+                        }
+
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+        });
 
     }
 
     private void initView() {
         biaoBeenList = new ArrayList<>();
-        biaoBeenList.add("1111");
-        biaoBeenList.add("1111");
-        biaoBeenList.add("1111");
-        biaoBeenList.add("1111");
 
-        adapter = new TransactionAdapter(biaoBeenList, getActivity());
-//        publicLv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-//        publicLv.verticalLayoutManager(getContext())
-//                .setAdapter(adapter)
-//                .setOnReloadListener(this)
-//                .setRecycleViewBackgroundColor(Utils.getColor(getActivity(), R.color.bg_huise))
-//                .setOnRefreshAndLoadMoreListener(this);
-        LinearLayoutManager linearLayoutManager;
-        linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        publicLv.setLayoutManager(linearLayoutManager);
+
+        adapter = new HuikuanAdapter(biaoBeenList, getActivity());
         publicLv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
-
-        publicLv.setAdapter(adapter);
+        publicLv.verticalLayoutManager(getContext())
+                .setAdapter(adapter)
+                .setOnReloadListener(this)
+                .setRecycleViewBackgroundColor(Utils.getColor(getActivity(), R.color.bg_huise))
+                .setOnRefreshAndLoadMoreListener(this);
+//        LinearLayoutManager linearLayoutManager;
+//        linearLayoutManager = new LinearLayoutManager(getActivity());
+//        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        publicLv.setLayoutManager(linearLayoutManager);
+//        publicLv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+//
+//        publicLv.setAdapter(adapter);
 
     }
 

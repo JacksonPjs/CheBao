@@ -69,7 +69,7 @@ public class Fragemt_Notes extends Fragment implements LoadingLayout.OnReloadLis
      * @param inrefresh 第几次刷新下的加载
      */
     private void net(final int stype, final int inrefresh) {
-        NetWorks.borrowInvestList(id, borrowStatus + "", page + "", pagesize + "", new Subscriber<InvestmentBean>() {
+        NetWorks.borrowInvestList(id, page + "", pagesize + "", new Subscriber<InvestmentBean>() {
             @Override
             public void onCompleted() {
                 publicLv.setRefreshing(false);

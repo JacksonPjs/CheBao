@@ -6,7 +6,7 @@
 
     <include layout="@layout/layout_back" />
 
-    <LinearLayout
+    <com.pvj.xlibrary.loadinglayout.LoadingLayout
         android:id="@+id/layout_contiant_bank"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -16,32 +16,33 @@
             android:orientation="vertical">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#fff"
-        android:orientation="vertical">
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="20dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:background="@color/white"
             >
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="真实姓名"
-                android:layout_marginLeft="10dp"
+                android:textColor="@color/black_home_four_midle"
+                android:layout_weight="3"
                 android:textSize="@dimen/text_size" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="8"
                 android:paddingLeft="10dp"
-
+                android:textColor="@color/black_home_four_midle"
                 android:text="吴奇隆"
                 android:textSize="@dimen/text_size"
                 android:id="@+id/name" />
@@ -49,97 +50,101 @@
         </LinearLayout>
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:drawableRight="@mipmap/go"
-            android:padding="10dp"
-            android:text="选择银行"
-            android:gravity="center_vertical"
-            android:textSize="@dimen/text_size"
-            android:id="@+id/bankbtn" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="20dp"
-            android:orientation="horizontal"
-
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
             android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:layout_marginTop="10dp"
            >
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black_home_four_midle"
+                android:layout_weight="3"
+                android:textSize="@dimen/text_size"
+
                 android:text="银行卡号"
-                android:layout_marginLeft="10dp"
-                android:textSize="@dimen/text_size" />
+                />
 
             <EditText
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
+                android:layout_weight="8"
                 android:inputType="number"
                 android:background="@null"
                 android:hint="请输入银行卡"
                 android:textColorHint="@color/text_hint"
-                android:textColor="@color/text_font"
                 android:textSize="@dimen/text_size"
                 android:maxLines="1"
                 android:maxLength="24"
+                android:textColor="@color/black_home_four_midle"
+
                 android:id="@+id/card" />
 
         </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="@dimen/home_margin"
+                android:layout_marginRight="@dimen/home_margin"
+                ></View>
 
         <LinearLayout
-            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
             android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@color/white"
             >
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="开户支行"
-                android:layout_marginLeft="10dp"
-                android:textSize="@dimen/text_size" />
+                android:textColor="@color/black_home_four_midle"
+                android:layout_weight="3"
+                android:textSize="@dimen/text_size"
+
+                android:text="预留手机号"
+
+                />
 
             <EditText
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
+                android:layout_weight="8"
                 android:inputType="text"
-                android:hint="支行名称"
+                android:hint="请输入银行卡预留手机号"
                 android:background="@null"
                 android:textColorHint="@color/text_hint"
-                android:textColor="@color/text_font"
+                android:textColor="@color/black_home_four_midle"
                 android:textSize="@dimen/text_size"
                 android:id="@+id/zhihang" />
 
         </LinearLayout>
-    </LinearLayout>
 
     <Button
         android:id="@+id/login_go"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="50dp"
+        android:background="@drawable/oval_gradient_linear"
         android:gravity="center"
-        android:padding="5dp"
+        android:textColor="@color/white"
         android:text="绑定"
-        android:textColor="#fff"
         android:textSize="@dimen/text_size" />
         </LinearLayout>
-    </LinearLayout>
+    </com.pvj.xlibrary.loadinglayout.LoadingLayout>
 </LinearLayout>
 
 

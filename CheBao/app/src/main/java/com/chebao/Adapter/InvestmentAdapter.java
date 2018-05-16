@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.chebao.R;
+import com.chebao.bean.InvestmentBean;
+import com.pvj.xlibrary.utils.DateUtils;
 
 import java.util.List;
 
@@ -19,12 +21,12 @@ import butterknife.ButterKnife;
  * 描述: 投资记录适配器
  * 作者:jackson Administrator
  */
-public class InvestmentAdapter  extends RecyclerView.Adapter<InvestmentAdapter.ViewHolder> {
-    private List<String> datas;
+public class InvestmentAdapter extends RecyclerView.Adapter<InvestmentAdapter.ViewHolder> {
+    private List<InvestmentBean.DataBean> datas;
     private Context context;
 
 
-    public InvestmentAdapter(List<String> datas, Context context) {
+    public InvestmentAdapter(List<InvestmentBean.DataBean> datas, Context context) {
         this.datas = datas;
         this.context = context;
     }
@@ -37,6 +39,21 @@ public class InvestmentAdapter  extends RecyclerView.Adapter<InvestmentAdapter.V
 
     @Override
     public void onBindViewHolder(InvestmentAdapter.ViewHolder holder, int position) {
+        InvestmentBean.DataBean dataBean = datas.get(position);
+        holder.name.setText(dataBean.getBorrowTitle() + "");
+        holder.date.setText(DateUtils.getStrTime3(dataBean.getInvestTime() + ""));
+        holder.num.setText(dataBean.getInvestAmount() + "");
+        switch (dataBean.getBorrowStatus()) {
+            case 3:
+                holder.type.setText("招标中");
+                break;
+            case 6:
+                holder.type.setText("已还款");
+                break;
+            case 5:
+                holder.type.setText("还款中");
+                break;
+        }
 
 
         //  holder.circleProgressbar.setProgressNotInUiThread(80);

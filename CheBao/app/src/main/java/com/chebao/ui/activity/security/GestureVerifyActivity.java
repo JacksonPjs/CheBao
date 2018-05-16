@@ -1,6 +1,7 @@
 package com.chebao.ui.activity.security;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
@@ -13,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chebao.MainActivity;
 import com.chebao.R;
 import com.chebao.widget.gesture.GestureContentView;
 import com.chebao.widget.gesture.GestureDrawline;
@@ -81,6 +83,8 @@ public class GestureVerifyActivity extends Activity implements android.view.View
 					public void checkedSuccess() {
 						mGestureContentView.clearDrawlineState(0L);
 						Toast.makeText(GestureVerifyActivity.this, "密码正确", Toast.LENGTH_LONG).show();
+						Intent intent=new Intent(GestureVerifyActivity.this, MainActivity.class);
+						startActivity(intent);
 						GestureVerifyActivity.this.finish();
 					}
 

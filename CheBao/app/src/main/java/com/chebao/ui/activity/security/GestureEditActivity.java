@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chebao.R;
+import com.chebao.utils.SharedPreferencesUtils;
 import com.chebao.widget.gesture.GestureContentView;
 import com.chebao.widget.gesture.GestureDrawline;
 import com.chebao.widget.gesture.LockIndicator;
@@ -81,6 +82,7 @@ public class GestureEditActivity extends Activity implements OnClickListener {
 				} else {
 					if (inputCode.equals(mFirstPassword)) {
 						Toast.makeText(GestureEditActivity.this, "设置成功", Toast.LENGTH_SHORT).show();
+						SharedPreferencesUtils.setGesturePsw(GestureEditActivity.this,inputCode);
 						mGestureContentView.clearDrawlineState(0L);
 						GestureEditActivity.this.finish();
 					} else {

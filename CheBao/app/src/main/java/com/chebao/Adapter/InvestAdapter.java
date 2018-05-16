@@ -66,7 +66,7 @@ public class InvestAdapter extends RecyclerView.Adapter<InvestAdapter.ViewHolder
 //        switch (flag) {
 //            case Constant.INVESTING:
         holder.xianshi.setBackgroundResource(R.drawable.rect_rounded_left_right_arc);
-        holder.progressBar.setProgressValue(d.getProgress()*100);
+        holder.progressBar.setProgressValue((int) (d.getProgress()*100));
 //        holder.progressBar.setColors(randomColors());
 //
 //                break;
