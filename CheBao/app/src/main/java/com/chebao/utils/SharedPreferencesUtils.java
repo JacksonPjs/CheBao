@@ -175,18 +175,13 @@ public class SharedPreferencesUtils {
 
 
         editor.putBoolean("islogin", true);//判断是否登录
-        editor.putString("name", bean.getUserName());// 用户名字
-        editor.putString("images", bean.getImages());// head
+//        editor.putString("name", bean.getUserName());// 用户名字
         java.text.NumberFormat nf = java.text.NumberFormat.getInstance();
         nf.setGroupingUsed(false);
         Logger.d(nf.format(bean.getTotal1()) + "total1");
         editor.putString("total1", nf.format(bean.getTotal1()) + "");//
         editor.putString("total2", nf.format(bean.getTotal2()) + "");//
         editor.putString("usableAmount", nf.format(bean.getUsableAmount()) + "");//
-        editor.putBoolean("tPerson", bean.isTPerson());//
-        editor.putBoolean("payPwd", bean.isPayPwd());//
-        editor.putBoolean("email", bean.isEmail());//
-        editor.putBoolean("tBankCardlist", bean.isTBankCardlist());//
 
         editor.commit();
 
@@ -236,6 +231,14 @@ public class SharedPreferencesUtils {
 
     public static String getGesturePsw(Context context) {
         return (String) SharedPreferencesUtils.getParam(context, "GesturePsw", "");
+    }
+
+    public static void setBankNUm(Context context, String BankNUm) {
+        SharedPreferencesUtils.setParam(context, "BankNUm", BankNUm);
+    }
+
+    public static String getBankNUm(Context context) {
+        return (String) SharedPreferencesUtils.getParam(context, "BankNUm", "");
     }
 
 }

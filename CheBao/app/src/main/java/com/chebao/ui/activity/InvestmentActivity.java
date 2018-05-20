@@ -45,7 +45,7 @@ public class InvestmentActivity extends BaseActivity implements LoadingLayout.On
 
     List<InvestmentBean.DataBean> biaoBeenList;
 
-    int type=0;
+    int type=-1;
     int page = 1;
     int pagesize = 10;
     @Bind(R.id.public_listview)
@@ -70,51 +70,54 @@ public class InvestmentActivity extends BaseActivity implements LoadingLayout.On
      * @param inrefresh 第几次刷新下的加载
      */
     private void net(final int stype, final int inrefresh,int funtype) {
-        NetWorks.selectInvestListing(page + "", funtype + "", new Subscriber<InvestmentBean>() {
-            @Override
-            public void onCompleted() {
-                publicLv.setRefreshing(false);
-                //    publicLv.setStatus(LoadingLayout.Success);
-                if (stype == 0) {
+        if (type==-1){
+            NetWorks.selectInvestListingAll(page + "", new Subscriber<InvestmentBean>() {
+                @Override
+                public void onCompleted() {
                     publicLv.setRefreshing(false);
-                } else {
-                    publicLv.loadMoreComplete();
-                }
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                if (stype == 0) {
-                    publicLv.setRefreshing(false);
-                } else {
-                    publicLv.loadMoreComplete();
-                }
-                if (page == 1) {
-                    publicLv.setStatus(LoadingLayout.Error);
-                } else {
-                    publicLv.setTextEnd();
-                }
-
-                Logger.e(e.toString());
-            }
-
-            @Override
-            public void onNext(InvestmentBean biaoBean) {
-
-
-                if (stype == 0) {
-                    if (biaoBean.getState().getStatus() == 0) {
-                        biaoBeenList.clear();
-                        biaoBeenList.addAll(biaoBean.getData());
-                        publicLv.setStatus(LoadingLayout.Success);
-                    } else if(biaoBean.getState().getStatus() == 99){
-                        netLogin();
-                    }else {
-                        publicLv.setStatus(LoadingLayout.Empty);
+                    //    publicLv.setStatus(LoadingLayout.Success);
+                    if (stype == 0) {
+                        publicLv.setRefreshing(false);
+                    } else {
+                        publicLv.loadMoreComplete();
                     }
 
-                } else if (stype == 1) {
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    if (stype == 0) {
+                        publicLv.setRefreshing(false);
+                    } else {
+                        publicLv.loadMoreComplete();
+                    }
+                    if (page == 1) {
+                        publicLv.setStatus(LoadingLayout.Error);
+                    } else {
+                        publicLv.setTextEnd();
+                    }
+
+                    Logger.e(e.toString());
+                }
+
+                @Override
+                public void onNext(InvestmentBean biaoBean) {
+
+
+                    if (stype == 0) {
+                        if (biaoBean.getState().getStatus() == 0) {
+                            biaoBeenList.clear();
+
+                            biaoBeenList.addAll(biaoBean.getData());
+                            publicLv.setStatus(LoadingLayout.Success);
+                        } else if(biaoBean.getState().getStatus() == 99){
+                            netLogin();
+                        }else {
+                            publicLv.setStatus(LoadingLayout.Empty);
+                        }
+
+                    }
+                else if (stype == 1) {
                     if (publicLv.getRefreshCount() == inrefresh) {
 
                         if (biaoBean.getState().getStatus() == 0) {
@@ -125,11 +128,75 @@ public class InvestmentActivity extends BaseActivity implements LoadingLayout.On
 
                     }
                 }
-                adapter.notifyDataSetChanged();
+                    adapter.notifyDataSetChanged();
 
-            }
+                }
 
-        });
+            });
+        }else {
+            NetWorks.selectInvestListing(page + "", funtype + "", new Subscriber<InvestmentBean>() {
+                @Override
+                public void onCompleted() {
+                    publicLv.setRefreshing(false);
+                    //    publicLv.setStatus(LoadingLayout.Success);
+                    if (stype == 0) {
+                        publicLv.setRefreshing(false);
+                    } else {
+                        publicLv.loadMoreComplete();
+                    }
+
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    if (stype == 0) {
+                        publicLv.setRefreshing(false);
+                    } else {
+                        publicLv.loadMoreComplete();
+                    }
+                    if (page == 1) {
+                        publicLv.setStatus(LoadingLayout.Error);
+                    } else {
+                        publicLv.setTextEnd();
+                    }
+
+                    Logger.e(e.toString());
+                }
+
+                @Override
+                public void onNext(InvestmentBean biaoBean) {
+
+
+                    if (stype == 0) {
+                        if (biaoBean.getState().getStatus() == 0) {
+                            biaoBeenList.clear();
+                            biaoBeenList.addAll(biaoBean.getData());
+                            publicLv.setStatus(LoadingLayout.Success);
+                        } else if(biaoBean.getState().getStatus() == 99){
+                            netLogin();
+                        }else {
+                            publicLv.setStatus(LoadingLayout.Empty);
+                        }
+
+                    }
+                else if (stype == 1) {
+                    if (publicLv.getRefreshCount() == inrefresh) {
+
+                        if (biaoBean.getState().getStatus() == 0) {
+                            biaoBeenList.addAll(biaoBean.getData());
+                        } else {
+                            publicLv.setTextEnd();
+                        }
+
+                    }
+                }
+                    adapter.notifyDataSetChanged();
+
+                }
+
+            });
+        }
+
 
     }
 
@@ -181,25 +248,37 @@ public class InvestmentActivity extends BaseActivity implements LoadingLayout.On
                 InvestmentDialog dialog=new InvestmentDialog(this, new InvestmentDialog.ItemSelectListener() {
                     @Override
                     public void selectAll() {
+                        type=-1;
+                        net(0, 0,type);
 
                     }
 
                     @Override
                     public void selectMeet() {
                         //已还清
+                        type=6;
+                        net(0, 0,type);
+
 
                     }
 
                     @Override
                     public void selectInvite() {
                         //招标中
+                        type=3;
+                        net(0, 0,type);
+
                     }
 
                     @Override
                     public void selectRepayment() {
                         //还款中
+                        type=5;
+                        net(0, 0,type);
+
                     }
                 });
+
                 dialog.show();
                 break;
         }

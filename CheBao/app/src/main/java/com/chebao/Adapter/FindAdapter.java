@@ -14,6 +14,8 @@ import com.bumptech.glide.Glide;
 import com.chebao.R;
 import com.chebao.bean.FindBean;
 import com.chebao.net.NetService;
+import com.chebao.ui.activity.WebActivity;
+import com.chebao.ui.activity.WebActivityJS;
 import com.chebao.ui.activity.login2register.LoginActivity;
 
 import java.util.List;
@@ -44,7 +46,7 @@ public class FindAdapter extends RecyclerView.Adapter<FindAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(FindAdapter.ViewHolder holder, int position) {
-        FindBean.DataBean dataBean=datas.get(position);
+        final FindBean.DataBean dataBean=datas.get(position);
         holder.title.setText(dataBean.getActivityName()+"");
         String url= NetService.API_SERVER_Photo+dataBean.getActivityImg()+"";
 
@@ -55,7 +57,8 @@ public class FindAdapter extends RecyclerView.Adapter<FindAdapter.ViewHolder> {
         holder.Head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, LoginActivity.class);
+                Intent intent=new Intent(context, WebActivity.class);
+                intent.putExtra("url",dataBean.getActivityWapSrc());
                 context.startActivity(intent);
             }
         });

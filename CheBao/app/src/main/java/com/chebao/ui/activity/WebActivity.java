@@ -1,17 +1,23 @@
 package com.chebao.ui.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.ViewGroup;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
+import com.chebao.MainActivity;
+import com.chebao.MyApplication;
 import com.chebao.R;
 import com.pvj.xlibrary.loadinglayout.LoadingLayout;
+import com.pvj.xlibrary.log.Logger;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -38,8 +44,8 @@ public class WebActivity extends BaseActivity {
         //   title.setText();
 
 //        url ="file:///android_asset/security.html";
-        url ="https://www.baidu.com";
-//        url = getIntent().getStringExtra("url");
+//        url ="https://www.baidu.com";
+        url = getIntent().getStringExtra("url");
         String title1 = getIntent().getStringExtra("title");
         if (title != null) {
             title.setText(title1);
@@ -71,6 +77,7 @@ public class WebActivity extends BaseActivity {
         webView.getSettings().setDomStorageEnabled(true);
         webView.getSettings().setDatabaseEnabled(true);
         webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        webView.addJavascriptInterface(new JavaScriptObject(this), "enduoApp");
 
         webView.getSettings().setAppCacheEnabled(true);
 
@@ -121,4 +128,37 @@ public class WebActivity extends BaseActivity {
             webView.destroy();
         }
     }
+
+    public class JavaScriptObject {
+        Context mContxt;
+
+        //sdk17版本以上加上注解
+        public JavaScriptObject(Context mContxt) {
+            this.mContxt = mContxt;
+        }
+
+        @JavascriptInterface
+        public void goRecharge() {
+            //   T.ShowToastForShort(mContxt,"goReCharge");
+            finish();
+            Logger.d("goReCharge");
+
+        }
+
+        @JavascriptInterface
+        public void goUserIndex() {
+            //   T.ShowToastForShort(mContxt,"goUserIndex");
+            MyApplication.instance.Allfinlish();
+            Logger.d("goUserIndex");
+        }
+        @JavascriptInterface
+        public void goInvest() {
+            //   T.ShowToastForShort(mContxt,"goUserIndex");
+            Intent intent=new Intent(mContxt, MainActivity.class);
+            intent.putExtra("index",1);
+            mContxt.startActivity(intent);
+            Logger.d("goInvest()");
+        }
+    }
+
 }

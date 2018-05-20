@@ -7,7 +7,7 @@
 
     <include layout="@layout/layout_back" />
 
-    <LinearLayout
+    <com.pvj.xlibrary.loadinglayout.LoadingLayout
         android:id="@+id/loadinglayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -19,80 +19,74 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="vertical"
+                android:orientation="vertical"
+                >
 
 
-                    >
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
                         android:orientation="horizontal"
-                        android:padding="10dp">
+                        android:gravity="center"
+                        android:background="@color/white"
+                        android:padding="@dimen/home_margin"
+                        >
 
                         <ImageView
                             android:id="@+id/bank_src"
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:layout_gravity="center_vertical" />
-
-
-                        <TextView
-                            android:id="@+id/bankname"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="银行"
-                            android:textColor="@color/text_font"
-                            android:textSize="@dimen/text_size" />
+                            android:layout_gravity="center_vertical"
+                            android:src="@mipmap/icon_mybank"
 
-                        <TextView
-                            android:id="@+id/cardtype"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:text="信用卡"
-                            android:textColor="@color/text_font"
-                            android:textSize="@dimen/text_size" />
+                            />
 
                         <TextView
                             android:id="@+id/cardnum"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
                             android:layout_toRightOf="@+id/cardtype"
-                            android:paddingBottom="10dp"
+                            android:layout_marginLeft="@dimen/home_margin"
                             android:text="666"
-                            android:textSize="25sp" />
+                            android:textSize="@dimen/text_18_size"
+                            android:textColor="@color/black_home_four_small"
+                            />
 
                     </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/home_margin"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="当前可提现金额:"
+                    />
+                <TextView
 
-                </LinearLayout>
-
-
+                    android:id="@+id/money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="110.00"
+                    android:textColor="@color/status4" />
                     <TextView
-
-                        android:id="@+id/money"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
+                        android:text="元"
+                        />
+            </LinearLayout>
 
-                        android:padding="10dp"
-                        android:layout_alignParentTop="true"
-                        android:text="@string/app_name"
-                        android:textColor="@color/font_color1" />
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:background="@color/ll_nor"
                     android:orientation="vertical">
 
@@ -101,6 +95,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:paddingTop="10dp"
+                        android:textColor="@color/black_home_four_small"
                         android:text="提现金额" />
 
                     <LinearLayout
@@ -121,7 +116,7 @@
                             android:layout_height="40dp"
                             android:layout_marginLeft="10dp"
                             android:background="@null"
-                            android:hint="金额不低于100.00元"
+                            android:hint=""
                             android:inputType="number"
                             android:maxLength="11"
                             android:maxLines="1"
@@ -132,54 +127,55 @@
 
                     </LinearLayout>
 
-
-
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="#fff"
-                    android:orientation="vertical">
-
-
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/bg_huise"
+                        android:layout_marginLeft="@dimen/home_margin"
+                        android:layout_marginRight="@dimen/home_margin"></View>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
-                        android:padding="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
-                            android:text="交易密码"
-                            android:textColor="@color/font_color1"
-                            android:textSize="@dimen/text_size" />
+                        android:background="#fff"
+                        android:orientation="vertical">
 
 
-                        <EditText
-                            android:id="@+id/t_shouyi"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:background="@null"
-                            android:hint="请输入您的交易密码"
-                            android:inputType="textPassword"
-                            android:maxLines="1"
-                            android:padding="10dp"
-                            android:textColor="#666"
-                            android:textColorHint="#ccc"
-                            android:textSize="@dimen/text_15_size" />
 
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="10dp"
+                                android:text="交易密码"
+                                android:textColor="@color/font_color1"
+                                android:textSize="@dimen/text_size" />
+
+
+                            <EditText
+                                android:id="@+id/t_shouyi"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:background="@null"
+                                android:hint="请输入交易密码"
+                                android:inputType="textPassword"
+                                android:maxLines="1"
+                                android:padding="10dp"
+                                android:textColor="#666"
+                                android:textColorHint="#ccc"
+                                android:textSize="@dimen/text_15_size" />
+
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
                 </LinearLayout>
+
 
 
                 <Button
@@ -197,48 +193,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginTop="20dp"
                     android:layout_marginLeft="10dp"
                     >
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="温馨提示"
-                        android:textColor="@color/text_blue"
+                        android:textColor="@color/black_home_four_larger"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        android:text="@string/withdraw_tip"
+                        android:textColor="@color/black_home_four_midle"
                         />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        />
+
                 </LinearLayout>
 
             </LinearLayout>
         </ScrollView>
-    </LinearLayout>
+    </com.pvj.xlibrary.loadinglayout.LoadingLayout>
 </LinearLayout>

@@ -19,13 +19,17 @@ import android.widget.TextView;
 import com.chebao.Adapter.ViewPagerFramentAdapter;
 import com.chebao.R;
 import com.chebao.bean.BorrowDetailBean;
+import com.chebao.ui.activity.login2register.LoginActivity;
 import com.chebao.ui.fragment.Fragemt_Explain;
 import com.chebao.ui.fragment.Fragemt_Notes;
 import com.chebao.ui.fragment.Fragment_Data;
+import com.chebao.utils.SharedPreferencesUtils;
 import com.chebao.widget.CircleProgress;
 import com.chebao.widget.MyScrollView;
 import com.pvj.xlibrary.loadinglayout.Utils;
+import com.pvj.xlibrary.utils.T;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,6 +91,22 @@ public class DetailsActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.back:
                 finish();
+                break;
+
+            case R.id.buy:
+                if ((Boolean) SharedPreferencesUtils.getParam(this, "islogin", false)){
+                    intent = new Intent(this, DepositActivity.class);
+//                    Bundle bundle = new Bundle();
+//                    bundle.putSerializable("bean", (Serializable) bean);
+//                    bundle.putString("id", id + "");
+//                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }else {
+                    intent = new Intent(DetailsActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    T.ShowToastForLong(DetailsActivity.this,"未登录");
+
+                }
                 break;
 
 

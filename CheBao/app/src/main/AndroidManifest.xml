@@ -3,13 +3,14 @@
     package="com.chebao">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!--添加可以向外拨打电话的权限  -->
+    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
 
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.activity.StartActivity">
@@ -52,6 +53,13 @@
         <activity android:name=".ui.activity.AddBankActivity"></activity>
         <activity android:name=".ui.activity.WebActivityJS"></activity>
         <activity android:name=".ui.activity.WithdrawActivity"></activity>
+        <activity android:name=".ui.activity.RansomActivity"></activity>
+        <activity android:name=".ui.activity.AnndatilsActivity"></activity>
+        <activity android:name=".ui.activity.AnnouncementListActivity"></activity>
+        <activity android:name=".ui.activity.ChargerWebActivity"></activity>
+        <activity android:name=".ui.activity.PayDiscountActivity"></activity>
+        <activity android:name=".ui.activity.DepositActivity"></activity>
+        <activity android:name=".ui.activity.AboutActivity"></activity>
     </application>
 
 </manifest>

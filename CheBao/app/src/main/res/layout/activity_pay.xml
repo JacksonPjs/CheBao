@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/bg_huise"
     android:orientation="vertical"
 
@@ -11,88 +12,87 @@
         android:id="@+id/ll_title"
         layout="@layout/titlebar_back"></include>
 
-    <LinearLayout
-        android:id="@+id/ll_data"
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_title"
-        android:layout_marginTop="1dp"
-        android:background="@color/ll_nor"
-        android:orientation="vertical"
-        android:paddingBottom="10dp">
+        android:padding="@dimen/home_margin"
+        android:background="@color/white"
+        >
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/yonghu"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="年化收益"
-                    android:textColor="@color/text_huise" />
-
-                <TextView
-                    android:id="@+id/percent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/text"
-                    android:text="12.8%"
-                    android:textColor="@color/text_org"
-                    android:textSize="30sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/data"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/text"
-                    android:text="180天期限"
-                    android:textSize="11sp" />
-
-                <TextView
-                    android:id="@+id/maxAmount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignTop="@+id/percent"
-                    android:layout_below="@+id/data"
-                    android:layout_marginTop="10dp"
-                    android:text="剩余金额：300000000" />
-
-            </LinearLayout>
+            android:textColor="@color/black_home_four_midle"
+            android:textSize="@dimen/text_midle_size"
+            tools:text="新手专享4月" />
 
 
-        </LinearLayout>
+        <TextView
+            android:id="@+id/percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/yonghu"
+            android:layout_marginTop="@dimen/home_margin"
+            android:layout_weight="1"
+            android:text="7.8%+2%"
+            android:textColor="@color/black_home_four_larger"
+            android:textSize="@dimen/text_large_size"
+            tools:text="7.8%+2%" />
+
+        <TextView
+            android:id="@+id/data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/percent"
+            android:layout_marginLeft="180dp"
+            android:layout_marginTop="@dimen/home_margin"
+            android:layout_weight="1"
+            android:text="投资期限：15天"
+            android:textColor="@color/black_home_four_midle"
+            android:textSize="@dimen/text_samll_size"
+
+            />
+
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/percent"
+            android:layout_marginTop="@dimen/home_margin"
+            android:layout_weight="1"
+            android:text="年化收益"
+            android:textColor="@color/black_home_four_midle"
+            android:textSize="@dimen/text_samll_size" />
+
+        <TextView
+            android:id="@+id/maxAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/data"
+            android:layout_alignTop="@+id/text"
+            android:layout_weight="1"
+            android:text="收益方式：满标计息，到期还本息"
+            android:textColor="@color/black_home_four_midle"
+            android:textSize="@dimen/text_samll_size" />
 
         <com.chebao.widget.GoodProgressView
             android:id="@+id/progressBar"
-            android:layout_below="@+id/tuijian_fangshi"
             android:layout_width="match_parent"
-            android:layout_alignParentRight="true"
             android:layout_height="40dp"
-            android:layout_marginLeft="@dimen/home_margin"
-            />
+            android:layout_alignParentRight="true"
 
-    </LinearLayout>
+            android:layout_below="@+id/maxAmount"
+            android:layout_marginTop="@dimen/home_margin" />
+
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ll_data"
         android:layout_marginTop="@dimen/home_margin"
         android:background="@color/white"
         android:orientation="vertical">
@@ -134,8 +134,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_toRightOf="@+id/symbol"
                 android:background="@null"
-                android:digits="0123456789"
-                android:hint="100元起投"
+                android:inputType="number"
                 android:maxLength="9"
                 android:padding="5dp" />
 
@@ -152,7 +151,6 @@
             android:id="@+id/rl_money"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:background="#fff">
 
             <TextView
@@ -161,7 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:text="账户余额:" />
+                android:text="账户余额(元):" />
 
             <TextView
                 android:id="@+id/tv_money"
@@ -169,7 +167,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/tv_money_title"
-                android:text="300.00元"
+                android:text="300.00"
                 android:textColor="@color/blue_pay"
 
                 />
@@ -199,21 +197,14 @@
         android:layout_marginTop="5dp"
         android:background="#fff">
 
-        <ImageView
-            android:id="@+id/quan_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:src="@mipmap/icon_discount" />
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/quan_img"
-            android:text="优惠券"
+            android:text="我的卡券"
             android:textColor="@color/text_newbie"
 
             />
@@ -240,13 +231,50 @@
                 android:id="@+id/restext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:layout_toLeftOf="@+id/img"
-                android:textColor="@color/text_huise"
+                android:layout_alignParentBottom="true"
+                android:layout_toStartOf="@+id/img"
+                android:layout_centerVertical="true"
+                android:text="选择"
+                android:textColor="@color/org_home"
                 android:textSize="@dimen/text_15_size" />
 
         </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/ll_nor"
+        android:padding="@dimen/home_margin"
+        >
 
+        <TextView
+            android:id="@+id/earnings1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="预期收益:"
+            android:textColor="@color/text_huise" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentRight="true"
+        >
+        <TextView
+            android:id="@+id/earnings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.0"
+            android:textColor="@color/text_org" />
+
+        <TextView
+            android:id="@+id/earnings2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/earnings"
+            android:text="元"
+            android:textColor="@color/text_huise" />
+
+    </LinearLayout>
     </RelativeLayout>
 
 
@@ -255,59 +283,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_money"
-        android:layout_marginTop="10dp"
-        android:background="@color/ll_nor"
         android:orientation="vertical"
         android:padding="10dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp">
+            android:layout_alignParentRight="true">
+
 
             <TextView
-                android:id="@+id/earnings1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="预期收益:"
-                android:textColor="@color/text_huise" />
+                android:text="投资即表示同意" />
 
             <TextView
-                android:id="@+id/earnings"
+                android:id="@+id/fuwutiaolie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/earnings1"
-                android:text="0.0"
-                android:textColor="@color/text_org" />
-
-            <TextView
-                android:id="@+id/earnings2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/earnings"
-                android:text="元"
-                android:textColor="@color/text_huise" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="投资即表示同意" />
-
-                <TextView
-                    android:id="@+id/fuwutiaolie"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="《认购协议》"
-                    android:textColor="#2990ef" />
-            </LinearLayout>
-        </RelativeLayout>
-
+                android:text="《车保金融点对点借款合同》"
+                android:textColor="@color/org_home" />
+        </LinearLayout>
     </LinearLayout>
 
 
@@ -324,7 +321,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="bottom"
-            android:background="@color/text_org"
+            android:background="@color/org_home"
             android:gravity="center"
             android:text="立即购买"
             android:textColor="#fff" />

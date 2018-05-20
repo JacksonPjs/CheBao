@@ -22,15 +22,15 @@ import com.pvj.xlibrary.loadinglayout.Utils;
  */
 public class TransactionDialog extends Dialog implements View.OnClickListener {
 
-    private TextView cancel, all,recharge,withdraw;
+    private TextView cancel, all, recharge, withdraw,hongbao,shou,huikuai;
     Context context;
     View localView;
     private ItemSelectListener itemSelectListener;
 
-    public TransactionDialog(Context context ,ItemSelectListener itemSelectListener ) {
+    public TransactionDialog(Context context, ItemSelectListener itemSelectListener) {
         super(context);
         this.context = context;
-        this.itemSelectListener=itemSelectListener;
+        this.itemSelectListener = itemSelectListener;
     }
 
     @Override
@@ -66,6 +66,9 @@ public class TransactionDialog extends Dialog implements View.OnClickListener {
         all.setOnClickListener(this);
         recharge.setOnClickListener(this);
         withdraw.setOnClickListener(this);
+        hongbao.setOnClickListener(this);
+        shou.setOnClickListener(this);
+        huikuai.setOnClickListener(this);
     }
 
     private void initView() {
@@ -73,6 +76,9 @@ public class TransactionDialog extends Dialog implements View.OnClickListener {
         all = (TextView) findViewById(R.id.all);
         recharge = (TextView) findViewById(R.id.recharge);
         withdraw = (TextView) findViewById(R.id.withdraw);
+        hongbao = (TextView) findViewById(R.id.hongbao);
+        shou = (TextView) findViewById(R.id.shou);
+        huikuai = (TextView) findViewById(R.id.huikuai);
 
     }
 
@@ -82,20 +88,35 @@ public class TransactionDialog extends Dialog implements View.OnClickListener {
                 this.dismiss();
                 break;
             case R.id.all:
-                if (itemSelectListener!=null){
+                if (itemSelectListener != null) {
                     itemSelectListener.selectAll();
                 }
 
                 break;
             case R.id.recharge:
-                if (itemSelectListener!=null){
+                if (itemSelectListener != null) {
                     itemSelectListener.selectRecharge();
                 }
                 break;
-                case R.id.withdraw:
-                    if (itemSelectListener!=null){
-                        itemSelectListener.selectWithdraw();
-                    }
+            case R.id.withdraw:
+                if (itemSelectListener != null) {
+                    itemSelectListener.selectWithdraw();
+                }
+                break;
+            case R.id.huikuai:
+                if (itemSelectListener != null) {
+                    itemSelectListener.selectHuiKuan();
+                }
+                break;
+                case R.id.shou:
+                if (itemSelectListener != null) {
+                    itemSelectListener.selectShou();
+                }
+                break;
+                case R.id.hongbao:
+                if (itemSelectListener != null) {
+                    itemSelectListener.selectHongBao();
+                }
                 break;
 
         }
@@ -103,10 +124,18 @@ public class TransactionDialog extends Dialog implements View.OnClickListener {
 
     }
 
-   public interface ItemSelectListener {
+    public interface ItemSelectListener {
         void selectAll();
+
         void selectRecharge();
+
         void selectWithdraw();
+
+        void selectHuiKuan();
+
+        void selectShou();
+
+        void selectHongBao();
 
     }
 }

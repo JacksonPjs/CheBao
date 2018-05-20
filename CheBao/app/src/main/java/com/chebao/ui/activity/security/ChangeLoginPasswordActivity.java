@@ -53,7 +53,7 @@ public class ChangeLoginPasswordActivity extends BaseActivity {
         setContentView(R.layout.activity_changeoginpassword);
         ButterKnife.bind(this);
 
-        title.setText("修改登陆密码");
+        title.setText("修改登录密码");
     }
 
     @OnClick(R.id.chagerloginpwd_go)

@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <LinearLayout
+        android:id="@+id/title_ll"
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:orientation="vertical"
@@ -61,6 +62,7 @@
             android:layout_marginTop="@dimen/home_margin"
             >
             <TextView
+                android:id="@+id/huikuai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="回款"
@@ -73,6 +75,7 @@
 
                 />
             <TextView
+                android:id="@+id/shou"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="收息"
@@ -83,6 +86,7 @@
                 android:textColor="@color/selector_text_black_white"
                 />
             <TextView
+                android:id="@+id/hongbao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="红包奖励"
@@ -97,17 +101,28 @@
 
     </LinearLayout>
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="@dimen/home_margin"
 
+    android:orientation="vertical">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/org_home"
+        ></View>
     <TextView
         android:id="@+id/cancel"
-        android:layout_marginTop="@dimen/home_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="取消"
         android:gravity="center"
         android:padding="@dimen/home_margin"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/home_margin"
         />
+
+</LinearLayout>
+
 
 </RelativeLayout>

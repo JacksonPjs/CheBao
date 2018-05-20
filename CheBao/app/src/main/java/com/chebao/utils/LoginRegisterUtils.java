@@ -7,7 +7,7 @@ import com.pvj.xlibrary.utils.StringUtil;
 import java.util.regex.Pattern;
 
 /**
- *     注册和登陆 验证 输入判断
+ *     注册和登录验证 输入判断
  * Created by Administrator on 2016/12/30.
  */
 

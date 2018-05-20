@@ -9,7 +9,7 @@ public class InfoBean {
     /**
      * state : {"info":"实名成功","status":"0"}
      */
-
+    double usermoney;
     private StateBean state;
 
     public StateBean getState() {
@@ -18,6 +18,14 @@ public class InfoBean {
 
     public void setState(StateBean state) {
         this.state = state;
+    }
+
+    public double getUsermoney() {
+        return usermoney;
+    }
+
+    public void setUsermoney(double usermoney) {
+        this.usermoney = usermoney;
     }
 
     public static class StateBean {

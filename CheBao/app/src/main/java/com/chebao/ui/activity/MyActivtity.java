@@ -2,6 +2,7 @@ package com.chebao.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.chebao.MyApplication;
@@ -11,12 +12,15 @@ import com.chebao.bean.DidibaoBean;
 import com.chebao.bean.LoginBean;
 import com.chebao.net.NetWorks;
 import com.chebao.ui.activity.login2register.LoginActivity;
+import com.chebao.utils.LoginRegisterUtils;
 import com.chebao.utils.SharedPreferencesUtils;
 import com.pvj.xlibrary.loadinglayout.LoadingLayout;
 import com.pvj.xlibrary.log.Logger;
+import com.pvj.xlibrary.utils.T;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import rx.Subscriber;
 
 import static com.chebao.utils.edncodeUtils.encodeHeadInfo;
@@ -28,7 +32,7 @@ import static com.chebao.utils.edncodeUtils.getCookie;
  * 作者:jackson Administrator
  */
 public class MyActivtity extends BaseActivity {
-        @Bind(R.id.zrsy)
+    @Bind(R.id.zrsy)
     TextView zrsy;
     @Bind(R.id.ljsy)
     TextView ljsy;
@@ -50,11 +54,30 @@ public class MyActivtity extends BaseActivity {
         net();
     }
 
+    @OnClick({R.id.chager,R.id.withdraw})
+    public void onClick(View view) {
+        Intent intent = null;
+        switch (view.getId()) {
+
+            case R.id.chager:
+                intent = new Intent(this, RansomActivity.class);
+                startActivity(intent);
+                finish();
+
+                break;
+
+            case R.id.withdraw:
+                intent =new Intent(this,DepositActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+        }
+    }
 
     private void net() {
 
 
-        NetWorks.userdidibao(getCookie()+"",new Subscriber<DidibaoBean>() {
+        NetWorks.userdidibao(getCookie() + "", new Subscriber<DidibaoBean>() {
             @Override
             public void onStart() {
 

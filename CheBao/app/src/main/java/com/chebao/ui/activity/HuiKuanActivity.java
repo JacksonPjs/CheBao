@@ -105,8 +105,8 @@ public class HuiKuanActivity extends BaseActivity implements ViewPager.OnPageCha
             public void onNext(HuiKuanBean b) {
 
                 if (b.getState().getStatus() == 0) {
-                    allmoney.setText(b.getZds());
-                    mmoney.setText(b.getDyds());
+                    allmoney.setText(b.getZds()+"");
+                    mmoney.setText(b.getDyds()+"");
 
 
                 } else {

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dsadas"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#fff"
+    android:padding="10dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/biaoti"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="标题"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:layout_marginLeft="15dp"
+        android:textSize="@dimen/text_size"
+        android:textColor="@color/text_font"
+        />
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingRight="10dp"
+            android:text="2016"
+            android:textSize="@dimen/text_samll_size"
+            android:textColor="@color/text_hint"
+            />
+
+
+</LinearLayout>

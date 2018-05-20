@@ -105,7 +105,37 @@ public class DetailsProductActivity extends BaseActivity implements ViewPager.On
 
         viewPagerFramentAdapter.notifyDataSetChanged();
 
+        BorrowDetailBean.DataBean d = bean.getData();
+        if (d.getBorrowStatus() == 3) {
+            buy.setBackgroundColor(this.getResources().getColor(R.color.text_org));
+            buy.setText("立即投资");
 
+        } else {
+            buy.setBackgroundColor(this.getResources().getColor(R.color.bar_clor));
+            buy.setClickable(false);
+            switch (d.getBorrowStatus()) {
+                case 2:
+                    buy.setText("即将开标");
+
+                    break;
+                case 4:
+                    buy.setText("满标审核中");
+
+                    break;
+                case 5:
+                    buy.setText("正在还款");
+
+                    break;
+                case 6:
+                    buy.setText("还款结束");
+
+                    break;
+                case 9:
+                    buy.setText("已流标");
+
+                    break;
+            }
+        }
 //        if (!(Boolean) SharedPreferencesUtils.getParam(this, "islogin", false)) {
 //            topay.setText(getResources().getString(R.string.logintopay));
 //            topay.setBackground(null);

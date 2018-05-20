@@ -42,7 +42,7 @@ public class TransactionActivity extends BaseActivity implements LoadingLayout.O
     TransactionAdapter adapter;
     List<CaseFlowBean.DataBean> biaoBeenList;
 
-    int type=0;
+    int type = 0;
     int page = 1;
     int pagesize = 10;
     @Bind(R.id.public_listview)
@@ -58,7 +58,7 @@ public class TransactionActivity extends BaseActivity implements LoadingLayout.O
         ButterKnife.bind(this);
         title.setText("交易记录");
         initView();
-        net(0, 0,type);
+        net(0, 0, type);
 
     }
 
@@ -67,7 +67,8 @@ public class TransactionActivity extends BaseActivity implements LoadingLayout.O
      * @param stype     是刷新 还是加载  0是刷新  1是加载
      * @param inrefresh 第几次刷新下的加载
      */
-    private void net(final int stype, final int inrefresh,int funtype) {
+    private void net(final int stype, final int inrefresh, int funtype) {
+
         NetWorks.moneyFlow(page + "", funtype + "", new Subscriber<CaseFlowBean>() {
             @Override
             public void onCompleted() {
@@ -106,9 +107,9 @@ public class TransactionActivity extends BaseActivity implements LoadingLayout.O
                         biaoBeenList.clear();
                         biaoBeenList.addAll(biaoBean.getData());
                         publicLv.setStatus(LoadingLayout.Success);
-                    } else if(biaoBean.getState().getStatus() == 99){
+                    } else if (biaoBean.getState().getStatus() == 99) {
                         netLogin();
-                    }else {
+                    } else {
                         publicLv.setStatus(LoadingLayout.Empty);
                     }
 
@@ -154,50 +155,79 @@ public class TransactionActivity extends BaseActivity implements LoadingLayout.O
     public void onReload(View v) {
         page = 1;
         publicLv.setStatus(LoadingLayout.Loading);
-        net(0, 0,type);
+        net(0, 0, type);
     }
 
     @Override
     public void onRefresh() {
         page = 1;
-        net(0, 0,type);
+        net(0, 0, type);
         publicLv.setTextStart();
     }
 
     @Override
     public void onLoadMore(int inrefresh) {
         page++;
-        net(1, inrefresh,type);
+        net(1, inrefresh, type);
     }
 
 
     @OnClick({R.id.type_select})
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.type_select:
 
-                TransactionDialog myDialog=new TransactionDialog(this,
+                TransactionDialog myDialog = new TransactionDialog(this,
                         new TransactionDialog.ItemSelectListener() {
                             @Override
                             public void selectAll() {
-                                type=1;
-                                net(0,0,type);
+                                type = 0;
+                                net(0, 0, type);
+
+
                             }
 
                             @Override
                             public void selectRecharge() {
+                                type = 1;
+                                net(0, 0, type);
 
                             }
 
                             @Override
                             public void selectWithdraw() {
+                                type = 4;
+                                net(0, 0, type);
+
+                            }
+
+                            @Override
+                            public void selectHuiKuan() {
+                                type = 12;
+                                net(0, 0, type);
+
+                            }
+
+                            @Override
+                            public void selectShou() {
+                                type = 13;
+                                net(0, 0, type);
+
+                            }
+
+                            @Override
+                            public void selectHongBao() {
+                                type = 16;
+                                net(0, 0, type);
 
                             }
                         });
+
                 myDialog.show();
                 break;
         }
     }
+
     private void netLogin() {
 
         NetWorks.login(SharedPreferencesUtils.getUserName(this),
@@ -216,9 +246,9 @@ public class TransactionActivity extends BaseActivity implements LoadingLayout.O
                     @Override
                     public void onNext(LoginBean loginBean) {
                         if (loginBean.getState().getStatus() == 0) {
-                            net(0,0,type);
+                            net(0, 0, type);
                         } else {
-                            SharedPreferencesUtils.setIsLogin(TransactionActivity.this,false);
+                            SharedPreferencesUtils.setIsLogin(TransactionActivity.this, false);
                         }
                     }
                 }

@@ -54,7 +54,11 @@ public class Fragment_OutOfDateDisount extends Fragment implements LoadingLayout
         net(0, 0);
         return rootView;
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        page=1;
+    }
 
     /**
      * @param stype     是刷新 还是加载  0是刷新  1是加载
@@ -63,7 +67,7 @@ public class Fragment_OutOfDateDisount extends Fragment implements LoadingLayout
     private void net(final int stype, final int inrefresh) {
 
 
-        NetWorks.CouponAndJxList(getCookie(), "5",page+"", new Subscriber<DiscountListBean>() {
+        NetWorks.CouponAndJxList(getCookie(), "3",page+"", new Subscriber<DiscountListBean>() {
             @Override
             public void onCompleted() {
                 publicLv.setRefreshing(false);
@@ -120,6 +124,20 @@ public class Fragment_OutOfDateDisount extends Fragment implements LoadingLayout
 
         });
 
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden) {
+
+            //隐藏时所作的事情
+            page=1;
+
+        } else {
+            //显示时所作的事情
+
+        }
     }
 
     private void initView() {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -133,6 +133,7 @@
             >
 
             <LinearLayout
+                android:id="@+id/cell_phohe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_oval_white"
@@ -141,9 +142,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/text_samll_size"
                     android:text="客服电话:  400-****-***"
-
+                    android:layout_gravity="center_vertical"
 
                     />
 
@@ -165,4 +165,4 @@
 
             />
     </LinearLayout>
-</ScrollView>
+</LinearLayout>

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@mipmap/bg_touzi"
-        >
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
         <com.chebao.widget.CircleProgress
             android:id="@+id/circleprogress"
             android:layout_width="wrap_content"
@@ -16,88 +20,84 @@
             android:layout_gravity="center_horizontal"
             app:antiAlias="true"
             app:bgArcColor="@color/black_home_four_midle"
-            app:hint="7.9%+2%"
+
+            app:hint="7.8%+2%"
             app:hintSize="15sp"
             app:startAngle="135"
             app:sweepAngle="270"
             app:unit="年化收益"
             app:unitSize="15sp"
-            app:valueSize="25sp"
-            />
+            app:valueSize="25sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_weight="1"
                 android:gravity="center"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mine"
-                    android:textSize="@dimen/text_12_size"
-                    android:textColor="@color/org_home"
-                    />
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/tuijian"
-                    android:textSize="@dimen/text_12_size"
+                    android:text="7.8%"
+                    android:textColor="@color/org_home"
+                    android:textSize="@dimen/text_12_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"
-                    />
+                    android:text="基础利率"
+                    android:textSize="@dimen/text_12_size" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_weight="1"
                 android:gravity="center"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mine"
-                    android:textSize="@dimen/text_12_size"
-                    android:textColor="@color/org_home"
-                    />
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/tuijian"
-                    android:textSize="@dimen/text_12_size"
+                    android:text="100元"
+                    android:textColor="@color/org_home"
+                    android:textSize="@dimen/text_12_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"
-                    />
+                    android:text="起投金额"
+                    android:textSize="@dimen/text_12_size" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_weight="1"
                 android:gravity="center"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mine"
-                    android:textSize="@dimen/text_12_size"
-                    android:textColor="@color/org_home"
-                    />
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/tuijian"
-                    android:textSize="@dimen/text_12_size"
+                    android:text="方便灵活"
+                    android:textColor="@color/org_home"
+                    android:textSize="@dimen/text_12_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="1dp"
-                    />
+                    android:text="产品特点"
+                    android:textSize="@dimen/text_12_size" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

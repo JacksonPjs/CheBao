@@ -105,17 +105,18 @@ public class Fragment_Huikuan_End extends Fragment implements LoadingLayout.OnRe
                         publicLv.setStatus(LoadingLayout.Empty);
                     }
 
-                } else if (stype == 1) {
-                    if (publicLv.getRefreshCount() == inrefresh) {
-
-                        if (biaoBean.getState().getStatus() == 0) {
-                            biaoBeenList.addAll(biaoBean.getData());
-                        } else {
-                            publicLv.setTextEnd();
-                        }
-
-                    }
                 }
+//                else if (stype == 1) {
+//                    if (publicLv.getRefreshCount() == inrefresh) {
+//
+//                        if (biaoBean.getState().getStatus() == 0) {
+//                            biaoBeenList.addAll(biaoBean.getData());
+//                        } else {
+//                            publicLv.setTextEnd();
+//                        }
+//
+//                    }
+//                }
                 adapter.notifyDataSetChanged();
             }
 

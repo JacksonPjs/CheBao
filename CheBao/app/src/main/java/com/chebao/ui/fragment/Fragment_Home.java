@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
@@ -24,10 +25,17 @@ import android.widget.ViewSwitcher;
 import com.bumptech.glide.Glide;
 import com.chebao.R;
 import com.chebao.net.NetWorks;
+import com.chebao.ui.activity.AboutActivity;
+import com.chebao.ui.activity.AnndatilsActivity;
+import com.chebao.ui.activity.AnnouncementListActivity;
+import com.chebao.ui.activity.DetailsActivity;
+import com.chebao.ui.activity.DetailsRegularActivity;
 import com.chebao.ui.activity.WebActivity;
 import com.chebao.bean.AnnouncementBean;
 import com.chebao.bean.OneBean;
 import com.chebao.net.NetService;
+import com.chebao.ui.activity.WebActivityJS;
+import com.chebao.ui.activity.WebNoTitileActivity;
 import com.chebao.utils.T1changerString;
 import com.chebao.widget.GoodProgressView;
 import com.chebao.widget.ProgressSeek;
@@ -37,6 +45,7 @@ import com.pvj.xlibrary.loadinglayout.LoadingLayout;
 import com.pvj.xlibrary.loadinglayout.Utils;
 import com.pvj.xlibrary.log.Logger;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,6 +97,10 @@ public class Fragment_Home extends BaseFragment {
     TextView yonghufangshi;
     @Bind(R.id.progressBar_yonghu)
     GoodProgressView progressBaryonghu;
+    @Bind(R.id.home_six_rl)
+    RelativeLayout home_six_rl;
+    @Bind(R.id.home_five_rl)
+    RelativeLayout home_five_rl;
 
     private BitHandler bitHandler;
 
@@ -215,8 +228,8 @@ public class Fragment_Home extends BaseFragment {
             @Override
             public void onItemClick(int position) {
 
-                Intent intent = new Intent(getActivity(), WebActivity.class);
-                intent.putExtra("url", drawables.get(position).getUrl());
+                Intent intent = new Intent(getActivity(), WebNoTitileActivity.class);
+                intent.putExtra("url", NetService.API_SERVER_Url + drawables.get(position).getUrl());
                 intent.putExtra("title", drawables.get(position).getBannerName());
                 startActivity(intent);
 
@@ -274,21 +287,29 @@ public class Fragment_Home extends BaseFragment {
                     didibaolilv.setText(oneBean.getBorrowhqll() + "%+2%");
 
                     data1Bean = oneBean.getData1();
-                    //新手标数据
-                    xinshou.setText(data1Bean.getBorrowTitle());
-                    tuijiandate.setText("投资期限:" + T1changerString.t2chager(data1Bean.getDeadline(), data1Bean.getDeadlineType()));
-                    lilvTv.setText((data1Bean.getAnnualRate() - 2) + "%+2%");
-                    tuijianfangshi.setText("收益方式:" + T1changerString.t4chager(data1Bean.getRepayType()));
+                    if (data1Bean.getBorrowTitle() == null) {
+                        home_five_rl.setVisibility(View.GONE);
+                    }else {
+                        //新手标数据
+                        xinshou.setText(data1Bean.getBorrowTitle());
+                        tuijiandate.setText("投资期限:" + T1changerString.t2chager(data1Bean.getDeadline(), data1Bean.getDeadlineType()));
+                        lilvTv.setText((data1Bean.getAnnualRate() - 3) + "%+3%");
+                        tuijianfangshi.setText("收益方式:" + T1changerString.t4chager(data1Bean.getRepayType()));
 
+                    }
 
                     data2Bean = oneBean.getData2();
-                    //用户标
-                    yonghu.setText(data2Bean.getBorrowTitle());
-                    yonghudate.setText("投资期限:" + T1changerString.t2chager(data2Bean.getDeadline(), data2Bean.getDeadlineType()));
-                    yonghulilv.setText((data2Bean.getAnnualRate() - 2) + "%+2%");
-                    yonghufangshi.setText("收益方式:" + T1changerString.t4chager(data2Bean.getRepayType()));
+                    if (data2Bean == null) {
+                        home_six_rl.setVisibility(View.GONE);
+                    } else {
+                        //用户标
+                        yonghu.setText(data2Bean.getBorrowTitle());
+                        yonghudate.setText("投资期限:" + T1changerString.t2chager(data2Bean.getDeadline(), data2Bean.getDeadlineType()));
+                        yonghulilv.setText((data2Bean.getAnnualRate() - 1) + "%+1%");
+                        yonghufangshi.setText("收益方式:" + T1changerString.t4chager(data2Bean.getRepayType()));
+                        handler.sendEmptyMessage(1);
+                    }
 
-                    handler.sendEmptyMessage(1);
 
                 } else {
 //                    layoutContiant.setStatus(LoadingLayout.Error);
@@ -309,7 +330,7 @@ public class Fragment_Home extends BaseFragment {
                 //通知view，进度值有变化
                 progressSeek.setProgressValue((int) (data1Bean.getProgress() * 100));
                 progressSeek.postInvalidate();
-                double progress=data2Bean.getProgress()*100;
+                double progress = data2Bean.getProgress() * 100;
                 progressBaryonghu.setProgressValue((int) progress);
 
                 progressBaryonghu.postInvalidate();
@@ -363,35 +384,74 @@ public class Fragment_Home extends BaseFragment {
     }
 
 
-    @OnClick({R.id.gonggao})
+    @OnClick({R.id.gonggao, R.id.home_four_rl, R.id.home_five_rl, R.id.home_six_rl, R.id.re_weixin1, R.id.re_contact_list1, R.id.re_find1
+            , R.id.re_four})
     public void onClick(View view) {
+        Intent intent = null;
         switch (view.getId()) {
+            case R.id.re_four:
+                intent = new Intent(getActivity(), WebActivity.class);
+                intent.putExtra("url", NetService.API_SERVER_Url + "wechat/recommend.html");
+                startActivity(intent);
+                break;
+            case R.id.re_find1:
+                intent = new Intent(getActivity(), WebActivity.class);
+                intent.putExtra("url", NetService.API_SERVER_Url + "wechat/safe.html");
+                startActivity(intent);
+                break;
+            case R.id.re_contact_list1:
+//                intent =new Intent(getActivity(), WebActivity.class);
+//                intent.putExtra("url","http://www.jq22.com/");
+//                startActivity(intent);
+                intent = new Intent(getActivity(), AboutActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.re_weixin1:
+                intent = new Intent(getActivity(), WebActivity.class);
+                intent.putExtra("url", NetService.API_SERVER_Url + "wechat/yungift.html");
+                startActivity(intent);
 
+                break;
+            case R.id.home_five_rl:
+                intent = new Intent(getActivity(), DetailsRegularActivity.class);
+                if (data1Bean != null)
+                    intent.putExtra("id", data1Bean.getId() + "");
+                startActivity(intent);
+                break;
+            case R.id.home_six_rl:
+                intent = new Intent(getActivity(), DetailsRegularActivity.class);
+                intent.putExtra("id", data2Bean.getId() + "");
+                startActivity(intent);
+                break;
+            case R.id.home_four_rl:
+                intent = new Intent(getActivity(), DetailsActivity.class);
+                startActivity(intent);
+                break;
             case R.id.gonggao:
 
-                if (data4Beens == null) {
-                    return;
-                }
+//                if (data4Beens == null) {
+//                    return;
+//                }
+//
+//
+//                int i = index - 1;
+//                if (i < 0) {
+//                    i = data4Beens.size() - 1;
+//                }
+//
+//
+//                Logger.d("i=" + i + "lengh=" + data4Beens.size());
+//                OneBean.Data4Bean data4Bean = data4Beens.get(i);
+//
+//                AnnouncementBean.DataBean b = new AnnouncementBean.DataBean();
+//                b.setCreateTime(data4Bean.getCreateTime());
+//                b.setNoticeContent(data4Bean.getNoticeContent());
+//                b.setNoticeTitle(data4Bean.getNoticeTitle());
 
 
-                int i = index - 1;
-                if (i < 0) {
-                    i = data4Beens.size() - 1;
-                }
-
-
-                Logger.d("i=" + i + "lengh=" + data4Beens.size());
-                OneBean.Data4Bean data4Bean = data4Beens.get(i);
-
-                AnnouncementBean.DataBean b = new AnnouncementBean.DataBean();
-                b.setCreateTime(data4Bean.getCreateTime());
-                b.setNoticeContent(data4Bean.getNoticeContent());
-                b.setNoticeTitle(data4Bean.getNoticeTitle());
-
-
-//                Intent intent = new Intent(getContext(), AnndatilsActivity.class);
+                intent = new Intent(getContext(), AnnouncementListActivity.class);
 //                intent.putExtra("data", (Serializable) b);
-//                getActivity().startActivity(intent);
+                getActivity().startActivity(intent);
 
                 break;
 

@@ -141,7 +141,10 @@ public class AddBankActivity extends BaseActivity {
                 if (s.getState().getStatus() == 0) {
                     name.setText(s.getTPerson().getRealName());
                     layoutContiant.setStatus(LoadingLayout.Success);
-                } else if (s.getState().getStatus() == 99) {
+                } else  if (s.getState().getStatus()==3){
+                    T.ShowToastForShort(AddBankActivity.this, "绑定银行卡请先实名");
+
+                }else if (s.getState().getStatus() == 99) {
                     netLogin(0);
                 } else {
                     T.ShowToastForShort(AddBankActivity.this, s.getState().getInfo());
@@ -152,7 +155,7 @@ public class AddBankActivity extends BaseActivity {
     }
 
     // 请求绑定银行卡
-    private void bankNet(String carno) {
+    private void bankNet(final String carno) {
         StringBuilder sb = new StringBuilder();
         sb.append(" _ed_token_");
         sb.append("=");
@@ -178,7 +181,7 @@ public class AddBankActivity extends BaseActivity {
         }
         com.zhy.http.okhttp.OkHttpUtils
                 .post()
-                .url(NetService.API_SERVER_Url + "/bandBank.html")
+                .url(NetService.API_SERVER_Url + "bandBank.html")
                 .addHeader("Cookie", sb.toString())
                 .addParams("phone", zhihang.getText().toString() + "")
                 .addParams("bankCardNo", carno)
@@ -208,13 +211,11 @@ public class AddBankActivity extends BaseActivity {
                             int s = sata.getInt("status");
                             if (s == 0) {
                                 SharedPreferencesUtils.setParam(AddBankActivity.this, "tBankCardlist", true);
+                                SharedPreferencesUtils.setBankNUm(AddBankActivity.this,carno);
+
                                 dialog.dismiss();
                                 finish();
-                            } else if (s==14){
-                                SharedPreferencesUtils.setIsBank(AddBankActivity.this,true);
-                                T.ShowToastForShort(AddBankActivity.this, sata.getString("info"));
-                                dialog.dismiss();
-                            }else if (s == 99) {
+                            } else if (s == 99) {
                                 netLogin(1);
                             } else {
                                 dialog.dismiss();

@@ -84,6 +84,7 @@
                 android:background="@null"
                 android:hint="请输入身份证号"
                 android:inputType="number"
+                android:digits="0123456789Xx"
                 android:maxLines="1"
                 android:textSize="@dimen/text_15_size"
                 android:textColor="#666"
@@ -99,7 +100,7 @@
         android:layout_margin="50dp"
         android:background="@drawable/oval_gradient_linear"
         android:gravity="center"
-        android:text="立即退出"
+        android:text="立即绑定"
         android:textColor="@color/white"  />
 
     <LinearLayout

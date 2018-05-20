@@ -54,7 +54,24 @@ public class Fragment_UseDiscount extends Fragment implements LoadingLayout.OnRe
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        page=1;
+    }
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden) {
 
+            //隐藏时所作的事情
+            page=1;
+
+        } else {
+            //显示时所作的事情
+
+        }
+    }
     /**
      * @param stype     是刷新 还是加载  0是刷新  1是加载
      * @param inrefresh 第几次刷新下的加载
@@ -62,7 +79,7 @@ public class Fragment_UseDiscount extends Fragment implements LoadingLayout.OnRe
     private void net(final int stype, final int inrefresh) {
 
 
-        NetWorks.CouponAndJxList(getCookie(), "3", page + "", new Subscriber<DiscountListBean>() {
+        NetWorks.CouponAndJxList(getCookie(), "2", page + "", new Subscriber<DiscountListBean>() {
             @Override
             public void onCompleted() {
                 publicLv.setRefreshing(false);

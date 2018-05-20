@@ -1,5 +1,6 @@
 package com.chebao.bean;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
@@ -61,7 +62,7 @@ public class DiscountListBean {
         }
     }
 
-    public static class DisData {
+    public static class DisData implements Serializable{
 
         /****/
         private Long id;
@@ -104,6 +105,15 @@ public class DiscountListBean {
         private Integer useqx;//使用最低日期
         /**礼券金额**/
         private Double couponAmount;
+        int rqlx;
+
+        public int getRqlx() {
+            return rqlx;
+        }
+
+        public void setRqlx(int rqlx) {
+            this.rqlx = rqlx;
+        }
 
         public Long getId() {
             return id;

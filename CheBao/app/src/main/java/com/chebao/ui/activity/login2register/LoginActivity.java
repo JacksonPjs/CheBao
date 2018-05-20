@@ -4,6 +4,7 @@ package com.chebao.ui.activity.login2register;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -45,7 +46,7 @@ public class LoginActivity extends BaseActivity {
         MyApplication.instance.addActivity(this);
     }
 
-    @OnClick({R.id.login_go, R.id.regist, R.id.forget})
+    @OnClick({R.id.login_go, R.id.regist, R.id.forget, R.id.back})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -53,13 +54,14 @@ public class LoginActivity extends BaseActivity {
                 //注册
                 intent = new Intent(this, RegisterActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.forget:
                 //忘记密码
                 intent = new Intent(this, ForgetPassWordActivity1.class);
                 startActivity(intent);
-                break;
 
+                break;
 
 
             case R.id.login_go:
@@ -88,19 +90,38 @@ public class LoginActivity extends BaseActivity {
 
 //                IsRegister(loginPhone.getText().toString());
 
-                login(loginPhone.getText().toString(),loginPassword.getText().toString());
+                login(loginPhone.getText().toString(), loginPassword.getText().toString());
+                break;
+            case R.id.back:
+                intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                finish();
                 break;
 
 
         }
     }
 
-    public void login(String name ,final String  passoword) {
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+            return false;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
+
+    }
+
+    public void login(String name, final String passoword) {
         NetWorks.login(name, passoword, new Subscriber<LoginBean>() {
             @Override
             public void onStart() {
                 if (dialog == null) {
-                    dialog = DialogUtils.createProgressDialog(LoginActivity.this, "登陆中...");
+                    dialog = DialogUtils.createProgressDialog(LoginActivity.this, "登录中...");
                 } else {
                     dialog.show();
                 }
@@ -113,29 +134,28 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void onError(Throwable e) {
-                T.ShowToastForLong(LoginActivity.this,"网络异常");
+                T.ShowToastForLong(LoginActivity.this, "网络异常");
                 dialog.dismiss();
                 Logger.e(e.toString());
             }
 
             @Override
             public void onNext(LoginBean s) {
-                if (s.getState().getStatus()==0){
+                if (s.getState().getStatus() == 0) {
 
-                    SharedPreferencesUtils.savaUser(LoginActivity.this,s,passoword);
+                    SharedPreferencesUtils.savaUser(LoginActivity.this, s, passoword);
+                    Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                    startActivity(intent);
                     finish();
-                    T.ShowToastForLong(LoginActivity.this,"登陆成功");
-                }else{
-                    T.ShowToastForLong(LoginActivity.this,s.getState().getInfo());
+                    T.ShowToastForLong(LoginActivity.this, "登录成功");
+                } else {
+                    T.ShowToastForLong(LoginActivity.this, s.getState().getInfo());
                 }
 
 
             }
         });
     }
-
-
-
 
 
 }

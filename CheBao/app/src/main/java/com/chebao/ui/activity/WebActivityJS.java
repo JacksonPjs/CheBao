@@ -2,6 +2,7 @@ package com.chebao.ui.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
+import com.chebao.MainActivity;
 import com.chebao.MyApplication;
 import com.chebao.R;
 import com.pvj.xlibrary.loadinglayout.LoadingLayout;
@@ -42,7 +44,6 @@ public class WebActivityJS extends BaseActivity {
         //   title.setText();
 
         MyApplication.instance.addActivity(this);
-
         url = getIntent().getStringExtra("url");
         String title1 = getIntent().getStringExtra("title");
         if (title != null) {
@@ -79,7 +80,7 @@ public class WebActivityJS extends BaseActivity {
         webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         webView.getSettings().setAppCacheEnabled(true);
         webView.addJavascriptInterface(new JavaScriptObject(this), "enduoApp");
-//        webView.loadUrl("file:///android_asset/security.html");
+//        webView.loadUrl(url);
         webView.loadData(url,"text/html; charset=UTF-8", null);
     }
 
@@ -144,6 +145,14 @@ public class WebActivityJS extends BaseActivity {
             //   T.ShowToastForShort(mContxt,"goUserIndex");
             MyApplication.instance.Allfinlish();
             Logger.d("goUserIndex");
+        }
+        @JavascriptInterface
+        public void goInvest() {
+            //   T.ShowToastForShort(mContxt,"goUserIndex");
+            Intent intent=new Intent(mContxt, MainActivity.class);
+            intent.putExtra("index",1);
+            mContxt.startActivity(intent);
+            Logger.d("goInvest()");
         }
     }
 }

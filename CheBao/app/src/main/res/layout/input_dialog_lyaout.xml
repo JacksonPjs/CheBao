@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_white_radd"
+        >
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/ll_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:textColor="#333333"
+                android:text="输入支付密码"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginRight="@dimen/home_margin"
+                android:layout_marginLeft="@dimen/home_margin"
+                ></View>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_msg"
+                tools:text="123"
+                android:textSize="@dimen/text_larger_size"
+                android:textColor="@color/black_home_four_small"
+                />
+        </LinearLayout>
+
+
+        <com.chebao.widget.pay.PayPwdEditText
+            android:id="@+id/ppet"
+            android:layout_below="@+id/ll_title"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_height="45dp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

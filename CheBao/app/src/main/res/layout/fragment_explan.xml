@@ -146,70 +146,14 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/home_margin"
-                android:layout_marginTop="@dimen/home_margin_top"
-                android:drawableLeft="@mipmap/tips"
-                android:drawablePadding="@dimen/home_margin"
-                android:text="律师事务所"
-                android:textColor="@color/black_home_four_larger" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/bg_org_circular"
-                android:orientation="horizontal"
-                android:padding="@dimen/home_margin">
-
-                <TextView
-                    android:id="@+id/mininvestamount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="XXX律师事务所"
-                    android:textColor="@color/black_home_four_midle" />
-
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/home_margin"
-                android:layout_marginTop="@dimen/home_margin_top"
-                android:drawableLeft="@mipmap/tips"
-                android:drawablePadding="@dimen/home_margin"
-                android:text="保险公司"
-                android:textColor="@color/black_home_four_larger" />
 
 
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/bg_org_circular"
-                    android:orientation="vertical"
-                    android:padding="@dimen/home_margin">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black_home_four_midle"
-                        android:text="中国人保财险"
-                        >
 
 
-                    </TextView>
 
-                </LinearLayout>
+
 
 
 

@@ -1,6 +1,7 @@
 package com.chebao.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chebao.MainActivity;
 import com.chebao.R;
 import com.chebao.bean.DiscountListBean;
 import com.pvj.xlibrary.utils.DateUtils;
@@ -46,28 +48,45 @@ public class DiscountListAdapter extends RecyclerView.Adapter<DiscountListAdapte
         holder.gz2.setText("投资" + data.getUseqx() + "天以上产品");
         holder.gz3.setText(DateUtils.getStrTime3(data.getExpirationDate() + "")+"前使用");
         holder.rl_left.setBackgroundResource(R.mipmap.hongbao_1);
+        switch (data.getCouponType()){
+            case 1:
+                holder.money_type.setText("红包");
+                break;
+            case 2:
+                holder.money_type.setText("推荐奖励");
+                break;
+        }
         switch (type) {
             case 1:
 
                 holder.type.setText("立即使用");
                 holder.type.setTextColor(context.getResources().getColor(R.color.red_hongbao));
+                holder.type.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(context, MainActivity.class);
+                        intent.putExtra("index",1);
+                        context.startActivity(intent);
+                    }
+                });
 
                 break;
 
-            case 3:
+            case 2:
                 holder.type.setText("已使用");
                 holder.type.setTextColor(context.getResources().getColor(R.color.black_home_four_small));
                 holder.rl_left.setBackgroundResource(R.mipmap.hongbao_hui);
 
                 break;
 
-            case 5:
+            case 3:
                 holder.type.setText("已过期");
                 holder.rl_left.setBackgroundResource(R.mipmap.hongbao_hui);
                 holder.type.setTextColor(context.getResources().getColor(R.color.black_home_four_small));
 
                 break;
         }
+
 
 
     }
@@ -79,7 +98,7 @@ public class DiscountListAdapter extends RecyclerView.Adapter<DiscountListAdapte
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView money;
-        TextView gz1, gz2, gz3, type;
+        TextView gz1, gz2, gz3, type,money_type;
         LinearLayout rl_left;
 
         //
@@ -90,6 +109,7 @@ public class DiscountListAdapter extends RecyclerView.Adapter<DiscountListAdapte
             gz2 = (TextView) view.findViewById(R.id.gz2);
             gz3 = (TextView) view.findViewById(R.id.gz3);
             type = (TextView) view.findViewById(R.id.type);
+            money_type = (TextView) view.findViewById(R.id.money_type);
             rl_left = (LinearLayout) view.findViewById(R.id.rl_left);
 
 

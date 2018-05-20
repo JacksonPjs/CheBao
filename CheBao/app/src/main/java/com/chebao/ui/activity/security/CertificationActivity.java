@@ -97,7 +97,7 @@ public class CertificationActivity extends BaseActivity {
     }
 
 
-    public void goShiMin(String name, String no) {
+    public void goShiMin(final String name, String no) {
 //        NetWorks.fysmrz(getCookie(),name,no,new Subscriber<CertificationBean>() {
 //            @Override
 //            public void onStart() {
@@ -155,7 +155,7 @@ public class CertificationActivity extends BaseActivity {
         }
         OkHttpUtils
                 .post()
-                .url(NetService.API_SERVER_Url + "/fysmrz.html")
+                .url(NetService.API_SERVER_Url + "fysmrz.html")
                 .addHeader("Cookie", sb.toString())
                 .addParams("name", name)
                 .addParams("idCard", no)
@@ -182,17 +182,18 @@ public class CertificationActivity extends BaseActivity {
                         try {
                             JSONObject json = new JSONObject((String) o.toString());
 
-                            sata = json.getJSONObject("state");
-
-                            int s = sata.getInt("status");
-                            info=sata.getString("info");
-                            if (s == 0) {
+//                            sata = json.getJSONObject("state");
+                           String s=json.getString("status");
+                           info =json.getString("info");
+//                            int s = sata.getInt("status");
+//                            info=sata.getString("info");
+                            if (s.equals("y")) {
                                 SharedPreferencesUtils.setParam(CertificationActivity.this, "tPerson", true);
+                                SharedPreferencesUtils.setParam(CertificationActivity.this,"realname",name);
+                                T.ShowToastForShort(CertificationActivity.this, info);
                                 dialog.dismiss();
                                 finish();
-                            } else if (s == 99) {
-                                netLogin(1);
-                            } else {
+                            }  else {
                                 dialog.dismiss();
                                 T.ShowToastForShort(CertificationActivity.this, info);
                             }

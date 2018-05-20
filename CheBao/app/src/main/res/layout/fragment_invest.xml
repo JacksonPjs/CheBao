@@ -152,7 +152,7 @@
             <TextView
                 style="@style/Home_padding"
                 android:layout_below="@+id/didibao_ll"
-                android:layout_width="wrap_content"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/oval_gradient_linear"
                 android:gravity="center"
@@ -161,7 +161,6 @@
                 android:text="@string/liji"
                 android:textColor="@color/white"
                 />
-
 
 
         </RelativeLayout>

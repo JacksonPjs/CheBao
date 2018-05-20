@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@mipmap/bg_wode"
+        android:background="@mipmap/bg_mine"
         >
 
         <RelativeLayout
@@ -22,7 +22,10 @@
                 android:id="@+id/set"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/shezhi_wode" />
+                android:src="@mipmap/shezhi_wode"
+                android:padding="@dimen/home_margin"
+                android:layout_centerVertical="true"
+                />
 
 
             <TextView
@@ -36,10 +39,12 @@
 
 
             <ImageView
-
+                android:id="@+id/xiaoxi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/home_margin"
                 android:src="@mipmap/xiaoxi_wode"
 
                 />
@@ -135,7 +140,17 @@
 
         </LinearLayout>
     </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
 
+        >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -205,7 +220,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="50dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_white_black"
+            android:background="@drawable/shape_org_radd"
             android:orientation="horizontal">
 
             <Button
@@ -214,7 +229,7 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:text="提现"
-                android:textColor="@color/black_home_four_midle"
+                android:textColor="@color/white"
                 android:textSize="@dimen/text_15_size"
 
                 />
@@ -227,7 +242,7 @@
     <include
 
         layout="@layout/include_mine_item" />
+</LinearLayout>
 
-
-
+    </ScrollView>
 </LinearLayout>

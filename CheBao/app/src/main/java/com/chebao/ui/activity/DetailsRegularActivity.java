@@ -11,11 +11,14 @@ import android.widget.TextView;
 import com.chebao.R;
 import com.chebao.bean.BorrowDetailBean;
 import com.chebao.net.NetWorks;
+import com.chebao.ui.activity.login2register.LoginActivity;
+import com.chebao.utils.SharedPreferencesUtils;
 import com.chebao.utils.T1changerString;
 import com.chebao.widget.CircleProgress;
 import com.chebao.widget.countdownview.CountdownView;
 import com.pvj.xlibrary.log.Logger;
 import com.pvj.xlibrary.utils.DateUtils;
+import com.pvj.xlibrary.utils.T;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
@@ -112,7 +115,14 @@ public class DetailsRegularActivity extends BaseActivity implements CountdownVie
         BorrowDetailBean.DataBean d = b.getData();
         title.setText(d.getBorrowTitle());
 //
-        circleprogress.setHint(df.format(d.getAnnualRate()) + "%+2%");
+
+        if (d.getBorrowType()==5){
+            circleprogress.setHint(df.format(d.getAnnualRate()-3) + "%+3%");
+
+        }else {
+            circleprogress.setHint(df.format(d.getAnnualRate()-1) + "%+1%");
+
+        }
 //        percent.setText(df.format(d.getAnnualRate()) + "%");
         Spanned text = Html.fromHtml(d.getIntroductionInfos());
 //        tv_expand.setText(text);
@@ -188,12 +198,12 @@ public class DetailsRegularActivity extends BaseActivity implements CountdownVie
         }
 
 
-//        if ((Boolean) SharedPreferencesUtils.getParam(this, "islogin", false)) {  //登陆
+//        if ((Boolean) SharedPreferencesUtils.getParam(this, "islogin", false)) {
 //            tv_money.setText("" + (String) SharedPreferencesUtils.getParam(this, "usableAmount", "0"));
 ////            hitiIslogin.setHint("可用总额:" + (String) SharedPreferencesUtils.getParam(this, "usableAmount", "0"));
 //
 //        } else {
-////            hitiIslogin.setHint("登陆后才能投资");
+////            hitiIslogin.setHint("登录后才能投资");
 //        }
 
         //  holder.circleProgressbar.setProgress(T1changerString.progress(d.getBorrowStatus(),d.getHasBorrowAmount(),d.getBorrowAmount()));
@@ -218,12 +228,20 @@ public class DetailsRegularActivity extends BaseActivity implements CountdownVie
                 break;
 
             case R.id.buy:
-                intent = new Intent(this, PayActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("bean", (Serializable) bean);
-                bundle.putString("id", id + "");
-                intent.putExtras(bundle);
-                startActivity(intent);
+                if ((Boolean) SharedPreferencesUtils.getParam(this, "islogin", false)){
+                    intent = new Intent(this, PayActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("bean", (Serializable) bean);
+                    bundle.putString("id", id + "");
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }else {
+                     intent = new Intent(DetailsRegularActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    T.ShowToastForLong(DetailsRegularActivity.this,"未登录");
+
+                }
+
                 break;
 
         }

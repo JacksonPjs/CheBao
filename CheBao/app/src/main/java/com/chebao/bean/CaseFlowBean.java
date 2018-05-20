@@ -1,5 +1,6 @@
 package com.chebao.bean;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -236,7 +237,7 @@ public class CaseFlowBean {
         private int fundType;
         private int id;
         private double inAmount;
-        private double operAmount;
+        private BigDecimal operAmount;
         private int operType;
         private double outAmount;
         private String remarks;
@@ -291,11 +292,11 @@ public class CaseFlowBean {
             this.inAmount = inAmount;
         }
 
-        public double getOperAmount() {
+        public BigDecimal getOperAmount() {
             return operAmount;
         }
 
-        public void setOperAmount(double operAmount) {
+        public void setOperAmount(BigDecimal operAmount) {
             this.operAmount = operAmount;
         }
 

@@ -182,7 +182,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="50dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_white_black"
+            android:background="@drawable/shape_org_radd"
             android:orientation="horizontal">
 
             <Button
@@ -191,7 +191,7 @@
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:text="存入"
-                android:textColor="@color/black_home_four_midle"
+                android:textColor="@color/white"
                 android:textSize="@dimen/text_15_size"
 
                 />
@@ -273,15 +273,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/details_item1_1"
+                    android:text="@string/my_tips_1"
                     android:textColor="@color/black_home_four_midle" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/details_item1_2"
-                    android:textColor="@color/black_home_four_midle" />
+
             </LinearLayout>
 
             <TextView
@@ -304,22 +299,16 @@
                 android:background="@drawable/bg_org_circular"
                 android:orientation="vertical"
                 android:padding="@dimen/home_margin"
-                tools:visibility="gone"
 
                 >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/details_item1_1"
+                    android:text="@string/my_tips_2"
                     android:textColor="@color/black_home_four_midle" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/details_item1_2"
-                    android:textColor="@color/black_home_four_midle" />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -5,12 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 
+import com.chebao.MyApplication;
+
 public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        MyApplication.instance.addActivity(this);
 //        if (getSupportActionBar() != null){
 //            getSupportActionBar().hide();
 //        }
@@ -18,6 +21,7 @@ public class BaseActivity extends AppCompatActivity {
 
 
     public void onBack(View view) {
+
         finish();
     }
 

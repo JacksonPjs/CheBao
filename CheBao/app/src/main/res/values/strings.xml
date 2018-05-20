@@ -8,7 +8,7 @@
     <string name="xinxi">信息披露</string>
     <string name="anquan">安全保障</string>
     <string name="tuijian">推荐有礼</string>
-    <string name="xianshijia">限时加息2%</string>
+    <string name="xianshijia">限时加息1%</string>
     <string name="nianhuashouyi">年化收益</string>
     <string name="linghuocunqu">灵活存取</string>
     <string name="dangri">当日计息</string>
@@ -37,11 +37,20 @@
     <string name="setup_gesture_pattern">绘制解锁图案</string>
     <string name="setup_gesture_pattern_again">再次绘制解锁图案</string>
     <string name="forget_gesture_code">忘记手势密码?</string>
-    <string name="use_other_account_login">用其他账号登录</string>
+    <string name="use_other_account_login">用户名登录</string>
     <string name="set_gesture_pattern">请设置手势密码</string>
     <string name="set_gesture_pattern_reason">设置手势密码，防止他人未经授权查看</string>
     <string name="reset_gesture_code">重新设置手势密码</string>
-    <string name="chager_tips_1">1.充值金额最小金额100元\n2.充值免手续费\n3.为了您的资金安全,平台仅支持同卡进出\n4.本站目前仅支持富友支付进行充值
-    \n5.如有任何问题请点击右上角的客服按钮,联系客服人员</string>
     <!-- End -->
+    <string name="chager_tips_1">1.充值金额最小金额100元;\n2.充值免手续费;\n3.为了您的资金安全,平台仅支持同卡进出;\n4.本站目前仅支持富友支付进行充值;
+    \n5.如有任何问题请点击右上角的客服按钮,联系客服人员</string>
+    <string name="withdraw_tip">1.提现2元/笔;\n2.T日16:00前提现,T日23:59前到账;T日16:00后提现;3.单笔提现范围:100~50000元,单日不限笔数,不限金额.\n
+    (注:"T日"指工作日)</string><string name="ransom_tip">1.工作日14:30前申请赎回当天16:00前回款至账号余额;
+    \n2.工作日14:30后赎回的将在下一个工作日16:00前回款至账户余额;</string>
+   <string name="my_tips_1">当天计息，次日结息，锁定期后可继续享有收益</string>
+   <string name="my_tips_2">1.单笔赎回最低额度为0.01元，最大额度不超过对应滴滴宝额度;\n2.工作日14：30前申请赎回当天16:00前回款至账户余额，工作日14:30后赎回的将在下一工作日16:00前回款至账户余额;
+       \n3.如遇周末节假日，赎回到账时间顺延至下一工作日;\n4.资金回款至账户余额后，您可选择再次购买理财产品.
+
+   </string>
+
 </resources>

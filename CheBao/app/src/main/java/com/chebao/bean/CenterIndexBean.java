@@ -20,12 +20,7 @@ public class CenterIndexBean {
      */
 
     private StateBean state;
-    private boolean tPerson;
-    private boolean payPwd;
-    private boolean email;
-    private boolean tBankCardlist;
-    private String images;
-    private String userName;
+
     private double usableAmount;
     private double total1;
     private double total2;
@@ -55,53 +50,12 @@ public class CenterIndexBean {
         this.state = state;
     }
 
-    public boolean isTPerson() {
-        return tPerson;
-    }
 
-    public void setTPerson(boolean tPerson) {
-        this.tPerson = tPerson;
-    }
 
-    public boolean isPayPwd() {
-        return payPwd;
-    }
 
-    public void setPayPwd(boolean payPwd) {
-        this.payPwd = payPwd;
-    }
 
-    public boolean isEmail() {
-        return email;
-    }
 
-    public void setEmail(boolean email) {
-        this.email = email;
-    }
 
-    public boolean isTBankCardlist() {
-        return tBankCardlist;
-    }
-
-    public void setTBankCardlist(boolean tBankCardlist) {
-        this.tBankCardlist = tBankCardlist;
-    }
-
-    public String getImages() {
-        return images;
-    }
-
-    public void setImages(String images) {
-        this.images = images;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public double getUsableAmount() {
         return usableAmount;

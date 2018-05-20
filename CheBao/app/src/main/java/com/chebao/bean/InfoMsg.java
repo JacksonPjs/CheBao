@@ -9,7 +9,7 @@ public class InfoMsg {
 	 * status: 返回提交数据的状态,是否提交成功。如可以用"y"表示提交成功，"n"表示提交失败,"o"表示中间状态,"j"表示session超时
 	 */
 	private String status;
-	
+
 	/**
 	 * value: 值;
 	 */

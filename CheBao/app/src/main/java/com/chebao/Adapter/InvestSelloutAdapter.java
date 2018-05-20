@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chebao.App.Constant;
@@ -54,27 +55,39 @@ public class InvestSelloutAdapter extends RecyclerView.Adapter<InvestSelloutAdap
     public void onBindViewHolder(InvestSelloutAdapter.ViewHolder holder, int position) {
         ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
         layoutParams.height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        holder.Head.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, DetailsRegularActivity.class);
-                context.startActivity(intent);
-            }
-        });
+//        holder.Head.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(context, DetailsRegularActivity.class);
+//                context.startActivity(intent);
+//            }
+//        });
         BiaoBean.DataBean d = datas.get(position);
 
 
         holder.xianshi.setBackgroundResource(R.drawable.rect_rounded_left_black);
         holder.title.setText("" + d.getBorrowTitle());
         holder.tuijiandate.setText("投资期限:" + T1changerString.t2chager(d.getDeadline(), d.getDeadlineType()));
-        holder.tuijianlilv.setText((d.getAnnualRate() - 2) + "%+2%");
+        if (d.getBorrowType()==5){
+            holder.tuijianlilv.setText((d.getAnnualRate() - 3) + "%+3%");
+            holder.xianshi.setText("限时加息3%");
+
+        }else {
+            holder.tuijianlilv.setText((d.getAnnualRate() - 1) + "%+1%");
+            holder.xianshi.setText("限时加息1%");
+
+        }
         holder.tuijianfangshi.setText("收益方式:" + T1changerString.t4chager(d.getRepayType()));
         holder.progressBar.setColors(randomColors());
         holder.progressBar.setPointColors(Utils.getColor(context,R.color.bg_huise));
         holder.progressBar.setProgressValue(100);
-//        holder.title.setText("春眠不觉晓");
 
+        if (flag==Constant.INVESTING){
+            holder.invest_item_rl.setBackground(context.getResources().getDrawable(R.mipmap.sell_bg));
+        }else {
+            holder.invest_item_rl.setBackground(context.getResources().getDrawable(R.mipmap.sellout_bk));
 
+        }
         //  holder.circleProgressbar.setProgressNotInUiThread(80);
 
 
@@ -117,6 +130,8 @@ public class InvestSelloutAdapter extends RecyclerView.Adapter<InvestSelloutAdap
         TextView tuijianlilv;
         @Bind(R.id.progressBar)
         GoodProgressView progressBar;
+        @Bind(R.id.invest_item_rl)
+        RelativeLayout invest_item_rl;
 //        @Bind(R.id.find_item_bg)
 //        ImageView imageView;
 

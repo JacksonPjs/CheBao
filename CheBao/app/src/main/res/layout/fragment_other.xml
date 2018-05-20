@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/home_margin"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/home_margin"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="联系我们"
+                android:textColor="@color/black_home_four_midle"
+                android:textSize="@dimen/text_18_size" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="1dp"
+                android:layout_margin="5dp"
+                android:background="@color/org_home"></View>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact Us" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="客服电话：400-xxx-xxxx"
+
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="工作时间：09:00 - 18:00"
+
+                />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="服务邮箱：xx@xx.com"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="工作时间：星期一至星期五，09:00 -18:00（法定节假日除外）"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="工作时间：09:00 - 18:00"
+
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="媒体采访：如果有媒体采访需求，请将您的媒体名称、采访提纲、联系方式发至：xx@xx.com，我们会尽快与您联系。"
+
+
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="商务合作：如果贵公司希望与我们建立商务合作关系，形成优势互补，请将合作意向进行简要描述并发送邮件至：xx@xx.com，我们会尽快与您联系。
+"
+
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="公司地址：深圳市福田区英龙商务大厦1707单元"
+
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/other_map" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</ScrollView>

@@ -1,6 +1,8 @@
 package com.chebao.net;
 
 
+import com.chebao.bean.AnnouncementBean;
+import com.chebao.bean.AppUpdataBean;
 import com.chebao.bean.BankListBean;
 import com.chebao.bean.BiaoBean;
 import com.chebao.bean.BorrowDetailBean;
@@ -8,6 +10,8 @@ import com.chebao.bean.CaseFlowBean;
 import com.chebao.bean.CenterIndexBean;
 import com.chebao.bean.CertificationBean;
 import com.chebao.bean.ChagerBean;
+import com.chebao.bean.ConsultationBean;
+import com.chebao.bean.DepositBean;
 import com.chebao.bean.DidibaoBean;
 import com.chebao.bean.DiscountListBean;
 import com.chebao.bean.FindBean;
@@ -15,11 +19,14 @@ import com.chebao.bean.ForgetPassBean;
 import com.chebao.bean.HuiKuanBean;
 import com.chebao.bean.ImageCodeBean;
 import com.chebao.bean.InfoBean;
+import com.chebao.bean.InfoMsg;
 import com.chebao.bean.IntroduceBean;
 import com.chebao.bean.InvestmentBean;
 import com.chebao.bean.LoginBean;
 import com.chebao.bean.OneBean;
+import com.chebao.bean.PayBean;
 import com.chebao.bean.ProductDetialBean;
+import com.chebao.bean.RansomBean;
 import com.chebao.bean.WithdrawBean;
 
 import retrofit2.http.POST;
@@ -30,15 +37,15 @@ import rx.Observable;
  */
 public interface NetService {
     //服务器路径
-//    public static final String API_SERVER = "http://172.18.5.252:8080/jp/app/";//测试地址
+//    public static final String API_SERVER = "http://192.168.1.171:8080/jp/app/";//测试地址
 
 
-    public static final String API_SERVER = "http://192.168.1.171:8080/jp/app/";  //上线地址
+        public static final String API_SERVER = "http://www.chebaojr.com/app/";  //上线地址
     //网址路径
-    public static final String API_SERVER_Url = "http://192.168.1.171:8080/jp/";
+//    public static final String API_SERVER_Url = "http://192.168.1.171:8080/jp/";
+    public static final String API_SERVER_Url = "http://www.chebaojr.com/";
 
 
-//    public static final String API_SERVER_Url = "http://www.enduo168.com/";
 
     //主程序地址
     public static final String API_SERVER_Main = API_SERVER_Url;
@@ -63,7 +70,8 @@ public interface NetService {
      */
     @POST("forGetPassPhone.html")
     Observable<InfoBean> forGetPassPhone(@Query("param") String param);
- /**
+
+    /**
      * 找回密码 获取验证码
      */
     @POST("getPhoneCode2.html")
@@ -73,14 +81,23 @@ public interface NetService {
      * 找回密码-验证手机验证码
      */
     @POST("forGetPassPhone.html")
-    Observable<InfoBean> reFormforGetPassCode(@Query("phone") String phone,@Query("telCode") String telCode);
+    Observable<InfoBean> reFormforGetPassCode(@Query("phone") String phone, @Query("telCode") String telCode);
 
 
     /**
      * 投标
      */
     @POST("bfpay/investAjaxBorrow.html")
-    Observable<String> investAjaxBorrow(@Query("tradingPassword") String tradingPassword, @Query("investAmount") String investAmount, @Query("borrowId") String borrowId);
+    Observable<PayBean> investAjaxBorrow(@Query("Cookie") String Cookie, @Query("tradingPassword") String tradingPassword,
+                                         @Query("investAmount") String investAmount, @Query("borrowId") String borrowId, @Query("coupontype") Integer coupontype,
+                                         @Query("couponId") String couponId);
+
+    /**
+     * 投标
+     */
+    @POST("bfpay/investAjaxBorrow.html")
+    Observable<PayBean> investAjaxBorrow2(@Query("Cookie") String Cookie, @Query("tradingPassword") String tradingPassword,
+                                          @Query("investAmount") String investAmount, @Query("borrowId") String borrowId);
 
 
     /**
@@ -110,6 +127,13 @@ public interface NetService {
     @POST("login.html")
     Observable<LoginBean> login(@Query("userName") String userName, @Query("pwd") String pwd);
 
+    /**
+     * /**
+     * 退出登录
+     */
+    @POST("loginOut.html")
+    Observable<InfoMsg> loginOut(@Query("token") String cookie, @Query("cellPhone") String cellPhone);
+
 
     /**
      * 2.验证手机号码是否存在
@@ -128,7 +152,7 @@ public interface NetService {
      * 获取短信验证码
      */
     @POST("getPhoneCodeByImageCode.html")
-    Observable<InfoBean> getPhoneCodeByImageCode(@Query("imgCode") String param, @Query("noncestr") String noncestr, @Query("cellPhone") String userPhone);
+    Observable<InfoMsg> getPhoneCodeByImageCode(@Query("imgCode") String param, @Query("noncestr") String noncestr, @Query("cellPhone") String userPhone);
 
     /**
      * 21． 首页
@@ -225,36 +249,52 @@ public interface NetService {
 
 
     /**
-     * 我的红包
+     * 回款记录
      */
     @POST("userreturnrecord.html")
     Observable<HuiKuanBean> userreturnrecord(@Query("Cookie") String Cookie, @Query("curPage") String curPage, @Query("repayStatus") String repayStatus);
+
     /**
      * 交易记录
      */
     @POST("moneyFlow.html")
     Observable<CaseFlowBean> moneyFlow(@Query("curPage") String curPage, @Query("fundType") String fundType);
+
+    /**
+     * 交易记录(全部)
+     */
+    @POST("moneyFlow.html")
+    Observable<CaseFlowBean> moneyFlowAll(@Query("curPage") String curPage);
+
     /**
      * 投资记录
      */
     @POST("selectInvestListing.html")
     Observable<InvestmentBean> selectInvestListing(@Query("curPage") String curPage, @Query("borrowStatus") String borrowStatus);
-   /**
-    * 实名认证
-    */
-   @POST("fysmrz.html")
-   Observable<CertificationBean> fysmrz(@Query("Cookie") String Cookie, @Query("name") String name, @Query("idCard") String idCard);
+
+    /**
+     * 投资记录(全部)
+     */
+    @POST("selectInvestListing.html")
+    Observable<InvestmentBean> selectInvestListingAll(@Query("curPage") String curPage);
+
+    /**
+     * 实名认证
+     */
+    @POST("fysmrz.html")
+    Observable<CertificationBean> fysmrz(@Query("Cookie") String Cookie, @Query("name") String name, @Query("idCard") String idCard);
+
     /**
      * 充值
      */
     @POST("fyPay.html")
-    Observable<ChagerBean> wxpay( @Query("rechargeAmount") String rechargeAmount);
+    Observable<ChagerBean> wxpay(@Query("rechargeAmount") String rechargeAmount);
 
-   /**
-    * 银行卡列表
-    */
-   @POST("selectBankCard.html")
-   Observable<BankListBean> selectBankCard();
+    /**
+     * 银行卡列表
+     */
+    @POST("selectBankCard.html")
+    Observable<BankListBean> selectBankCard();
 
     /**
      * 提现准备
@@ -263,6 +303,7 @@ public interface NetService {
      */
     @POST("userWithdraw.html")
     Observable<WithdrawBean> userWithdraw(@Query("Cookie") String Cookie);
+
     /**
      * 提现申请
      *
@@ -272,4 +313,67 @@ public interface NetService {
     Observable<InfoBean> tongLianUserWithdraw(@Query("withdrawAmount") String withdrawAmount,
                                               @Query("pwd") String pwd);
 
+    /**
+     * 赎回
+     *
+     * @return
+     */
+    @POST("didiRedeemInfo.html")
+    Observable<RansomBean> didiRedeemInfo();
+
+    /**
+     * 平台公告
+     */
+    @POST("noticeList.html")
+    Observable<AnnouncementBean> noticeList();
+
+    /**
+     * 媒体报道
+     */
+    @POST("consultationPageApp.html")
+    Observable<ConsultationBean> consultationPageApp();
+
+    /**
+     * 平台公告
+     *
+     * @return
+     */
+    @POST("showNotice.html")
+    Observable<AnnouncementBean> showNotice(@Query("noticeId") String noticeId);
+
+    /**
+     * 媒体报道详情
+     *
+     * @return
+     */
+    @POST("consultationApp.html")
+    Observable<InfoBean> consultationApp(@Query("id") String id);
+
+    /**
+     * 我的卡券
+     *
+     * @return
+     */
+    @POST("ajaxgetuseryhq.html")
+    Observable<DiscountListBean> ajaxgetuseryhq(@Query("couponAmount") String couponAmount, @Query("useqx") String useqx, @Query("rqlx") String rqlx);
+ /**
+     * 存入
+     *
+     * @return
+     */
+    @POST("applicationForm.html")
+    Observable<DepositBean> applicationForm(@Query("investmoney") String investmoney, @Query("tradingPassword") String tradingPassword);
+    /**
+     * 存入准备
+     *
+     * @return
+     */
+    @POST("didiPurchaseInfo.html")
+    Observable<InfoBean> didiPurchaseInfo();
+
+    /**
+     * 版本升级
+     */
+    @POST("appCurrentVersion.html")
+    Observable<AppUpdataBean> appCurrentVersion(@Query("phoneType") String phoneType);
 }

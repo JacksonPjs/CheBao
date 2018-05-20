@@ -17,14 +17,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.chebao.MainActivity;
 import com.chebao.MyApplication;
 import com.chebao.R;
 import com.chebao.bean.ImageCodeBean;
 import com.chebao.bean.InfoBean;
+import com.chebao.bean.InfoMsg;
 import com.chebao.bean.LoginBean;
 import com.chebao.geetest_sdk.SdkUtilsNEW;
 import com.chebao.net.NetWorks;
 import com.chebao.ui.activity.BaseActivity;
+import com.chebao.ui.activity.MyBankActivity;
 import com.chebao.utils.CodeUtils;
 import com.chebao.utils.DialogUtils;
 import com.chebao.utils.LoginRegisterUtils;
@@ -61,6 +64,8 @@ public class RegisterActivity extends BaseActivity {
     EditText password;
     @Bind(R.id.yzm)
     EditText yzm;
+    @Bind(R.id.tuijian)
+    EditText tuijian;
 
     @Bind(R.id.regist_go)
     Button registGo;
@@ -79,7 +84,7 @@ public class RegisterActivity extends BaseActivity {
     Bitmap bitmap;
 
     String noncestr;
-    boolean isCheck=false;
+    boolean isCheck = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,13 +94,13 @@ public class RegisterActivity extends BaseActivity {
 
         title.setText("注册");
 
-        codeUtils=CodeUtils.getInstance();
+        codeUtils = CodeUtils.getInstance();
         MyApplication.instance.addActivity(this);
         getImgCode();
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                isCheck=isChecked;
+                isCheck = isChecked;
             }
         });
 
@@ -103,9 +108,9 @@ public class RegisterActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.get_regist, R.id.regist_go, R.id.code_again,R.id.fuwutiaolie})
+    @OnClick({R.id.get_regist, R.id.regist_go, R.id.code_again, R.id.fuwutiaolie})
     public void onClick(View view) {
-        Intent intent=null;
+        Intent intent = null;
         switch (view.getId()) {
             case R.id.fuwutiaolie:
                 break;
@@ -149,14 +154,16 @@ public class RegisterActivity extends BaseActivity {
                 }
 
                 if (LoginRegisterUtils.isNullOrEmpty(yzm)) {
-                T.ShowToastForShort(this, "手机验证码未输入");
-                return;
-            }
+                    T.ShowToastForShort(this, "手机验证码未输入");
+                    return;
+                }
                 if (!isCheck) {
                     T.ShowToastForShort(this, "尚未阅读或同意《车宝金融注册服务协议》");
                     return;
                 }
-                regist(phone.getText().toString(),password.getText().toString(),yzm.getText().toString(),"");
+
+
+                regist(phone.getText().toString(), password.getText().toString(), yzm.getText().toString(), tuijian.getText().toString()+"");
 
 
 //
@@ -218,7 +225,7 @@ public class RegisterActivity extends BaseActivity {
 
                 if (s.getState().getStatus() == 0) {
                     dialog.dismiss();
-                    getPhoneCodeByImageCode(phoneEdit.getText().toString(),noncestr,code.getText().toString());
+                    getPhoneCodeByImageCode(phoneEdit.getText().toString(), noncestr, code.getText().toString());
                 } else {
                     dialog.dismiss();
                     T.ShowToastForShort(RegisterActivity.this, s.getState().getInfo());
@@ -228,7 +235,7 @@ public class RegisterActivity extends BaseActivity {
         });
     }
 
-    private void getImgCode(){
+    private void getImgCode() {
         noncestr = UUIDs.uuid();
         NetWorks.getImageCode(noncestr, new Subscriber<ImageCodeBean>() {
             @Override
@@ -243,7 +250,7 @@ public class RegisterActivity extends BaseActivity {
 
             @Override
             public void onNext(ImageCodeBean infoBean) {
-                String string=infoBean.getCheckcode();
+                String string = infoBean.getCheckcode();
                 codeUtils.setCode(string);
                 bitmap = codeUtils.createBitmap();
                 codeImageview.setImageBitmap(bitmap);
@@ -253,28 +260,90 @@ public class RegisterActivity extends BaseActivity {
     }
 
 
-    private void getPhoneCodeByImageCode(String num, String noncestr, String codeNum){
-            NetWorks.getPhoneCodeByImageCode( num,noncestr,codeNum, new Subscriber<InfoBean>() {
-                @Override
-                public void onCompleted() {
+    private void getPhoneCodeByImageCode(String num, String noncestr, String codeNum) {
+        NetWorks.getPhoneCodeByImageCode(num, noncestr, codeNum, new Subscriber<InfoMsg>() {
+            @Override
+            public void onCompleted() {
 
-                }
+            }
 
-                @Override
-                public void onError(Throwable e) {
+            @Override
+            public void onError(Throwable e) {
+                Logger.json(e.toString());
+                T.ShowToastForShort(RegisterActivity.this, "网络异常");
+            }
 
-                }
+            @Override
+            public void onNext(InfoMsg infoBean) {
+                T.ShowToastForLong(RegisterActivity.this, infoBean.getInfo());
 
-                @Override
-                public void onNext(InfoBean infoBean) {
-                    int o=infoBean.getState().getStatus();
-
-                }
-            });
+            }
+        });
 
     }
 
+    /**
+     * 验证推荐人是否正确
+     *
+     * @param
+     */
+    public void chackRefereeUser(final Context context, final Activity activity, final EditText phoneEdit) {
+        //   this.noncestr = UUIDs.uuid();
 
+        if (LoginRegisterUtils.isNullOrEmpty(phoneEdit)) {
+            T.ShowToastForShort(this, "手机号码未输入");
+            //   T.ShowToastForShort(this, "手机号码未输入");
+            return;
+        }
+
+        if (!LoginRegisterUtils.isPhone(phoneEdit)) {
+            T.ShowToastForShort(this, "手机号码不正确");
+            //    T.ShowToastForShort(this, "手机号码不正确");
+            return;
+        }
+
+
+        NetWorks.verificationNewUserPhone(phoneEdit.getText().toString(), new Subscriber<InfoBean>() {
+            @Override
+            public void onStart() {
+                if (!activity.isFinishing()) {
+                    if (dialog == null) {
+                        dialog = DialogUtils.createProgressDialog(activity, "请求中");
+                    } else {
+                        dialog.show();
+                    }
+                }
+            }
+
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+
+            {
+                dialog.dismiss();
+                T.ShowToastForShort(RegisterActivity.this, "网络异常");
+                //  T.ShowToastForShort(activity,"网络异常");
+            }
+
+            @Override
+            public void onNext(InfoBean s) {
+                //  {"info":"可用的手机号码","status":"0"}
+
+                if (s.getState().getStatus() == 0) {
+                    dialog.dismiss();
+                    getPhoneCodeByImageCode(phoneEdit.getText().toString(), noncestr, code.getText().toString());
+                } else {
+                    dialog.dismiss();
+                    T.ShowToastForShort(RegisterActivity.this, s.getState().getInfo());
+                }
+
+            }
+        });
+    }
     private void regist(final String cellPhone, final String pwd, String regCode, String regReferee) {
 
         NetWorks.regist(cellPhone, pwd, regCode, regReferee, new Subscriber<InfoBean>() {
@@ -308,8 +377,8 @@ public class RegisterActivity extends BaseActivity {
             public void onNext(InfoBean b) {
                 if (b.getState().getStatus() == 0) {
                     T.ShowToastForShort(RegisterActivity.this, "注册成功");
-                    login(cellPhone,pwd);
-                    //     finish();
+                    login(cellPhone, pwd);
+//                         finish();
                 } else {
                     T.ShowToastForShort(RegisterActivity.this, b.getState().getInfo());
                 }
@@ -320,12 +389,12 @@ public class RegisterActivity extends BaseActivity {
     }
 
 
-    public void login(String name ,final String  passoword) {
+    public void login(String name, final String passoword) {
         NetWorks.login(name, passoword, new Subscriber<LoginBean>() {
             @Override
             public void onStart() {
                 if (dialog2 == null) {
-                    dialog2 = DialogUtils.createProgressDialog(RegisterActivity.this, "登陆中...");
+                    dialog2 = DialogUtils.createProgressDialog(RegisterActivity.this, "登录中...");
                 } else {
                     dialog2.show();
                 }
@@ -338,21 +407,22 @@ public class RegisterActivity extends BaseActivity {
 
             @Override
             public void onError(Throwable e) {
-                T.ShowToastForLong(RegisterActivity.this,"网络异常");
+                T.ShowToastForLong(RegisterActivity.this, "网络异常");
                 dialog2.dismiss();
                 Logger.e(e.toString());
             }
 
             @Override
             public void onNext(LoginBean s) {
-                if (s.getState().getStatus()==0){
+                if (s.getState().getStatus() == 0) {
+                    Intent intent=new Intent(RegisterActivity.this, MainActivity.class);
+                    startActivity(intent);
 
-                    SharedPreferencesUtils.savaUser(RegisterActivity.this,s,passoword);
-                    //   finish();
-                    MyApplication.instance.Allfinlish();
-                    //  T.ShowToastForLong(RegisterActivity.this,"登陆成功");
-                }else{
-                    T.ShowToastForLong(RegisterActivity.this,s.getState().getInfo());
+                    finish();
+                    SharedPreferencesUtils.savaUser(RegisterActivity.this, s, passoword);
+//                    MyApplication.instance.Allfinlish();
+                } else {
+                    T.ShowToastForLong(RegisterActivity.this, s.getState().getInfo());
                 }
 
 

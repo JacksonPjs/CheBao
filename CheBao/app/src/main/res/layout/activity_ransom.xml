@@ -1,0 +1,161 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/bg_huise"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/layout_back" />
+        <com.pvj.xlibrary.loadinglayout.LoadingLayout
+            android:id="@+id/layout_contiant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/ll_nor"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="赎回金额" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:text="￥"
+                            android:textColor="@color/text_newbie" />
+
+                        <EditText
+                            android:id="@+id/t_moeny"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/text"
+                            android:background="@null"
+                            android:inputType="number"
+                            android:maxLength="11"
+                            android:maxLines="1"
+                            android:textColor="@color/status4"
+                            android:textColorHint="#ccc"
+                            android:textSize="@dimen/text_15_size" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/t_moeny"
+                            android:background="@color/xixian"></View>
+                    </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#fff"
+                        android:orientation="vertical">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="10dp"
+                                android:text="交易密码"
+                                android:textColor="@color/font_color1"
+                                android:textSize="@dimen/text_size" />
+
+
+                            <EditText
+                                android:id="@+id/t_shouyi"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:background="@null"
+                                android:hint="请输入交易密码"
+                                android:inputType="textPassword"
+                                android:maxLines="1"
+                                android:padding="10dp"
+                                android:textColor="#666"
+                                android:textColorHint="#ccc"
+                                android:textSize="@dimen/text_15_size" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+
+                <!-- <View
+                     android:layout_width="match_parent"
+                     android:layout_height="1px"
+                     android:background="@color/bg_huise" />-->
+
+
+                <Button
+                    android:id="@+id/calculator_go"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="50dp"
+                    android:background="@drawable/oval_gradient_linear"
+                    android:gravity="center"
+                    android:text="确认赎回"
+                    android:textColor="@color/white" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="温馨提示"
+                        android:textColor="@color/black_home_four_larger" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/ransom_tip" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </com.pvj.xlibrary.loadinglayout.LoadingLayout>
+
+
+
+
+    </LinearLayout>
+</ScrollView>
+
+

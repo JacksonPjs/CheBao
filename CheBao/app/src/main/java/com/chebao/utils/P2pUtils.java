@@ -25,7 +25,7 @@ public class P2pUtils {
      * @return   收益
      */
      public  static double  calculator(double investAmount,double apr,int period){
-         return P2pUtils.round(apr / 360 / 100 * period * investAmount,
+         return P2pUtils.round(apr / 365 / 100 * period * investAmount,
           2);
      }
 

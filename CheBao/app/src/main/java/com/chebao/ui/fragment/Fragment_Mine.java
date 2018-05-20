@@ -1,7 +1,14 @@
 package com.chebao.ui.fragment;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +21,7 @@ import com.chebao.bean.CenterIndexBean;
 import com.chebao.bean.LoginBean;
 import com.chebao.net.NetWorks;
 import com.chebao.ui.activity.Activity_discount;
+import com.chebao.ui.activity.AnnouncementListActivity;
 import com.chebao.ui.activity.ChagerActivity;
 import com.chebao.ui.activity.HuiKuanActivity;
 import com.chebao.ui.activity.InvestmentActivity;
@@ -78,9 +86,14 @@ public class Fragment_Mine extends BaseFragment {
         ButterKnife.bind(this, rootView);
 
         //标题内容  ChagerActivity
-
+        SharedPreferencesUtils.getUserName(getContext());
 
         return rootView;
+    }
+
+    public void init() {
+
+
     }
 
     /**
@@ -95,14 +108,13 @@ public class Fragment_Mine extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        name.setText((String) SharedPreferencesUtils.getParam(getActivity(), "name", ""));
+//        name.setText((String) SharedPreferencesUtils.getParam(getActivity(), "name", ""));
         toatal.setText((String) SharedPreferencesUtils.getParam(getActivity(), "total1", "0"));
         eableuse.setText((String) SharedPreferencesUtils.getParam(getActivity(), "total3", "0"));
         usableamount.setText((String) SharedPreferencesUtils.getParam(getActivity(), "usableAmount", "0"));
         toatal2.setText((String) SharedPreferencesUtils.getParam(getActivity(), "toatal2", "0"));
         netLogin();
 
-        selectUserIndex();
 
     }
 
@@ -123,10 +135,28 @@ public class Fragment_Mine extends BaseFragment {
 
 
     @OnClick({R.id.count_to, R.id.withdraw, R.id.chager, R.id.touzi_to, R.id.money_to,
-            R.id.measgg_to, R.id.set, R.id.eye_set, R.id.mine_to})
+            R.id.measgg_to, R.id.set, R.id.eye_set, R.id.mine_to, R.id.cell_phohe,R.id.xiaoxi})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
+            case R.id.cell_phohe:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                        && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{
+                            Manifest.permission.CALL_PHONE}, 1);
+                } else {
+                    call();
+                }
+
+
+                break;
+
+            case R.id.xiaoxi:
+                intent =new Intent(getActivity(), AnnouncementListActivity.class);
+                startActivity(intent);
+                break;
+
             case R.id.eye_set:
                 if (!IsGone) {
                     eyeSet.setImageDrawable(getResources().getDrawable(R.mipmap.icon_eye_gone));
@@ -167,8 +197,12 @@ public class Fragment_Mine extends BaseFragment {
 
             case R.id.chager:
                 //充值
-                intent = new Intent(getActivity(), ChagerActivity.class);
-                getActivity().startActivity(intent);
+                if (SharedPreferencesUtils.getIsBank(getContext())) {
+                    intent = new Intent(getActivity(), ChagerActivity.class);
+                    getActivity().startActivity(intent);
+                } else {
+                    T.ShowToastForShort(getContext(), "充值前，需要添加银行卡.");
+                }
 
                 break;
             case R.id.withdraw:
@@ -196,16 +230,44 @@ public class Fragment_Mine extends BaseFragment {
         }
     }
 
+    private void call() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{
+                    Manifest.permission.CALL_PHONE}, 1);
+        } else {
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse("tel:"+"4000651520"));
+            startActivity(intent);
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults != null && grantResults.length > 0) {
+            switch (requestCode) {
+                case 1:
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        call();
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         if (!hidden) {
-            name.setText((String) SharedPreferencesUtils.getParam(getActivity(), "name", ""));
+//            name.setText((String) SharedPreferencesUtils.getParam(getActivity(), "name", ""));
             toatal.setText((String) SharedPreferencesUtils.getParam(getActivity(), "total1", "0"));
             eableuse.setText((String) SharedPreferencesUtils.getParam(getActivity(), "usableAmount", "0"));
 
 
-//            selectUserIndex();
+            selectUserIndex();
         }
     }
 
@@ -227,11 +289,11 @@ public class Fragment_Mine extends BaseFragment {
                                      public void onNext(CenterIndexBean loginBean) {
                                          if (loginBean.getState().getStatus() == 0) {
                                              SharedPreferencesUtils.savaUser2(getActivity(), loginBean);
-                                             name.setText((String) SharedPreferencesUtils.getParam(getActivity(), "name", ""));
-                                             toatal.setText((String) SharedPreferencesUtils.getParam(getActivity(), "total1", "0"));
-                                             usableamount.setText((String) SharedPreferencesUtils.getParam(getActivity(), "usableAmount", "0"));
-                                             eableuse.setText((String) SharedPreferencesUtils.getParam(getActivity(), "total3", "0"));
-                                             toatal2.setText((String) SharedPreferencesUtils.getParam(getActivity(), "total2", "0"));
+//                                             name.setText(SharedPreferencesUtils.getUserName(getActivity()));
+                                             toatal.setText(loginBean.getTotal1() + "");
+                                             toatal2.setText(loginBean.getTotal2() + "");
+                                             eableuse.setText(loginBean.getTotal3() + "");
+                                             usableamount.setText(loginBean.getUsableAmount() + "");
                                          } else if (loginBean.getState().getStatus() == 99) {
                                              netLogin();
                                          }
@@ -241,9 +303,11 @@ public class Fragment_Mine extends BaseFragment {
     }
 
     private void netLogin() {
+        String name=SharedPreferencesUtils.getUserName(getContext());
+        String psw=SharedPreferencesUtils.getPassword(getContext());
 
-        NetWorks.login(SharedPreferencesUtils.getUserName(getContext()),
-                SharedPreferencesUtils.getPassword(getContext()), new Subscriber<LoginBean>() {
+
+        NetWorks.login(name, psw, new Subscriber<LoginBean>() {
                     @Override
                     public void onCompleted() {
 
@@ -259,12 +323,17 @@ public class Fragment_Mine extends BaseFragment {
                     public void onNext(LoginBean loginBean) {
                         if (loginBean.getState().getStatus() == 0) {
                             SharedPreferencesUtils.savaUser(getActivity(), loginBean, SharedPreferencesUtils.getPassword(getActivity()));
-                            name.setText((String) SharedPreferencesUtils.getParam(getActivity(), "name", ""));
-                            toatal.setText((String) SharedPreferencesUtils.getParam(getActivity(), "total1", "0"));
-                            toatal2.setText((String) SharedPreferencesUtils.getParam(getActivity(), "toatal2", "0"));
-                            eableuse.setText((String) SharedPreferencesUtils.getParam(getActivity(), "total3", "0"));
+
+                            selectUserIndex();
+
+                        } else if (loginBean.getState().getStatus() == 15) {
+                            SharedPreferencesUtils.setParam(getContext(), "islogin", false);
+                            Intent intent = new Intent(getActivity(), LoginActivity.class);
+                            startActivity(intent);
                         } else {
                             SharedPreferencesUtils.setParam(getContext(), "islogin", false);
+                            Intent intent = new Intent(getActivity(), LoginActivity.class);
+                            startActivity(intent);
                         }
                     }
                 }

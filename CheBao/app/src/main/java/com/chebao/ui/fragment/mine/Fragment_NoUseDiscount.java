@@ -153,6 +153,25 @@ public class Fragment_NoUseDiscount extends Fragment implements LoadingLayout.On
 
 
     @Override
+    public void onResume() {
+        super.onResume();
+        page=1;
+    }
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden) {
+
+            //隐藏时所作的事情
+            page=1;
+
+        } else {
+            //显示时所作的事情
+
+        }
+    }
+
+    @Override
     public void onReload(View v) {
         page = 1;
         publicLv.setStatus(LoadingLayout.Loading);

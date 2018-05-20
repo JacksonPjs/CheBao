@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import com.chebao.R;
 import com.chebao.bean.HuiKuanBean;
+import com.pvj.xlibrary.utils.DateUtils;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import butterknife.Bind;
@@ -38,8 +40,18 @@ public class HuikuanAdapter extends RecyclerView.Adapter<HuikuanAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(HuikuanAdapter.ViewHolder holder, int position) {
+        HuiKuanBean.DataBean b=datas.get(position);
+        if (b.getRepayStatus()==1){
+            holder.date.setText(DateUtils.getStrTime2(b.getRepayDate() + ""));
 
-        holder.money.setText("333333333");
+        }else {
+            holder.date.setText(DateUtils.getStrTime2(b.getRealRepayTime() + ""));
+
+        }
+        holder.num.setText("本:"+b.getCapitalAmount()+" 息:"+b.getFeeAmount());
+        BigDecimal s=b.getCapitalAmount().add(b.getFeeAmount());
+        holder.type.setText(b.getBorrowTitle()+"");
+        holder.money.setText(s+"");
 
         //  holder.circleProgressbar.setProgressNotInUiThread(80);
 

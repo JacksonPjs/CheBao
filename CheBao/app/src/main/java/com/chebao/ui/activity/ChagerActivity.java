@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.chebao.MyApplication;
 import com.chebao.R;
+import com.chebao.bean.BankListBean;
 import com.chebao.bean.ChagerBean;
 import com.chebao.bean.LoginBean;
 import com.chebao.net.NetService;
@@ -20,6 +21,7 @@ import com.chebao.net.NetWorks;
 import com.chebao.utils.DialogUtils;
 import com.chebao.utils.LoginRegisterUtils;
 import com.chebao.utils.SharedPreferencesUtils;
+import com.pvj.xlibrary.loadinglayout.LoadingLayout;
 import com.pvj.xlibrary.loadinglayout.Utils;
 import com.pvj.xlibrary.log.Logger;
 import com.pvj.xlibrary.utils.T;
@@ -49,20 +51,19 @@ public class ChagerActivity extends BaseActivity {
     @Bind(R.id.t_moeny)
     EditText tMoeny;
 
-    @Bind(R.id.alipay)
-    RelativeLayout alipay;
+
     @Bind(R.id.calculator_go)
     Button calculatorGo;
 
-    @Bind(R.id.alicheck)
-    ImageView alicheck;
+
+    @Bind(R.id.layout_contiant)
+    LoadingLayout layoutContiant;
 
 
-    @Bind(R.id.bankcheck)
-    ImageView bankcheck;
     @Bind(R.id.bankpay)
     RelativeLayout bankpay;
-
+    @Bind(R.id.bank)
+    TextView bank;
 
     Dialog dialog;
 
@@ -75,12 +76,13 @@ public class ChagerActivity extends BaseActivity {
 
         MyApplication.instance.addActivity(this);
 
-
-
+//        String cardno = (String) SharedPreferencesUtils.getBankNUm(this);
+//        bank.setText(cardno);
+        netList();
 
     }
 
-    @OnClick({ R.id.calculator_go})
+    @OnClick({R.id.calculator_go})
     public void onClick(View view) {
         switch (view.getId()) {
 
@@ -88,6 +90,12 @@ public class ChagerActivity extends BaseActivity {
 
                 if (LoginRegisterUtils.isNullOrEmpty(tMoeny)) {
                     T.ShowToastForShort(ChagerActivity.this, "请输入充值金额");
+                    return;
+                }
+                double money = Double.parseDouble(tMoeny.getText().toString());
+
+                if (money < 100) {
+                    T.ShowToastForShort(ChagerActivity.this, "最低充值:100元");
                     return;
                 }
 
@@ -108,7 +116,7 @@ public class ChagerActivity extends BaseActivity {
 
         OkHttpUtils
                 .post()
-                .url(NetService.API_SERVER_Url + "/fyPay.html")
+                .url(NetService.API_SERVER_Url + "fyPay.html")
                 .addHeader("Cookie", getCookie())
                 .addParams("rechargeAmount", tMoeny.getText().toString() + "")
 //                .addParams("bankCardNo", carno)
@@ -129,7 +137,7 @@ public class ChagerActivity extends BaseActivity {
                     public void onResponse(String o) {
                         Logger.json(o);
                         Intent intent = new Intent(ChagerActivity.this, WebActivityJS.class);
-                        intent.putExtra("url", ""+o);
+                        intent.putExtra("url", "" + o);
                         startActivity(intent);
                         dialog.dismiss();
                         ChagerActivity.this.finish();
@@ -204,6 +212,52 @@ public class ChagerActivity extends BaseActivity {
 //        });
     }
 
+    // 获取银行卡列表
+    private void netList() {
+        NetWorks.selectBankCard(new Subscriber<BankListBean>() {
+
+            @Override
+            public void onStart() {
+                layoutContiant.setStatus(LoadingLayout.Loading);
+            }
+
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Logger.json(e.toString());
+                T.ShowToastForShort(ChagerActivity.this, "网络异常");
+                layoutContiant.setStatus(LoadingLayout.Error);
+            }
+
+            @Override
+            public void onNext(BankListBean bean) {
+                if (bean.getState().getStatus() == 0) {
+
+
+                    String aa = bean.getData().get(0).getBankCardNo();
+                    int n = 4;
+
+                    if (aa.length() > 4) {
+                        String b = aa.substring(aa.length() - n, aa.length());
+                        bank.setText(bean.getData().get(0).getBankName() + "(尾号" + b + ")");
+                    } else {
+                        bank.setText(bean.getData().get(0).getBankName() + "(尾号" + aa + ")");
+                    }
+                    layoutContiant.setStatus(LoadingLayout.Success);
+                } else if (bean.getState().getStatus() == 99) {
+                    netLogin();
+                } else {
+                    layoutContiant.setStatus(LoadingLayout.Error);
+                    T.ShowToastForShort(ChagerActivity.this, bean.getState().getInfo());
+                }
+
+            }
+        });
+    }
 
     //  0 是 获取   1是设置
     private void netLogin() {
@@ -240,8 +294,6 @@ public class ChagerActivity extends BaseActivity {
                 }
         );
     }
-
-
 
 
 }
