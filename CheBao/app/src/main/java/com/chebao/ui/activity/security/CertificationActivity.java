@@ -155,7 +155,7 @@ public class CertificationActivity extends BaseActivity {
         }
         OkHttpUtils
                 .post()
-                .url(NetService.API_SERVER_Url + "fysmrz.html")
+                .url(NetService.API_SERVER_Url + "center/smrz2.html")
                 .addHeader("Cookie", sb.toString())
                 .addParams("name", name)
                 .addParams("idCard", no)

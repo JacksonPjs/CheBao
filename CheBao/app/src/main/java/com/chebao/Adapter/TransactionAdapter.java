@@ -43,31 +43,18 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         holder.date.setText(DateUtils.getStrTime2(b.getCreateTime() + ""));
         holder.num.setText(b.getUsableAmount() + "");
 
-        //1（收入）2（冻结）3.（解冻）4.（支出）
+        //1（收入+）2（冻结-）3.（解冻+）4.（支出-）
         holder.money.setText("" + b.getOperAmount());
         holder.type.setText(""+b.getFundMode());
-        if (b.getOperType() == 1) {
+        if (b.getOperType() == 1|b.getOperType()==3) {
 //            holder.type.setText("充值成功");
             holder.money.setText("+" + b.getOperAmount());
             holder.money.setTextColor(context.getResources().getColor(R.color.text_org));
-        } else if (b.getOperType() == 4) {
+        } else if (b.getOperType() == 4|b.getOperType()==2) {
 //            holder.type.setText("提现成功");
 
             holder.money.setText("-" + b.getOperAmount());
-            holder.money.setTextColor(context.getResources().getColor(R.color.mouth_btn_bg));
-        } else if (b.getOperType() == 12) {
-//            holder.type.setText("回收本金");
-            holder.money.setTextColor(context.getResources().getColor(R.color.bg_2));
-
-            holder.money.setText("+" + b.getOperAmount());
-        } else if (b.getOperType() == 13) {
-//            holder.type.setText("回收收益");
-            holder.money.setTextColor(context.getResources().getColor(R.color.season));
-            holder.money.setText("-" + b.getOperAmount());
-        }else if (b.getOperType() == 16) {
-//            holder.type.setText("红包");
             holder.money.setTextColor(context.getResources().getColor(R.color.status4));
-            holder.money.setText("-" + b.getOperAmount());
         }
 
 

@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 
+import com.baidu.mobstat.StatService;
 import com.chebao.MyApplication;
+import com.umeng.analytics.MobclickAgent;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -31,4 +33,19 @@ public class BaseActivity extends AppCompatActivity {
         super.onDestroy();
 //        EToast.reset();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        StatService.onResume(this);
+//        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+//        StatService.onPause(this);
+//        MobclickAgent.onPause(this);
+    }
+
 }

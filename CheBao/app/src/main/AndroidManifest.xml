@@ -6,6 +6,55 @@
     <!--添加可以向外拨打电话的权限  -->
     <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
 
+    <!--百度统计SDK  -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--<uses-permission android:name="android.permission.WRITE_SETTINGS" />-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
+    <!-- 您从百度网站获取的APP KEY，根据实际您的APP申请的APP_KEY进行修改 -->
+    <meta-data
+        android:name="BaiduMobAd_STAT_ID"
+        android:value="b78fb4681d" /> <!-- abcd1234 -->
+    <!-- 渠道商编号 -->
+    <meta-data
+        android:name="BaiduMobAd_CHANNEL"
+        android:value="${UMENG_CHANNEL_VALUE}" />
+    <!-- 是否开启错误日志统计，默认为false -->
+    <meta-data
+        android:name="BaiduMobAd_EXCEPTION_LOG"
+        android:value="true" />
+    <!-- 日志发送策略，可选值：APP_START、ONCE_A_DAY、SET_TIME_INTERVAL，默认为APP_START -->
+    <meta-data
+        android:name="BaiduMobAd_SEND_STRATEGY"
+        android:value="APP_START" />
+    <!-- 日志发送策略 为SET_TIME_INTERVAL时，需设定时间间隔(取消下行注释)。取值为1-24的整数，默认为1 -->
+    <!-- <meta-data android:name="BaiduMobAd_TIME_INTERVAL" android:value="2" /> -->
+    <!-- 日志仅在wifi网络下发送，默认为false -->
+    <meta-data
+        android:name="BaiduMobAd_ONLY_WIFI"
+        android:value="false" />
+    <!-- 是否获取基站位置信息 ,默认为true -->
+    <meta-data
+        android:name="BaiduMobAd_CELL_LOCATION"
+        android:value="true" />
+    <!-- 是否获取GPS位置信息，默认为true -->
+    <meta-data
+        android:name="BaiduMobAd_GPS_LOCATION"
+        android:value="true" />
+    <!-- 是否获取WIFI位置信息，默认为true -->
+    <meta-data
+        android:name="BaiduMobAd_WIFI_LOCATION"
+        android:value="true" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -60,6 +109,8 @@
         <activity android:name=".ui.activity.PayDiscountActivity"></activity>
         <activity android:name=".ui.activity.DepositActivity"></activity>
         <activity android:name=".ui.activity.AboutActivity"></activity>
+        <activity android:name=".ui.activity.WebNoTitileActivity"></activity>
     </application>
-
+    <meta-data android:value="5b012b73a40fa3083400009b" android:name="UMENG_APPKEY"/>
+    <meta-data android:value="${UMENG_CHANNEL_VALUE}" android:name="UMENG_CHANNEL"/>
 </manifest>

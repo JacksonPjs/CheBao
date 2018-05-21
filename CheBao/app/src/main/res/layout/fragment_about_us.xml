@@ -81,6 +81,7 @@
             android:text="Software Copyright" />
 
         <ImageView
+            android:id="@+id/img_ruan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/bg_ruanzhu"
@@ -118,6 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/bg_zhizhao"
+            android:id="@+id/zhizhao"
             />
 
 
@@ -150,6 +152,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/bg_xukong"
+            android:id="@+id/xuke"
             />
 
 

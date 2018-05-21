@@ -153,7 +153,7 @@ public class RansomActivity extends BaseActivity {
 
         OkHttpUtils
                 .post()
-                .url(NetService.API_SERVER_Url + "wechat/applyRedeem.html")
+                .url(NetService.API_SERVER + "applyRedeem.html")
                 .addHeader("Cookie", getCookie())
                 .addParams("shmoney", tMoeny.getText().toString() + "")
                 .addParams("tradingPassword", tShouyi.getText().toString() + "")

@@ -181,7 +181,7 @@ public class AddBankActivity extends BaseActivity {
         }
         com.zhy.http.okhttp.OkHttpUtils
                 .post()
-                .url(NetService.API_SERVER_Url + "bandBank.html")
+                .url(NetService.API_SERVER_Url + "bandBank2.html")
                 .addHeader("Cookie", sb.toString())
                 .addParams("phone", zhihang.getText().toString() + "")
                 .addParams("bankCardNo", carno)

@@ -290,11 +290,16 @@ public class Fragment_Home extends BaseFragment {
                     if (data1Bean.getBorrowTitle() == null) {
                         home_five_rl.setVisibility(View.GONE);
                     }else {
-                        //新手标数据
-                        xinshou.setText(data1Bean.getBorrowTitle());
-                        tuijiandate.setText("投资期限:" + T1changerString.t2chager(data1Bean.getDeadline(), data1Bean.getDeadlineType()));
-                        lilvTv.setText((data1Bean.getAnnualRate() - 3) + "%+3%");
-                        tuijianfangshi.setText("收益方式:" + T1changerString.t4chager(data1Bean.getRepayType()));
+                        if (data1Bean.getBorrowType()!=5){
+                            home_five_rl.setVisibility(View.GONE);
+
+                        }else {
+                            //新手标数据
+                            xinshou.setText(data1Bean.getBorrowTitle());
+                            tuijiandate.setText("投资期限:" + T1changerString.t2chager(data1Bean.getDeadline(), data1Bean.getDeadlineType()));
+                            lilvTv.setText((data1Bean.getAnnualRate() - 3) + "%+3%");
+                            tuijianfangshi.setText("收益方式:" + T1changerString.t4chager(data1Bean.getRepayType()));
+                        }
 
                     }
 
@@ -302,12 +307,18 @@ public class Fragment_Home extends BaseFragment {
                     if (data2Bean == null) {
                         home_six_rl.setVisibility(View.GONE);
                     } else {
-                        //用户标
-                        yonghu.setText(data2Bean.getBorrowTitle());
-                        yonghudate.setText("投资期限:" + T1changerString.t2chager(data2Bean.getDeadline(), data2Bean.getDeadlineType()));
-                        yonghulilv.setText((data2Bean.getAnnualRate() - 1) + "%+1%");
-                        yonghufangshi.setText("收益方式:" + T1changerString.t4chager(data2Bean.getRepayType()));
-                        handler.sendEmptyMessage(1);
+                        if (data2Bean.getBorrowType()!=5){
+                            //用户标
+                            yonghu.setText(data2Bean.getBorrowTitle());
+                            yonghudate.setText("投资期限:" + T1changerString.t2chager(data2Bean.getDeadline(), data2Bean.getDeadlineType()));
+                            yonghulilv.setText((data2Bean.getAnnualRate() - 1) + "%+1%");
+                            yonghufangshi.setText("收益方式:" + T1changerString.t4chager(data2Bean.getRepayType()));
+                            handler.sendEmptyMessage(1);
+                        }else {
+                            home_six_rl.setVisibility(View.GONE);
+
+                        }
+
                     }
 
 
@@ -390,12 +401,12 @@ public class Fragment_Home extends BaseFragment {
         Intent intent = null;
         switch (view.getId()) {
             case R.id.re_four:
-                intent = new Intent(getActivity(), WebActivity.class);
+                intent = new Intent(getActivity(), WebNoTitileActivity.class);
                 intent.putExtra("url", NetService.API_SERVER_Url + "wechat/recommend.html");
                 startActivity(intent);
                 break;
             case R.id.re_find1:
-                intent = new Intent(getActivity(), WebActivity.class);
+                intent = new Intent(getActivity(), WebNoTitileActivity.class);
                 intent.putExtra("url", NetService.API_SERVER_Url + "wechat/safe.html");
                 startActivity(intent);
                 break;
@@ -407,7 +418,7 @@ public class Fragment_Home extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.re_weixin1:
-                intent = new Intent(getActivity(), WebActivity.class);
+                intent = new Intent(getActivity(), WebNoTitileActivity.class);
                 intent.putExtra("url", NetService.API_SERVER_Url + "wechat/yungift.html");
                 startActivity(intent);
 

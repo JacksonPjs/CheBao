@@ -97,6 +97,7 @@
                                 android:hint="请输入交易密码"
                                 android:inputType="textPassword"
                                 android:maxLines="1"
+                                android:maxLength="6"
                                 android:padding="10dp"
                                 android:textColor="#666"
                                 android:textColorHint="#ccc"

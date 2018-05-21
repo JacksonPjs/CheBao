@@ -77,6 +77,11 @@ public class DetailsRegularActivity extends BaseActivity implements CountdownVie
         net();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();net();
+    }
+
     public void net() {
         NetWorks.queryBorrowDetail(id, new Subscriber<BorrowDetailBean>() {
 

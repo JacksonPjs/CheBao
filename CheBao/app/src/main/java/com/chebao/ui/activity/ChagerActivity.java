@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
 import com.chebao.MyApplication;
 import com.chebao.R;
 import com.chebao.bean.BankListBean;
@@ -80,6 +81,18 @@ public class ChagerActivity extends BaseActivity {
 //        bank.setText(cardno);
         netList();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        StatService.onPageStart(this, "充值界面");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        StatService.onPageEnd(this, "充值界面");
     }
 
     @OnClick({R.id.calculator_go})
@@ -243,9 +256,21 @@ public class ChagerActivity extends BaseActivity {
 
                     if (aa.length() > 4) {
                         String b = aa.substring(aa.length() - n, aa.length());
-                        bank.setText(bean.getData().get(0).getBankName() + "(尾号" + b + ")");
+                        if (bean.getData().get(0).getBankName()==null){
+                            bank.setText(""+ "(尾号" + b + ")");
+
+                        }else {
+                            bank.setText(bean.getData().get(0).getBankName() + "(尾号" + b + ")");
+
+                        }
                     } else {
-                        bank.setText(bean.getData().get(0).getBankName() + "(尾号" + aa + ")");
+                        if (bean.getData().get(0).getBankName()==null){
+                            bank.setText(""+ "(尾号" + aa + ")");
+
+                        }else {
+                            bank.setText(bean.getData().get(0).getBankName() + "(尾号" + aa + ")");
+
+                        }
                     }
                     layoutContiant.setStatus(LoadingLayout.Success);
                 } else if (bean.getState().getStatus() == 99) {

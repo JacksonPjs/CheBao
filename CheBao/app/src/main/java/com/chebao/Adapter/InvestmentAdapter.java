@@ -44,14 +44,45 @@ public class InvestmentAdapter extends RecyclerView.Adapter<InvestmentAdapter.Vi
         holder.date.setText(DateUtils.getStrTime3(dataBean.getInvestTime() + ""));
         holder.num.setText(dataBean.getInvestAmount() + "");
         switch (dataBean.getBorrowStatus()) {
+            case 1:
+                holder.type.setText("申请中");
+                break;
+            case 2:
+                holder.type.setText("初审通过");
+
+                break;
             case 3:
                 holder.type.setText("招标中");
+                break;
+            case 4:
+                holder.type.setText("复审中");
+
                 break;
             case 6:
                 holder.type.setText("已还款");
                 break;
             case 5:
                 holder.type.setText("还款中");
+                break;
+            case 7:
+                holder.type.setText("借款失败(初审)");
+
+                break;
+            case 8:
+                holder.type.setText("复审失败");
+
+                break;
+            case 9:
+                holder.type.setText("流标");
+
+                break;
+            case 10:
+                holder.type.setText("复审处理中");
+
+                break;
+            case 11:
+                holder.type.setText("流标或复审不通过处理中");
+
                 break;
         }
 

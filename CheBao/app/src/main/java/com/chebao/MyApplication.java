@@ -10,6 +10,8 @@ import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.chebao.net.OkHttpUtils;
 import com.pvj.xlibrary.loadinglayout.LoadingLayout;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.commonsdk.UMConfigure;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -39,6 +41,10 @@ public class MyApplication extends Application {
 
         LoadingLayout.getConfig()
                 .setLoadingPageLayout(R.layout.loading);
+        UMConfigure.setLogEnabled(true);
+        UMConfigure.init(this,  UMConfigure.DEVICE_TYPE_PHONE,
+                "");
+//        UMConfigure.init(context, UMConfigure.DEVICE_TYPE_PHONE,  "");
     }
 
     private void initGlide() {

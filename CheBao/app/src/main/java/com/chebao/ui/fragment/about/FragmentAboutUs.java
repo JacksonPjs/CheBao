@@ -18,11 +18,13 @@ import android.widget.TextView;
 import com.chebao.MainActivity;
 import com.chebao.MyApplication;
 import com.chebao.R;
+import com.chebao.ui.activity.PicturesLookActivity;
 import com.pvj.xlibrary.loadinglayout.LoadingLayout;
 import com.pvj.xlibrary.log.Logger;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * 创建日期：2018/5/20 on 12:52
@@ -41,5 +43,26 @@ public class FragmentAboutUs  extends Fragment {
         return rootView;
     }
 
+    @OnClick({R.id.img_ruan,R.id.zhizhao,R.id.xuke})
+    public void onClick(View view) {
+        Intent intent = null;
+        switch (view.getId()){
+            case R.id.img_ruan:
+                intent = new Intent(getActivity(), PicturesLookActivity.class);
+                intent.putExtra("url",R.mipmap.bg_ruanzhu);
+               startActivity(intent);
+                break;
+            case R.id.zhizhao:
+                intent = new Intent(getActivity(), PicturesLookActivity.class);
+                intent.putExtra("url",R.mipmap.bg_zhizhao);
+                startActivity(intent);
+                break;
+            case R.id.xuke:
+                intent = new Intent(getActivity(), PicturesLookActivity.class);
+                intent.putExtra("url",R.mipmap.bg_xukong);
+                startActivity(intent);
+                break;
 
+        }
+    }
 }

@@ -12,7 +12,7 @@ import com.chebao.R;
  */
 
 public class PicturesLookActivity extends BaseActivity {
-    String url  ;
+    int url  ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class PicturesLookActivity extends BaseActivity {
         setContentView(R.layout.pictures_layout);
         ImageView imageView = (ImageView) findViewById(R.id.pic);
 
-        url = getIntent().getStringExtra("url");
+        url = getIntent().getIntExtra("url",R.mipmap.error);
 
 
         Glide.with(this).load(url)

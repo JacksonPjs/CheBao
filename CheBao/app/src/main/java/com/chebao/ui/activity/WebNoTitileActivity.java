@@ -37,7 +37,7 @@ public class WebNoTitileActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web);
+        setContentView(R.layout.activity_webnotitle);
         ButterKnife.bind(this);
         //   title.setText();
 

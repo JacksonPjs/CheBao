@@ -374,9 +374,10 @@ public class PayActivity extends BaseActivity {
                                 tv_money.setText("" + SharedPreferencesUtils.getParam(PayActivity.this, "usableAmount", "0"));
                                 editText.setText("");
                                 dialog.dismiss();
+                                finish();
+
                             }
                         });
-//                        finish();
                     } else {
                         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
@@ -427,10 +428,11 @@ public class PayActivity extends BaseActivity {
                                 tv_money.setText("" + SharedPreferencesUtils.getParam(PayActivity.this, "usableAmount", "0"));
                                 editText.setText("");
                                 dialog.dismiss();
+                                finish();
+
                             }
                         });
 
-//                        finish();
                     } else {
                         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
@@ -526,6 +528,7 @@ public class PayActivity extends BaseActivity {
                 restext.setTextColor(getResources().getColor(R.color.status4));
 
             } else {
+                coupontype=-1;
                 restext.setText("暂无卡券");
             }
         }

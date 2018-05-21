@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.baidu.mobstat.StatService;
 import com.chebao.App.AppUpdataUtils;
 import com.chebao.App.AppUtils;
 import com.chebao.bean.AppUpdataBean;
@@ -29,6 +30,7 @@ import com.chebao.utils.SharedPreferencesUtils;
 import com.pvj.xlibrary.loadinglayout.Utils;
 import com.pvj.xlibrary.log.Logger;
 import com.pvj.xlibrary.utils.T;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +56,8 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initTabView(savedInstanceState);
+        //百度统计
+        StatService.start(this);
         Intent intent = getIntent();
         currentIndex = intent.getIntExtra("index", 0);
         netUpdate();
@@ -65,6 +69,9 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
+        MobclickAgent.onResume(this);
+        StatService.onResume(this);
+
         if (transaction != null) {
             if (currentIndex == 1) {
                 currentIndex = 1;
@@ -72,6 +79,14 @@ public class MainActivity extends BaseActivity {
             }
         }
 
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+        StatService.onPause(this);
 
     }
 
@@ -290,6 +305,7 @@ public class MainActivity extends BaseActivity {
             mHandler.sendEmptyMessageDelayed(0, 2000);
         } else {
             finish();
+            MobclickAgent.onKillProcess(this);
             MyApplication.instance.Allfinlish();
 
             System.exit(0);
