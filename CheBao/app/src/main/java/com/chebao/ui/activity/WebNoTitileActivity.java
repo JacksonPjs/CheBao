@@ -44,6 +44,7 @@ public class WebNoTitileActivity extends BaseActivity {
 //        url ="file:///android_asset/security.html";
 //        url ="https://www.baidu.com";
         url = getIntent().getStringExtra("url");
+
         String title1 = getIntent().getStringExtra("title");
 
 

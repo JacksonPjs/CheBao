@@ -40,7 +40,6 @@ public class Fragment_Find_Start extends Fragment implements LoadingLayout.OnRel
 
     @Bind(R.id.public_listview)
     LoadMoreRecyclerLoadingLayout publicLv;
-//            RecyclerView publicLv;
 
     @Nullable
     @Override
@@ -94,7 +93,12 @@ public class Fragment_Find_Start extends Fragment implements LoadingLayout.OnRel
                     if (findBean.getState().getStatus() == 0) {
                         biaoBeenList.clear();
                         biaoBeenList.addAll(findBean.getData());
-                        publicLv.setStatus(LoadingLayout.Success);
+                        if (findBean.getData().size()==0){
+                            publicLv.setStatus(LoadingLayout.Empty);
+                        }else {
+                            publicLv.setStatus(LoadingLayout.Success);
+
+                        }
                     } else {
                         publicLv.setStatus(LoadingLayout.Empty);
                     }

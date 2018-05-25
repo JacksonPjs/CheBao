@@ -46,7 +46,7 @@ public class LoginActivity extends BaseActivity {
         MyApplication.instance.addActivity(this);
     }
 
-    @OnClick({R.id.login_go, R.id.regist, R.id.forget, R.id.back})
+    @OnClick({R.id.login_go, R.id.regist, R.id.forget, R.id.back, R.id.tv_register})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -54,7 +54,13 @@ public class LoginActivity extends BaseActivity {
                 //注册
                 intent = new Intent(this, RegisterActivity.class);
                 startActivity(intent);
-                finish();
+//                finish();
+                break;
+            case R.id.tv_register:
+                //注册
+                intent = new Intent(this, RegisterActivity.class);
+                startActivity(intent);
+//                finish();
                 break;
             case R.id.forget:
                 //忘记密码
@@ -144,7 +150,7 @@ public class LoginActivity extends BaseActivity {
                 if (s.getState().getStatus() == 0) {
 
                     SharedPreferencesUtils.savaUser(LoginActivity.this, s, passoword);
-                    Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                     T.ShowToastForLong(LoginActivity.this, "登录成功");

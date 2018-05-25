@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/bg_huise"
     android:orientation="vertical">
 
@@ -10,7 +11,9 @@
     <com.pvj.xlibrary.loadinglayout.LoadingLayout
         android:id="@+id/loadinglayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:isFirstVisible="true"
+        >
 
         <ScrollView
             android:layout_width="match_parent"
@@ -162,11 +165,12 @@
                                 android:layout_marginLeft="10dp"
                                 android:background="@null"
                                 android:hint="请输入交易密码"
-                                android:inputType="textPassword"
+                                android:inputType="numberPassword"
                                 android:maxLines="1"
                                 android:padding="10dp"
                                 android:textColor="#666"
                                 android:textColorHint="#ccc"
+                                android:maxLength="6"
                                 android:textSize="@dimen/text_15_size" />
 
 

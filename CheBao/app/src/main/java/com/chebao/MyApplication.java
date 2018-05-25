@@ -41,10 +41,11 @@ public class MyApplication extends Application {
 
         LoadingLayout.getConfig()
                 .setLoadingPageLayout(R.layout.loading);
+        UMConfigure.init(this,  UMConfigure.DEVICE_TYPE_PHONE, "");
+//        UMConfigure.init(this, "5b012b73a40fa3083400009b", "Cs", UMConfigure.DEVICE_TYPE_PHONE,
+//                "");
         UMConfigure.setLogEnabled(true);
-        UMConfigure.init(this,  UMConfigure.DEVICE_TYPE_PHONE,
-                "");
-//        UMConfigure.init(context, UMConfigure.DEVICE_TYPE_PHONE,  "");
+
     }
 
     private void initGlide() {

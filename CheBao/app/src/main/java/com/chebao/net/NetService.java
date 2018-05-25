@@ -36,14 +36,18 @@ import rx.Observable;
 /**
  */
 public interface NetService {
+
+
+
+
     //服务器路径
 //    public static final String API_SERVER = "http://192.168.1.171:8080/jp/app/";//测试地址
 
 
-        public static final String API_SERVER = "http://www.chebaojr.com/app/";  //上线地址
+        public static  String API_SERVER = "http://www.chebaojr.com/app/";  //上线地址
     //网址路径
 //    public static final String API_SERVER_Url = "http://192.168.1.171:8080/jp/";
-    public static final String API_SERVER_Url = "http://www.chebaojr.com/";
+    public static  String API_SERVER_Url = "http://www.chebaojr.com/";
 
 
 
@@ -52,7 +56,7 @@ public interface NetService {
     //测试主程序地址
 //    public static final String API_SERVER_Main = "http://172.18.5.252:8080/jp/";
     //图片地址
-    public static final String API_SERVER_Photo = "http://192.168.1.171:8080/";
+    public static final String API_SERVER_Photo = "http://www.chebaojr.com/";
 
 
     // 开启滑块
@@ -186,7 +190,7 @@ public interface NetService {
     Observable<BorrowDetailBean> queryBorrowDetail(@Query("id") String id);
 
     /**
-     * 产品投资记录
+     * 产品出借记录
      */
     @POST("borrowInvestList.html")
     Observable<InvestmentBean> borrowInvestList(@Query("borrowId") String borrowId,

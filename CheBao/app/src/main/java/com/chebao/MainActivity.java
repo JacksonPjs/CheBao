@@ -45,6 +45,7 @@ public class MainActivity extends BaseActivity {
     private FragmentManager fragmentManager;
     private Fragment currentFragment = new Fragment();
     private List<Fragment> fragments = new ArrayList<>();
+    String mPageName="MainActivity";
 
     private int currentIndex = 0;
     //当前显示的fragment
@@ -57,7 +58,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         initTabView(savedInstanceState);
         //百度统计
-        StatService.start(this);
+//        StatService.start(this);
         Intent intent = getIntent();
         currentIndex = intent.getIntExtra("index", 0);
         netUpdate();
@@ -68,9 +69,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        MobclickAgent.onResume(this);
-        StatService.onResume(this);
 
         if (transaction != null) {
             if (currentIndex == 1) {
@@ -85,8 +83,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
-        StatService.onPause(this);
 
     }
 

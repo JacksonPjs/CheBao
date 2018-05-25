@@ -50,7 +50,7 @@
             android:layout_below="@+id/percent"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="年化收益"
+            android:text="@string/nianhuashouyi"
             android:textColor="@color/black_home_four_midle"
 
             android:textSize="@dimen/text_samll_size" />
@@ -202,18 +202,31 @@
         android:layout_margin="@dimen/home_margin"
         android:layout_alignParentRight="true">
 
-
-        <TextView
+        <CheckBox
+            android:id="@+id/cbox"
+            android:checked="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="投资即表示同意" />
+            android:background="@drawable/selector_check"
+            android:button="@null"
+            />
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_samll_size"
+            android:text="我已阅读并同意" />
 
         <TextView
             android:id="@+id/fuwutiaolie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="《车保金融点对点借款合同》"
-            android:textColor="@color/org_home" />
+            android:textColor="@color/org_home"
+            android:textSize="@dimen/text_samll_size"
+
+            />
 
     </LinearLayout>
 

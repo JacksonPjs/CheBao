@@ -226,13 +226,13 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:background="@null"
-                android:hint="登录密码(6~20位字母、数字及其组合)"
+                android:hint="登录密码(6~16位字母、数字及其组合)"
                 android:inputType="textPassword"
                 android:textSize="@dimen/text_12_size"
                 android:textColor="#666"
                 android:textColorHint="#ccc"
 
-                android:maxLength="20"
+                android:maxLength="16"
                 android:maxLines="1"
                 />
 

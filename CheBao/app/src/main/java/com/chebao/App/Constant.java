@@ -34,6 +34,9 @@ public class Constant {
     public static final int INVEST_SELL_OUT=1;
     public static final int INVESTING=0;
 
+    public static final boolean IsDebug=true;//线上,测试flag(发版本改false)
+    public static final boolean IsCeshi=false;//切换网络地址的flag,线上false,测试地址为true
+
 
     /**
      * 获取屏幕分辨率

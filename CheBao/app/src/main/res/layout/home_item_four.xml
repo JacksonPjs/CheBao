@@ -51,7 +51,7 @@
             android:textColor="@color/black_home_four_midle"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/home_margin"
-            tools:text="年化收益"
+            tools:text="@string/nianhuashouyi"
             android:text="@string/nianhuashouyi"
             />
 

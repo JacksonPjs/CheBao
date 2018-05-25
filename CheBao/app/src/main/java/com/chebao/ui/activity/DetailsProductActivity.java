@@ -108,7 +108,7 @@ public class DetailsProductActivity extends BaseActivity implements ViewPager.On
         BorrowDetailBean.DataBean d = bean.getData();
         if (d.getBorrowStatus() == 3) {
             buy.setBackgroundColor(this.getResources().getColor(R.color.text_org));
-            buy.setText("立即投资");
+            buy.setText("立即出借");
 
         } else {
             buy.setBackgroundColor(this.getResources().getColor(R.color.bar_clor));

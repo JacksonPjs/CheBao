@@ -49,7 +49,7 @@
             android:layout_marginLeft="180dp"
             android:layout_marginTop="@dimen/home_margin"
             android:layout_weight="1"
-            android:text="投资期限：15天"
+            android:text="出借期限：15天"
             android:textColor="@color/black_home_four_midle"
             android:textSize="@dimen/text_samll_size"
 
@@ -63,7 +63,7 @@
             android:layout_below="@+id/percent"
             android:layout_marginTop="@dimen/home_margin"
             android:layout_weight="1"
-            android:text="年化收益"
+            android:text="@string/nianhuashouyi"
             android:textColor="@color/black_home_four_midle"
             android:textSize="@dimen/text_samll_size" />
 
@@ -102,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="投资金额"
+            android:text="出借金额"
             android:textColor="@color/black_home_four_midle"
 
             />
@@ -284,25 +284,39 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_money"
         android:orientation="vertical"
-        android:padding="10dp">
+        >
 
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true">
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
 
+            >
 
-            <TextView
+            <CheckBox
+                android:id="@+id/cbox"
+                android:checked="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="投资即表示同意" />
+                android:background="@drawable/selector_check"
+                android:button="@null"
+                />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_samll_size"
+                android:text="我已阅读并同意" />
 
             <TextView
                 android:id="@+id/fuwutiaolie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="《车保金融点对点借款合同》"
+                android:textSize="@dimen/text_samll_size"
                 android:textColor="@color/org_home" />
         </LinearLayout>
     </LinearLayout>

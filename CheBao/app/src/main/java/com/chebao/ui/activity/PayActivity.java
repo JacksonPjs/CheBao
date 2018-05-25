@@ -9,6 +9,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -76,7 +78,12 @@ public class PayActivity extends BaseActivity {
     EditText editText;
     @Bind(R.id.earnings)
     TextView earnings;
+    @Bind(R.id.cbox)
+    CheckBox checkBox;
+
     Dialog LoodDialog;
+
+
 
     String id;
     String result = "";
@@ -91,6 +98,8 @@ public class PayActivity extends BaseActivity {
     DiscountListBean.DisData disData;
     int coupontype = -1;
     String couponId = null;
+
+    boolean isCheck=false;
 
 
     @Override
@@ -113,16 +122,22 @@ public class PayActivity extends BaseActivity {
     }
 
     private void setData() {
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isCheck = isChecked;
+            }
+        });
         if (bean != null) {
             DecimalFormat df = new DecimalFormat("######0.00");
             BorrowDetailBean.DataBean d = bean.getData();
             percent.setText(df.format(d.getAnnualRate()) + "%");
             String deadliness = T1changerString.t2chager(d.getDeadline(), d.getDeadlineType());
             data.setText(deadliness);
-            yonghu.setText(bean.getData().getBorrowTitle()+"");
+            yonghu.setText(bean.getData().getBorrowTitle() + "");
             maxAmount.setText("剩余额度：" + T1changerString.t3chager(d.getBorrowAmount() - d.getHasBorrowAmount()));
             if ((Boolean) SharedPreferencesUtils.getParam(this, "islogin", false)) {  //登录
-                tv_money.setText("" + (String) SharedPreferencesUtils.getParam(this, "usableAmount", "0") );
+                tv_money.setText("" + (String) SharedPreferencesUtils.getParam(this, "usableAmount", "0"));
 
             } else {
                 Intent intent = new Intent(PayActivity.this, LoginActivity.class);
@@ -189,14 +204,15 @@ public class PayActivity extends BaseActivity {
         AlertDialog dialog;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 //        builder.setTitle("").setIcon(android.R.drawable.stat_notify_error);
-        builder.setMessage("修改金额，已选优惠券将无效");
+        builder.setMessage("修改金额，已选卡券将无效");
         builder.setPositiveButton("继续", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
                 result = "";
                 isSelect = false;
-                restext.setText("请选择优惠券");
+                coupontype = -1;
+                restext.setText("请选择卡券");
 
             }
         });
@@ -216,7 +232,7 @@ public class PayActivity extends BaseActivity {
         Intent intent = null;
         switch (view.getId()) {
             case R.id.gotopay:
-                editText.setText(tv_money.getText().toString()+"");
+                editText.setText(tv_money.getText().toString() + "");
 
                 break;
             case R.id.fuwutiaolie:
@@ -238,11 +254,41 @@ public class PayActivity extends BaseActivity {
                     startActivityForResult(intent, 1);
 
                 } else {
-                    T.ShowToastForLong(PayActivity.this, "请输入投资金额");
+                    T.ShowToastForLong(PayActivity.this, "请输入出借金额");
 
                 }
                 break;
             case R.id.buy:
+                double money = 0;
+                if (LoginRegisterUtils.isNullOrEmpty(editText)) {
+                    T.ShowToastForShort(PayActivity.this, "请输入出借金额");
+
+                } else {
+                    money = Double.parseDouble(editText.getText().toString());
+                }
+
+                if (money < bean.getData().getMinInvestAmount()) {
+                    T.ShowToastForShort(PayActivity.this, "最低出借:" + bean.getData().getMinInvestAmount());
+                    return;
+                }
+
+                double anbleM = Double.parseDouble((String) SharedPreferencesUtils.getParam(PayActivity.this, "usableAmount", "0"));
+                if (money > anbleM) {
+                    T.ShowToastForShort(PayActivity.this, "可用余额少于出借金额.请先充值");
+                    return;
+                }
+
+                double able = (bean.getData().getBorrowAmount() - bean.getData().getHasBorrowAmount());
+
+                if (money > able) {
+                    T.ShowToastForShort(PayActivity.this, "出借金额不能大于剩余额度.");
+                    return;
+                }
+                if (!isCheck){
+                    T.ShowToastForShort(this, "尚未阅读或同意《车宝金融注册服务协议》");
+                    return;
+                }
+
                 final PayDialog payDialog = new PayDialog(this);
                 payDialog.setMsg(editText.getText().toString() + "");
                 payDialog.show();
@@ -257,30 +303,6 @@ public class PayActivity extends BaseActivity {
                         word = str;
 
 
-                        double money = 0;
-                        if (LoginRegisterUtils.isNullOrEmpty(editText)) {
-
-                        } else {
-                            money = Double.parseDouble(editText.getText().toString());
-                        }
-
-//                            if (money < bean.getData().getMinInvestAmount()) {
-//                                T.ShowToastForShort(PayActivity.this, "最低投资:" + bean.getData().getMinInvestAmount());
-//                                return;
-//                            }
-
-                        double anbleM = Double.parseDouble((String) SharedPreferencesUtils.getParam(PayActivity.this, "usableAmount", "0"));
-                        if (money > anbleM) {
-                            T.ShowToastForShort(PayActivity.this, "可用余额少于投资金额.请先充值");
-                            return;
-                        }
-
-                        double able = (bean.getData().getBorrowAmount() - bean.getData().getHasBorrowAmount());
-
-                        if (money > able) {
-                            T.ShowToastForShort(PayActivity.this, "投资金额不能大于剩余额度.");
-                            return;
-                        }
                         netPay(str);
 //                        //动态关软键盘
 //                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE); //得到InputMethodManager的实例
@@ -361,13 +383,13 @@ public class PayActivity extends BaseActivity {
                 public void onNext(PayBean o) {
 //                    LoodDialog.dismiss();
 //                    LoodDialog.cancel();
-                    ToastDialog.Builder builder=new ToastDialog.Builder(PayActivity.this);
+                    ToastDialog.Builder builder = new ToastDialog.Builder(PayActivity.this);
 
                     if (o.getStatus().equals("y")) {
-                        SharedPreferencesUtils.setParam(PayActivity.this, "usableAmount",o.getUsableAmount()+"");
+                        SharedPreferencesUtils.setParam(PayActivity.this, "usableAmount", o.getUsableAmount() + "");
 
 //                        T.ShowToastForShort(PayActivity.this, o.getState().getInfo());
-                        builder.setMessage(""+o.getInfo());
+                        builder.setMessage("" + o.getInfo());
                         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -387,11 +409,10 @@ public class PayActivity extends BaseActivity {
                                 dialog.dismiss();
                             }
                         });
-                        builder.setMessage(""+o.getInfo());
+                        builder.setMessage("" + o.getInfo());
 //                        T.ShowToastForShort(PayActivity.this, o.getInfo());
                     }
                     builder.create().show();
-
 
 
                 }
@@ -415,13 +436,13 @@ public class PayActivity extends BaseActivity {
                 public void onNext(PayBean o) {
 //                    LoodDialog.dismiss();
 //                    LoodDialog.cancel();
-                    ToastDialog.Builder builder=new ToastDialog.Builder(PayActivity.this);
+                    ToastDialog.Builder builder = new ToastDialog.Builder(PayActivity.this);
                     if (o.getStatus().equals("y")) {
-                        SharedPreferencesUtils.setParam(PayActivity.this, "usableAmount",o.getUsableAmount()+"");
+                        SharedPreferencesUtils.setParam(PayActivity.this, "usableAmount", o.getUsableAmount() + "");
 
                         T.ShowToastForShort(PayActivity.this, o.getState().getInfo());
 
-                        builder.setMessage("投标成功");
+                        builder.setMessage("出借成功");
                         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -442,7 +463,7 @@ public class PayActivity extends BaseActivity {
                                 dialog.dismiss();
                             }
                         });
-                        builder.setMessage(""+o.getInfo());
+                        builder.setMessage("" + o.getInfo());
 //                        T.ShowToastForShort(PayActivity.this, o.getInfo());
                     }
 
@@ -521,6 +542,7 @@ public class PayActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if (resultCode == 200) {
+                isSelect=true;
                 disData = (DiscountListBean.DisData) data.getSerializableExtra("disbean");
                 couponId = disData.getId() + "";
                 coupontype = disData.getCouponType();
@@ -528,7 +550,7 @@ public class PayActivity extends BaseActivity {
                 restext.setTextColor(getResources().getColor(R.color.status4));
 
             } else {
-                coupontype=-1;
+                coupontype = -1;
                 restext.setText("暂无卡券");
             }
         }

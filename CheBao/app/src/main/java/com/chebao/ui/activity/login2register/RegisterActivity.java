@@ -25,9 +25,11 @@ import com.chebao.bean.InfoBean;
 import com.chebao.bean.InfoMsg;
 import com.chebao.bean.LoginBean;
 import com.chebao.geetest_sdk.SdkUtilsNEW;
+import com.chebao.net.NetService;
 import com.chebao.net.NetWorks;
 import com.chebao.ui.activity.BaseActivity;
 import com.chebao.ui.activity.MyBankActivity;
+import com.chebao.ui.activity.WebActivity;
 import com.chebao.utils.CodeUtils;
 import com.chebao.utils.DialogUtils;
 import com.chebao.utils.LoginRegisterUtils;
@@ -112,9 +114,14 @@ public class RegisterActivity extends BaseActivity {
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
-            case R.id.fuwutiaolie:
-                break;
 
+            case R.id.fuwutiaolie:
+                intent = new Intent(this, WebActivity.class);
+                intent.putExtra("url", NetService.API_SERVER_Url + "wechat/showAgreementAPP.html");
+                intent.putExtra("title", "认购协议");
+                startActivity(intent);
+
+                break;
             case R.id.code_again:
                 getImgCode();
 //                bitmap = codeUtils.createBitmap();

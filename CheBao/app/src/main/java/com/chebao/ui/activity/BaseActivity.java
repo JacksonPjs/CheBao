@@ -37,15 +37,15 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        StatService.onResume(this);
-//        MobclickAgent.onResume(this);
+        StatService.onResume(this);
+        MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-//        StatService.onPause(this);
-//        MobclickAgent.onPause(this);
+        StatService.onPause(this);
+        MobclickAgent.onPause(this);
     }
 
 }

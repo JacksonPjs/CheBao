@@ -246,7 +246,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="投资计息"
+                android:text="出借计息"
                 android:textColor="@color/org_home_btn"
                 android:textSize="@dimen/text_12_size" />
 

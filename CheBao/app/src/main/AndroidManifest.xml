@@ -21,13 +21,13 @@
 
 
     <!-- 您从百度网站获取的APP KEY，根据实际您的APP申请的APP_KEY进行修改 -->
-    <meta-data
-        android:name="BaiduMobAd_STAT_ID"
-        android:value="b78fb4681d" /> <!-- abcd1234 -->
-    <!-- 渠道商编号 -->
-    <meta-data
-        android:name="BaiduMobAd_CHANNEL"
-        android:value="${UMENG_CHANNEL_VALUE}" />
+    <!--<meta-data-->
+        <!--android:name="BaiduMobAd_STAT_ID"-->
+        <!--android:value="b78fb4681d" /> &lt;!&ndash; abcd1234 &ndash;&gt;-->
+    <!--&lt;!&ndash; 渠道商编号 &ndash;&gt;-->
+    <!--<meta-data-->
+        <!--android:name="BaiduMobAd_CHANNEL"-->
+        <!--android:value="${UMENG_CHANNEL_VALUE}" />-->
     <!-- 是否开启错误日志统计，默认为false -->
     <meta-data
         android:name="BaiduMobAd_EXCEPTION_LOG"
@@ -110,7 +110,11 @@
         <activity android:name=".ui.activity.DepositActivity"></activity>
         <activity android:name=".ui.activity.AboutActivity"></activity>
         <activity android:name=".ui.activity.WebNoTitileActivity"></activity>
+        <activity android:name=".ui.activity.PicturesLookNetActivity"></activity>
+        <meta-data android:value="5b012b73a40fa3083400009b" android:name="UMENG_APPKEY"/>
+        <meta-data android:value="${UMENG_CHANNEL_VALUE}" android:name="UMENG_CHANNEL"/>
+
+
     </application>
-    <meta-data android:value="5b012b73a40fa3083400009b" android:name="UMENG_APPKEY"/>
-    <meta-data android:value="${UMENG_CHANNEL_VALUE}" android:name="UMENG_CHANNEL"/>
+
 </manifest>

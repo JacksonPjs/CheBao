@@ -58,7 +58,7 @@ public class InvestmentActivity extends BaseActivity implements LoadingLayout.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction);
         ButterKnife.bind(this);
-        title.setText("投资记录");
+        title.setText("出借记录");
         initView();
         net(0, 0,type);
 

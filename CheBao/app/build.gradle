@@ -9,7 +9,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        manifestPlaceholders = [UMENG_CHANNEL_VALUE: "ceshi"] //默认名称
+        manifestPlaceholders = [UMENG_CHANNEL_VALUE: "default_channel"] //默认名称
+        flavorDimensions "default"
+
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
 
     }
@@ -22,9 +24,23 @@ android {
     buildToolsVersion '27.0.3'
 
 //    multiDexEnabled true //突破应用方法数65535的一个限制
-    flavorDimensions "default"
     productFlavors {
         wangzhan {dimension "default"}
+        default_channel {dimension "default"}
+        OPPO {dimension "default"}
+        anzhi {dimension "default"}
+        meizu {dimension "default"}
+        xiaomi {dimension "default"}
+        ali {dimension "default"}
+        baidu {dimension "default"}
+        yingyongbao {dimension "default"}
+        huawei {dimension "default"}
+        yingyonghui {dimension "default"}
+        mumayi {dimension "default"}
+        jifeng {dimension "default"}
+        aisi {dimension "default"}
+        sanliuling {dimension "default"}
+        vivo {dimension "default"}
     }
 //批量处理
     productFlavors.all {

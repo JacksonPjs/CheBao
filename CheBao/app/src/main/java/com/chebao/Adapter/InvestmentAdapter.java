@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
 
 /**
  * 创建日期：2018/5/7 on 16:38
- * 描述: 投资记录适配器
+ * 描述: 出借记录适配器
  * 作者:jackson Administrator
  */
 public class InvestmentAdapter extends RecyclerView.Adapter<InvestmentAdapter.ViewHolder> {

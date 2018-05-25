@@ -14,6 +14,7 @@ import com.chebao.R;
 import com.chebao.bean.ProductDetialBean;
 import com.chebao.net.NetService;
 import com.chebao.ui.activity.PicturesLookActivity;
+import com.chebao.ui.activity.PicturesLookNetActivity;
 
 
 import java.util.List;
@@ -73,7 +74,7 @@ public class GirdViewAdapter extends BaseAdapter {
         holder.imgGv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, PicturesLookActivity.class);
+                Intent intent = new Intent(context, PicturesLookNetActivity.class);
                 intent.putExtra("url",NetService.API_SERVER_Photo+d.getAttrPath());
                 context.startActivity(intent);
             }

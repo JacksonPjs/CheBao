@@ -67,7 +67,7 @@ public class InvestSelloutAdapter extends RecyclerView.Adapter<InvestSelloutAdap
 
         holder.xianshi.setBackgroundResource(R.drawable.rect_rounded_left_black);
         holder.title.setText("" + d.getBorrowTitle());
-        holder.tuijiandate.setText("投资期限:" + T1changerString.t2chager(d.getDeadline(), d.getDeadlineType()));
+        holder.tuijiandate.setText("出借期限:" + T1changerString.t2chager(d.getDeadline(), d.getDeadlineType()));
         if (d.getBorrowType()==5){
             holder.tuijianlilv.setText((d.getAnnualRate() - 3) + "%+3%");
             holder.xianshi.setText("限时加息3%");

@@ -70,7 +70,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_margin="@dimen/home_margin"
                 android:background="@drawable/rect_rounded_left_right_arc"
-                android:text="@string/xianshijia"
+                android:text="限时加息2%"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_samll_size"
                 />
@@ -94,7 +94,7 @@
                 android:textColor="@color/black_home_four_midle"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/home_margin"
-                tools:text="年化收益"
+                tools:text="@string/nianhuashouyi"
                 android:text="@string/nianhuashouyi"
                 />
 

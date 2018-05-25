@@ -85,7 +85,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/home_margin"
                 android:background="@mipmap/sell_bg"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone"
+                >
 
                 <TextView
                     style="@style/Home_padding"
@@ -143,7 +145,7 @@
                         android:layout_marginLeft="180dp"
                         android:layout_marginTop="@dimen/home_margin"
                         android:layout_weight="1"
-                        android:text="投资期限：15天"
+                        android:text="@string/touziqixian"
                         android:textColor="@color/black_home_four_midle"
                         android:textSize="@dimen/text_samll_size"
 
@@ -157,7 +159,7 @@
                         android:layout_below="@+id/tuijian_lilv"
                         android:layout_marginTop="@dimen/home_margin"
                         android:layout_weight="1"
-                        android:text="年化收益"
+                        android:text="@string/nianhuashouyi"
                         android:textColor="@color/black_home_four_midle"
                         android:textSize="@dimen/text_samll_size" />
 
@@ -192,6 +194,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/home_margin"
+                android:visibility="gone"
+
                 android:background="@mipmap/sell_bg"
                 android:orientation="vertical">
 
@@ -250,7 +254,7 @@
                         android:layout_marginLeft="180dp"
                         android:layout_marginTop="@dimen/home_margin"
                         android:layout_weight="1"
-                        android:text="投资期限：15天"
+                        android:text="@string/touziqixian"
                         android:textColor="@color/black_home_four_midle"
                         android:textSize="@dimen/text_samll_size"
 
@@ -264,7 +268,7 @@
                         android:layout_below="@+id/yonghu_lilv"
                         android:layout_marginTop="@dimen/home_margin"
                         android:layout_weight="1"
-                        android:text="年化收益"
+                        android:text="@string/nianhuashouyi"
                         android:textColor="@color/black_home_four_midle"
                         android:textSize="@dimen/text_samll_size" />
 

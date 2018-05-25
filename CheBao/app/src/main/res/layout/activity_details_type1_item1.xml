@@ -20,7 +20,7 @@
             app:hintSize="15sp"
             app:startAngle="135"
             app:sweepAngle="270"
-            app:unit="年化收益"
+            app:unit="年化利率"
             app:unitSize="15sp"
             app:valueSize="25sp"
             />

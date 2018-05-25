@@ -89,7 +89,12 @@ public class Fragment_Find_End extends Fragment implements LoadingLayout.OnReloa
                     if (findBean.getState().getStatus() == 0) {
                         biaoBeenList.clear();
                         biaoBeenList.addAll(findBean.getData());
-                        publicLv.setStatus(LoadingLayout.Success);
+                        if (findBean.getData().size()==0){
+                            publicLv.setStatus(LoadingLayout.Empty);
+                        }else {
+                            publicLv.setStatus(LoadingLayout.Success);
+
+                        }
                     } else {
                         publicLv.setStatus(LoadingLayout.Empty);
                     }

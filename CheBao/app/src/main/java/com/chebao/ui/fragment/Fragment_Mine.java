@@ -31,6 +31,7 @@ import com.chebao.ui.activity.TransactionActivity;
 import com.chebao.ui.activity.WithdrawActivity;
 import com.chebao.ui.activity.login2register.LoginActivity;
 import com.chebao.utils.SharedPreferencesUtils;
+import com.pvj.xlibrary.loadinglayout.LoadingLayout;
 import com.pvj.xlibrary.log.Logger;
 import com.pvj.xlibrary.utils.T;
 
@@ -67,6 +68,7 @@ public class Fragment_Mine extends BaseFragment {
     TextView usableamount;
     @Bind(R.id.eye_set)
     ImageView eyeSet;
+
 
     @Bind(R.id.withdraw)
     View withdraw;
@@ -135,7 +137,7 @@ public class Fragment_Mine extends BaseFragment {
 
 
     @OnClick({R.id.count_to, R.id.withdraw, R.id.chager, R.id.touzi_to, R.id.money_to,
-            R.id.measgg_to, R.id.set, R.id.eye_set, R.id.mine_to, R.id.cell_phohe,R.id.xiaoxi})
+            R.id.measgg_to, R.id.set, R.id.eye_set, R.id.mine_to, R.id.cell_phohe, R.id.xiaoxi})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -153,7 +155,7 @@ public class Fragment_Mine extends BaseFragment {
                 break;
 
             case R.id.xiaoxi:
-                intent =new Intent(getActivity(), AnnouncementListActivity.class);
+                intent = new Intent(getActivity(), AnnouncementListActivity.class);
                 startActivity(intent);
                 break;
 
@@ -222,7 +224,7 @@ public class Fragment_Mine extends BaseFragment {
                 break;
 
             case R.id.measgg_to:
-                //投资记录
+                //出借记录
                 intent = new Intent(getActivity(), InvestmentActivity.class);
                 getActivity().startActivity(intent);
                 break;
@@ -238,10 +240,11 @@ public class Fragment_Mine extends BaseFragment {
                     Manifest.permission.CALL_PHONE}, 1);
         } else {
             Intent intent = new Intent(Intent.ACTION_CALL);
-            intent.setData(Uri.parse("tel:"+"4000651520"));
+            intent.setData(Uri.parse("tel:" + "4000651520"));
             startActivity(intent);
         }
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -303,8 +306,8 @@ public class Fragment_Mine extends BaseFragment {
     }
 
     private void netLogin() {
-        String name=SharedPreferencesUtils.getUserName(getContext());
-        String psw=SharedPreferencesUtils.getPassword(getContext());
+        String name = SharedPreferencesUtils.getUserName(getContext());
+        String psw = SharedPreferencesUtils.getPassword(getContext());
 
 
         NetWorks.login(name, psw, new Subscriber<LoginBean>() {

@@ -165,7 +165,7 @@ public class DetailsRegularActivity extends BaseActivity implements CountdownVie
 
         if (d.getBorrowStatus() == 3) {
             buy.setBackgroundColor(this.getResources().getColor(R.color.text_org));
-            buy.setText("立即投资");
+            buy.setText("立即出借");
 
         } else {
             buy.setBackgroundColor(this.getResources().getColor(R.color.bar_clor));
@@ -208,7 +208,6 @@ public class DetailsRegularActivity extends BaseActivity implements CountdownVie
 ////            hitiIslogin.setHint("可用总额:" + (String) SharedPreferencesUtils.getParam(this, "usableAmount", "0"));
 //
 //        } else {
-////            hitiIslogin.setHint("登录后才能投资");
 //        }
 
         //  holder.circleProgressbar.setProgress(T1changerString.progress(d.getBorrowStatus(),d.getHasBorrowAmount(),d.getBorrowAmount()));
@@ -258,7 +257,7 @@ public class DetailsRegularActivity extends BaseActivity implements CountdownVie
         if (bean.getData().getBorrowStatus() == 2) {
             buy.setBackgroundColor(this.getResources().getColor(R.color.text_org));
             buy.setClickable(true);
-            buy.setText("立即投资");
+            buy.setText("立即出借");
         }
 
 

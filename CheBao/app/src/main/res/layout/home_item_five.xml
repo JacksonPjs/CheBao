@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/home_margin"
             android:layout_weight="1"
-            android:text="投资期限：15天"
+            android:text="出借期限：15天"
             android:textColor="@color/black_home_four_midle"
             android:textSize="@dimen/text_samll_size"
 
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/home_margin"
             android:layout_weight="1"
-            android:text="年化收益"
+            android:text="@string/nianhuashouyi"
             android:textColor="@color/black_home_four_midle"
             android:textSize="@dimen/text_samll_size" />
 

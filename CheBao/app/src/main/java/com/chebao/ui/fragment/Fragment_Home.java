@@ -44,6 +44,7 @@ import com.pvj.xlibrary.banner.BannerIndicator;
 import com.pvj.xlibrary.loadinglayout.LoadingLayout;
 import com.pvj.xlibrary.loadinglayout.Utils;
 import com.pvj.xlibrary.log.Logger;
+import com.umeng.analytics.MobclickAgent;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
@@ -231,7 +232,12 @@ public class Fragment_Home extends BaseFragment {
                 Intent intent = new Intent(getActivity(), WebNoTitileActivity.class);
                 intent.putExtra("url", NetService.API_SERVER_Url + drawables.get(position).getUrl());
                 intent.putExtra("title", drawables.get(position).getBannerName());
-                startActivity(intent);
+                if (drawables.get(position).getUrl().endsWith("wechat/index.html")) {
+
+                } else {
+                    startActivity(intent);
+
+                }
 
                 //    T.ShowToastForShort(getActivity(), "第" + position + "图片被点击了");
             }
@@ -287,18 +293,25 @@ public class Fragment_Home extends BaseFragment {
                     didibaolilv.setText(oneBean.getBorrowhqll() + "%+2%");
 
                     data1Bean = oneBean.getData1();
-                    if (data1Bean.getBorrowTitle() == null) {
+                    if (data1Bean == null) {
                         home_five_rl.setVisibility(View.GONE);
-                    }else {
-                        if (data1Bean.getBorrowType()!=5){
+
+                    } else if (data1Bean.getBorrowTitle() == null) {
+                        home_five_rl.setVisibility(View.GONE);
+                    } else {
+                        if (data1Bean.getBorrowType() != 5) {
                             home_five_rl.setVisibility(View.GONE);
 
-                        }else {
+                        } else {
                             //新手标数据
+                            home_five_rl.setVisibility(View.VISIBLE);
+
                             xinshou.setText(data1Bean.getBorrowTitle());
-                            tuijiandate.setText("投资期限:" + T1changerString.t2chager(data1Bean.getDeadline(), data1Bean.getDeadlineType()));
+                            tuijiandate.setText("出借期限:" + T1changerString.t2chager(data1Bean.getDeadline(), data1Bean.getDeadlineType()));
                             lilvTv.setText((data1Bean.getAnnualRate() - 3) + "%+3%");
                             tuijianfangshi.setText("收益方式:" + T1changerString.t4chager(data1Bean.getRepayType()));
+                            handler.sendEmptyMessage(1);
+
                         }
 
                     }
@@ -307,14 +320,17 @@ public class Fragment_Home extends BaseFragment {
                     if (data2Bean == null) {
                         home_six_rl.setVisibility(View.GONE);
                     } else {
-                        if (data2Bean.getBorrowType()!=5){
+                        if (data2Bean.getBorrowType() != 5) {
                             //用户标
                             yonghu.setText(data2Bean.getBorrowTitle());
-                            yonghudate.setText("投资期限:" + T1changerString.t2chager(data2Bean.getDeadline(), data2Bean.getDeadlineType()));
+                            yonghudate.setText("出借期限:" + T1changerString.t2chager(data2Bean.getDeadline(), data2Bean.getDeadlineType()));
                             yonghulilv.setText((data2Bean.getAnnualRate() - 1) + "%+1%");
                             yonghufangshi.setText("收益方式:" + T1changerString.t4chager(data2Bean.getRepayType()));
-                            handler.sendEmptyMessage(1);
-                        }else {
+                            home_six_rl.setVisibility(View.VISIBLE);
+
+                            handler.sendEmptyMessage(2);
+
+                        } else {
                             home_six_rl.setVisibility(View.GONE);
 
                         }
@@ -333,29 +349,28 @@ public class Fragment_Home extends BaseFragment {
 
     Handler handler = new Handler() {
         public void handleMessage(Message msg) {
-            if (msg.what == 1) {
+            switch (msg.what) {
+                case 1:
+                    //通知view，进度值有变化
+                    progressSeek.setProgressValue((int) (data1Bean.getProgress() * 100));
+                    progressSeek.postInvalidate();
 
-                //通知view，进度值有变化
-                progressSeek.setProgressValue((int) (data1Bean.getProgress() * 100));
-                progressSeek.postInvalidate();
-                //通知view，进度值有变化
-                progressSeek.setProgressValue((int) (data1Bean.getProgress() * 100));
-                progressSeek.postInvalidate();
-                double progress = data2Bean.getProgress() * 100;
-                progressBaryonghu.setProgressValue((int) progress);
 
-                progressBaryonghu.postInvalidate();
+                    break;
+                case 2:
 
+                    double progress2 = data2Bean.getProgress() * 100;
+                    progressBaryonghu.setProgressValue((int) progress2);
+
+                    progressBaryonghu.postInvalidate();
+                    break;
             }
+
             super.handleMessage(msg);
         }
 
         ;
     };
-
-    private void initNetData() {
-
-    }
 
 
     private class myThread extends Thread {
@@ -385,13 +400,18 @@ public class Fragment_Home extends BaseFragment {
     @Override
     public void onPause() {
         banner.pauseScroll();
+
         super.onPause();
+        MobclickAgent.onPause(getActivity()); //统计时长
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
         banner.resumeScroll();
+        MobclickAgent.onResume(getActivity()); //统计时长
+
     }
 
 
@@ -439,25 +459,6 @@ public class Fragment_Home extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.gonggao:
-
-//                if (data4Beens == null) {
-//                    return;
-//                }
-//
-//
-//                int i = index - 1;
-//                if (i < 0) {
-//                    i = data4Beens.size() - 1;
-//                }
-//
-//
-//                Logger.d("i=" + i + "lengh=" + data4Beens.size());
-//                OneBean.Data4Bean data4Bean = data4Beens.get(i);
-//
-//                AnnouncementBean.DataBean b = new AnnouncementBean.DataBean();
-//                b.setCreateTime(data4Bean.getCreateTime());
-//                b.setNoticeContent(data4Bean.getNoticeContent());
-//                b.setNoticeTitle(data4Bean.getNoticeTitle());
 
 
                 intent = new Intent(getContext(), AnnouncementListActivity.class);

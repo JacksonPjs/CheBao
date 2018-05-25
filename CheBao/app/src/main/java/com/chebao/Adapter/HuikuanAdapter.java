@@ -48,8 +48,8 @@ public class HuikuanAdapter extends RecyclerView.Adapter<HuikuanAdapter.ViewHold
             holder.date.setText(DateUtils.getStrTime2(b.getRealRepayTime() + ""));
 
         }
-        holder.num.setText("本:"+b.getCapitalAmount()+" 息:"+b.getFeeAmount());
-        BigDecimal s=b.getCapitalAmount().add(b.getFeeAmount());
+        holder.num.setText("本:"+b.getCapitalAmount()+" 息:"+b.getProfitAmount());
+        BigDecimal s=b.getCapitalAmount().add(b.getProfitAmount());
         holder.type.setText(b.getBorrowTitle()+"");
         holder.money.setText(s+"");
 

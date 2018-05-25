@@ -60,7 +60,7 @@ public class Fragment_Invest extends Fragment implements LoadingLayout.OnReloadL
         View rootView = inflater.inflate(R.layout.fragment_invest, null);
         ButterKnife.bind(this, rootView);
         initView();
-        tiltle.setText("投资");
+        tiltle.setText("出借");
         net(0, 0);
         return rootView;
     }
@@ -149,17 +149,17 @@ public class Fragment_Invest extends Fragment implements LoadingLayout.OnReloadL
                     }
 
                 }
-//                else if (stype == 1) {
-//                    if (publicLv.getRefreshCount() == inrefresh) {
-//
-//                        if (biaoBean.getState().getStatus() == 0) {
-//                            biaoBeenList.addAll(biaoBean.getData());
-//                        } else {
-//                            publicLv.setTextEnd();
-//                        }
-//
-//                    }
-//                }
+                else if (stype == 1) {
+                    if (publicLv.getRefreshCount() == inrefresh) {
+
+                        if (biaoBean.getState().getStatus() == 0) {
+                            biaoBeenList.addAll(biaoBean.getData());
+                        } else {
+                            publicLv.setTextEnd();
+                        }
+
+                    }
+                }
                 adapter.notifyDataSetChanged();
             }
 

@@ -50,7 +50,7 @@ public class ChangeLoginPasswordActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_changeoginpassword);
+        setContentView(R.layout.activity_change_loginpsw);
         ButterKnife.bind(this);
 
         title.setText("修改登录密码");

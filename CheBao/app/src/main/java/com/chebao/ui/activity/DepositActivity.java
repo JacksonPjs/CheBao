@@ -8,6 +8,8 @@ import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -72,6 +74,9 @@ public class DepositActivity extends BaseActivity {
     int coupontype = -1;
     String couponId = null;
     double anbleM = 0;
+    @Bind(R.id.cbox)
+    CheckBox checkBox;
+    boolean isCheck=false;
 
 
     @Override
@@ -87,6 +92,12 @@ public class DepositActivity extends BaseActivity {
     private void init() {
         title.setText("购买");
         editText.addTextChangedListener(new DepositActivity.EditTextChangeListener());
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isCheck = isChecked;
+            }
+        });
     }
 
 
@@ -159,6 +170,36 @@ public class DepositActivity extends BaseActivity {
 
             case R.id.buy:
 
+                double money = 0;
+                if (LoginRegisterUtils.isNullOrEmpty(editText)) {
+                    T.ShowToastForShort(DepositActivity.this, "请输入出借金额");
+
+                } else {
+                    money = Double.parseDouble(editText.getText().toString());
+                }
+
+                if (money < bean.getData().getMinInvestAmount()) {
+                    T.ShowToastForShort(DepositActivity.this, "最低出借:" + bean.getData().getMinInvestAmount());
+                    return;
+                }
+
+                double anbleM = Double.parseDouble((String) SharedPreferencesUtils.getParam(DepositActivity.this, "usableAmount", "0"));
+                if (money > anbleM) {
+                    T.ShowToastForShort(DepositActivity.this, "可用余额少于出借金额.请先充值");
+                    return;
+                }
+
+                double able = (bean.getData().getBorrowAmount() - bean.getData().getHasBorrowAmount());
+
+                if (money > able) {
+                    T.ShowToastForShort(DepositActivity.this, "出借金额不能大于剩余额度.");
+                    return;
+                }
+                if (!isCheck){
+                    T.ShowToastForShort(this, "尚未阅读或同意《车宝金融注册服务协议》");
+                    return;
+                }
+
                 final PayDialog payDialog = new PayDialog(this);
                 payDialog.setMsg(editText.getText().toString() + "");
                 payDialog.show();
@@ -166,28 +207,10 @@ public class DepositActivity extends BaseActivity {
                     @Override
                     public void onFinish(String str) {
                         payDialog.dismiss();
-//                        Toast.makeText(PayActivity.this, str, Toast.LENGTH_SHORT).show();
-//                        KeyBoardUtils.hideInputForce(PayActivity.this);
+//
                         isSelect = false;
 
-                        double money = 0;
-                        if (LoginRegisterUtils.isNullOrEmpty(editText)) {
 
-                        } else {
-                            money = Double.parseDouble(editText.getText().toString());
-                        }
-
-//                            if (money < bean.getData().getMinInvestAmount()) {
-//                                T.ShowToastForShort(PayActivity.this, "最低投资:" + bean.getData().getMinInvestAmount());
-//                                return;
-//                            }
-
-//                        double able = (anbleM - money);
-//
-//                        if (money > able) {
-//                            T.ShowToastForShort(DepositActivity.this, "投资金额不能大于剩余额度.");
-//                            return;
-//                        }
                         netPay(str);
 //
 

@@ -45,7 +45,7 @@ public class DiscountListAdapter extends RecyclerView.Adapter<DiscountListAdapte
         DiscountListBean.DisData data = datas.get(position);
         holder.money.setText("￥" + data.getCouponAmount());
         holder.gz1.setText("满" + data.getUseMinMoney() + "元使用");
-        holder.gz2.setText("投资" + data.getUseqx() + "天以上产品");
+        holder.gz2.setText("出借" + data.getUseqx() + "天以上产品");
         holder.gz3.setText(DateUtils.getStrTime3(data.getExpirationDate() + "")+"前使用");
         holder.rl_left.setBackgroundResource(R.mipmap.hongbao_1);
         switch (data.getCouponType()){
