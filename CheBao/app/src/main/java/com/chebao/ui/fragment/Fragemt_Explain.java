@@ -107,6 +107,7 @@ public class Fragemt_Explain extends Fragment {
                 if (b.getState().getStatus() == 0) {
                     layoutContiant.setStatus(LoadingLayout.Success);
                     IntroduceBean.DataBean dataBean=b.getData();
+
                     Spanned text = Html.fromHtml(dataBean.getCollateralInfos());
                     collateralInfos.setText(text);
                     Spanned introductioninfostext = Html.fromHtml(dataBean.getIntroductionInfos());

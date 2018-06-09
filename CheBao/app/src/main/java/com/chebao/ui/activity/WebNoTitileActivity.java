@@ -2,6 +2,7 @@ package com.chebao.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.ViewGroup;
@@ -68,20 +69,36 @@ public class WebNoTitileActivity extends BaseActivity {
                 }
             }
         });
+
+
+        WebSettings settings=webView.getSettings();
+        settings.setUseWideViewPort(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setSupportZoom(false);
+        settings.setBuiltInZoomControls(false);
+
+
+
         webView.setWebViewClient(new WebViewClient());
-        webView.getSettings().setBuiltInZoomControls(true);
+
+
+
         webView.getSettings().setJavaScriptEnabled(true);
+
+
         webView.getSettings().setDomStorageEnabled(true);
         webView.getSettings().setDatabaseEnabled(true);
         webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         webView.addJavascriptInterface(new JavaScriptObject(this), "enduoApp");
+        webView.getSettings().setUseWideViewPort(true); //设置加载进来的页面自适应手机屏幕（可缩放）
+        webView.getSettings().setLoadWithOverviewMode(true);
 
         webView.getSettings().setAppCacheEnabled(true);
 
-//        webView.getSettings().setBlockNetworkImage(false); // 解决图片不显示
-//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ){
-//            webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-//        }
+        webView.getSettings().setBlockNetworkImage(false); // 解决图片不显示
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ){
+            webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
 
         webView.loadUrl(url);
     }

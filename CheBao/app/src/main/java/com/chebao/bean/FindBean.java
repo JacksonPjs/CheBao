@@ -11,6 +11,7 @@ public class FindBean {
 
 
     private StateBean state;
+    private pageBean page;
 
     private List<FindBean.DataBean> list;
 
@@ -30,6 +31,14 @@ public class FindBean {
 
     public void setData(List<DataBean> data) {
         this.list = data;
+    }
+
+    public pageBean getPage() {
+        return page;
+    }
+
+    public void setPage(pageBean page) {
+        this.page = page;
     }
 
     public static class StateBean {
@@ -57,7 +66,22 @@ public class FindBean {
             this.status = status;
         }
     }
+    public static class pageBean {
+        /**
+         * "page":{"endRow":3,"firstPage":true,"hasNextPage":false,"hasPrePage":false,"lastPage":true,"limit":10,"nextPage":1,"offset":0,"page":1,"prePage":1,
+         * "slider":[1],"startRow":1,"totalCount":3,"totalPages":1}}
+         */
 
+        private boolean hasNextPage;
+
+        public boolean isHasNextPage() {
+            return hasNextPage;
+        }
+
+        public void setHasNextPage(boolean hasNextPage) {
+            this.hasNextPage = hasNextPage;
+        }
+    }
 
     public static class DataBean {
        private String activityBS;

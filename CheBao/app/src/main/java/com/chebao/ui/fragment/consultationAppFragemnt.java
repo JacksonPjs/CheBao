@@ -126,7 +126,7 @@ public class consultationAppFragemnt extends Fragment implements LoadingLayout.O
 
 
         adapter = new ConsultationAdapter(biaoBeenList, getActivity());
-        publicLv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+//        publicLv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         publicLv.verticalLayoutManager(getContext())
                 .setAdapter(adapter)
                 .setOnReloadListener(this)

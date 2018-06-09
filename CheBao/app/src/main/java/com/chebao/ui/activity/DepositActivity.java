@@ -1,5 +1,6 @@
 package com.chebao.ui.activity;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.chebao.App.Constant;
 import com.chebao.R;
 import com.chebao.bean.BorrowDetailBean;
 import com.chebao.bean.DepositBean;
@@ -23,6 +25,7 @@ import com.chebao.bean.PayBean;
 import com.chebao.net.NetService;
 import com.chebao.net.NetWorks;
 import com.chebao.ui.activity.login2register.LoginActivity;
+import com.chebao.utils.IntentUtils;
 import com.chebao.utils.LoginRegisterUtils;
 import com.chebao.utils.P2pUtils;
 import com.chebao.utils.PayWordsUtils;
@@ -67,7 +70,6 @@ public class DepositActivity extends BaseActivity {
 
     String id;
     Dialog dialogPay;
-    BorrowDetailBean bean;
     boolean isSelect = false;
 
     String amout;
@@ -76,7 +78,8 @@ public class DepositActivity extends BaseActivity {
     double anbleM = 0;
     @Bind(R.id.cbox)
     CheckBox checkBox;
-    boolean isCheck=false;
+    boolean isCheck = false;
+    Activity activity;
 
 
     @Override
@@ -84,6 +87,7 @@ public class DepositActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deposit);
         ButterKnife.bind(this);
+        activity = this;
         init();
         net();
 
@@ -160,9 +164,9 @@ public class DepositActivity extends BaseActivity {
 
                 break;
             case R.id.fuwutiaolie:
-                intent = new Intent(this, WebActivity.class);
+                intent = new Intent(this, WebNoTitileActivity.class);
                 intent.putExtra("url", NetService.API_SERVER_Url + "wechat/showAgreementAPP.html");
-                intent.putExtra("title", "认购协议");
+//                intent.putExtra("title", "认购协议");
                 startActivity(intent);
 
                 break;
@@ -172,30 +176,32 @@ public class DepositActivity extends BaseActivity {
 
                 double money = 0;
                 if (LoginRegisterUtils.isNullOrEmpty(editText)) {
-                    T.ShowToastForShort(DepositActivity.this, "请输入出借金额");
+                    T.ShowToastForShort(DepositActivity.this, "请输入存入金额");
+                    return;
 
                 } else {
                     money = Double.parseDouble(editText.getText().toString());
                 }
-
-                if (money < bean.getData().getMinInvestAmount()) {
-                    T.ShowToastForShort(DepositActivity.this, "最低出借:" + bean.getData().getMinInvestAmount());
+                if (!(Boolean) SharedPreferencesUtils.getParam(this, "payPwd", false)) {
+                    T.ShowToastForShort(activity, "请先设置交易密码");
+                    IntentUtils.ToastIntent(activity, Constant.PAY_NO_PAYPSW);
                     return;
                 }
-
                 double anbleM = Double.parseDouble((String) SharedPreferencesUtils.getParam(DepositActivity.this, "usableAmount", "0"));
                 if (money > anbleM) {
-                    T.ShowToastForShort(DepositActivity.this, "可用余额少于出借金额.请先充值");
+                    if (!SharedPreferencesUtils.getIsBank(activity)) {
+                        T.ShowToastForShort(activity, "交易需要先绑定银行卡");
+                        IntentUtils.ToastIntent(activity, Constant.PAY_NO_BANK);
+                        return;
+
+                    }
+                    T.ShowToastForShort(DepositActivity.this, "可用余额少于存入金额.请先充值");
+                    IntentUtils.ToastIntent(activity, Constant.PAY_NO_MONEY);
                     return;
                 }
 
-                double able = (bean.getData().getBorrowAmount() - bean.getData().getHasBorrowAmount());
 
-                if (money > able) {
-                    T.ShowToastForShort(DepositActivity.this, "出借金额不能大于剩余额度.");
-                    return;
-                }
-                if (!isCheck){
+                if (!isCheck) {
                     T.ShowToastForShort(this, "尚未阅读或同意《车宝金融注册服务协议》");
                     return;
                 }
@@ -325,16 +331,16 @@ public class DepositActivity extends BaseActivity {
 
             @Override
             public void onNext(DepositBean o) {
-                ToastDialog.Builder builder=new ToastDialog.Builder(DepositActivity.this);
+                ToastDialog.Builder builder = new ToastDialog.Builder(DepositActivity.this);
 //                    LoodDialog.dismiss();
 //                    LoodDialog.cancel();
                 if (o.getState().getStatus().equals("y")) {
                     T.ShowToastForShort(DepositActivity.this, o.getState().getInfo());
-                    builder.setMessage(""+o.getState().getInfo());
+                    builder.setMessage("" + o.getState().getInfo());
                     builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            tv_money.setText("" + SharedPreferencesUtils.getParam(DepositActivity.this, "usableAmount", "0")+"元");
+                            tv_money.setText("" + SharedPreferencesUtils.getParam(DepositActivity.this, "usableAmount", "0") + "元");
                             editText.setText("");
                             dialog.dismiss();
                             finish();
@@ -344,17 +350,16 @@ public class DepositActivity extends BaseActivity {
                     builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            tv_money.setText("" + SharedPreferencesUtils.getParam(DepositActivity.this, "usableAmount", "0")+"元");
+                            tv_money.setText("" + SharedPreferencesUtils.getParam(DepositActivity.this, "usableAmount", "0") + "元");
                             editText.setText("");
                             dialog.dismiss();
                             finish();
                         }
                     });
-                    builder.setMessage(""+o.getState().getInfo());
+                    builder.setMessage("" + o.getState().getInfo());
 //                        T.ShowToastForShort(PayActivity.this, o.getInfo());
                 }
                 builder.create().show();
-
 
 
             }

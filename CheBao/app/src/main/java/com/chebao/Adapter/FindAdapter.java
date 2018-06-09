@@ -14,9 +14,7 @@ import com.bumptech.glide.Glide;
 import com.chebao.R;
 import com.chebao.bean.FindBean;
 import com.chebao.net.NetService;
-import com.chebao.ui.activity.WebActivity;
-import com.chebao.ui.activity.WebActivityJS;
-import com.chebao.ui.activity.login2register.LoginActivity;
+import com.chebao.ui.activity.WebNoTitileActivity;
 
 import java.util.List;
 
@@ -31,11 +29,12 @@ import butterknife.ButterKnife;
 public class FindAdapter extends RecyclerView.Adapter<FindAdapter.ViewHolder> {
     private List<FindBean.DataBean> datas;
     private Context context;
+    private  int type=0;
 
-
-    public FindAdapter(List<FindBean.DataBean> datas, Context context) {
+    public FindAdapter(List<FindBean.DataBean> datas, Context context, int i) {
         this.datas = datas;
         this.context = context;
+        type=i;
     }
 
     @Override
@@ -49,22 +48,29 @@ public class FindAdapter extends RecyclerView.Adapter<FindAdapter.ViewHolder> {
         final FindBean.DataBean dataBean=datas.get(position);
         holder.title.setText(dataBean.getActivityName()+"");
         String url= NetService.API_SERVER_Photo+dataBean.getActivityImg()+"";
+        if (type==0){
+            holder.title.setBackgroundResource(R.drawable.shape_left_round);
+        }else {
+            holder.title.setBackgroundResource(R.drawable.shape_find_view);
 
+        }
 
-        Glide.with(context).load(url)
-                .error(R.mipmap.error).placeholder(R.mipmap.error).
-                into(holder.imageView);
+        Glide.with(context).
+                load(url)
+                .error(R.mipmap.error)
+                .placeholder(R.mipmap.error)
+                .crossFade()
+                .into(holder.imageView);
         holder.Head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, WebActivity.class);
+                Intent intent=new Intent(context, WebNoTitileActivity.class);
                 intent.putExtra("url",dataBean.getActivityWapSrc());
                 context.startActivity(intent);
             }
         });
 
 
-        //  holder.circleProgressbar.setProgressNotInUiThread(80);
 
 
     }

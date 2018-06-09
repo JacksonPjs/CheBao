@@ -1,5 +1,6 @@
 package com.chebao.ui.activity;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.chebao.App.Constant;
 import com.chebao.MyApplication;
 import com.chebao.R;
 import com.chebao.bean.BankListBean;
@@ -18,6 +20,7 @@ import com.chebao.bean.RansomBean;
 import com.chebao.net.NetService;
 import com.chebao.net.NetWorks;
 import com.chebao.utils.DialogUtils;
+import com.chebao.utils.IntentUtils;
 import com.chebao.utils.LoginRegisterUtils;
 import com.chebao.utils.SharedPreferencesUtils;
 import com.chebao.widget.dialog.ToastDialog;
@@ -64,6 +67,7 @@ public class RansomActivity extends BaseActivity {
     Dialog dialog;
 
     double maxMoney;
+    Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +75,7 @@ public class RansomActivity extends BaseActivity {
         setContentView(R.layout.activity_ransom);
         ButterKnife.bind(this);
         title.setText("赎回");
+        activity=this;
         netList();
         MyApplication.instance.addActivity(this);
 
@@ -134,7 +139,11 @@ public class RansomActivity extends BaseActivity {
                     T.ShowToastForShort(RansomActivity.this, "交易密码未输入");
                     return;
                 }
-
+                if (!(Boolean) SharedPreferencesUtils.getParam(this, "payPwd", false)) {
+                    T.ShowToastForShort(activity, "请先设置交易密码");
+                    IntentUtils.ToastIntent(activity, Constant.PAY_NO_PAYPSW);
+                    return;
+                }
 
                 net(tMoeny, tShouyi);
                 break;
@@ -175,7 +184,7 @@ public class RansomActivity extends BaseActivity {
                     @Override
                     public void onResponse(String o) {
                         Logger.json(o);
-                        ToastDialog.Builder builder=new ToastDialog.Builder(RansomActivity.this);
+                        ToastDialog.Builder builder = new ToastDialog.Builder(RansomActivity.this);
 
                         dialog.dismiss();
                         try {
@@ -184,9 +193,9 @@ public class RansomActivity extends BaseActivity {
                             JSONObject sata = json.getJSONObject("state");
 
                             String s = sata.getString("status");
-                            if (s .equals("y")) {
+                            if (s.equals("y")) {
 
-                                builder.setMessage(""+sata.getString("info"));
+                                builder.setMessage("" + sata.getString("info"));
                                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -198,7 +207,7 @@ public class RansomActivity extends BaseActivity {
 //                                dialog.dismiss();
 //                                finish();
                             } else {
-                                builder.setMessage(""+sata.getString("info"));
+                                builder.setMessage("" + sata.getString("info"));
                                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {

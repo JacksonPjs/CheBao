@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+        <include layout="@layout/titlebar_back"></include>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:padding="@dimen/home_margin"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/day_rl"
+                >
+
+                <TextView
+                    android:id="@+id/day_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:layout_centerHorizontal="true"
+                    android:text="存入"
+                    android:textColor="@color/org_home"
+                    android:textSize="@dimen/text_size" />
+
+                <ImageView
+                    android:id="@+id/putong_view"
+                    android:layout_width="35dp"
+                    android:layout_height="3dp"
+                    android:layout_below="@+id/day_text"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp"
+                    android:background="@color/org_home"
+                    tools:visibility="visible"></ImageView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/month_rl"
+                >
+
+                <TextView
+                    android:id="@+id/month_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="赎回"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/black_home_four_midle"
+                    android:textSize="@dimen/text_size" />
+
+                <ImageView
+                    android:id="@+id/month_team"
+                    android:layout_width="35dp"
+                    android:layout_height="3dp"
+                    android:layout_below="@+id/month_text"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp"
+                    android:background="@color/org_home"
+                    android:visibility="invisible"></ImageView>
+
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            ></android.support.v4.view.ViewPager>
+
+
+</LinearLayout>

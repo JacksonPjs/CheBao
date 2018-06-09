@@ -12,6 +12,7 @@ import com.chebao.bean.CertificationBean;
 import com.chebao.bean.ChagerBean;
 import com.chebao.bean.ConsultationBean;
 import com.chebao.bean.DepositBean;
+import com.chebao.bean.DepositListBean;
 import com.chebao.bean.DidibaoBean;
 import com.chebao.bean.DiscountListBean;
 import com.chebao.bean.FindBean;
@@ -26,6 +27,7 @@ import com.chebao.bean.LoginBean;
 import com.chebao.bean.OneBean;
 import com.chebao.bean.PayBean;
 import com.chebao.bean.ProductDetialBean;
+import com.chebao.bean.RandomListBean;
 import com.chebao.bean.RansomBean;
 import com.chebao.bean.WithdrawBean;
 
@@ -38,17 +40,14 @@ import rx.Observable;
 public interface NetService {
 
 
-
-
     //服务器路径
-//    public static final String API_SERVER = "http://192.168.1.171:8080/jp/app/";//测试地址
+//    public static final String API_SERVER = "http://192.168.1.149:8080/jp/app/";//测试地址
 
 
-        public static  String API_SERVER = "http://www.chebaojr.com/app/";  //上线地址
+    public static String API_SERVER = "http://www.chebaojr.com/app/";  //上线地址
     //网址路径
-//    public static final String API_SERVER_Url = "http://192.168.1.171:8080/jp/";
-    public static  String API_SERVER_Url = "http://www.chebaojr.com/";
-
+//    public static final String API_SERVER_Url = "http://192.168.1.149:8080/jp/";
+    public static String API_SERVER_Url = "http://www.chebaojr.com/";
 
 
     //主程序地址
@@ -93,7 +92,8 @@ public interface NetService {
      */
     @POST("bfpay/investAjaxBorrow.html")
     Observable<PayBean> investAjaxBorrow(@Query("Cookie") String Cookie, @Query("tradingPassword") String tradingPassword,
-                                         @Query("investAmount") String investAmount, @Query("borrowId") String borrowId, @Query("coupontype") Integer coupontype,
+                                         @Query("investAmount") String investAmount, @Query("borrowId") String borrowId,
+                                         @Query("coupontype") Integer coupontype,
                                          @Query("couponId") String couponId);
 
     /**
@@ -115,7 +115,9 @@ public interface NetService {
      * 4.注册
      */
     @POST("regist.html")
-    Observable<InfoBean> regist(@Query("cellPhone") String cellPhone, @Query("pwd") String pwd, @Query("regCode") String regCode, @Query("regReferee") String regReferee);
+    Observable<InfoBean> regist(@Query("cellPhone") String cellPhone, @Query("pwd") String pwd,
+                                @Query("regCode") String regCode, @Query("regReferee") String regReferee,
+                                @Query("channelbs") String channel_name);
 
     /**
      * 找回密码
@@ -193,7 +195,7 @@ public interface NetService {
      * 产品出借记录
      */
     @POST("borrowInvestList.html")
-    Observable<InvestmentBean> borrowInvestList(@Query("borrowId") String borrowId,
+    Observable<InvestmentBean> borrowInvestList(@Query("borrowId") String borrowId,@Query("result") String borrowStatus,
                                                 @Query("curPage") String curPage, @Query("pageSize") String pageSize);
 
     /**
@@ -360,13 +362,15 @@ public interface NetService {
      */
     @POST("ajaxgetuseryhq.html")
     Observable<DiscountListBean> ajaxgetuseryhq(@Query("couponAmount") String couponAmount, @Query("useqx") String useqx, @Query("rqlx") String rqlx);
- /**
+
+    /**
      * 存入
      *
      * @return
      */
     @POST("applicationForm.html")
     Observable<DepositBean> applicationForm(@Query("investmoney") String investmoney, @Query("tradingPassword") String tradingPassword);
+
     /**
      * 存入准备
      *
@@ -374,6 +378,23 @@ public interface NetService {
      */
     @POST("didiPurchaseInfo.html")
     Observable<InfoBean> didiPurchaseInfo();
+
+    /**
+     * 赎回记录
+     *
+     * @return
+     */
+    @POST("appRedemptionRecord.html")
+    Observable<RandomListBean> appRedemptionRecord( @Query("Cookie") String Cookie, @Query("curPage") String curPage);
+
+    /**
+     * 存入记录
+     *
+     * @return
+     */
+    @POST("appInvestHqRecord.html")
+    Observable<DepositListBean> appInvestHqRecord(@Query("Cookie") String Cookie, @Query("curPage") String curPage);
+
 
     /**
      * 版本升级

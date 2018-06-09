@@ -87,9 +87,9 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:padding="10dp"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginLeft="@dimen/home_margin"
             >
             <ImageView
                 android:layout_width="wrap_content"
@@ -99,10 +99,10 @@
                 />
 
             <EditText
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp"
+                android:layout_weight="3"
+                android:padding="@dimen/home_margin"
                 android:background="@null"
                 android:hint="验证码"
                 android:inputType="text"
@@ -114,28 +114,20 @@
 
                 android:id="@+id/code" />
 
-            <View
-                android:layout_width="1px"
-                android:layout_height="match_parent"
-                android:background="@color/xixian" />
 
             <ImageView
                 android:id="@+id/code_img"
-                android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
                 android:textSize="@dimen/text_15_size"
                 android:gravity="center"
+                android:paddingTop="@dimen/home_margin"
+                android:paddingBottom="@dimen/home_margin"
                 android:text="发送验证码"
                 android:textColor="@color/org_home"
                 />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="看不清"
-                android:padding="@dimen/home_margin"
-                android:id="@+id/code_again"
-                />
+
 
         </LinearLayout>
         <TextView

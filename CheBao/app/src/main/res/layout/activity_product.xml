@@ -34,7 +34,7 @@
                     android:background="@color/white"
                     android:gravity="center"
                     android:layout_centerHorizontal="true"
-                    android:text="产品介绍"
+                    android:text="产品信息"
                     android:textColor="@color/org_home"
                     android:textSize="@dimen/text_size" />
 

@@ -51,11 +51,20 @@ public class PayBean {
     public static class StateBean {
         /**
          * info : 实名成功
-         * status : 0
+         * status : "7"
+         *
          */
 
         private String info;
-        private int status;
+        String status;
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
 
         public String getInfo() {
             return info;
@@ -65,13 +74,7 @@ public class PayBean {
             this.info = info;
         }
 
-        public int getStatus() {
-            return status;
-        }
 
-        public void setStatus(int status) {
-            this.status = status;
-        }
     }
 }
 

@@ -43,10 +43,10 @@ public class BuyNotesAdapter extends RecyclerView.Adapter<BuyNotesAdapter.ViewHo
         holder.num.setText(b.getInvestAmount() + "元");
         if(b.getUserName().length()==11){
             String str = b.getUserName();
-            String ss = str.substring(0,str.length()-(str.substring(1)).length())+"*********"+str.substring(10);
-            holder.name.setText(ss);
+            String ss = str.substring(0,str.length()-(str.substring(3)).length())+"*********"+str.substring(7);
+            holder.name.setText("用户名:"+ss);
         }else{
-            holder.name.setText(b.getUserName());
+            holder.name.setText("用户名:"+b.getUserName());
         }
 
         holder.date.setText(DateUtils.getStrTime2(b.getInvestTime() + ""));

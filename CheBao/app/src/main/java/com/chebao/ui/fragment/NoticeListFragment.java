@@ -126,7 +126,7 @@ public class NoticeListFragment extends Fragment implements LoadingLayout.OnRelo
 
 
         adapter = new AnnouncementAdapter(biaoBeenList, getActivity());
-        publicLv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+//        publicLv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         publicLv.verticalLayoutManager(getContext())
                 .setAdapter(adapter)
                 .setOnReloadListener(this)

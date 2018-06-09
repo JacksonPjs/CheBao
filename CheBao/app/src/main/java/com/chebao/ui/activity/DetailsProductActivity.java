@@ -1,6 +1,7 @@
 package com.chebao.ui.activity;
 
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,10 +13,13 @@ import android.widget.TextView;
 import com.chebao.Adapter.ViewPagerFramentAdapter;
 import com.chebao.R;
 import com.chebao.bean.BorrowDetailBean;
+import com.chebao.ui.activity.login2register.LoginActivity;
 import com.chebao.ui.fragment.Fragemt_Explain;
 import com.chebao.ui.fragment.Fragemt_Notes;
 import com.chebao.ui.fragment.Fragment_Data;
+import com.chebao.utils.SharedPreferencesUtils;
 import com.pvj.xlibrary.loadinglayout.Utils;
+import com.pvj.xlibrary.utils.T;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -61,12 +65,15 @@ public class DetailsProductActivity extends BaseActivity implements ViewPager.On
     String id;
     int borrowStatus;
     boolean flag;
+    Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
         ButterKnife.bind(this);
+        activity=this;
+        title.setText("产品介绍");
         init();
     }
 
@@ -80,7 +87,7 @@ public class DetailsProductActivity extends BaseActivity implements ViewPager.On
         viewPagerFramentAdapter = new ViewPagerFramentAdapter(getSupportFragmentManager(), fragmentList);
         viewPager.setAdapter(viewPagerFramentAdapter);
         viewPager.setOnPageChangeListener(this);
-
+        borrowStatus=bean.getData().getBorrowStatus();
         Fragemt_Explain fragment_day1 = new Fragemt_Explain();
         Bundle bundle1 = new Bundle();
 //                    bundle1.putSerializable("data", (Serializable) oneBean);
@@ -164,12 +171,21 @@ public class DetailsProductActivity extends BaseActivity implements ViewPager.On
                 finish();
                 break;
             case R.id.buy:
-                intent=new Intent(this,PayActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("bean", (Serializable) bean);
-                bundle.putString("id", id + "");
-                intent.putExtras(bundle);
-                startActivity(intent);
+
+                if ((Boolean) SharedPreferencesUtils.getParam(this, "islogin", false)) {
+                    intent = new Intent(this, PayActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("bean", (Serializable) bean);
+                    bundle.putString("id", id + "");
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                } else {
+                    intent = new Intent(activity, LoginActivity.class);
+                    startActivity(intent);
+                    T.ShowToastForLong(activity, "未登录");
+
+                }
+
                 break;
             case R.id.day_rl:
                 viewPager.setCurrentItem(0);

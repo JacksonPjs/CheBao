@@ -309,10 +309,26 @@ public class Fragment_Home extends BaseFragment {
                             xinshou.setText(data1Bean.getBorrowTitle());
                             tuijiandate.setText("出借期限:" + T1changerString.t2chager(data1Bean.getDeadline(), data1Bean.getDeadlineType()));
                             lilvTv.setText((data1Bean.getAnnualRate() - 3) + "%+3%");
-                            tuijianfangshi.setText("收益方式:" + T1changerString.t4chager(data1Bean.getRepayType()));
+                            tuijianfangshi.setText("计息方式:" + T1changerString.t4chager(data1Bean.getRepayType()));
                             handler.sendEmptyMessage(1);
 
                         }
+
+                    }
+                    switch (data1Bean.getBorrowStatus()) {
+                        case 2:
+                            home_five_rl.setVisibility(View.VISIBLE);
+                            break;
+                        case 3:
+                            home_five_rl.setVisibility(View.VISIBLE);
+                            break;
+                        case 4:
+                            home_five_rl.setVisibility(View.VISIBLE);
+                            break;
+                        default:
+                            home_five_rl.setVisibility(View.GONE);
+
+                            break;
 
                     }
 
@@ -325,7 +341,7 @@ public class Fragment_Home extends BaseFragment {
                             yonghu.setText(data2Bean.getBorrowTitle());
                             yonghudate.setText("出借期限:" + T1changerString.t2chager(data2Bean.getDeadline(), data2Bean.getDeadlineType()));
                             yonghulilv.setText((data2Bean.getAnnualRate() - 1) + "%+1%");
-                            yonghufangshi.setText("收益方式:" + T1changerString.t4chager(data2Bean.getRepayType()));
+                            yonghufangshi.setText("计息方式:" + T1changerString.t4chager(data2Bean.getRepayType()));
                             home_six_rl.setVisibility(View.VISIBLE);
 
                             handler.sendEmptyMessage(2);
@@ -434,8 +450,12 @@ public class Fragment_Home extends BaseFragment {
 //                intent =new Intent(getActivity(), WebActivity.class);
 //                intent.putExtra("url","http://www.jq22.com/");
 //                startActivity(intent);
+
                 intent = new Intent(getActivity(), AboutActivity.class);
+                intent.putExtra("url", NetService.API_SERVER_Url + "wechat/aboutUs.html");
                 startActivity(intent);
+//                intent = new Intent(getActivity(), AboutActivity.class);
+//                startActivity(intent);
                 break;
             case R.id.re_weixin1:
                 intent = new Intent(getActivity(), WebNoTitileActivity.class);

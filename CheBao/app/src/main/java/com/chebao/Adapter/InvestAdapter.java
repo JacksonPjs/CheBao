@@ -89,7 +89,7 @@ public class InvestAdapter extends RecyclerView.Adapter<InvestAdapter.ViewHolder
 
         }
 
-        holder.tuijianfangshi.setText("收益方式:" + T1changerString.t4chager(d.getRepayType()));
+        holder.tuijianfangshi.setText("计息方式:" + T1changerString.t4chager(d.getRepayType()));
 
         if (flag==Constant.INVESTING){
             holder.invest_item_rl.setBackground(context.getResources().getDrawable(R.mipmap.sell_bg));

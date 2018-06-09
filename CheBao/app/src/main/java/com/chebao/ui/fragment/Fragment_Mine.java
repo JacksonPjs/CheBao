@@ -1,7 +1,6 @@
 package com.chebao.ui.fragment;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -9,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +16,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chebao.App.Constant;
 import com.chebao.R;
 import com.chebao.bean.CenterIndexBean;
 import com.chebao.bean.LoginBean;
 import com.chebao.net.NetWorks;
 import com.chebao.ui.activity.Activity_discount;
 import com.chebao.ui.activity.AnnouncementListActivity;
-import com.chebao.ui.activity.ChagerActivity;
+import com.chebao.ui.activity.mine.ChagerActivity;
 import com.chebao.ui.activity.HuiKuanActivity;
 import com.chebao.ui.activity.InvestmentActivity;
 import com.chebao.ui.activity.MyActivtity;
@@ -30,8 +31,10 @@ import com.chebao.ui.activity.SecurityActivity;
 import com.chebao.ui.activity.TransactionActivity;
 import com.chebao.ui.activity.WithdrawActivity;
 import com.chebao.ui.activity.login2register.LoginActivity;
+import com.chebao.ui.activity.mine.ShareActivity;
+import com.chebao.utils.IntentUtils;
+import com.chebao.utils.PermissionsManager;
 import com.chebao.utils.SharedPreferencesUtils;
-import com.pvj.xlibrary.loadinglayout.LoadingLayout;
 import com.pvj.xlibrary.log.Logger;
 import com.pvj.xlibrary.utils.T;
 
@@ -74,6 +77,7 @@ public class Fragment_Mine extends BaseFragment {
     View withdraw;
     boolean IsGone = false;
 
+
     /**
      * find view from layout and set listener
      *
@@ -95,7 +99,6 @@ public class Fragment_Mine extends BaseFragment {
 
     public void init() {
 
-
     }
 
     /**
@@ -106,6 +109,26 @@ public class Fragment_Mine extends BaseFragment {
 
     }
 
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+
+        if (grantResults != null && grantResults.length > 0) {
+            switch (requestCode) {
+                case 1:
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        call();
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
 
     @Override
     public void onResume() {
@@ -137,10 +160,15 @@ public class Fragment_Mine extends BaseFragment {
 
 
     @OnClick({R.id.count_to, R.id.withdraw, R.id.chager, R.id.touzi_to, R.id.money_to,
-            R.id.measgg_to, R.id.set, R.id.eye_set, R.id.mine_to, R.id.cell_phohe, R.id.xiaoxi})
+            R.id.measgg_to, R.id.set, R.id.eye_set, R.id.mine_to, R.id.cell_phohe, R.id.xiaoxi,
+            R.id.certification_go, R.id.share_to})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
+            case R.id.certification_go:
+                intent = new Intent(getActivity(), SecurityActivity.class);
+                startActivity(intent);
+                break;
             case R.id.cell_phohe:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
                         && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE)
@@ -204,6 +232,9 @@ public class Fragment_Mine extends BaseFragment {
                     getActivity().startActivity(intent);
                 } else {
                     T.ShowToastForShort(getContext(), "充值前，需要添加银行卡.");
+                    IntentUtils.ToastIntent(getActivity(), Constant.PAY_NO_BANK);
+
+
                 }
 
                 break;
@@ -213,6 +244,8 @@ public class Fragment_Mine extends BaseFragment {
                     intent = new Intent(getActivity(), WithdrawActivity.class);
                     getActivity().startActivity(intent);
                 } else {
+                    IntentUtils.ToastIntent(getActivity(), Constant.PAY_NO_BANK);
+
                     T.ShowToastForShort(getContext(), "提现前，需要添加银行卡.");
                 }
 
@@ -226,6 +259,10 @@ public class Fragment_Mine extends BaseFragment {
             case R.id.measgg_to:
                 //出借记录
                 intent = new Intent(getActivity(), InvestmentActivity.class);
+                getActivity().startActivity(intent);
+                break;
+            case R.id.share_to:
+                intent = new Intent(getActivity(), ShareActivity.class);
                 getActivity().startActivity(intent);
                 break;
 
@@ -245,22 +282,6 @@ public class Fragment_Mine extends BaseFragment {
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (grantResults != null && grantResults.length > 0) {
-            switch (requestCode) {
-                case 1:
-                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                        call();
-                    }
-                    break;
-
-                default:
-                    break;
-            }
-        }
-    }
 
     @Override
     public void onHiddenChanged(boolean hidden) {

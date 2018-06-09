@@ -180,7 +180,15 @@
 
                 </LinearLayout>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/withdraw_tip_xian"
+                    android:textColor="@color/org_home"
+                    android:textSize="@dimen/text_12_size"
+                    android:padding="@dimen/home_margin"
 
+                    />
 
                 <Button
                     android:id="@+id/calculator_go"

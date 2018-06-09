@@ -37,7 +37,7 @@
             android:layout_marginTop="@dimen/home_margin"
             android:layout_weight="1"
             android:text="7.8%+2%"
-            android:textColor="@color/black_home_four_larger"
+            android:textColor="@color/num_color"
             android:textSize="@dimen/text_large_size"
             tools:text="7.8%+2%" />
 
@@ -74,7 +74,7 @@
             android:layout_alignStart="@+id/data"
             android:layout_alignTop="@+id/text"
             android:layout_weight="1"
-            android:text="收益方式：满标计息，到期还本息"
+            android:text="利息方式：满标计息，到期还本息"
             android:textColor="@color/black_home_four_midle"
             android:textSize="@dimen/text_samll_size" />
 
@@ -251,7 +251,7 @@
             android:id="@+id/earnings1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="预期收益:"
+            android:text="预期利息:"
             android:textColor="@color/text_huise" />
     <LinearLayout
         android:layout_width="wrap_content"
@@ -315,7 +315,7 @@
                 android:id="@+id/fuwutiaolie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="《车保金融点对点借款合同》"
+                android:text="《车宝金融点对点借款合同》"
                 android:textSize="@dimen/text_samll_size"
                 android:textColor="@color/org_home" />
         </LinearLayout>
@@ -337,7 +337,7 @@
             android:layout_gravity="bottom"
             android:background="@color/org_home"
             android:gravity="center"
-            android:text="立即购买"
+            android:text="立即出借"
             android:textColor="#fff" />
 
     </LinearLayout>

@@ -269,9 +269,21 @@ public class CertificationActivity extends BaseActivity {
             @Override
             public void onNext(CertificationBean s) {
                 if (s.getState().getStatus() == 0 | s.getState().getStatus() == 31) {
-                    userName.setText(s.getTPerson().getRealName());
+                    String realName=s.getTPerson().getRealName();
+                    String rn=realName.substring(0,1);
+                    String aa = s.getTPerson().getCardNo();
+                    int n = 4;
+
+                    if (aa.length() > 4) {
+                        String b = aa.substring(aa.length() - n, aa.length());
+                        String s1=aa.substring(0,4);
+                        sfz.setText(s1+" **** **** **** " + b);
+                    } else {
+                        sfz.setText("**** **** **** " + aa);
+                    }
+                    userName.setText(rn+"**");
                     userName.setKeyListener(null);
-                    sfz.setText(s.getTPerson().getCardNo());
+//                    sfz.setText(s.getTPerson().getCardNo());
                     sfz.setKeyListener(null);
                     loadinglayout.setStatus(LoadingLayout.Success);
 

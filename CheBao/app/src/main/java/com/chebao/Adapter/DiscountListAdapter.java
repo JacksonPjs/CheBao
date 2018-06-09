@@ -49,10 +49,13 @@ public class DiscountListAdapter extends RecyclerView.Adapter<DiscountListAdapte
         holder.gz3.setText(DateUtils.getStrTime3(data.getExpirationDate() + "")+"前使用");
         holder.rl_left.setBackgroundResource(R.mipmap.hongbao_1);
         switch (data.getCouponType()){
-            case 1:
-                holder.money_type.setText("红包");
+            case 0:
+                holder.money_type.setText("加息券");
                 break;
             case 2:
+                holder.money_type.setText("出借红包");
+                break;
+            case 4:
                 holder.money_type.setText("推荐奖励");
                 break;
         }
@@ -72,15 +75,16 @@ public class DiscountListAdapter extends RecyclerView.Adapter<DiscountListAdapte
 
                 break;
 
-            case 2:
-                holder.type.setText("已使用");
-                holder.type.setTextColor(context.getResources().getColor(R.color.black_home_four_small));
+            case 3:
+                holder.type.setVisibility(View.GONE);
+//                holder.type.setTextColor(context.getResources().getColor(R.color.black_home_four_small));
                 holder.rl_left.setBackgroundResource(R.mipmap.hongbao_hui);
 
                 break;
 
-            case 3:
-                holder.type.setText("已过期");
+            case 5:
+                holder.type.setVisibility(View.GONE);
+//                holder.type.setText("已过期");
                 holder.rl_left.setBackgroundResource(R.mipmap.hongbao_hui);
                 holder.type.setTextColor(context.getResources().getColor(R.color.black_home_four_small));
 

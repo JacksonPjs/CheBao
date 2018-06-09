@@ -111,6 +111,9 @@ public class AnnouncementListActivity extends BaseActivity implements ViewPager.
     public void onClick(View view) {
         Intent intent;
         switch (view.getId()) {
+            case  R.id.back:
+                finish();
+                break;
 
             case R.id.day_rl:
                 viewPager.setCurrentItem(0);

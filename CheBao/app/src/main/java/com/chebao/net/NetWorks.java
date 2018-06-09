@@ -12,6 +12,7 @@ import com.chebao.bean.CertificationBean;
 import com.chebao.bean.ChagerBean;
 import com.chebao.bean.ConsultationBean;
 import com.chebao.bean.DepositBean;
+import com.chebao.bean.DepositListBean;
 import com.chebao.bean.DidibaoBean;
 import com.chebao.bean.DiscountListBean;
 import com.chebao.bean.FindBean;
@@ -26,6 +27,7 @@ import com.chebao.bean.LoginBean;
 import com.chebao.bean.OneBean;
 import com.chebao.bean.PayBean;
 import com.chebao.bean.ProductDetialBean;
+import com.chebao.bean.RandomListBean;
 import com.chebao.bean.RansomBean;
 import com.chebao.bean.WithdrawBean;
 
@@ -126,8 +128,8 @@ public class NetWorks extends RetrofitUtils {
      *
      * @param observer
      */
-    public static void regist(String cellPhone, String pwd, String regCode, String regReferee, Subscriber<InfoBean> observer) {
-        setSubscribe(service.regist(cellPhone, pwd, regCode, regReferee), observer);
+    public static void regist(String cellPhone, String pwd, String regCode, String regReferee,String channel_name, Subscriber<InfoBean> observer) {
+        setSubscribe(service.regist(cellPhone, pwd, regCode, regReferee,channel_name), observer);
     }
 
     /**
@@ -206,9 +208,9 @@ public class NetWorks extends RetrofitUtils {
      *
      * @param observer
      */
-    public static void borrowInvestList(String id, String page, String pagesize,
+    public static void borrowInvestList(String id,String borrowStatus, String page, String pagesize,
                                         Subscriber<InvestmentBean> observer) {
-        setSubscribe(service.borrowInvestList(id, page, pagesize), observer);
+        setSubscribe(service.borrowInvestList(id,borrowStatus, page, pagesize), observer);
     }
 
 
@@ -266,7 +268,7 @@ public class NetWorks extends RetrofitUtils {
         setSubscribe(service.setUserPayPwd(address, readdress), observer);
     }
     /**
-     * 修改支付密码
+     * 修改登录密码
      *
      * @param observer
      */
@@ -463,6 +465,23 @@ public class NetWorks extends RetrofitUtils {
      */
     public static void didiPurchaseInfo(Subscriber<InfoBean> observer) {
         setSubscribe(service.didiPurchaseInfo(), observer);
+    }
+    /**
+     *
+     *赎回记录
+     * @param observer
+     */
+    public static void appRedemptionRecord(String Cookie,String page,Subscriber<RandomListBean> observer) {
+        setSubscribe(service.appRedemptionRecord(Cookie,page), observer);
+    }
+
+    /**
+     *存入记录
+     *
+     * @param observer
+     */
+    public static void appInvestHqRecord(String Cookie,String page,Subscriber<DepositListBean> observer) {
+        setSubscribe(service.appInvestHqRecord(Cookie,page), observer);
     }
 
     /**

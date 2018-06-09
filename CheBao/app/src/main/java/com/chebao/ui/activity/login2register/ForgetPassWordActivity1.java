@@ -17,6 +17,7 @@ import com.chebao.net.NetWorks;
 import com.chebao.ui.activity.BaseActivity;
 import com.chebao.utils.DialogUtils;
 import com.chebao.utils.LoginRegisterUtils;
+import com.chebao.utils.TimeUtils;
 import com.pvj.xlibrary.utils.CountDownButtonHelper;
 import com.pvj.xlibrary.utils.T;
 
@@ -72,6 +73,22 @@ public class ForgetPassWordActivity1 extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.getcode:
+                TimeUtils.setCountDownTimerListener(new TimeUtils.CountDownTimerlistener() {
+                    @Override
+                    public void onTick(String time) {
+                        getcode.setEnabled(false);
+                        getcode.setText(time);
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        getcode.setEnabled(true);
+                        getcode.setText(getResources().getString(R.string.done));
+                        TimeUtils.timerCancel();
+                    }
+                });
+
+
                 verificationPhone(ForgetPassWordActivity1.this, ForgetPassWordActivity1.this, loginPhone);
 
 
@@ -168,6 +185,7 @@ public class ForgetPassWordActivity1 extends BaseActivity {
                     //设置不可编辑
                     phoneEdit.setFocusable(false);
                     phoneEdit.setFocusableInTouchMode(false);
+                    TimeUtils.timerStart();
                     getPhoneCode(context, activity, phoneEdit);
                 } else {
                     dialog.dismiss();

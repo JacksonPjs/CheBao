@@ -249,6 +249,7 @@ public class InvestmentActivity extends BaseActivity implements LoadingLayout.On
                     @Override
                     public void selectAll() {
                         type=-1;
+                        page = 1;
                         net(0, 0,type);
 
                     }
@@ -257,6 +258,7 @@ public class InvestmentActivity extends BaseActivity implements LoadingLayout.On
                     public void selectMeet() {
                         //已还清
                         type=6;
+                        page = 1;
                         net(0, 0,type);
 
 
@@ -266,6 +268,7 @@ public class InvestmentActivity extends BaseActivity implements LoadingLayout.On
                     public void selectInvite() {
                         //招标中
                         type=3;
+                        page = 1;
                         net(0, 0,type);
 
                     }
@@ -274,6 +277,7 @@ public class InvestmentActivity extends BaseActivity implements LoadingLayout.On
                     public void selectRepayment() {
                         //还款中
                         type=5;
+                        page = 1;
                         net(0, 0,type);
 
                     }

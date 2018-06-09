@@ -11,16 +11,6 @@
 
 
 
-    <TextView
-        android:id="@+id/buy"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="bottom"
-        android:layout_weight="1"
-        android:height="50dp"
-        android:background="@color/text_org"
-        android:gravity="center"
-        android:text="立即购买"
-        android:textColor="#fff" />
+
 
 </LinearLayout>

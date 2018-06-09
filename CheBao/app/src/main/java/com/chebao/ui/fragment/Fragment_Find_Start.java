@@ -97,7 +97,10 @@ public class Fragment_Find_Start extends Fragment implements LoadingLayout.OnRel
                             publicLv.setStatus(LoadingLayout.Empty);
                         }else {
                             publicLv.setStatus(LoadingLayout.Success);
+                            if (!findBean.getPage().isHasNextPage()){
+                                publicLv.setTextEnd();
 
+                            }
                         }
                     } else {
                         publicLv.setStatus(LoadingLayout.Empty);
@@ -112,7 +115,10 @@ public class Fragment_Find_Start extends Fragment implements LoadingLayout.OnRel
 
                             biaoBeenList.addAll(findBean.getData());
 
+                            if (!findBean.getPage().isHasNextPage()){
+                                publicLv.setTextEnd();
 
+                            }
                         } else {
                             publicLv.setTextEnd();
                         }
@@ -132,8 +138,8 @@ public class Fragment_Find_Start extends Fragment implements LoadingLayout.OnRel
         biaoBeenList = new ArrayList<>();
 
 
-        adapter = new FindAdapter(biaoBeenList, getActivity());
-        publicLv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+        adapter = new FindAdapter(biaoBeenList, getActivity(),0);
+//        publicLv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         publicLv.verticalLayoutManager(getContext())
                 .setAdapter(adapter)
                 .setOnReloadListener(this)

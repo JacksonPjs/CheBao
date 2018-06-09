@@ -137,13 +137,15 @@ public class WebActivityJS extends BaseActivity {
             //   T.ShowToastForShort(mContxt,"goReCharge");
             finish();
             Logger.d("goReCharge");
-
         }
 
         @JavascriptInterface
         public void goUserIndex() {
             //   T.ShowToastForShort(mContxt,"goUserIndex");
-            MyApplication.instance.Allfinlish();
+//            MyApplication.instance.Allfinlish();
+            Intent intent=new Intent(mContxt, MainActivity.class);
+            intent.putExtra("index",3);
+            mContxt.startActivity(intent);
             Logger.d("goUserIndex");
         }
         @JavascriptInterface

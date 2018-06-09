@@ -182,6 +182,7 @@ public class TransactionActivity extends BaseActivity implements LoadingLayout.O
                             @Override
                             public void selectAll() {
                                 type = 0;
+                                page=1;
                                 net(0, 0, type);
 
 
@@ -190,6 +191,7 @@ public class TransactionActivity extends BaseActivity implements LoadingLayout.O
                             @Override
                             public void selectRecharge() {
                                 type = 1;
+                                page=1;
                                 net(0, 0, type);
 
                             }
@@ -197,6 +199,7 @@ public class TransactionActivity extends BaseActivity implements LoadingLayout.O
                             @Override
                             public void selectWithdraw() {
                                 type = 4;
+                                page=1;
                                 net(0, 0, type);
 
                             }
@@ -204,6 +207,7 @@ public class TransactionActivity extends BaseActivity implements LoadingLayout.O
                             @Override
                             public void selectHuiKuan() {
                                 type = 12;
+                                page=1;
                                 net(0, 0, type);
 
                             }
@@ -211,6 +215,7 @@ public class TransactionActivity extends BaseActivity implements LoadingLayout.O
                             @Override
                             public void selectShou() {
                                 type = 13;
+                                page=1;
                                 net(0, 0, type);
 
                             }
@@ -218,6 +223,7 @@ public class TransactionActivity extends BaseActivity implements LoadingLayout.O
                             @Override
                             public void selectHongBao() {
                                 type = 16;
+                                page=1;
                                 net(0, 0, type);
 
                             }

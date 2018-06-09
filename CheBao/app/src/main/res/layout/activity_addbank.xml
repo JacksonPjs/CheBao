@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/bg_huise"
     android:orientation="vertical">
 
@@ -9,7 +10,9 @@
     <com.pvj.xlibrary.loadinglayout.LoadingLayout
         android:id="@+id/layout_contiant_bank"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:isFirstVisible="true"
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -129,6 +132,68 @@
                 android:textColor="@color/black_home_four_midle"
                 android:textSize="@dimen/text_size"
                 android:id="@+id/zhihang" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:padding="@dimen/home_margin"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_home_four_midle"
+                android:layout_weight="3"
+                android:textSize="@dimen/text_size"
+                android:text="开户行所属市/县"
+                />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:hint="例如:深圳市"
+                android:padding="@dimen/home_margin"
+                android:background="@null"
+                android:textColorHint="@color/text_hint"
+                android:textColor="@color/black_home_four_midle"
+                android:textSize="@dimen/text_size"
+                android:id="@+id/city" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:padding="@dimen/home_margin"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_home_four_midle"
+                android:layout_weight="3"
+                android:textSize="@dimen/text_size"
+                android:text="开户行支行名称"
+                />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:hint="深圳xxx支行"
+                android:padding="@dimen/home_margin"
+                android:background="@null"
+                android:textColorHint="@color/text_hint"
+                android:textColor="@color/black_home_four_midle"
+                android:textSize="@dimen/text_size"
+                android:id="@+id/bankname" />
 
         </LinearLayout>
 

@@ -5,9 +5,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.chebao.App.AppUtils;
 import com.chebao.MainActivity;
 import com.chebao.MyApplication;
 import com.chebao.R;
@@ -28,27 +28,22 @@ import com.chebao.geetest_sdk.SdkUtilsNEW;
 import com.chebao.net.NetService;
 import com.chebao.net.NetWorks;
 import com.chebao.ui.activity.BaseActivity;
-import com.chebao.ui.activity.MyBankActivity;
 import com.chebao.ui.activity.WebActivity;
+import com.chebao.ui.activity.WebNoTitileActivity;
 import com.chebao.utils.CodeUtils;
 import com.chebao.utils.DialogUtils;
 import com.chebao.utils.LoginRegisterUtils;
 import com.chebao.utils.SharedPreferencesUtils;
+import com.chebao.utils.TimeUtils;
 import com.chebao.utils.UUIDs;
 import com.pvj.xlibrary.log.Logger;
 import com.pvj.xlibrary.utils.CountDownButtonHelper;
 import com.pvj.xlibrary.utils.T;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.InputStream;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscriber;
-import rx.internal.util.ObserverSubscriber;
 
 public class RegisterActivity extends BaseActivity {
     @Bind(R.id.title)
@@ -87,13 +82,15 @@ public class RegisterActivity extends BaseActivity {
 
     String noncestr;
     boolean isCheck = false;
+    Activity activity;
+    String channel_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
-
+        activity=this;
         title.setText("注册");
 
         codeUtils = CodeUtils.getInstance();
@@ -105,24 +102,24 @@ public class RegisterActivity extends BaseActivity {
                 isCheck = isChecked;
             }
         });
-
-
+         channel_name= AppUtils.getChannelName(activity);
+        Log.i("channel_name==",channel_name+"");
     }
 
 
-    @OnClick({R.id.get_regist, R.id.regist_go, R.id.code_again, R.id.fuwutiaolie})
+    @OnClick({R.id.get_regist, R.id.regist_go, R.id.code_img, R.id.fuwutiaolie})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
 
             case R.id.fuwutiaolie:
-                intent = new Intent(this, WebActivity.class);
-                intent.putExtra("url", NetService.API_SERVER_Url + "wechat/showAgreementAPP.html");
-                intent.putExtra("title", "认购协议");
+                intent = new Intent(this, WebNoTitileActivity.class);
+                intent.putExtra("url", NetService.API_SERVER_Url + "wechat/regagreement.html");
+//                intent.putExtra("title", "认购协议");
                 startActivity(intent);
 
                 break;
-            case R.id.code_again:
+            case R.id.code_img:
                 getImgCode();
 //                bitmap = codeUtils.createBitmap();
 //                codeImageview.setImageBitmap(bitmap);
@@ -134,7 +131,21 @@ public class RegisterActivity extends BaseActivity {
 //                    DialogUtils.createProgressDialog(this, "图形验证码错误");
 //                    return;
 //                }
-                //                    getPhoneCodeByImageCode(phoneNum,noncestr,code.getText().toString());
+                //
+                TimeUtils.setCountDownTimerListener(new TimeUtils.CountDownTimerlistener() {
+                    @Override
+                    public void onTick(String time) {
+                        getRegist.setEnabled(false);
+                        getRegist.setText(time);
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        getRegist.setEnabled(true);
+                        getRegist.setText(getResources().getString(R.string.done));
+                        TimeUtils.timerCancel();
+                    }
+                });
 
                 verificationNewUserPhone(RegisterActivity.this, RegisterActivity.this, phone);
                 break;
@@ -231,6 +242,7 @@ public class RegisterActivity extends BaseActivity {
                 //  {"info":"可用的手机号码","status":"0"}
 
                 if (s.getState().getStatus() == 0) {
+                    TimeUtils.timerStart();
                     dialog.dismiss();
                     getPhoneCodeByImageCode(phoneEdit.getText().toString(), noncestr, code.getText().toString());
                 } else {
@@ -288,6 +300,8 @@ public class RegisterActivity extends BaseActivity {
         });
 
     }
+
+
 
     /**
      * 验证推荐人是否正确
@@ -353,7 +367,7 @@ public class RegisterActivity extends BaseActivity {
     }
     private void regist(final String cellPhone, final String pwd, String regCode, String regReferee) {
 
-        NetWorks.regist(cellPhone, pwd, regCode, regReferee, new Subscriber<InfoBean>() {
+        NetWorks.regist(cellPhone, pwd, regCode, regReferee,channel_name, new Subscriber<InfoBean>() {
             @Override
             public void onStart() {
                 if (dialog == null) {

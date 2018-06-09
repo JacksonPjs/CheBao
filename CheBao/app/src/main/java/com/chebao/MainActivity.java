@@ -71,8 +71,7 @@ public class MainActivity extends BaseActivity {
         super.onResume();
 
         if (transaction != null) {
-            if (currentIndex == 1) {
-                currentIndex = 1;
+            if (currentIndex != 0) {
                showFragment();
             }
         }

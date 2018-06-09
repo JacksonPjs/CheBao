@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_left_round"
-            android:text="@string/tuijian"
+            android:text="滴滴宝"
             android:textColor="@color/white" />
 
 
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/home_four_margin_top"
-            android:textColor="@color/black_home_four_larger"
+            android:textColor="@color/num_color"
             android:textSize="@dimen/text_larger_size"
             tools:text="7.8%+2%" />
 

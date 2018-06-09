@@ -50,8 +50,12 @@ public class DetailsRegularActivity extends BaseActivity implements CountdownVie
     TextView interestBearingTime;
     @Bind(R.id.mininvestamount)
     TextView minInvestAmount;
+    @Bind(R.id.tv_countdowntime)
+    TextView tv_countdowntime;
+    @Bind(R.id.date)
+    TextView date;
 
-//    @Bind(R.id.time)
+    //    @Bind(R.id.time)
 //    TextView time;
     @Bind(R.id.circleprogress)
     CircleProgress circleprogress;
@@ -79,7 +83,8 @@ public class DetailsRegularActivity extends BaseActivity implements CountdownVie
 
     @Override
     protected void onResume() {
-        super.onResume();net();
+        super.onResume();
+        net();
     }
 
     public void net() {
@@ -121,11 +126,11 @@ public class DetailsRegularActivity extends BaseActivity implements CountdownVie
         title.setText(d.getBorrowTitle());
 //
 
-        if (d.getBorrowType()==5){
-            circleprogress.setHint(df.format(d.getAnnualRate()-3) + "%+3%");
+        if (d.getBorrowType() == 5) {
+            circleprogress.setHint(df.format(d.getAnnualRate() - 3) + "%+3%");
 
-        }else {
-            circleprogress.setHint(df.format(d.getAnnualRate()-1) + "%+1%");
+        } else {
+            circleprogress.setHint(df.format(d.getAnnualRate() - 1) + "%+1%");
 
         }
 //        percent.setText(df.format(d.getAnnualRate()) + "%");
@@ -159,35 +164,53 @@ public class DetailsRegularActivity extends BaseActivity implements CountdownVie
         long millionSeconds = com.pvj.xlibrary.utils.DateUtils.getTimeSecond(d.getRemainTime() + "");
 //        DateUtils.getStrTime(millionSeconds+"");
 //        time.setText(millionSeconds + "");
-        countdowntime.start(millionSeconds);
 //
-        countdowntime.setOnCountdownEndListener(this);
 
+        countdowntime.start(millionSeconds);
+
+        countdowntime.setOnCountdownEndListener(this);
         if (d.getBorrowStatus() == 3) {
             buy.setBackgroundColor(this.getResources().getColor(R.color.text_org));
             buy.setText("立即出借");
+            tv_countdowntime.setText("剩余时间");
+            date.setVisibility(View.GONE);
+            countdowntime.setVisibility(View.VISIBLE);
 
         } else {
             buy.setBackgroundColor(this.getResources().getColor(R.color.bar_clor));
             buy.setClickable(false);
             switch (d.getBorrowStatus()) {
                 case 2:
+                    date.setVisibility(View.GONE);
+                    countdowntime.setVisibility(View.VISIBLE);
                     buy.setText("即将开标");
-
+                    tv_countdowntime.setText("开标倒计时");
                     break;
                 case 4:
                     buy.setText("满标审核中");
 
+                    countdowntime.setVisibility(View.GONE);
+                    date.setVisibility(View.VISIBLE);
+                    date.setText(DateUtils.getStrTime2(d.getFullTime()+""));
                     break;
                 case 5:
                     buy.setText("正在还款");
-
+                    countdowntime.setVisibility(View.GONE);
+                    date.setVisibility(View.VISIBLE);
+                    date.setText(DateUtils.getStrTime2(d.getFullTime()+""));
+                    tv_countdowntime.setText("满标时间");
                     break;
                 case 6:
                     buy.setText("还款结束");
+                    countdowntime.setVisibility(View.GONE);
+                    date.setVisibility(View.VISIBLE);
+                    date.setText(DateUtils.getStrTime3(d.getFullTime()+""));
+
+                    tv_countdowntime.setText("满标时间");
 
                     break;
                 case 9:
+
                     buy.setText("已流标");
 
                     break;
@@ -232,17 +255,17 @@ public class DetailsRegularActivity extends BaseActivity implements CountdownVie
                 break;
 
             case R.id.buy:
-                if ((Boolean) SharedPreferencesUtils.getParam(this, "islogin", false)){
+                if ((Boolean) SharedPreferencesUtils.getParam(this, "islogin", false)) {
                     intent = new Intent(this, PayActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("bean", (Serializable) bean);
                     bundle.putString("id", id + "");
                     intent.putExtras(bundle);
                     startActivity(intent);
-                }else {
-                     intent = new Intent(DetailsRegularActivity.this, LoginActivity.class);
+                } else {
+                    intent = new Intent(DetailsRegularActivity.this, LoginActivity.class);
                     startActivity(intent);
-                    T.ShowToastForLong(DetailsRegularActivity.this,"未登录");
+                    T.ShowToastForLong(DetailsRegularActivity.this, "未登录");
 
                 }
 

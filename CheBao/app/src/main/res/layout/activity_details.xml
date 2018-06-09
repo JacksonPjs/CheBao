@@ -1,18 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="50dp"
+    >
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
 
-<include
-    android:id="@+id/ll_title"
-    layout="@layout/titlebar_back"></include>
-    <include layout="@layout/activity_details_view1"></include>
+        <include
+            android:id="@+id/ll_title"
+            layout="@layout/titlebar_back"></include>
+
+        <include layout="@layout/activity_details_view1"></include>
+
+
     </LinearLayout>
 </ScrollView>
+    <TextView
+        android:id="@+id/buy"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:background="@color/text_org"
+        android:gravity="center"
+        android:text="立即存入"
+        android:textColor="#fff" />
+</android.support.design.widget.CoordinatorLayout>

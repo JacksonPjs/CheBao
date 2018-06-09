@@ -1,5 +1,6 @@
 package com.chebao.ui.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -7,38 +8,36 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
+import com.chebao.App.Constant;
 import com.chebao.MyApplication;
 import com.chebao.R;
 import com.chebao.bean.InfoMsg;
-import com.chebao.bean.LoginBean;
 import com.chebao.net.NetWorks;
 import com.chebao.ui.activity.login2register.LoginActivity;
+import com.chebao.ui.activity.security.AddBankActivity;
 import com.chebao.ui.activity.security.CertificationActivity;
 import com.chebao.ui.activity.security.ChangeLoginPasswordActivity;
 import com.chebao.ui.activity.security.ChangerPayPassWordActivity;
 import com.chebao.ui.activity.security.GestureEditActivity;
-import com.chebao.ui.activity.security.GestureVerifyActivity;
+import com.chebao.ui.activity.security.MyBankActivity;
 import com.chebao.ui.activity.security.SetPayPasswordActivity;
 import com.chebao.utils.FileSizeUtil;
 import com.chebao.utils.FileUtil;
 import com.chebao.utils.SharedPreferencesUtils;
+import com.chebao.widget.dialog.ToastDialog;
 import com.pvj.xlibrary.loadinglayout.Utils;
 import com.pvj.xlibrary.log.Logger;
 import com.pvj.xlibrary.utils.T;
-
-import java.security.Security;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscriber;
-
-import static com.chebao.utils.edncodeUtils.getCookie;
 
 /**
  * 安全中心
@@ -80,6 +79,7 @@ public class SecurityActivity extends BaseActivity {
 //    @Bind(R.id.certification_go)
 //    ImageView certificationGo;
 
+    String realname = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,8 +108,8 @@ public class SecurityActivity extends BaseActivity {
 
 
 //        phoneTo.setCompoundDrawables(null, null, drawable, null);
-        String realname=(String) SharedPreferencesUtils.getParam(this, "realname", "");
-        if (realname == null||realname.equals("")) {
+        realname = (String) SharedPreferencesUtils.getParam(this, "realname", "");
+        if (realname == null || realname.equals("")) {
 
             certificationTip.setText("未认证");
             certificationTip.setTextColor(getResources().getColor(R.color.org_home));
@@ -170,7 +170,7 @@ public class SecurityActivity extends BaseActivity {
 
         }
         try {
-            version.setText(getVersionName()+"");
+            version.setText(getVersionName() + "");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -192,8 +192,30 @@ public class SecurityActivity extends BaseActivity {
 
             case R.id.bank_rl:
                 //银行卡认证
+                if (realname == null || realname.equals("")) {
+                    ToastDialog.Builder builder = new ToastDialog.Builder(SecurityActivity.this);
 
-                if ((Boolean) SharedPreferencesUtils.getParam(this, "tBankCardlist", false)) {
+                    builder.setPositiveButton("跳转", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(SecurityActivity.this, CertificationActivity.class);
+                            startActivity(intent);
+                            dialog.dismiss();
+
+
+                        }
+                    });
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    builder.setMessage("未实名");
+                    builder.create().show();
+
+                } else if ((Boolean) SharedPreferencesUtils.getParam(this, "tBankCardlist", false)) {
                     intent = new Intent(this, MyBankActivity.class);
                     startActivity(intent);
                 } else {
@@ -225,7 +247,8 @@ public class SecurityActivity extends BaseActivity {
 
             case R.id.clearmmmm:
                 FileUtil.cleanInternalCache(SecurityActivity.this);
-
+//                Glide.get(this).clearMemory();//清理内存中的缓存。
+//                Glide.get(this).clearDiskCache();//清理硬盘中的缓存。
                 long cd = FileUtil.getFolderSize(getExternalCacheDir());
                 double fileSizeLong = FileSizeUtil.FormetFileSize(cd, 3);
                 number_size.setText(fileSizeLong + "M");
@@ -238,9 +261,9 @@ public class SecurityActivity extends BaseActivity {
     }
 
     private void LoginOut() {
-        String token=(String) SharedPreferencesUtils.getParam(MyApplication.context, "token", "");
-        NetWorks.loginOut(token,SharedPreferencesUtils.getUserName(this),
-                 new Subscriber<InfoMsg>() {
+        String token = (String) SharedPreferencesUtils.getParam(MyApplication.context, "token", "");
+        NetWorks.loginOut(token, SharedPreferencesUtils.getUserName(this),
+                new Subscriber<InfoMsg>() {
                     @Override
                     public void onCompleted() {
 
@@ -255,10 +278,12 @@ public class SecurityActivity extends BaseActivity {
                     public void onNext(InfoMsg loginBean) {
                         if (loginBean.getStatus().equals("y")) {
                             SharedPreferencesUtils.clearAll(SecurityActivity.this);
+                            Intent intent = new Intent(SecurityActivity.this, LoginActivity.class);
+                            startActivity(intent);
                             finish();
 
-                        }else {
-                            T.ShowToastForShort(SecurityActivity.this, loginBean.getInfo()+"");
+                        } else {
+                            T.ShowToastForShort(SecurityActivity.this, loginBean.getInfo() + "");
                         }
                     }
                 }

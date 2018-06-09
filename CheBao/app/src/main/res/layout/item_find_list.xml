@@ -4,9 +4,11 @@
     android:id="@+id/biao_head"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/ll_nor"
     android:orientation="horizontal"
     android:layout_margin="@dimen/home_margin"
+    app:cardCornerRadius="@dimen/home_margin"
+
+
     >
 
 
@@ -22,7 +24,6 @@
             android:id="@+id/find_item_bg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/banner"
             />
         <TextView
             android:id="@+id/find_item_title"

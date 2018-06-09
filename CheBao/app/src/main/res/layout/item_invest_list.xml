@@ -56,7 +56,7 @@
                 android:layout_marginTop="@dimen/home_margin"
                 android:layout_weight="1"
                 android:text="7.8%+2%"
-                android:textColor="@color/black_home_four_larger"
+                android:textColor="@color/num_color"
                 android:textSize="@dimen/text_large_size"
                 tools:text="7.8%+2%" />
 
@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="收益方式：满标计息，到期还本息"
+                android:text="利息方式：满标计息，到期还本息"
                 android:textColor="@color/black_home_four_midle"
                 android:textSize="@dimen/text_samll_size" />
 

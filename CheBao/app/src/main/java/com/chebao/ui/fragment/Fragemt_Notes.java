@@ -69,7 +69,7 @@ public class Fragemt_Notes extends Fragment implements LoadingLayout.OnReloadLis
      * @param inrefresh 第几次刷新下的加载
      */
     private void net(final int stype, final int inrefresh) {
-        NetWorks.borrowInvestList(id, page + "", pagesize + "", new Subscriber<InvestmentBean>() {
+        NetWorks.borrowInvestList(id, borrowStatus + "", page + "", pagesize + "", new Subscriber<InvestmentBean>() {
             @Override
             public void onCompleted() {
                 publicLv.setRefreshing(false);
@@ -99,13 +99,18 @@ public class Fragemt_Notes extends Fragment implements LoadingLayout.OnReloadLis
             }
 
             @Override
-            public void onNext(InvestmentBean biaoBean) {
+            public void onNext(InvestmentBean bean) {
 
                 if (stype == 0) {
-                    if (biaoBean.getState().getStatus() == 0) {
+                    if (bean.getState().getStatus() == 0) {
                         biaoBeenList.clear();
-                        biaoBeenList.addAll(biaoBean.getData());
+                        biaoBeenList.addAll(bean.getData());
                         publicLv.setStatus(LoadingLayout.Success);
+                        if (!bean.getPage().isHasNextPage()) {
+                            publicLv.setTextEnd();
+
+                        }
+
                     } else {
                         publicLv.setStatus(LoadingLayout.Empty);
                     }
@@ -113,8 +118,13 @@ public class Fragemt_Notes extends Fragment implements LoadingLayout.OnReloadLis
                 } else if (stype == 1) {
                     if (publicLv.getRefreshCount() == inrefresh) {
 
-                        if (biaoBean.getState().getStatus() == 0) {
-                            biaoBeenList.addAll(biaoBean.getData());
+                        if (bean.getState().getStatus() == 0) {
+                            biaoBeenList.addAll(bean.getData());
+                            if (!bean.getPage().isHasNextPage()) {
+                                publicLv.setTextEnd();
+
+                            }
+
                         } else {
                             publicLv.setTextEnd();
                         }

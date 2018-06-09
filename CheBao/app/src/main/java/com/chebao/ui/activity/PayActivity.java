@@ -1,9 +1,12 @@
 package com.chebao.ui.activity;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,16 +19,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.chebao.App.Constant;
+import com.chebao.MainActivity;
 import com.chebao.MyApplication;
 import com.chebao.R;
 import com.chebao.bean.BorrowDetailBean;
 import com.chebao.bean.DiscountListBean;
+import com.chebao.bean.InfoBean;
 import com.chebao.bean.InfoMsg;
 import com.chebao.bean.PayBean;
 import com.chebao.net.NetService;
 import com.chebao.net.NetWorks;
 import com.chebao.ui.activity.login2register.LoginActivity;
+import com.chebao.ui.activity.security.AddBankActivity;
 import com.chebao.utils.DialogUtils;
+import com.chebao.utils.IntentUtils;
 import com.chebao.utils.KeyBoardUtils;
 import com.chebao.utils.LoginRegisterUtils;
 import com.chebao.utils.P2pUtils;
@@ -84,7 +92,6 @@ public class PayActivity extends BaseActivity {
     Dialog LoodDialog;
 
 
-
     String id;
     String result = "";
     Dialog dialogPay;
@@ -99,7 +106,9 @@ public class PayActivity extends BaseActivity {
     int coupontype = -1;
     String couponId = null;
 
-    boolean isCheck=false;
+    boolean isCheck = false;
+    int STATUS_INTENT_TIME = 1000;//默认跳转等待时间
+    Activity activity;
 
 
     @Override
@@ -107,11 +116,13 @@ public class PayActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay);
         ButterKnife.bind(this);
+        activity=this;
         id = getIntent().getStringExtra("id");
         Bundle bundle = getIntent().getExtras();
         bean = (BorrowDetailBean) bundle.getSerializable("bean");
         borrowtype = bean.getData().getBorrowType();
         init();
+        net();
     }
 
     private void init() {
@@ -131,24 +142,68 @@ public class PayActivity extends BaseActivity {
         if (bean != null) {
             DecimalFormat df = new DecimalFormat("######0.00");
             BorrowDetailBean.DataBean d = bean.getData();
-            percent.setText(df.format(d.getAnnualRate()) + "%");
-            String deadliness = T1changerString.t2chager(d.getDeadline(), d.getDeadlineType());
-            data.setText(deadliness);
-            yonghu.setText(bean.getData().getBorrowTitle() + "");
-            maxAmount.setText("剩余额度：" + T1changerString.t3chager(d.getBorrowAmount() - d.getHasBorrowAmount()));
-            if ((Boolean) SharedPreferencesUtils.getParam(this, "islogin", false)) {  //登录
-                tv_money.setText("" + (String) SharedPreferencesUtils.getParam(this, "usableAmount", "0"));
+            if (d.getBorrowType()==5){
+                percent.setText(df.format(d.getAnnualRate()-3)+ "%+3%");
 
-            } else {
-                Intent intent = new Intent(PayActivity.this, LoginActivity.class);
-                startActivity(intent);
-                T.ShowToastForLong(PayActivity.this, "未登录");
+            }else if (d.getBorrowType()==1){
+                percent.setText(df.format(d.getAnnualRate()-1) + "%+1%");
 
             }
+            String deadliness = T1changerString.t2chager(d.getDeadline(), d.getDeadlineType());
+            data.setText("出借期限:"+deadliness);
+            yonghu.setText(bean.getData().getBorrowTitle() + "");
+            maxAmount.setText("剩余额度：" + T1changerString.t3chager(d.getBorrowAmount() - d.getHasBorrowAmount()));
+//            if ((Boolean) SharedPreferencesUtils.getParam(this, "islogin", false)) {  //登录
+//                tv_money.setText("" + (String) SharedPreferencesUtils.getParam(this, "usableAmount", "0"));
+//
+//            } else {
+//                Intent intent = new Intent(PayActivity.this, LoginActivity.class);
+//                startActivity(intent);
+//                T.ShowToastForLong(PayActivity.this, "未登录");
+//
+//            }
 
         }
 
     }
+    private void net() {
+
+        NetWorks.didiPurchaseInfo(new Subscriber<InfoBean>() {
+            @Override
+            public void onCompleted() {
+//                    LoodDialog = DialogUtils.createProgressDialog(PayActivity.this, "购买中...");
+//                    if (!LoodDialog.isShowing()) {
+//                        LoodDialog.show();
+//                    }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+//                    LoodDialog.dismiss();
+            }
+
+            @Override
+            public void onNext(InfoBean o) {
+//                    LoodDialog.dismiss();
+//                    LoodDialog.cancel();
+                if (o.getState().getStatus() == 0) {
+                   double anbleM = o.getUsermoney();
+                    tv_money.setText(anbleM +"");
+                } else if (o.getState().getStatus()==99){
+                    T.ShowToastForShort(activity, o.getState().getInfo());
+                   Intent intent = new Intent(activity, LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    T.ShowToastForShort(activity, o.getState().getInfo());
+                }
+
+
+            }
+        });
+
+
+    }
+
 
     public class EditTextChangeListener implements TextWatcher {
 
@@ -227,6 +282,8 @@ public class PayActivity extends BaseActivity {
         dialog.show();
     }
 
+
+
     @OnClick({R.id.fuwutiaolie, R.id.gotopay, R.id.rl_discount, R.id.buy})
     public void onClick(View view) {
         Intent intent = null;
@@ -236,9 +293,9 @@ public class PayActivity extends BaseActivity {
 
                 break;
             case R.id.fuwutiaolie:
-                intent = new Intent(this, WebActivity.class);
+                intent = new Intent(this, WebNoTitileActivity.class);
                 intent.putExtra("url", NetService.API_SERVER_Url + "wechat/showAgreementAPP.html");
-                intent.putExtra("title", "认购协议");
+//                intent.putExtra("title", "认购协议");
                 startActivity(intent);
 
                 break;
@@ -271,10 +328,21 @@ public class PayActivity extends BaseActivity {
                     T.ShowToastForShort(PayActivity.this, "最低出借:" + bean.getData().getMinInvestAmount());
                     return;
                 }
-
+//                if (!(Boolean) SharedPreferencesUtils.getParam(this, "payPwd", false)) {
+//                T.ShowToastForShort(activity, "请先设置交易密码");
+//                IntentUtils.ToastIntent(activity, Constant.PAY_NO_PAYPSW);
+//                return;
+//            }
+//                if (!SharedPreferencesUtils.getIsBank(activity)) {
+//                    T.ShowToastForShort(activity, "交易需要先绑定银行卡");
+//                    IntentUtils.ToastIntent(activity,Constant.PAY_NO_BANK);
+//                    return;
+//
+//                }
                 double anbleM = Double.parseDouble((String) SharedPreferencesUtils.getParam(PayActivity.this, "usableAmount", "0"));
                 if (money > anbleM) {
                     T.ShowToastForShort(PayActivity.this, "可用余额少于出借金额.请先充值");
+                    IntentUtils.ToastIntent(activity,Constant.PAY_NO_MONEY);
                     return;
                 }
 
@@ -284,7 +352,7 @@ public class PayActivity extends BaseActivity {
                     T.ShowToastForShort(PayActivity.this, "出借金额不能大于剩余额度.");
                     return;
                 }
-                if (!isCheck){
+                if (!isCheck) {
                     T.ShowToastForShort(this, "尚未阅读或同意《车宝金融注册服务协议》");
                     return;
                 }
@@ -304,11 +372,6 @@ public class PayActivity extends BaseActivity {
 
 
                         netPay(str);
-//                        //动态关软键盘
-//                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE); //得到InputMethodManager的实例
-//                        if (imm.isActive()) {//如果开启
-//                            imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT,InputMethodManager.HIDE_NOT_ALWAYS);//关闭软键盘，开启方法相同，这个方法是切换开启与关闭状态的
-//                        }
 
                     }
                 });
@@ -364,6 +427,7 @@ public class PayActivity extends BaseActivity {
     }
 
     private void netPay(String p) {
+
         if (coupontype == -1) {
             NetWorks.investAjaxBorrow2(getCookie(), p, editText.getText().toString(), id, new Subscriber<PayBean>() {
                 @Override
@@ -380,12 +444,12 @@ public class PayActivity extends BaseActivity {
                 }
 
                 @Override
-                public void onNext(PayBean o) {
+                public void onNext(final PayBean o) {
 //                    LoodDialog.dismiss();
 //                    LoodDialog.cancel();
                     ToastDialog.Builder builder = new ToastDialog.Builder(PayActivity.this);
 
-                    if (o.getStatus().equals("y")) {
+                    if (o.getState().getStatus().equals("0")) {
                         SharedPreferencesUtils.setParam(PayActivity.this, "usableAmount", o.getUsableAmount() + "");
 
 //                        T.ShowToastForShort(PayActivity.this, o.getState().getInfo());
@@ -407,9 +471,27 @@ public class PayActivity extends BaseActivity {
                                 tv_money.setText("" + SharedPreferencesUtils.getParam(PayActivity.this, "usableAmount", "0"));
                                 editText.setText("");
                                 dialog.dismiss();
+
+                                switch (o.getState().getStatus()) {
+                                    case Constant.PAY_NO_PAYPSW:
+                                        IntentUtils.ToastIntent(activity,Constant.PAY_NO_PAYPSW);
+
+                                        break;
+                                    case Constant.PAY_NO_SHIMING:
+                                        IntentUtils.ToastIntent(activity,Constant.PAY_NO_SHIMING);
+                                        break;
+                                    case Constant.PAY_NO_MONEY:
+
+                                        IntentUtils.ToastIntent(activity,Constant.PAY_NO_MONEY);
+                                        break;
+
+
+
+                                }
+
                             }
                         });
-                        builder.setMessage("" + o.getInfo());
+                        builder.setMessage("" + o.getState().getInfo());
 //                        T.ShowToastForShort(PayActivity.this, o.getInfo());
                     }
                     builder.create().show();
@@ -433,11 +515,11 @@ public class PayActivity extends BaseActivity {
                 }
 
                 @Override
-                public void onNext(PayBean o) {
+                public void onNext(final PayBean o) {
 //                    LoodDialog.dismiss();
 //                    LoodDialog.cancel();
                     ToastDialog.Builder builder = new ToastDialog.Builder(PayActivity.this);
-                    if (o.getStatus().equals("y")) {
+                    if (o.getState().getStatus().equals("0")) {
                         SharedPreferencesUtils.setParam(PayActivity.this, "usableAmount", o.getUsableAmount() + "");
 
                         T.ShowToastForShort(PayActivity.this, o.getState().getInfo());
@@ -461,10 +543,28 @@ public class PayActivity extends BaseActivity {
                                 tv_money.setText("" + SharedPreferencesUtils.getParam(PayActivity.this, "usableAmount", "0"));
                                 editText.setText("");
                                 dialog.dismiss();
+                                switch (o.getState().getStatus()) {
+                                    case Constant.PAY_NO_PAYPSW:
+                                        IntentUtils.ToastIntent(activity,Constant.PAY_NO_PAYPSW);
+
+                                        break;
+                                    case Constant.PAY_NO_SHIMING:
+                                        IntentUtils.ToastIntent(activity,Constant.PAY_NO_SHIMING);
+                                        break;
+                                    case Constant.PAY_NO_MONEY:
+                                        if (SharedPreferencesUtils.getIsBank(activity)) {
+                                            IntentUtils.ToastIntent(activity,Constant.PAY_NO_BANK);
+
+                                        }else
+                                            IntentUtils.ToastIntent(activity,Constant.PAY_NO_MONEY);
+                                        break;
+
+
+
+                                }
                             }
                         });
-                        builder.setMessage("" + o.getInfo());
-//                        T.ShowToastForShort(PayActivity.this, o.getInfo());
+                        builder.setMessage("" + o.getState().getInfo());
                     }
 
                     builder.create().show();
@@ -473,67 +573,6 @@ public class PayActivity extends BaseActivity {
         }
 
 
-//
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(" _ed_token_");
-//        sb.append("=");
-//        sb.append((String) SharedPreferencesUtils.getParam(MyApplication.context, "token", ""));
-//        sb.append(";");
-//
-//        sb.append(" _ed_username_");
-//        sb.append("=");
-//        sb.append((String) SharedPreferencesUtils.getParam(MyApplication.context, "name", ""));
-//        sb.append(";");
-//
-//        sb.append(" _ed_cellphone_");
-//        sb.append("=");
-//        sb.append((String) SharedPreferencesUtils.getParam(MyApplication.context, "phone", ""));
-//        sb.append(";");
-//        if (LoodDialog == null) {
-//            LoodDialog = DialogUtils.createProgressDialog(PayActivity.this, "购买中...");
-//        } else {
-//            if (!LoodDialog.isShowing()) {
-//                LoodDialog.show();
-//            }
-//        }
-//        OkHttpUtils
-//                .post()
-//                .url(NetService.API_SERVER + "bfpay/investAjaxBorrow.html")
-//                .addHeader("Cookie", encodeHeadInfo(sb.toString()))
-//                .addParams("tradingPassword", p)//交易密码
-//                .addParams("investAmount", editText.getText().toString())//投资金额
-//                .addParams("borrowId", id)//产品id
-//                .addParams("coupontype", coupontype + "")
-//                .addParams("couponId", couponId + "")
-////                .addParams("couponId", result)//使用现金券json
-//                .build()
-//                .execute(new Callback<String>() {
-//
-//                    @Override
-//                    public String parseNetworkResponse(Response response) throws IOException {
-//                        return response.body().string();
-//                    }
-//
-//                    @Override
-//                    public void onError(Request request, Exception e) {
-//                        LoodDialog.dismiss();
-//                    }
-//
-////                    @Override
-////                    public void onResponse(String response) {
-////
-////                    }
-//
-//                    @Override
-//                    public void onResponse(String o) {
-//                        Logger.json(o);
-//                        LoodDialog.dismiss();
-//
-//
-//                    }
-//
-//
-//                });
     }
 
 
@@ -542,7 +581,7 @@ public class PayActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if (resultCode == 200) {
-                isSelect=true;
+                isSelect = true;
                 disData = (DiscountListBean.DisData) data.getSerializableExtra("disbean");
                 couponId = disData.getId() + "";
                 coupontype = disData.getCouponType();

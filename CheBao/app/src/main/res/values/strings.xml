@@ -16,7 +16,7 @@
     <string name="liji">立即抢购</string>
     <string name="jingppin">精品推荐</string>
     <string name="touziqixian">出借期限</string>
-    <string name="shengyuyue">剩余余额</string>
+    <string name="shengyuyue">剩余金额</string>
     <string name="shengyutime">剩余时间</string>
 
 
@@ -25,11 +25,11 @@
     <string name="details_item5_1">锁定期后随时赎回</string>
 
     <string name="mine_count">我的红包</string>
-    <string name="discount_dj_item1">· 在出借时使用，只计算其额外收益；</string>
+    <string name="discount_dj_item1">· 在出借时使用，只计算其额外利息；</string>
     <string name="discount_dj_item2">· 该券最高使用比例是出借额的1%；</string>
     <string name="discount_dj_item3">· 该券不与其他优惠券同时使用</string>
     <string name="discount_jx_item1">· 限新手标使用，该券限用一次；</string>
-    <string name="discount_jx_item2">· 用户最终可获得其出借产生的收益；</string>
+    <string name="discount_jx_item2">· 用户最终可获得其出借产生的利息；</string>
 
 
     <!-- Gesture code starting -->
@@ -43,13 +43,30 @@
     <string name="reset_gesture_code">重新设置手势密码</string>
     <!-- End -->
     <string name="chager_tips_1">1.充值金额最小金额100元;\n2.充值免手续费;\n3.为了您的资金安全,平台仅支持同卡进出;\n4.本站目前仅支持富友支付进行充值;
-    \n5.如有任何问题请点击右上角的客服按钮,联系客服人员</string>
-    <string name="withdraw_tip">1.提现2元/笔;\n2.T日16:00前提现,T日23:59前到账;T日16:00后提现;3.单笔提现范围:100~50000元,单日不限笔数,不限金额.\n
-    (注:"T日"指工作日)</string><string name="ransom_tip">1.工作日14:30前申请赎回当天16:00前回款至账号余额;
+    \n5.如有任何问题请联系客服人员</string>
+    <string name="withdraw_tip">1.提现2元/笔;\n2.T日16:00前提现,T日23:59前到账;T日16:00后提现;\n3.单笔提现范围:100~50000元,单日不限笔数,不限金额.\n
+    (注:"T日"指工作日)</string><string name="ransom_tip">1.工作日14:30前申请赎回当天16:00前回款至账户余额;
     \n2.工作日14:30后赎回的将在下一个工作日16:00前回款至账户余额;</string>
-   <string name="my_tips_1">当天计息，次日结息，锁定期后可继续享有收益</string>
+   <string name="my_tips_1">当天计息，次日结息，锁定期后可继续享有利息</string>
    <string name="my_tips_2">1.单笔赎回最低额度为0.01元，最大额度不超过对应滴滴宝额度;\n2.工作日14：30前申请赎回当天16:00前回款至账户余额，工作日14:30后赎回的将在下一工作日16:00前回款至账户余额;
        \n3.如遇周末节假日，赎回到账时间顺延至下一工作日;\n4.资金回款至账户余额后，您可选择再次购买理财产品.
 
    </string>
+    <string name="done">重新获取</string>
+    <string name="withdraw_tip_xian">限额说明：快捷限额单笔5万，具体限额以银行为准</string>
+    <string name="share">邀请好友</string>
+    <string name="share_link">邀请链接</string>
+
+    <string name="activity_rule">活动规则</string>
+    <string name="activity_rule_text">1.被邀请人首次出借1月标金额≥5000元，邀请人将获得现金30元＋20元现金券；被邀请人首次出借2月标金额≥5000元，邀请人将获得现金50元＋30元现金券；被邀请人首次出借3月标金额≥5000元，邀请人将获得现金80元＋60元现金券；被邀请人首次出借6月标金额≥5000元，邀请人将获得现金100元＋80元现金券。
+
+\n2.被邀请人须通过邀请人的注册链接注册平台账户；
+
+\n3.被邀请人注册后15天内需完成首次出借，否则邀请失效;
+
+\n4.被邀请人首次单笔出借需≥5000元，出借期限需≥30天，方可有效；
+
+\n5.被邀请人首次出借生效后，邀请奖励即刻发放至邀请人账户；
+
+\n6.严禁用户恶意刷单，一切通过不法手段获得的奖励，一经发现，将取消奖励的发放。</string>
 </resources>

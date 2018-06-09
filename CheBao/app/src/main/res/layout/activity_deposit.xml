@@ -167,7 +167,7 @@
             android:id="@+id/earnings1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="预期单日收益:"
+            android:text="预期单日利息:"
             android:textColor="@color/text_huise" />
 
         <LinearLayout
@@ -222,7 +222,7 @@
             android:id="@+id/fuwutiaolie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="《车保金融点对点借款合同》"
+            android:text="《车宝金融点对点借款合同》"
             android:textColor="@color/org_home"
             android:textSize="@dimen/text_samll_size"
 

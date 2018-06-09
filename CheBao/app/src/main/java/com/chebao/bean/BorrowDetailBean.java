@@ -128,7 +128,16 @@ public class BorrowDetailBean implements Serializable {
         private int repayType;//还款方式(1,一次性还款,2.按月付息,到期还本3.等额本息)
         private String riskControlInfos;
         private int remainTime;
+        private long fullTime;
      //   private int riskrank;
+
+        public long getFullTime() {
+            return fullTime;
+        }
+
+        public void setFullTime(long fullTime) {
+            this.fullTime = fullTime;
+        }
 
         public int getRemainTime() {
             return remainTime;

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/titlebar_back"></include>
+
+        <ImageView
+            android:id="@+id/iv_qrcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/bg_share_titile" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:padding="@dimen/home_margin"
+            android:text="@string/share_link"
+            android:textColor="@color/red_share" />
+
+        <TextView
+            android:id="@+id/link_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_yellow_arc"
+            android:text="@string/ransom_tip"
+            android:padding="@dimen/share_padding"
+            android:layout_marginLeft="@dimen/share_margin"
+            android:layout_marginRight="@dimen/share_margin"
+            android:gravity="center"
+            android:textColor="@color/red_share" />
+
+        <Button
+            android:id="@+id/share_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/share_margin"
+            android:layout_marginRight="@dimen/share_margin"
+            android:layout_marginTop="@dimen/home_margin"
+            android:background="@drawable/oval_gradient_linear"
+            android:gravity="center"
+            android:text="分享邀请二维码"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/share_umeng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/share_margin"
+            android:layout_marginRight="@dimen/share_margin"
+            android:layout_marginTop="@dimen/home_margin"
+
+            android:background="@drawable/oval_gradient_linear"
+            android:gravity="center"
+            android:text="分享邀请链接"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/share_margin_top"
+            android:text="@string/activity_rule"
+            android:textColor="@color/black_home_four_larger"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/share_margin"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="@dimen/home_margin"
+            android:text="@string/activity_rule_text" />
+
+    </LinearLayout>
+</ScrollView>

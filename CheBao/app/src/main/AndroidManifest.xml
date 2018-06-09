@@ -19,7 +19,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-
     <!-- 您从百度网站获取的APP KEY，根据实际您的APP申请的APP_KEY进行修改 -->
     <!--<meta-data-->
         <!--android:name="BaiduMobAd_STAT_ID"-->
@@ -70,7 +69,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity"
+            android:exported="true"
+            ></activity>
         <activity android:name=".ui.activity.login2register.LoginActivity"></activity>
         <activity android:name=".ui.activity.Activity_discount"></activity>
         <activity android:name=".ui.activity.DetailsActivity"></activity>
@@ -84,7 +85,7 @@
         <activity android:name=".ui.activity.security.ChangeLoginPasswordActivity"></activity>
         <activity android:name=".ui.activity.security.SetPayPasswordActivity"></activity>
         <activity android:name=".ui.activity.security.ChangerPayPassWordActivity"></activity>
-        <activity android:name=".ui.activity.MyBankActivity"></activity>
+        <activity android:name=".ui.activity.security.MyBankActivity"></activity>
         <activity android:name=".ui.activity.TransactionActivity"></activity>
         <activity android:name=".ui.activity.HuiKuanActivity"></activity>
         <activity android:name=".ui.activity.InvestmentActivity"></activity>
@@ -98,8 +99,8 @@
         <activity android:name=".ui.activity.PicturesLookActivity"></activity>
 
         <activity android:name=".ui.activity.PayActivity"></activity>
-        <activity android:name=".ui.activity.ChagerActivity"></activity>
-        <activity android:name=".ui.activity.AddBankActivity"></activity>
+        <activity android:name=".ui.activity.mine.ChagerActivity"></activity>
+        <activity android:name=".ui.activity.security.AddBankActivity"></activity>
         <activity android:name=".ui.activity.WebActivityJS"></activity>
         <activity android:name=".ui.activity.WithdrawActivity"></activity>
         <activity android:name=".ui.activity.RansomActivity"></activity>
@@ -111,10 +112,65 @@
         <activity android:name=".ui.activity.AboutActivity"></activity>
         <activity android:name=".ui.activity.WebNoTitileActivity"></activity>
         <activity android:name=".ui.activity.PicturesLookNetActivity"></activity>
+        <activity android:name=".ui.activity.pay.RansomListActivity"></activity>
+        <activity android:name=".ui.activity.mine.ShareActivity"></activity>
+
+
         <meta-data android:value="5b012b73a40fa3083400009b" android:name="UMENG_APPKEY"/>
         <meta-data android:value="${UMENG_CHANNEL_VALUE}" android:name="UMENG_CHANNEL"/>
+        <!--<meta-data android:value="GlideModule" android:name="com.chebao.utils.MyGlideModule"></meta-data>-->
+
+        <!--share  start-->
+        <!--wechat-->
 
 
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1106938486" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+<!-- 新浪-->
+        <activity
+            android:name="com.umeng.socialize.media.WBShareCallBackActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:exported="false"
+            >
+        </activity>
+        <activity android:name="com.sina.weibo.sdk.web.WeiboSdkWebActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            >
+        </activity>
+        <activity
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            android:launchMode="singleTask"
+            android:name="com.sina.weibo.sdk.share.WbShareTransActivity">
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!--share  end-->
     </application>
 
 </manifest>

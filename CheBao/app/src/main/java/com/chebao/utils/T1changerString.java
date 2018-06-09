@@ -95,9 +95,9 @@ public class T1changerString {
     public static String t4chager(int interestBearingTime){
         switch (interestBearingTime){
             case 1:
-                return "一次性还款" ;
+                return "到期还本付息" ;
             case 2:
-                return "按月付息,到期还本" ;
+                return "先息后本" ;
             case 3:
                 return "等额还款" ;
             default:

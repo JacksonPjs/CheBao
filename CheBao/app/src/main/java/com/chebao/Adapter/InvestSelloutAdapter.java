@@ -77,7 +77,7 @@ public class InvestSelloutAdapter extends RecyclerView.Adapter<InvestSelloutAdap
             holder.xianshi.setText("限时加息1%");
 
         }
-        holder.tuijianfangshi.setText("收益方式:" + T1changerString.t4chager(d.getRepayType()));
+        holder.tuijianfangshi.setText("利息方式:" + T1changerString.t4chager(d.getRepayType()));
         holder.progressBar.setColors(randomColors());
         holder.progressBar.setPointColors(Utils.getColor(context,R.color.bg_huise));
         holder.progressBar.setProgressValue(100);

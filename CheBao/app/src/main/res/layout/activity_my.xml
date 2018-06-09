@@ -17,20 +17,16 @@
 
             >
 
-            <RelativeLayout
-                android:layout_width="55dp"
-                android:layout_height="match_parent"
-                android:onClick="onBack">
 
                 <ImageView
                     android:id="@+id/back"
-                    android:layout_width="20dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:padding="3dp"
+                    android:padding="@dimen/home_margin"
                     android:src="@mipmap/back" />
-            </RelativeLayout>
+
+
 
             <TextView
                 android:id="@+id/title"
@@ -40,8 +36,20 @@
                 android:layout_marginLeft="60dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="#000"
+                android:textColor="@color/white"
                 android:textSize="@dimen/title_size"
+
+                />
+
+            <TextView
+                android:id="@+id/ransomlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="记录"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/home_margin"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
 
                 />
         </RelativeLayout>
@@ -65,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    android:text="今日预计收益（元）"
+                    android:text="今日预计利息（元）"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_12_size"
 
@@ -124,7 +132,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="累计收益（元）"
+                            android:text="累计利息（元）"
                             android:textColor="@color/white"
                             android:textSize="14sp" />
 
@@ -256,7 +264,7 @@
                 android:layout_marginTop="@dimen/home_margin_top"
                 android:drawableLeft="@mipmap/tips"
                 android:drawablePadding="@dimen/home_margin"
-                android:text="收益规则"
+                android:text="利息规则"
                 android:textColor="@color/black_home_four_larger" />
 
 

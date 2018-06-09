@@ -102,7 +102,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="待收收益（元）"
+                    android:text="待收利息（元）"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
 
@@ -125,7 +125,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="累计收益（元）"
+                    android:text="累计利息（元）"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
 

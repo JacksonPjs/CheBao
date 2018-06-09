@@ -73,7 +73,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="借款抵押物足额抵押，收益稳定高效"
+            android:text="借款抵押物足额抵押，利息稳定高效"
             android:textColor="@color/black_home_four_midle"
             />
 

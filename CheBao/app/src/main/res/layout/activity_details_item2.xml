@@ -14,167 +14,6 @@
         android:text="项目介绍"
         android:textColor="@color/white" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/home_margin"
-        android:layout_marginTop="@dimen/home_margin_top"
-        android:drawableLeft="@mipmap/tips"
-        android:drawablePadding="@dimen/home_margin"
-        android:text="计息规则"
-        android:textColor="@color/black_home_four_larger" />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_org_circular"
-        android:orientation="vertical"
-        android:padding="@dimen/home_margin">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/details_item1_1"
-            android:textColor="@color/black_home_four_midle" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@string/details_item1_2"
-            android:textColor="@color/black_home_four_midle" />
-    </LinearLayout>
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/home_margin"
-        android:layout_marginTop="@dimen/home_margin_top"
-        android:drawableLeft="@mipmap/tips"
-        android:drawablePadding="@dimen/home_margin"
-        android:text="收益规则"
-        android:textColor="@color/black_home_four_larger" />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_org_circular"
-        android:orientation="vertical"
-        android:padding="@dimen/home_margin">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="当天计息，次日结息，锁定期后可继续享有收益"
-            android:textColor="@color/black_home_four_midle" />
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/home_margin"
-        android:layout_marginTop="@dimen/home_margin_top"
-        android:drawableLeft="@mipmap/tips"
-        android:drawablePadding="@dimen/home_margin"
-        android:text="赎回规则"
-        android:textColor="@color/black_home_four_larger" />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_org_circular"
-        android:orientation="vertical"
-        android:padding="@dimen/home_margin"
-        tools:visibility="gone"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1、单笔赎回最低额度为0.01元，最大额度不超过对应滴
-滴宝额度"
-            android:textColor="@color/black_home_four_midle" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="2、工作日14：30前申请赎回当天16:00前回款至账户余
-额，工作日14:30后赎回的将在下一工作日16:00前回款至账户余额 "
-            android:textColor="@color/black_home_four_midle" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="3、如遇周末节假日，赎回到账时间顺延至下一工作日 "
-            android:textColor="@color/black_home_four_midle" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="4、资金回款至账户余额后，您可选择再次购买理财产品"
-            android:textColor="@color/black_home_four_midle" />
-    </LinearLayout>
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/home_margin"
-        android:layout_marginTop="@dimen/home_margin_top"
-        android:drawableLeft="@mipmap/tips"
-        android:drawablePadding="@dimen/home_margin"
-        android:text="产品介绍"
-        android:textColor="@color/black_home_four_larger" />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_org_circular"
-        android:orientation="vertical"
-        android:padding="@dimen/home_margin"
-        tools:visibility="gone"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="产品名称：滴滴宝"
-            android:textColor="@color/black_home_four_midle" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="起投金额：100元"
-            android:textColor="@color/black_home_four_midle" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="基础利率：7.8%"
-            android:textColor="@color/black_home_four_midle" />
-    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -292,6 +131,170 @@
 
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/home_margin"
+        android:layout_marginTop="@dimen/home_margin_top"
+        android:drawableLeft="@mipmap/tips"
+        android:drawablePadding="@dimen/home_margin"
+        android:text="计息规则"
+        android:textColor="@color/black_home_four_larger" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_org_circular"
+        android:orientation="vertical"
+        android:padding="@dimen/home_margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/details_item1_1"
+            android:textColor="@color/black_home_four_midle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/details_item1_2"
+            android:textColor="@color/black_home_four_midle" />
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/home_margin"
+        android:layout_marginTop="@dimen/home_margin_top"
+        android:drawableLeft="@mipmap/tips"
+        android:drawablePadding="@dimen/home_margin"
+        android:text="利息规则"
+        android:textColor="@color/black_home_four_larger" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_org_circular"
+        android:orientation="vertical"
+        android:padding="@dimen/home_margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当天计息，次日结息，锁定期后可继续享有利息"
+            android:textColor="@color/black_home_four_midle" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/home_margin"
+        android:layout_marginTop="@dimen/home_margin_top"
+        android:drawableLeft="@mipmap/tips"
+        android:drawablePadding="@dimen/home_margin"
+        android:text="赎回规则"
+        android:textColor="@color/black_home_four_larger" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_org_circular"
+        android:orientation="vertical"
+        android:padding="@dimen/home_margin"
+        tools:visibility="gone"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1、单笔赎回最低额度为0.01元，最大额度不超过对应滴
+滴宝额度"
+            android:textColor="@color/black_home_four_midle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="2、工作日14：30前申请赎回当天16:00前回款至账户余
+额，工作日14:30后赎回的将在下一工作日16:00前回款至账户余额 "
+            android:textColor="@color/black_home_four_midle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="3、如遇周末节假日，赎回到账时间顺延至下一工作日 "
+            android:textColor="@color/black_home_four_midle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="4、资金回款至账户余额后，您可选择再次购买理财产品"
+            android:textColor="@color/black_home_four_midle" />
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/home_margin"
+        android:layout_marginTop="@dimen/home_margin_top"
+        android:drawableLeft="@mipmap/tips"
+        android:drawablePadding="@dimen/home_margin"
+        android:text="产品介绍"
+        android:textColor="@color/black_home_four_larger" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_org_circular"
+        android:orientation="vertical"
+        android:padding="@dimen/home_margin"
+        tools:visibility="gone"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="产品名称：滴滴宝"
+            android:textColor="@color/black_home_four_midle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="起投金额：100元"
+            android:textColor="@color/black_home_four_midle" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="基础利率：7.8%"
+            android:textColor="@color/black_home_four_midle" />
+    </LinearLayout>
+
+
 
 
 

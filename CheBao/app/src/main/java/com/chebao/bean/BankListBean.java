@@ -49,7 +49,7 @@ public class BankListBean {
          */
 
         private String info;
-        private int status;
+        private String status;
 
         public String getInfo() {
             return info;
@@ -59,11 +59,11 @@ public class BankListBean {
             this.info = info;
         }
 
-        public int getStatus() {
+        public String getStatus() {
             return status;
         }
 
-        public void setStatus(int status) {
+        public void setStatus(String status) {
             this.status = status;
         }
     }

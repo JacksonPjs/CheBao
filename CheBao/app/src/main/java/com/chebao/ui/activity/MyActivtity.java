@@ -12,6 +12,7 @@ import com.chebao.bean.DidibaoBean;
 import com.chebao.bean.LoginBean;
 import com.chebao.net.NetWorks;
 import com.chebao.ui.activity.login2register.LoginActivity;
+import com.chebao.ui.activity.pay.RansomListActivity;
 import com.chebao.utils.LoginRegisterUtils;
 import com.chebao.utils.SharedPreferencesUtils;
 import com.pvj.xlibrary.loadinglayout.LoadingLayout;
@@ -32,6 +33,8 @@ import static com.chebao.utils.edncodeUtils.getCookie;
  * 作者:jackson Administrator
  */
 public class MyActivtity extends BaseActivity {
+    @Bind(R.id.title)
+    TextView title;
     @Bind(R.id.zrsy)
     TextView zrsy;
     @Bind(R.id.ljsy)
@@ -46,7 +49,7 @@ public class MyActivtity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
         ButterKnife.bind(this);
-
+        title.setText("我的滴滴宝");
         init();
     }
 
@@ -54,11 +57,23 @@ public class MyActivtity extends BaseActivity {
         net();
     }
 
-    @OnClick({R.id.chager,R.id.withdraw})
+    @Override
+    protected void onResume() {
+        super.onResume();
+        net();
+    }
+
+    @OnClick({R.id.chager, R.id.withdraw, R.id.ransomlist, R.id.back})
     public void onClick(View view) {
         Intent intent = null;
         switch (view.getId()) {
-
+            case R.id.back:
+                finish();
+                break;
+            case R.id.ransomlist:
+                intent = new Intent(this, RansomListActivity.class);
+                startActivity(intent);
+                break;
             case R.id.chager:
                 intent = new Intent(this, RansomActivity.class);
                 startActivity(intent);
@@ -67,7 +82,7 @@ public class MyActivtity extends BaseActivity {
                 break;
 
             case R.id.withdraw:
-                intent =new Intent(this,DepositActivity.class);
+                intent = new Intent(this, DepositActivity.class);
                 startActivity(intent);
                 finish();
                 break;

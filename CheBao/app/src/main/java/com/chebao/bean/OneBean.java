@@ -489,7 +489,7 @@ public class OneBean implements Serializable {
         }
         //   private int raisingPeriod;
         //   private int remainTime;
-           private int repayType;
+           private int repayType;//1到期还本付息2.先息后本3.等额还款
 
         public double getAnnualRate() {
             return annualRate;

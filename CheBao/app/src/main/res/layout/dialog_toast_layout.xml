@@ -76,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:background="@null"
                 android:text="取消"
                 android:textColor="@color/mouth" />
         </LinearLayout>

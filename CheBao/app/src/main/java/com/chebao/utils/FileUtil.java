@@ -63,7 +63,7 @@ public class FileUtil {
         try {
             String suffix = "";
             if (filePath == null || filePath.trim().length() == 0) {
-                filePath = Environment.getExternalStorageDirectory() + "/Snoppa/" + dateFolder + "/";
+                filePath = Environment.getExternalStorageDirectory() + "/Chebao/" + dateFolder + "/";
             }
             File file = new File(filePath);
             if (!file.exists()) {
@@ -93,7 +93,7 @@ public class FileUtil {
      * @return snoppaPath = /storage/emulated/0/Snoppa
      */
     public static File getSnoppaFile() {
-        final String snoppaPath = Environment.getExternalStorageDirectory().getPath() + "/Snoppa";
+        final String snoppaPath = Environment.getExternalStorageDirectory().getPath() + "/Chebao";
         File mSnoppaDir = new File(snoppaPath);
 
         if (!mSnoppaDir.exists()) {
@@ -108,11 +108,11 @@ public class FileUtil {
      * @return
      */
     public static String getVideoFilePath() {
-        File destDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Snoppa/");
+        File destDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Chebao/");
         if (!destDir.exists()) {
             destDir.mkdirs();
         }
-        final String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Snoppa/";
+        final String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Chebao/";
         return path;
     }
 

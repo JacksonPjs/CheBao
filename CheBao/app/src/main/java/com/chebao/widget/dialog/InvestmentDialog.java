@@ -87,6 +87,7 @@ public class InvestmentDialog extends Dialog implements View.OnClickListener {
                 if (itemSelectListener != null) {
                     itemSelectListener.selectAll();
                 }
+                break;
             case R.id.meet:
                 //已还清
                 if (itemSelectListener != null) {
