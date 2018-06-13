@@ -1,15 +1,18 @@
 package com.chebao.ui.activity;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
@@ -26,6 +29,7 @@ import com.chebao.ui.activity.security.ChangerPayPassWordActivity;
 import com.chebao.ui.activity.security.GestureEditActivity;
 import com.chebao.ui.activity.security.MyBankActivity;
 import com.chebao.ui.activity.security.SetPayPasswordActivity;
+import com.chebao.utils.FileCacheUtils;
 import com.chebao.utils.FileSizeUtil;
 import com.chebao.utils.FileUtil;
 import com.chebao.utils.SharedPreferencesUtils;
@@ -80,13 +84,14 @@ public class SecurityActivity extends BaseActivity {
 //    ImageView certificationGo;
 
     String realname = null;
+    Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_security);
         ButterKnife.bind(this);
-
+        activity=this;
         initView();
     }
 
@@ -174,7 +179,14 @@ public class SecurityActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        String size = "";
+        try {
+             size=FileCacheUtils.getTotalCacheSize(activity);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        number_size.setText(size);
 
     }
 
@@ -246,12 +258,13 @@ public class SecurityActivity extends BaseActivity {
                 break;
 
             case R.id.clearmmmm:
-                FileUtil.cleanInternalCache(SecurityActivity.this);
-//                Glide.get(this).clearMemory();//清理内存中的缓存。
-//                Glide.get(this).clearDiskCache();//清理硬盘中的缓存。
-                long cd = FileUtil.getFolderSize(getExternalCacheDir());
-                double fileSizeLong = FileSizeUtil.FormetFileSize(cd, 3);
-                number_size.setText(fileSizeLong + "M");
+//                FileUtil.cleanInternalCache(getApplicationContext());
+////                Glide.get(this).clearMemory();//清理内存中的缓存。
+////                Glide.get(this).clearDiskCache();//清理硬盘中的缓存。
+//                long cd = FileUtil.getFolderSize(getCacheDir());
+//                double fileSizeLong = FileSizeUtil.FormetFileSize(cd, 3);
+//                number_size.setText(fileSizeLong + "M");
+                new Thread(new clearCache()).start();
                 break;
             case R.id.exit:
                 LoginOut();
@@ -259,6 +272,63 @@ public class SecurityActivity extends BaseActivity {
                 break;
         }
     }
+
+    class clearCache implements Runnable {
+
+        @Override
+
+        public void run() {
+
+            try {
+
+                FileCacheUtils.clearAllCache(activity);
+
+//                Thread.sleep(3000);
+                String size=FileCacheUtils.getTotalCacheSize(activity);
+
+                if (size.startsWith("0")) {
+
+                    handler.sendEmptyMessage(0);
+
+                }
+
+            } catch (Exception e) {
+
+                return;
+
+            }
+
+        }
+
+    }
+
+
+    private Handler handler = new Handler() {
+
+        public void handleMessage(android.os.Message msg) {
+
+            switch (msg.what) {
+
+                case 0:
+
+                    Toast.makeText(activity,"清理完成",Toast.LENGTH_SHORT).show();
+
+                    try {
+                        String size=FileCacheUtils.getTotalCacheSize(activity);
+                        number_size.setText(size+"");
+
+
+                    } catch (Exception e) {
+
+                        e.printStackTrace();
+
+                    }
+
+            }
+
+        };
+
+    };
 
     private void LoginOut() {
         String token = (String) SharedPreferencesUtils.getParam(MyApplication.context, "token", "");

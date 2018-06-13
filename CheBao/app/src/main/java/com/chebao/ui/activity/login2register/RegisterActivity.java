@@ -367,7 +367,7 @@ public class RegisterActivity extends BaseActivity {
     }
     private void regist(final String cellPhone, final String pwd, String regCode, String regReferee) {
 
-        NetWorks.regist(cellPhone, pwd, regCode, regReferee,channel_name, new Subscriber<InfoBean>() {
+        NetWorks.regist(cellPhone, pwd, regCode, regReferee,channel_name,"1", new Subscriber<InfoBean>() {
             @Override
             public void onStart() {
                 if (dialog == null) {

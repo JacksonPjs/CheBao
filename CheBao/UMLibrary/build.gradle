@@ -14,7 +14,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation 'com.android.support:appcompat-v7:27.1.1'
     testImplementation 'junit:junit:4.12'
@@ -34,12 +34,12 @@ dependencies {
     //友盟统计
     api 'com.umeng.sdk:analytics:7.5.0'
     //友盟社会化分享
-    api 'com.umeng.sdk:share-core:6.9.1'
-    api 'com.umeng.sdk:share-wechat:6.9.1'
-    api 'com.umeng.sdk:share-sina:6.9.1'
+    api 'com.umeng.sdk:share-core:6.9.2'
+//    api 'com.umeng.sdk:share-wechat:6.9.2'
+    api 'com.umeng.sdk:share-sina:6.9.2'
 
     //分享面板
-    api 'com.umeng.sdk:shareboard-widget:6.9.1'
+    api 'com.umeng.sdk:shareboard-widget:6.9.2'
 
 
 }

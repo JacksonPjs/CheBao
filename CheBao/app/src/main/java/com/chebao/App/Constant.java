@@ -19,7 +19,7 @@ public class Constant {
 
     public static final int DEFAULT_ANIM_TIME = 1000;
 
-    public static final int DEFAULT_MAX_VALUE = 100;
+    public static final int DEFAULT_MAX_VALUE = 10000;
     public static final int DEFAULT_VALUE = 50;
 
     public static final int DEFAULT_HINT_SIZE = 15;

@@ -68,7 +68,7 @@ public class AnndatilsActivity extends BaseActivity {
             ConsultationBean.DataBean b = (ConsultationBean.DataBean) getIntent().getSerializableExtra("data");
 
             biaoti.setText(b.getTitle());
-            laiyuan.setText("来源:官方公告"+ DateUtils.getStrTime2(b.getCreateTime()+""));
+            laiyuan.setText("来源:媒体报道"+ DateUtils.getStrTime2(b.getCreateTime()+""));
 
 
             Spanned text = Html.fromHtml(b.getContent());

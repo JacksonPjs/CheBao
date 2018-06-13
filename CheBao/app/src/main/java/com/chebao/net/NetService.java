@@ -117,7 +117,8 @@ public interface NetService {
     @POST("regist.html")
     Observable<InfoBean> regist(@Query("cellPhone") String cellPhone, @Query("pwd") String pwd,
                                 @Query("regCode") String regCode, @Query("regReferee") String regReferee,
-                                @Query("channelbs") String channel_name);
+                                @Query("channelbs") String channel_name,@Query("source") String source
+    );
 
     /**
      * 找回密码

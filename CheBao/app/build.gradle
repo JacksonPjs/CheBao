@@ -6,8 +6,8 @@ android {
         applicationId "com.chebao"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 8
-        versionName "1.07"
+        versionCode 10
+        versionName "1.10"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [UMENG_CHANNEL_VALUE: "default_channel"] //默认名称
         flavorDimensions "default"
@@ -25,7 +25,7 @@ android {
 //    }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -79,9 +79,8 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation 'com.zhy:okhttputils:2.0.0'
-    implementation 'com.baidu.mobstat:mtj-sdk-circle:latest.integration'
+    //    implementation 'com.baidu.mobstat:mtj-sdk-circle:latest.integration'
     //引入ZXing库用于生成二维码（QRCode）
     implementation 'com.google.zxing:core:3.3.0'
-
-    implementation project(':UMLibrary')
+    implementation project(':umlibrary')
 }

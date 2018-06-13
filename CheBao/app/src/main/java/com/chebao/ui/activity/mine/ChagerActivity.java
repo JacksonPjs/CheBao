@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.baidu.mobstat.StatService;
 import com.chebao.App.Constant;
 import com.chebao.MyApplication;
 import com.chebao.R;
@@ -87,13 +86,11 @@ public class ChagerActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        StatService.onPageStart(this, "充值界面");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        StatService.onPageEnd(this, "充值界面");
     }
 
     @OnClick({R.id.calculator_go})

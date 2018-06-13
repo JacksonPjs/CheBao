@@ -91,13 +91,64 @@
                  -keep interface okio.**{*;}
                  # ==================okhttp end=====================
 
+# OkHttp3
+-dontwarn okhttp3.logging.**
+-keep class okhttp3.internal.**{*;}
+-dontwarn okio.**
+# Retrofit
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+-keepattributes Signature
+-keepattributes Exceptions
+# RxJava RxAndroid
+-dontwarn sun.misc.**
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+    long producerIndex;
+    long consumerIndex;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode producerNode;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
 
-    #避免混淆Rxjava/RxAndroid
-        -dontwarn sun.misc.**
-        -keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
-         long producerIndex;
-         long consumerIndex;
-        }
+
+
 
  #避免混淆实体类
-#    -keep com.chebao.bean.** { *; }
+  -keep class com.chebao.bean.** { *; }
+
+#避免混淆友盟
+-dontwarn com.tencent.mm.**
+-keep class com.tencent.mm.**{*;}
+
+-dontwarn com.umeng.**
+-keep class com.umeng.** {*;}
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+-keep public class [com.chebao].R$*{
+public static final int *;
+}
+
+#butterknife
+-keep class butterknife.** { *; }
+-dontwarn butterknife.internal.**
+-keep class **$$ViewBinder { *; }
+-keepclasseswithmembernames class * {
+    @butterknife.* <fields>;
+}
+-keepclasseswithmembernames class * {
+    @butterknife.* <methods>;
+}
+#Glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}

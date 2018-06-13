@@ -40,6 +40,7 @@ import com.chebao.utils.P2pUtils;
 import com.chebao.utils.PayWordsUtils;
 import com.chebao.utils.SharedPreferencesUtils;
 import com.chebao.utils.T1changerString;
+import com.chebao.widget.GoodProgressView;
 import com.chebao.widget.dialog.PayDialog;
 import com.chebao.widget.dialog.ToastDialog;
 import com.pvj.xlibrary.log.Logger;
@@ -88,6 +89,8 @@ public class PayActivity extends BaseActivity {
     TextView earnings;
     @Bind(R.id.cbox)
     CheckBox checkBox;
+    @Bind(R.id.progressBar)
+    GoodProgressView progressView;
 
     Dialog LoodDialog;
 
@@ -153,7 +156,10 @@ public class PayActivity extends BaseActivity {
             data.setText("出借期限:"+deadliness);
             yonghu.setText(bean.getData().getBorrowTitle() + "");
             maxAmount.setText("剩余额度：" + T1changerString.t3chager(d.getBorrowAmount() - d.getHasBorrowAmount()));
-//            if ((Boolean) SharedPreferencesUtils.getParam(this, "islogin", false)) {  //登录
+            double progressi =  (d.getHasBorrowAmount() / d.getBorrowAmount());
+            progressView.setProgressValue((int) (progressi*100));
+
+            //            if ((Boolean) SharedPreferencesUtils.getParam(this, "islogin", false)) {  //登录
 //                tv_money.setText("" + (String) SharedPreferencesUtils.getParam(this, "usableAmount", "0"));
 //
 //            } else {

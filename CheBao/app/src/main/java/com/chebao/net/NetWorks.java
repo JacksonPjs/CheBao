@@ -128,8 +128,8 @@ public class NetWorks extends RetrofitUtils {
      *
      * @param observer
      */
-    public static void regist(String cellPhone, String pwd, String regCode, String regReferee,String channel_name, Subscriber<InfoBean> observer) {
-        setSubscribe(service.regist(cellPhone, pwd, regCode, regReferee,channel_name), observer);
+    public static void regist(String cellPhone, String pwd, String regCode, String regReferee,String channel_name,String source , Subscriber<InfoBean> observer) {
+        setSubscribe(service.regist(cellPhone, pwd, regCode, regReferee,channel_name,source ), observer);
     }
 
     /**

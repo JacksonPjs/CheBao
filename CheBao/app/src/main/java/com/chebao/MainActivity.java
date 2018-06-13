@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.baidu.mobstat.StatService;
 import com.chebao.App.AppUpdataUtils;
 import com.chebao.App.AppUtils;
 import com.chebao.bean.AppUpdataBean;

@@ -104,7 +104,7 @@ public class ShareActivity extends BaseActivity {
                            Manifest.permission.WRITE_APN_SETTINGS};
                    ActivityCompat.requestPermissions(this,mPermissionList,123);
                }
-               UMImage image = new UMImage(ShareActivity.this, R.mipmap.ic_launcher);
+               UMImage image = new UMImage(ShareActivity.this, R.mipmap.ic_share);
 
                UMWeb web = new UMWeb(url);
                web.setTitle("车宝金融-人脉总动员，邀请送现金红包，可提现！");//标题
