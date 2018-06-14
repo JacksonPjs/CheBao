@@ -106,7 +106,7 @@ public class WithdrawActivity extends BaseActivity {
 
                     tMoeny.addTextChangedListener(new EditTextChangeListener());
 
-                    String str1 = "可提现金额:";
+                    String str1 = "当前可提现金额:";
                     String str2 = "" + UsableAmount;
                     String str3 = "元";
 
@@ -116,7 +116,9 @@ public class WithdrawActivity extends BaseActivity {
 //                    builder.setSpan(new ForegroundColorSpan(Color.parseColor("#ffffa200")),
 //                            (str1 + str2 + str3).length(), (str1 + str2 + str3 ).length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
 
-                    money.setText(UsableAmount);
+                    money.setTextColor(getResources().getColor(R.color.font_color1));
+
+                    money.setText(builder);
 
                     String aa = s.getData2().getBankCardNo();
                     int n = 4;
@@ -222,7 +224,7 @@ public class WithdrawActivity extends BaseActivity {
                     money.setText("金额已超出可提现金额");
                     money.setTextColor(getResources().getColor(R.color.dayday_btn_bg));
                 } else {
-                    String str1 = "可提现金额:";
+                    String str1 = "当前可提现金额:";
                     String str2 = "" + UsableAmount;
                     String str3 = "元";
                     money.setTextColor(getResources().getColor(R.color.font_color1));

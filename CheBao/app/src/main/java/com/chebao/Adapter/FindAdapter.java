@@ -15,6 +15,7 @@ import com.chebao.R;
 import com.chebao.bean.FindBean;
 import com.chebao.net.NetService;
 import com.chebao.ui.activity.WebNoTitileActivity;
+import com.pvj.xlibrary.utils.T;
 
 import java.util.List;
 
@@ -64,9 +65,14 @@ public class FindAdapter extends RecyclerView.Adapter<FindAdapter.ViewHolder> {
         holder.Head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, WebNoTitileActivity.class);
-                intent.putExtra("url",dataBean.getActivityWapSrc());
-                context.startActivity(intent);
+                if (type==0){
+                    Intent intent=new Intent(context, WebNoTitileActivity.class);
+                    intent.putExtra("url",dataBean.getActivityWapSrc());
+                    context.startActivity(intent);
+                }else {
+                    T.ShowToastForLong(context,"活动已结束");
+                }
+
             }
         });
 
