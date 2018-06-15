@@ -28,6 +28,26 @@ public class edncodeUtils {
         return cookie;
     }
 
+    public static String getToken(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(" _ed_token_");
+        sb.append("=");
+        sb.append((String) SharedPreferencesUtils.getParam(MyApplication.context, "token", ""));
+        sb.append(";");
+
+        sb.append(" _ed_username_");
+        sb.append("=");
+        sb.append((String) SharedPreferencesUtils.getParam(MyApplication.context, "name", ""));
+        sb.append(";");
+
+        sb.append(" _ed_cellphone_");
+        sb.append("=");
+        sb.append((String) SharedPreferencesUtils.getParam(MyApplication.context, "phone", ""));
+        sb.append(";");
+        String cookie=encodeHeadInfo(sb.toString());
+        return cookie;
+    }
+
 
     public static String encodeHeadInfo(String headInfo) {
         StringBuffer stringBuffer = new StringBuffer();

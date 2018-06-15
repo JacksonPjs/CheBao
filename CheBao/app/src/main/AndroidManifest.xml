@@ -113,7 +113,7 @@
         <activity android:name=".ui.activity.PicturesLookNetActivity"></activity>
         <activity android:name=".ui.activity.pay.RansomListActivity"></activity>
         <activity android:name=".ui.activity.mine.ShareActivity"></activity>
-
+        <activity android:name=".ui.activity.WebNotitleHtmlActivity"></activity>
 
         <meta-data android:value="5b012b73a40fa3083400009b" android:name="UMENG_APPKEY"/>
         <meta-data android:value="${UMENG_CHANNEL_VALUE}" android:name="UMENG_CHANNEL"/>

@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -24,6 +25,7 @@ import android.widget.ViewSwitcher;
 
 import com.bumptech.glide.Glide;
 import com.chebao.R;
+import com.chebao.bean.LoginBean;
 import com.chebao.net.NetWorks;
 import com.chebao.ui.activity.AboutActivity;
 import com.chebao.ui.activity.AnndatilsActivity;
@@ -36,6 +38,10 @@ import com.chebao.bean.OneBean;
 import com.chebao.net.NetService;
 import com.chebao.ui.activity.WebActivityJS;
 import com.chebao.ui.activity.WebNoTitileActivity;
+import com.chebao.ui.activity.WebNotitleHtmlActivity;
+import com.chebao.ui.activity.login2register.LoginActivity;
+import com.chebao.ui.activity.mine.ChagerActivity;
+import com.chebao.utils.SharedPreferencesUtils;
 import com.chebao.utils.T1changerString;
 import com.chebao.widget.GoodProgressView;
 import com.chebao.widget.ProgressSeek;
@@ -44,8 +50,11 @@ import com.pvj.xlibrary.banner.BannerIndicator;
 import com.pvj.xlibrary.loadinglayout.LoadingLayout;
 import com.pvj.xlibrary.loadinglayout.Utils;
 import com.pvj.xlibrary.log.Logger;
+import com.squareup.okhttp.Request;
 import com.umeng.analytics.MobclickAgent;
+import com.zhy.http.okhttp.OkHttpUtils;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -55,6 +64,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscriber;
+
+import static com.chebao.utils.edncodeUtils.getCookie;
 
 /**
  * Created by Administrator on 2017/3/21.
@@ -229,12 +240,25 @@ public class Fragment_Home extends BaseFragment {
             @Override
             public void onItemClick(int position) {
 
-                Intent intent = new Intent(getActivity(), WebNoTitileActivity.class);
-                intent.putExtra("url", NetService.API_SERVER_Url + drawables.get(position).getUrl());
-                intent.putExtra("title", drawables.get(position).getBannerName());
+
+//                intent.putExtra("url", NetService.API_SERVER_Url + drawables.get(position).getUrl());
+//                intent.putExtra("title", drawables.get(position).getBannerName());
                 if (drawables.get(position).getUrl().endsWith("wechat/index.html")) {
 
-                } else {
+                }
+                if (drawables.get(position).getUrl().contains("wechat/duanwuActive.html")){
+                    netLogin(NetService.API_SERVER_Url+drawables.get(position).getUrl());
+
+
+
+
+
+                }
+                else {
+                    Intent intent = new Intent(getActivity(), WebNoTitileActivity.class);
+
+                    intent.putExtra("url", NetService.API_SERVER_Url + drawables.get(position).getUrl());
+                    intent.putExtra("title", drawables.get(position).getBannerName());
                     startActivity(intent);
 
                 }
@@ -243,6 +267,68 @@ public class Fragment_Home extends BaseFragment {
             }
         });
 
+    }
+    private void netLogin(final String url) {
+        String name = SharedPreferencesUtils.getUserName(getActivity());
+        String psw = SharedPreferencesUtils.getPassword(getActivity());
+
+
+        NetWorks.login(name, psw, new Subscriber<LoginBean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Logger.json(e.toString());
+                    }
+
+                    @Override
+                    public void onNext(LoginBean loginBean) {
+                        if (loginBean.getState().getStatus() == 0) {
+                            SharedPreferencesUtils.savaUser(getActivity(), loginBean, SharedPreferencesUtils.getPassword(getActivity()));
+                            OkHttpUtils
+                                    .post()
+                                    .url(url)
+                                    .addHeader("Cookie", getCookie())
+                                    .addParams("", "")
+                                    .build()
+                                    .execute(new com.zhy.http.okhttp.callback.Callback<String>() {
+
+                                        @Override
+                                        public String parseNetworkResponse(com.squareup.okhttp.Response response) throws IOException {
+                                            return response.body().string();
+                                        }
+
+                                        @Override
+                                        public void onError(Request request, Exception e) {
+                                            String s = e.toString();
+
+                                        }
+
+                                        @Override
+                                        public void onResponse(String o) {
+                                            Logger.json(o);
+                                            Intent intent = new Intent(getActivity(), WebNotitleHtmlActivity.class);
+                                            intent.putExtra("url", "" + o);
+                                            startActivity(intent);
+//
+
+                                        }
+
+
+                                    });
+
+                        } else {
+                            SharedPreferencesUtils.setParam(getActivity(), "islogin", false);
+                            Intent intent = new Intent(getActivity(), LoginActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                }
+        );
     }
 
     /**
