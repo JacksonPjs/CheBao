@@ -102,7 +102,7 @@
                 android:layout_toRightOf="@+id/symbol"
                 android:background="@null"
                 android:hint="请输入购买金额"
-                android:inputType="number"
+                android:inputType="number|numberDecimal"
                 android:maxLength="9"
                 android:padding="5dp" />
 
@@ -216,13 +216,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_samll_size"
-            android:text="我已阅读并同意" />
+            android:text="@string/readandagree" />
 
         <TextView
             android:id="@+id/fuwutiaolie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="《车宝金融点对点借款合同》"
+            android:text="@string/tv_contracts_lease"
             android:textColor="@color/org_home"
             android:textSize="@dimen/text_samll_size"
 

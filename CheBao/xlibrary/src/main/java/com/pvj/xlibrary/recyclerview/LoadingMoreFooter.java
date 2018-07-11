@@ -91,4 +91,13 @@ public class LoadingMoreFooter extends LinearLayout {
         mText.setText("正在加载...");
         pb.setVisibility(View.VISIBLE);
     }
+    public void setTextGone(){
+        pb.setVisibility(View.GONE);
+        mText.setVisibility(View.GONE);
+    }
+    public void setTextInit(){
+        mText.setText("正在加载...");
+        pb.setVisibility(View.VISIBLE);
+        mText.setVisibility(View.VISIBLE);
+    }
 }

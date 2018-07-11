@@ -1,7 +1,6 @@
 package com.chebao.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +12,8 @@ import android.widget.TextView;
 import com.chebao.App.Constant;
 import com.chebao.R;
 import com.chebao.bean.BiaoBean;
-import com.chebao.ui.activity.DetailsRegularActivity;
 import com.chebao.utils.T1changerString;
 import com.chebao.widget.GoodProgressView;
-import com.chebao.widget.ProgressSeek;
 import com.pvj.xlibrary.loadinglayout.Utils;
 
 import java.util.List;
@@ -77,7 +74,7 @@ public class InvestSelloutAdapter extends RecyclerView.Adapter<InvestSelloutAdap
             holder.xianshi.setText("限时加息1%");
 
         }
-        holder.tuijianfangshi.setText("利息方式:" + T1changerString.t4chager(d.getRepayType()));
+        holder.tuijianfangshi.setText(T1changerString.t4chager(d.getRepayType()));
         holder.progressBar.setColors(randomColors());
         holder.progressBar.setPointColors(Utils.getColor(context,R.color.bg_huise));
         holder.progressBar.setProgressValue(100);

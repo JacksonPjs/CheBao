@@ -235,6 +235,7 @@
             android:background="@color/xixian" />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/ll_tuijain"
         android:layout_marginRight="50dp"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="10dp"
@@ -258,7 +259,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:background="@null"
-                android:hint="推荐码(选填)"
+                android:hint="邀请人手机号码(选填)"
                 android:inputType="number"
                 android:textSize="@dimen/text_12_size"
                 android:textColor="#666"
@@ -310,13 +311,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_samll_size"
-            android:text="我已阅读并同意" />
+            android:text="@string/readandagree" />
 
         <TextView
             android:id="@+id/fuwutiaolie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="《车宝金融注册服务协议》"
+            android:text="@string/tv_service_agreement"
             android:textColor="@color/org_home"
             android:textSize="@dimen/text_samll_size"
 

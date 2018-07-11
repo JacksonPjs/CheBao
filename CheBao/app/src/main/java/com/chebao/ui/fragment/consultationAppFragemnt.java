@@ -28,7 +28,7 @@ import rx.Subscriber;
 
 /**
  * 创建日期：2018/5/17 on 18:17
- * 描述:
+ * 描述:媒体报道
  * 作者:jackson Administrator
  */
 public class consultationAppFragemnt extends Fragment implements LoadingLayout.OnReloadListener,

@@ -2,6 +2,7 @@ package com.chebao.ui.activity;
 
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ import com.chebao.utils.SharedPreferencesUtils;
 import com.pvj.xlibrary.log.Logger;
 import com.pvj.xlibrary.utils.T;
 
-public class StartActivity extends BaseActivity {
+public class StartActivity extends Activity {
     private final int REQUEST_VIDEO_PERMISSION = 1;
     private final static String TAG = "StartActivity";
 

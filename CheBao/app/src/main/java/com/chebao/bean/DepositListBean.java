@@ -1,5 +1,6 @@
 package com.chebao.bean;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -55,7 +56,7 @@ public class DepositListBean {
         int borrowId;
         int id;
         long investTime;
-        int investmoney;
+        BigDecimal investmoney;
         int locktime;
         int type;
         int userId;
@@ -85,11 +86,11 @@ public class DepositListBean {
             this.investTime = investTime;
         }
 
-        public int getInvestmoney() {
+        public BigDecimal getInvestmoney() {
             return investmoney;
         }
 
-        public void setInvestmoney(int investmoney) {
+        public void setInvestmoney(BigDecimal investmoney) {
             this.investmoney = investmoney;
         }
 

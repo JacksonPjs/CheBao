@@ -87,46 +87,22 @@
                 >
 
                 <TextView
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/mine"
-                    android:id="@+id/date"
+                    android:id="@+id/amount"
                     android:textSize="@dimen/text_12_size"
                     android:textColor="@color/org_home"
                     />
-                <com.chebao.widget.countdownview.CountdownView
-                    android:id="@+id/countdowntime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    app:isShowDay="true"
-                    app:isShowHour="true"
-                    app:isShowMillisecond="false"
-                    app:isShowMinute="true"
-                    app:isShowSecond="true"
-                    app:suffixDay="天"
-                    app:suffixGravity="center"
-                    app:suffixHour="时"
-                    app:suffixMinute="分"
-                    app:suffixSecond="秒"
-                    app:suffixTextColor="@color/org_home"
-                    app:suffixTextSize="10sp"
-                    app:timeTextColor="@color/org_home"
-                    app:timeTextSize="@dimen/text_12_size"
-                    android:layout_marginTop="5dp"
-                    />
 
                 <TextView
-                    android:layout_below="@+id/countdowntime"
-                    android:id="@+id/tv_countdowntime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/shengyutime"
-                    android:layout_centerHorizontal="true"
+                    android:text="@string/borrowamount"
                     android:textSize="@dimen/text_12_size"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="1dp"
                     />
+
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

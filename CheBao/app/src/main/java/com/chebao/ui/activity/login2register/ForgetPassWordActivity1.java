@@ -18,6 +18,7 @@ import com.chebao.ui.activity.BaseActivity;
 import com.chebao.utils.DialogUtils;
 import com.chebao.utils.LoginRegisterUtils;
 import com.chebao.utils.TimeUtils;
+import com.chebao.utils.onclick.AntiShake;
 import com.pvj.xlibrary.utils.CountDownButtonHelper;
 import com.pvj.xlibrary.utils.T;
 
@@ -71,6 +72,9 @@ public class ForgetPassWordActivity1 extends BaseActivity {
 
     @OnClick({R.id.getcode, R.id.login_go})
     public void onClick(View view) {
+        if (AntiShake.check(view.getId())) {    //判断是否多次点击
+            return;
+        }
         switch (view.getId()) {
             case R.id.getcode:
                 TimeUtils.setCountDownTimerListener(new TimeUtils.CountDownTimerlistener() {

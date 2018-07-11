@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +17,11 @@ import android.widget.TextView;
 import com.chebao.App.Constant;
 import com.chebao.R;
 import com.chebao.bean.BiaoBean;
-import com.chebao.ui.activity.DetailsRegularActivity;
+import com.chebao.ui.activity.invest.DetailsRegularActivity;
 import com.chebao.utils.T1changerString;
 import com.chebao.widget.GoodProgressView;
-import com.chebao.widget.ProgressSeek;
-import com.pvj.xlibrary.loadinglayout.Utils;
 
 import java.util.List;
-import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -38,6 +37,7 @@ public class InvestAdapter extends RecyclerView.Adapter<InvestAdapter.ViewHolder
         flag = investing;
     }
 
+
 //    public  void upData(List<BiaoBean.DataBean> datas){
 //        this.datas=datas;
 //        notifyDataSetChanged();
@@ -45,7 +45,7 @@ public class InvestAdapter extends RecyclerView.Adapter<InvestAdapter.ViewHolder
 
     @Override
     public InvestAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_invest_list, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_list, parent, false);
         return new InvestAdapter.ViewHolder(view);
     }
 
@@ -58,8 +58,9 @@ public class InvestAdapter extends RecyclerView.Adapter<InvestAdapter.ViewHolder
         holder.Head.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //点击事件
                 Intent intent = new Intent(context, DetailsRegularActivity.class);
-                intent.putExtra("id",d.getId()+"");
+                intent.putExtra("id", d.getId() + "");
                 context.startActivity(intent);
             }
         });
@@ -67,34 +68,40 @@ public class InvestAdapter extends RecyclerView.Adapter<InvestAdapter.ViewHolder
 //        switch (flag) {
 //            case Constant.INVESTING:
         holder.xianshi.setBackgroundResource(R.drawable.rect_rounded_left_right_arc);
-        holder.progressBar.setProgressValue((int) (d.getProgress()*100));
-//        holder.progressBar.setColors(randomColors());
-//
-//                break;
+        holder.progressBar.setProgressValue((int) (d.getProgress() * 100));
 
-//            case Constant.INVEST_SELL_OUT:
-//                holder.progressBar.setBP(Constant.INVEST_SELL_OUT);
-//                holder.progressBar.init(100);
-//                holder.xianshi.setBackgroundResource(R.drawable.rect_rounded_left_black);
-//                break;
-//        }
-        holder.title.setText("" + d.getBorrowTitle());
         holder.tuijiandate.setText("出借期限:" + T1changerString.t2chager(d.getDeadline(), d.getDeadlineType()));
-        if (d.getBorrowType()==5){
+        String str1 = "出借期限:";
+        String str2 = T1changerString.t2chager(d.getDeadline(), d.getDeadlineType());
+
+        SpannableStringBuilder builder = new SpannableStringBuilder(str1 + str2);
+        builder.setSpan(new ForegroundColorSpan(Color.parseColor("#fb500a")),
+                str1.length(), (str1 + str2).length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        holder.browamount.setText(context.getString(R.string.borrowamount) +":"+ T1changerString.t3chager(d.getBorrowAmount()));
+        holder.shengyu.setText("剩余金额:" + T1changerString.t3chager(d.getBorrowAmount() - d.getHasBorrowAmount()));
+        holder.tuijiandate.setText(builder);
+        holder.title.setText("" + d.getBorrowTitle());
+//        holder.tuijiandate.setText("出借期限:" + T1changerString.t2chager(d.getDeadline(), d.getDeadlineType()));
+        if (d.getBorrowType() == 5) {
             holder.tuijianlilv.setText((d.getAnnualRate() - 3) + "%+3%");
             holder.xianshi.setText("限时加息3%");
-        }else {
+            holder.titletype.setText("新手标");
+        } else {
             holder.xianshi.setText("限时加息1%");
+            holder.titletype.setText("车车宝");
+
             holder.tuijianlilv.setText((d.getAnnualRate() - 1) + "%+1%");
 
         }
 
-        holder.tuijianfangshi.setText("计息方式:" + T1changerString.t4chager(d.getRepayType()));
+        holder.tuijianfangshi.setText( T1changerString.t4chager(d.getRepayType()));
 
-        if (flag==Constant.INVESTING){
-            holder.invest_item_rl.setBackground(context.getResources().getDrawable(R.mipmap.sell_bg));
-        }else {
-            holder.invest_item_rl.setBackground(context.getResources().getDrawable(R.mipmap.sellout_bk));
+        if (flag == Constant.INVESTING) {
+            holder.invest_item_rl.setBackground(context.getResources().getDrawable(R.mipmap.bg_invest));
+        } else {
+            holder.invest_item_rl.setBackground(context.getResources().getDrawable(R.drawable.elevation_home_bg));
+
+//            holder.invest_item_rl.setBackground(context.getResources().getDrawable(R.mipmap.sellout_bk));
 
         }
 
@@ -105,7 +112,6 @@ public class InvestAdapter extends RecyclerView.Adapter<InvestAdapter.ViewHolder
 
 
     }
-
 
 
     @Override
@@ -127,6 +133,12 @@ public class InvestAdapter extends RecyclerView.Adapter<InvestAdapter.ViewHolder
         TextView tuijianfangshi;
         @Bind(R.id.tuijian_lilv)
         TextView tuijianlilv;
+        @Bind(R.id.browamount)
+        TextView browamount;
+        @Bind(R.id.shengyu)
+        TextView shengyu;
+        @Bind(R.id.titletype)
+        TextView titletype;
         @Bind(R.id.progressBar)
         GoodProgressView progressBar;
         @Bind(R.id.invest_item_rl)

@@ -94,7 +94,6 @@ public class IntroduceBean {
         private String borrowTitle;
         private int borrowType;
         private int borrowerId;
-        private int clockAmount;
         private String collateralInfos;
         private String introductionInfos;
         private String guaranteetype;
@@ -159,13 +158,7 @@ public class IntroduceBean {
             this.borrowerId = borrowerId;
         }
 
-        public int getClockAmount() {
-            return clockAmount;
-        }
 
-        public void setClockAmount(int clockAmount) {
-            this.clockAmount = clockAmount;
-        }
 
         public String getCollateralInfos() {
             return collateralInfos;

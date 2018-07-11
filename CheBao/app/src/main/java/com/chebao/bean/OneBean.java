@@ -20,8 +20,8 @@ public class OneBean implements Serializable {
     private String borrowhqll;
     private StateBean state;
     private Data0Bean data0;
-    private Data1Bean data1;
-    private Data2Bean data2;
+//    private Data1Bean data1;
+    private List<Data2Bean> data2;
     private Data3Bean data3;
     private List<Data4Bean> data4;
     private List<BannersBean> banners;
@@ -50,19 +50,13 @@ public class OneBean implements Serializable {
         this.data0 = data0;
     }
 
-    public Data1Bean getData1() {
-        return data1;
-    }
 
-    public void setData1(Data1Bean data1) {
-        this.data1 = data1;
-    }
 
-    public Data2Bean getData2() {
+    public List<Data2Bean> getData2() {
         return data2;
     }
 
-    public void setData2(Data2Bean data2) {
+    public void setData2(List<Data2Bean> data2) {
         this.data2 = data2;
     }
 

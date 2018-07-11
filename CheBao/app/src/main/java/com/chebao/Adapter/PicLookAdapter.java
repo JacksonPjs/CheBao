@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.chebao.R;
 import com.chebao.bean.ProductDetialBean;
 import com.chebao.net.NetService;
-import com.chebao.ui.activity.PicturesLookNetActivity;
+import com.chebao.ui.activity.invest.PicturesLookNetActivity;
 
 import java.util.List;
 

@@ -4,10 +4,18 @@ package com.chebao.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Base64;
 
 import com.chebao.bean.CenterIndexBean;
 import com.chebao.bean.LoginBean;
+import com.chebao.bean.OneBean;
 import com.pvj.xlibrary.log.Logger;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * SharedPreferences的一个工具类，调用setParam就能保存String, Integer, Boolean, Float,
@@ -185,6 +193,57 @@ public class SharedPreferencesUtils {
 
         editor.commit();
 
+    }
+    /**
+     * 保存数据
+     *
+     * @param context
+     * @return
+     */
+    public static void savaHome(Context context, OneBean bean) {
+
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+                Context.MODE_PRIVATE);
+        Editor editor = sp.edit();// 获取编辑器
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(bean);
+            String base64Student = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
+            editor.putString("oneBean", base64Student);
+            editor.apply();
+
+            oos.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        editor.commit();
+
+    }
+
+    public static  OneBean getHome(Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+
+        String studentString = sharedPreferences.getString("oneBean", "");
+
+        byte[] base64Student = Base64.decode(studentString, Base64.DEFAULT);
+
+        ByteArrayInputStream bais = new ByteArrayInputStream(base64Student);
+
+        try {
+
+            ObjectInputStream ois = new ObjectInputStream(bais);
+
+            OneBean bean = (OneBean) ois.readObject();
+                return bean;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

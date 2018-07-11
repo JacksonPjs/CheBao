@@ -11,13 +11,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.ViewTarget;
 import com.chebao.R;
 import com.chebao.bean.FindBean;
 import com.chebao.bean.LoginBean;
 import com.chebao.net.NetService;
 import com.chebao.net.NetWorks;
-import com.chebao.ui.activity.WebNoTitileActivity;
-import com.chebao.ui.activity.WebNotitleHtmlActivity;
+import com.chebao.ui.activity.web.WebNoTitileActivity;
+import com.chebao.ui.activity.web.WebNotitleHtmlActivity;
 import com.chebao.ui.activity.login2register.LoginActivity;
 import com.chebao.utils.SharedPreferencesUtils;
 import com.pvj.xlibrary.log.Logger;
@@ -56,8 +59,10 @@ public class FindAdapter extends RecyclerView.Adapter<FindAdapter.ViewHolder> {
         return new FindAdapter.ViewHolder(view);
     }
 
+
+
     @Override
-    public void onBindViewHolder(FindAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final FindAdapter.ViewHolder holder, int position) {
         final FindBean.DataBean dataBean = datas.get(position);
         holder.title.setText(dataBean.getActivityName() + "");
         String url = NetService.API_SERVER_Photo + dataBean.getActivityImg() + "";
@@ -68,10 +73,23 @@ public class FindAdapter extends RecyclerView.Adapter<FindAdapter.ViewHolder> {
 
         }
 
+
         Glide.with(context).
                 load(url)
-                .error(R.mipmap.error)
-                .placeholder(R.mipmap.error)
+//                .error(R.mipmap.error)
+//                .placeholder(R.mipmap.error)
+                .crossFade()
+                .into(new ViewTarget<View, GlideDrawable>(holder.Bg) {
+                    @Override
+                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+                            holder.Bg.setBackground(resource);
+                    }
+                });
+
+        Glide.with(context).
+                load(url)
+//                .error(R.mipmap.error)
+//                .placeholder(R.mipmap.error)
                 .crossFade()
                 .into(holder.imageView);
         holder.Head.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +135,8 @@ public class FindAdapter extends RecyclerView.Adapter<FindAdapter.ViewHolder> {
         @Bind(R.id.find_item_bg)
         ImageView imageView;
         @Bind(R.id.biao_head)
-        CardView Head;
+        CardView Head; @Bind(R.id.find_bg)
+        View Bg;
 
         ViewHolder(View view) {
             super(view);

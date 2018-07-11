@@ -50,6 +50,7 @@ public class Constant {
     public static final String PAY_NO_MONEY="53";//支付返回余额不足
     public static final String PAY_NO_BANK="6";//没有绑定银行卡
     public static final String STATUS_SUCCESS="0";//返回成功状态
+    public static final String STATUS_Empty="3";//返回数据为空状态
     public static final String STATUS_NO_LOGIN="99";//返回未登录
 
     public static final int PAY_NO_PAYPSW_INTENT=2;//支付返回没有设置交易密码跳转flag

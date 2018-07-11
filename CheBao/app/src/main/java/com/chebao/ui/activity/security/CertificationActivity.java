@@ -2,6 +2,7 @@ package com.chebao.ui.activity.security;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import com.chebao.ui.activity.BaseActivity;
 import com.chebao.utils.DialogUtils;
 import com.chebao.utils.LoginRegisterUtils;
 import com.chebao.utils.SharedPreferencesUtils;
+import com.chebao.utils.onclick.AntiShake;
 import com.pvj.xlibrary.loadinglayout.LoadingLayout;
 import com.pvj.xlibrary.loadinglayout.Utils;
 import com.pvj.xlibrary.log.Logger;
@@ -80,7 +82,10 @@ public class CertificationActivity extends BaseActivity {
 
 
     @OnClick(R.id.rez_go)
-    public void onClick() {
+    public void onClick(View view) {
+        if (AntiShake.check(view.getId())) {    //判断是否多次点击
+            return;
+        }
         if (LoginRegisterUtils.isNullOrEmpty(userName)) {
             T.ShowToastForShort(this, "请填写姓名");
             return;

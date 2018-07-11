@@ -18,6 +18,7 @@ import com.chebao.ui.activity.login2register.LoginActivity;
 import com.chebao.utils.DialogUtils;
 import com.chebao.utils.LoginRegisterUtils;
 import com.chebao.utils.SharedPreferencesUtils;
+import com.chebao.utils.onclick.AntiShake;
 import com.pvj.xlibrary.log.Logger;
 import com.pvj.xlibrary.utils.T;
 
@@ -68,7 +69,10 @@ public class SetPayPasswordActivity extends BaseActivity {
     }
 
     @OnClick(R.id.chagerloginpwd_go)
-    public void onClick() {
+    public void onClick(View view) {
+        if (AntiShake.check(view.getId())) {    //判断是否多次点击
+            return;
+        }
         if (LoginRegisterUtils.isNullOrEmpty(tword)) {
             T.ShowToastForShort(this, "密码不能为空");
             return;

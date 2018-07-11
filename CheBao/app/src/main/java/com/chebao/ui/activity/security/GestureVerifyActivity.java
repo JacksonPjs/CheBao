@@ -2,7 +2,9 @@ package com.chebao.ui.activity.security;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,12 +19,19 @@ import android.widget.Toast;
 import com.chebao.MainActivity;
 import com.chebao.MyApplication;
 import com.chebao.R;
+import com.chebao.bean.LoginBean;
+import com.chebao.net.NetWorks;
 import com.chebao.ui.activity.login2register.LoginActivity;
 import com.chebao.ui.activity.login2register.RegisterActivity;
+import com.chebao.utils.DialogUtils;
+import com.chebao.utils.PermissionsManager;
 import com.chebao.utils.SharedPreferencesUtils;
 import com.chebao.widget.gesture.GestureContentView;
 import com.chebao.widget.gesture.GestureDrawline;
+import com.pvj.xlibrary.log.Logger;
 import com.pvj.xlibrary.utils.T;
+
+import rx.Subscriber;
 
 
 /**
@@ -48,14 +57,15 @@ public class GestureVerifyActivity extends Activity implements android.view.View
     private String mParamPhoneNumber;
     private long mExitTime = 0;
     private int mParamIntentCode;
-    int index=0;
+    int index = 0;
+    Activity activity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gesture_verify);
         MyApplication.instance.addActivity(this);
-
+        activity = this;
         ObtainExtraData();
         setUpViews();
         setUpListeners();
@@ -74,12 +84,12 @@ public class GestureVerifyActivity extends Activity implements android.view.View
         mGestureContainer = (FrameLayout) findViewById(R.id.gesture_container);
         mTextOther = (TextView) findViewById(R.id.text_other_account);
         String str = SharedPreferencesUtils.getUserName(this);
-        if (str.equals("")){
-            Intent intent=new Intent(GestureVerifyActivity.this,LoginActivity.class);
+        if (str.equals("")) {
+            Intent intent = new Intent(GestureVerifyActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
 
-        }else {
+        } else {
             String bb = str.substring(3, 7);
             //字符串替换
             String cc = str.replace(bb, "****");
@@ -99,19 +109,16 @@ public class GestureVerifyActivity extends Activity implements android.view.View
                     @Override
                     public void checkedSuccess() {
                         mGestureContentView.clearDrawlineState(0L);
-                        Toast.makeText(GestureVerifyActivity.this, "密码正确", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(GestureVerifyActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        GestureVerifyActivity.this.finish();
+                        login();
                     }
 
                     @Override
                     public void checkedFail() {
                         index++;
-                        if (index>=5){
+                        if (index >= 5) {
                             Intent intent = new Intent(GestureVerifyActivity.this, LoginActivity.class);
                             startActivity(intent);
-                            T.ShowToastForLong(GestureVerifyActivity.this,"手势密码错误超过5次,请使用用户名登录");
+                            T.ShowToastForLong(GestureVerifyActivity.this, "手势密码错误超过5次,请使用用户名登录");
                             GestureVerifyActivity.this.finish();
                         }
                         mGestureContentView.clearDrawlineState(1300L);
@@ -164,5 +171,49 @@ public class GestureVerifyActivity extends Activity implements android.view.View
                 break;
         }
     }
+
+    public void login() {
+        String name=SharedPreferencesUtils.getUserName(activity)+"";
+        final String passoword=SharedPreferencesUtils.getPassword(activity);
+        NetWorks.login(name, passoword, new Subscriber<LoginBean>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onCompleted() {
+                ;
+            }
+
+            @Override
+            public void onError(Throwable e) {
+//                T.ShowToastForLong(
+//                        activity, "网络异常");
+                Intent intent = new Intent(activity, MainActivity.class);
+                startActivity(intent);
+                Logger.e(e.toString());
+                finish();
+            }
+
+            @Override
+            public void onNext(LoginBean s) {
+                if (s.getState().getStatus() == 0) {
+
+                    SharedPreferencesUtils.savaUser(activity, s, passoword);
+
+                    T.ShowToastForLong(activity, "登录成功");
+                } else {
+                    T.ShowToastForLong(activity, s.getState().getInfo());
+                }
+
+                Intent intent = new Intent(activity, MainActivity.class);
+                startActivity(intent);
+
+                finish();
+            }
+        });
+    }
+
 
 }

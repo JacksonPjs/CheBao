@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-            <include layout="@layout/layout_back"></include>
+            <include layout="@layout/titlebar_back"></include>
 
 
 

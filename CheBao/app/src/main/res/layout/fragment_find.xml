@@ -13,7 +13,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:background="@color/ll_nor"
             android:padding="10dp"
             android:gravity="center"
@@ -82,13 +81,12 @@
 
         </LinearLayout>
 
-        <include layout="@layout/line_match_parent"></include>
     </LinearLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/biao_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/ll_nor"></android.support.v4.view.ViewPager>
+        ></android.support.v4.view.ViewPager>
 
 </LinearLayout>

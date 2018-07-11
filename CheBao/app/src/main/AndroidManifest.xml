@@ -3,6 +3,9 @@
     package="com.chebao">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE"></uses-permission>
+
+
     <!--添加可以向外拨打电话的权限  -->
     <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
 
@@ -72,11 +75,11 @@
             android:exported="true"
             ></activity>
         <activity android:name=".ui.activity.login2register.LoginActivity"></activity>
-        <activity android:name=".ui.activity.Activity_discount"></activity>
-        <activity android:name=".ui.activity.DetailsActivity"></activity>
-        <activity android:name=".ui.activity.DetailsProductActivity"></activity>
-        <activity android:name=".ui.activity.DetailsRegularActivity"></activity>
-        <activity android:name=".ui.activity.SecurityActivity"></activity>
+        <activity android:name=".ui.activity.mine.Activity_discount"></activity>
+        <activity android:name=".ui.activity.invest.DetailsActivity"></activity>
+        <activity android:name=".ui.activity.invest.DetailsProductActivity"></activity>
+        <activity android:name=".ui.activity.invest.DetailsRegularActivity"></activity>
+        <activity android:name=".ui.activity.security.SecurityActivity"></activity>
 
         <activity android:name=".ui.activity.security.GestureEditActivity"></activity>
         <activity android:name=".ui.activity.security.GestureVerifyActivity"></activity>
@@ -85,35 +88,36 @@
         <activity android:name=".ui.activity.security.SetPayPasswordActivity"></activity>
         <activity android:name=".ui.activity.security.ChangerPayPassWordActivity"></activity>
         <activity android:name=".ui.activity.security.MyBankActivity"></activity>
-        <activity android:name=".ui.activity.TransactionActivity"></activity>
-        <activity android:name=".ui.activity.HuiKuanActivity"></activity>
-        <activity android:name=".ui.activity.InvestmentActivity"></activity>
-        <activity android:name=".ui.activity.MyActivtity"></activity>
+        <activity android:name=".ui.activity.mine.TransactionActivity"></activity>
+        <activity android:name=".ui.activity.mine.HuiKuanActivity"></activity>
+        <activity android:name=".ui.activity.mine.InvestmentActivity"></activity>
+        <activity android:name=".ui.activity.mine.MyActivtity"></activity>
         <activity android:name=".ui.activity.login2register.RegisterActivity"></activity>
         <activity android:name=".ui.activity.login2register.ForgetPassWordActivity1"></activity>
-        <activity android:name=".ui.activity.WebActivity"></activity>
-        <activity android:name=".ui.activity.SecurityWebActivity"></activity>
+        <activity android:name=".ui.activity.web.WebActivity"></activity>
+        <activity android:name=".ui.activity.security.SecurityWebActivity"></activity>
 
-        <activity android:name=".ui.activity.InvestSellOutActivity"></activity>
-        <activity android:name=".ui.activity.PicturesLookActivity"></activity>
+        <activity android:name=".ui.activity.invest.InvestSellOutActivity"></activity>
+        <activity android:name=".ui.activity.invest.PicturesLookActivity"></activity>
 
-        <activity android:name=".ui.activity.PayActivity"></activity>
+        <activity android:name=".ui.activity.pay.PayActivity"></activity>
         <activity android:name=".ui.activity.mine.ChagerActivity"></activity>
         <activity android:name=".ui.activity.security.AddBankActivity"></activity>
-        <activity android:name=".ui.activity.WebActivityJS"></activity>
-        <activity android:name=".ui.activity.WithdrawActivity"></activity>
-        <activity android:name=".ui.activity.RansomActivity"></activity>
-        <activity android:name=".ui.activity.AnndatilsActivity"></activity>
-        <activity android:name=".ui.activity.AnnouncementListActivity"></activity>
-        <activity android:name=".ui.activity.ChargerWebActivity"></activity>
-        <activity android:name=".ui.activity.PayDiscountActivity"></activity>
-        <activity android:name=".ui.activity.DepositActivity"></activity>
-        <activity android:name=".ui.activity.AboutActivity"></activity>
-        <activity android:name=".ui.activity.WebNoTitileActivity"></activity>
-        <activity android:name=".ui.activity.PicturesLookNetActivity"></activity>
+        <activity android:name=".ui.activity.web.WebActivityJS"></activity>
+        <activity android:name=".ui.activity.pay.WithdrawActivity"></activity>
+        <activity android:name=".ui.activity.pay.RansomActivity"></activity>
+        <activity android:name=".ui.activity.mine.AnndatilsActivity"></activity>
+        <activity android:name=".ui.activity.mine.AnnouncementListActivity"></activity>
+        <activity android:name=".ui.activity.mine.ChargerWebActivity"></activity>
+        <activity android:name=".ui.activity.invest.PayDiscountActivity"></activity>
+        <activity android:name=".ui.activity.pay.DepositActivity"></activity>
+        <activity android:name=".ui.activity.web.AboutActivity"></activity>
+        <activity android:name=".ui.activity.web.WebNoTitileActivity"></activity>
+        <activity android:name=".ui.activity.invest.PicturesLookNetActivity"></activity>
         <activity android:name=".ui.activity.pay.RansomListActivity"></activity>
         <activity android:name=".ui.activity.mine.ShareActivity"></activity>
-        <activity android:name=".ui.activity.WebNotitleHtmlActivity"></activity>
+        <activity android:name=".ui.activity.web.WebNotitleHtmlActivity"></activity>
+        <activity android:name=".ui.activity.mine.ShareNoteActivity"></activity>
 
         <meta-data android:value="5b012b73a40fa3083400009b" android:name="UMENG_APPKEY"/>
         <meta-data android:value="${UMENG_CHANNEL_VALUE}" android:name="UMENG_CHANNEL"/>
@@ -144,7 +148,6 @@
         </activity>
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
-            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="orientation|keyboardHidden|screenSize"/>
 <!-- 新浪-->

@@ -6,7 +6,7 @@
     android:background="@color/bg_huise"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_back" />
+    <include layout="@layout/titlebar_back" />
 
     <ScrollView
         android:background="#fff"

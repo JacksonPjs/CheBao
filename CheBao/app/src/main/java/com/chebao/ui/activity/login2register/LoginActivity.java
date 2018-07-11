@@ -26,6 +26,7 @@ import com.chebao.utils.DialogUtils;
 import com.chebao.utils.LoginRegisterUtils;
 import com.chebao.utils.PermissionsManager;
 import com.chebao.utils.SharedPreferencesUtils;
+import com.chebao.utils.onclick.AntiShake;
 import com.pvj.xlibrary.log.Logger;
 import com.pvj.xlibrary.utils.T;
 
@@ -59,6 +60,9 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick({R.id.login_go, R.id.regist, R.id.forget, R.id.back, R.id.tv_register})
     public void onClick(View view) {
+        if (AntiShake.check(view.getId())) {    //判断是否多次点击
+            return;
+        }
         Intent intent = null;
         switch (view.getId()) {
             case R.id.regist:
@@ -110,8 +114,8 @@ public class LoginActivity extends BaseActivity {
                 login(loginPhone.getText().toString(), loginPassword.getText().toString());
                 break;
             case R.id.back:
-                intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+//                intent = new Intent(this, MainActivity.class);
+//                startActivity(intent);
                 finish();
                 break;
 
@@ -123,8 +127,8 @@ public class LoginActivity extends BaseActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
 
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(this, MainActivity.class);
+//            startActivity(intent);
             finish();
             return false;
         } else {
@@ -161,8 +165,7 @@ public class LoginActivity extends BaseActivity {
                 if (s.getState().getStatus() == 0) {
 
                     SharedPreferencesUtils.savaUser(LoginActivity.this, s, passoword);
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
+
                     String[] permissions = PermissionsManager.haveNoPermissions(activity, PERMISSIONS);
 //                            if (permissions == null || permissions.length < 1) {
 //                                startMain();
@@ -171,7 +174,8 @@ public class LoginActivity extends BaseActivity {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && permissions != null && permissions.length > 0) {
                         ActivityCompat.requestPermissions(activity, permissions, REQUEST_VIDEO_PERMISSION);
                     }
-
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
                     finish();
                     T.ShowToastForLong(LoginActivity.this, "登录成功");
                 } else {

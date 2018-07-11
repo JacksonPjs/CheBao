@@ -1,5 +1,7 @@
 package com.chebao.bean;
 
+import java.math.BigDecimal;
+
 /**
  * 个人中心
  * Created by Administrator on 2017/1/5.
@@ -25,6 +27,24 @@ public class CenterIndexBean {
     private double total1;
     private double total2;
     private double total3;
+    private BigDecimal sumhb;//红包总数
+    private BigDecimal dhksum;//待还款总数
+
+    public BigDecimal getSumhb() {
+        return sumhb;
+    }
+
+    public void setSumhb(BigDecimal sumhb) {
+        this.sumhb = sumhb;
+    }
+
+    public BigDecimal getDhksum() {
+        return dhksum;
+    }
+
+    public void setDhksum(BigDecimal dhksum) {
+        this.dhksum = dhksum;
+    }
 
     public double getTotal3() {
         return total3;

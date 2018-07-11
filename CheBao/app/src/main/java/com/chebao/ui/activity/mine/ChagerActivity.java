@@ -19,11 +19,12 @@ import com.chebao.bean.LoginBean;
 import com.chebao.net.NetService;
 import com.chebao.net.NetWorks;
 import com.chebao.ui.activity.BaseActivity;
-import com.chebao.ui.activity.WebActivityJS;
+import com.chebao.ui.activity.web.WebActivityJS;
 import com.chebao.utils.DialogUtils;
 import com.chebao.utils.IntentUtils;
 import com.chebao.utils.LoginRegisterUtils;
 import com.chebao.utils.SharedPreferencesUtils;
+import com.chebao.utils.onclick.AntiShake;
 import com.chebao.widget.dialog.ToastDialog;
 import com.pvj.xlibrary.loadinglayout.LoadingLayout;
 import com.pvj.xlibrary.log.Logger;
@@ -95,6 +96,9 @@ public class ChagerActivity extends BaseActivity {
 
     @OnClick({R.id.calculator_go})
     public void onClick(View view) {
+        if (AntiShake.check(view.getId())) {    //判断是否多次点击
+            return;
+        }
         switch (view.getId()) {
 
             case R.id.calculator_go:

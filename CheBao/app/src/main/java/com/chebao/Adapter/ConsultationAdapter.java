@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.chebao.R;
-import com.chebao.bean.AnnouncementBean;
 import com.chebao.bean.ConsultationBean;
-import com.chebao.ui.activity.AnndatilsActivity;
+import com.chebao.net.NetService;
+import com.chebao.ui.activity.web.WebNoTitileActivity;
 import com.pvj.xlibrary.utils.DateUtils;
 
 import java.io.Serializable;
@@ -61,10 +61,13 @@ public class ConsultationAdapter extends RecyclerView.Adapter<ConsultationAdapte
         holder.dsadas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, AnndatilsActivity.class);
-                intent.putExtra("id", (Serializable) b.getId());
-                intent.putExtra("type", 1);
-                intent.putExtra("data", (Serializable) b);
+//                Intent intent = new Intent(context, AnndatilsActivity.class);
+//                intent.putExtra("id", (Serializable) b.getId());
+//                intent.putExtra("type", 1);
+//                intent.putExtra("data", (Serializable) b);
+                Intent intent = new Intent(context, WebNoTitileActivity.class);
+                intent.putExtra("url", NetService.API_SERVER_Url+"wechat/mediamsg.html?id="+(Serializable) b.getId());
+
                 context.startActivity(intent);
             }
         });

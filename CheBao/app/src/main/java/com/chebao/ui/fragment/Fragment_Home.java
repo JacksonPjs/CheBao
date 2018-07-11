@@ -1,62 +1,51 @@
 package com.chebao.ui.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import com.bumptech.glide.Glide;
+import com.chebao.Adapter.HomeAdapter;
+import com.chebao.MainActivity;
 import com.chebao.R;
 import com.chebao.bean.LoginBean;
 import com.chebao.net.NetWorks;
-import com.chebao.ui.activity.AboutActivity;
-import com.chebao.ui.activity.AnndatilsActivity;
-import com.chebao.ui.activity.AnnouncementListActivity;
-import com.chebao.ui.activity.DetailsActivity;
-import com.chebao.ui.activity.DetailsRegularActivity;
-import com.chebao.ui.activity.WebActivity;
-import com.chebao.bean.AnnouncementBean;
+import com.chebao.ui.activity.security.AddBankActivity;
+import com.chebao.ui.activity.web.AboutActivity;
+import com.chebao.ui.activity.mine.AnnouncementListActivity;
 import com.chebao.bean.OneBean;
 import com.chebao.net.NetService;
-import com.chebao.ui.activity.WebActivityJS;
-import com.chebao.ui.activity.WebNoTitileActivity;
-import com.chebao.ui.activity.WebNotitleHtmlActivity;
+import com.chebao.ui.activity.web.WebNoTitileActivity;
+import com.chebao.ui.activity.web.WebNotitleHtmlActivity;
 import com.chebao.ui.activity.login2register.LoginActivity;
-import com.chebao.ui.activity.mine.ChagerActivity;
 import com.chebao.utils.SharedPreferencesUtils;
-import com.chebao.utils.T1changerString;
-import com.chebao.widget.GoodProgressView;
-import com.chebao.widget.ProgressSeek;
+import com.chebao.utils.onclick.AntiShake;
 import com.pvj.xlibrary.banner.Banner;
 import com.pvj.xlibrary.banner.BannerIndicator;
-import com.pvj.xlibrary.loadinglayout.LoadingLayout;
 import com.pvj.xlibrary.loadinglayout.Utils;
 import com.pvj.xlibrary.log.Logger;
+import com.pvj.xlibrary.utils.T;
 import com.squareup.okhttp.Request;
 import com.umeng.analytics.MobclickAgent;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.io.IOException;
-import java.io.Serializable;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,36 +72,7 @@ public class Fragment_Home extends BaseFragment {
     BannerIndicator bannerIndicator;
     @Bind(R.id.gonggao)
     View gonggao;
-    @Bind(R.id.progressBar)
-    GoodProgressView progressSeek;
 
-    @Bind(R.id.xinshou)
-    TextView xinshou;
-    @Bind(R.id.tuijian_lilv)
-    TextView lilvTv;
-    @Bind(R.id.didibao_lilv)
-    TextView didibaolilv;
-    @Bind(R.id.tuijian_date)
-    TextView tuijiandate;
-    @Bind(R.id.tuijian_fangshi)
-    TextView tuijianfangshi;
-    @Bind(R.id.yonghu)
-    TextView yonghu;
-
-    @Bind(R.id.yonghu_date)
-    TextView yonghudate;
-
-
-    @Bind(R.id.yonghu_lilv)
-    TextView yonghulilv;
-    @Bind(R.id.yonghu_fangshi)
-    TextView yonghufangshi;
-    @Bind(R.id.progressBar_yonghu)
-    GoodProgressView progressBaryonghu;
-    @Bind(R.id.home_six_rl)
-    RelativeLayout home_six_rl;
-    @Bind(R.id.home_five_rl)
-    RelativeLayout home_five_rl;
 
     private BitHandler bitHandler;
 
@@ -122,8 +82,16 @@ public class Fragment_Home extends BaseFragment {
 
     private int index = 0;
 
-    OneBean.Data1Bean data1Bean;
-    OneBean.Data2Bean data2Bean;
+
+    List<OneBean.Data2Bean> biaoBeenList;
+
+    @Bind(R.id.public_listview)
+    RecyclerView publicLv;
+    @Bind(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout swipeRefreshLayout;
+    HomeAdapter homeAdapter;
+    int page = 0;
+
 
     //公告handler
     class BitHandler extends Handler {
@@ -136,7 +104,12 @@ public class Fragment_Home extends BaseFragment {
                 index++;
                 if (index == data4Beens.size()) {
                     index = 0;
+                    bitHandler.sendEmptyMessageDelayed(0, 2000);
+
+                } else if (index < data4Beens.size()) {
+                    bitHandler.sendEmptyMessageDelayed(0, 2000);
                 }
+
             }
 
         }
@@ -162,6 +135,19 @@ public class Fragment_Home extends BaseFragment {
 
     @Override
     public void initData() {
+
+
+        biaoBeenList = new ArrayList<>();
+        homeAdapter = new HomeAdapter(biaoBeenList, getActivity());
+        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
+        publicLv.setLayoutManager(manager);
+
+//        publicLv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+        publicLv.setAdapter(homeAdapter);
+
+
+        publicLv.setNestedScrollingEnabled(false);
         textSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
             @Override
             public View makeView() {
@@ -180,11 +166,23 @@ public class Fragment_Home extends BaseFragment {
             }
         });
 
+        OneBean oneBean = SharedPreferencesUtils.getHome(getActivity());
+
         bitHandler = new BitHandler();
+        swipeRefreshLayout.setColorSchemeResources(new int[]{R.color.colorAccent, R.color.colorPrimary});
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                requestData();
+//                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
 
         //----------------------banner start------------------------------
         initBanner();
+        if (oneBean!=null)
+            setDate(oneBean);
     }
 
 
@@ -240,21 +238,16 @@ public class Fragment_Home extends BaseFragment {
             @Override
             public void onItemClick(int position) {
 
-
+                if (AntiShake.check(banner)) {    //判断是否多次点击
+                    return;
+                }
 //                intent.putExtra("url", NetService.API_SERVER_Url + drawables.get(position).getUrl());
 //                intent.putExtra("title", drawables.get(position).getBannerName());
-                if (drawables.get(position).getUrl().endsWith("wechat/index.html")) {
+                //wechat/index.html
+                String url=drawables.get(position).getUrl();
+                if (url.endsWith("wechat/index.html")) {
 
-                }
-                if (drawables.get(position).getUrl().contains("wechat/duanwuActive.html")){
-                    netLogin(NetService.API_SERVER_Url+drawables.get(position).getUrl());
-
-
-
-
-
-                }
-                else {
+                }else {
                     Intent intent = new Intent(getActivity(), WebNoTitileActivity.class);
 
                     intent.putExtra("url", NetService.API_SERVER_Url + drawables.get(position).getUrl());
@@ -268,68 +261,7 @@ public class Fragment_Home extends BaseFragment {
         });
 
     }
-    private void netLogin(final String url) {
-        String name = SharedPreferencesUtils.getUserName(getActivity());
-        String psw = SharedPreferencesUtils.getPassword(getActivity());
 
-
-        NetWorks.login(name, psw, new Subscriber<LoginBean>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                        Logger.json(e.toString());
-                    }
-
-                    @Override
-                    public void onNext(LoginBean loginBean) {
-                        if (loginBean.getState().getStatus() == 0) {
-                            SharedPreferencesUtils.savaUser(getActivity(), loginBean, SharedPreferencesUtils.getPassword(getActivity()));
-                            OkHttpUtils
-                                    .post()
-                                    .url(url)
-                                    .addHeader("Cookie", getCookie())
-                                    .addParams("", "")
-                                    .build()
-                                    .execute(new com.zhy.http.okhttp.callback.Callback<String>() {
-
-                                        @Override
-                                        public String parseNetworkResponse(com.squareup.okhttp.Response response) throws IOException {
-                                            return response.body().string();
-                                        }
-
-                                        @Override
-                                        public void onError(Request request, Exception e) {
-                                            String s = e.toString();
-
-                                        }
-
-                                        @Override
-                                        public void onResponse(String o) {
-                                            Logger.json(o);
-                                            Intent intent = new Intent(getActivity(), WebNotitleHtmlActivity.class);
-                                            intent.putExtra("url", "" + o);
-                                            startActivity(intent);
-//
-
-                                        }
-
-
-                                    });
-
-                        } else {
-                            SharedPreferencesUtils.setParam(getActivity(), "islogin", false);
-                            Intent intent = new Intent(getActivity(), LoginActivity.class);
-                            startActivity(intent);
-                        }
-                    }
-                }
-        );
-    }
 
     /**
      * init data
@@ -349,7 +281,6 @@ public class Fragment_Home extends BaseFragment {
 
             @Override
             public void onCompleted() {
-
             }
 
             @Override
@@ -357,6 +288,8 @@ public class Fragment_Home extends BaseFragment {
 
 
                 Logger.e(e.toString());
+                swipeRefreshLayout.setRefreshing(false);
+
 //                layoutContiant.setStatus(LoadingLayout.Error);
             }
 
@@ -364,84 +297,8 @@ public class Fragment_Home extends BaseFragment {
             public void onNext(OneBean oneBean) {
 
                 if (oneBean.getState().getStatus() == 0) {
-                    //广告
-//                    layoutContiant.setStatus(LoadingLayout.Success);
-                    drawables.clear();
-                    drawables.addAll(oneBean.getBanners());
-                    banner.setDataSource(drawables);
-
-                    // 设置 广播消息
-                    data4Beens.clear();
-                    data4Beens.addAll(oneBean.getData4());
-
-                    new myThread().start();
-
-                    didibaolilv.setText(oneBean.getBorrowhqll() + "%+2%");
-
-                    data1Bean = oneBean.getData1();
-                    if (data1Bean == null) {
-                        home_five_rl.setVisibility(View.GONE);
-
-                    } else if (data1Bean.getBorrowTitle() == null) {
-                        home_five_rl.setVisibility(View.GONE);
-                    } else {
-                        if (data1Bean.getBorrowType() != 5) {
-                            home_five_rl.setVisibility(View.GONE);
-
-                        } else {
-                            //新手标数据
-                            home_five_rl.setVisibility(View.VISIBLE);
-
-                            xinshou.setText(data1Bean.getBorrowTitle());
-                            tuijiandate.setText("出借期限:" + T1changerString.t2chager(data1Bean.getDeadline(), data1Bean.getDeadlineType()));
-                            lilvTv.setText((data1Bean.getAnnualRate() - 3) + "%+3%");
-                            tuijianfangshi.setText("计息方式:" + T1changerString.t4chager(data1Bean.getRepayType()));
-                            handler.sendEmptyMessage(1);
-
-                        }
-
-                    }
-                    switch (data1Bean.getBorrowStatus()) {
-                        case 2:
-                            home_five_rl.setVisibility(View.VISIBLE);
-                            break;
-                        case 3:
-                            home_five_rl.setVisibility(View.VISIBLE);
-                            break;
-                        case 4:
-                            home_five_rl.setVisibility(View.VISIBLE);
-                            break;
-                        default:
-                            home_five_rl.setVisibility(View.GONE);
-
-                            break;
-
-                    }
-
-                    data2Bean = oneBean.getData2();
-                    if (data2Bean == null) {
-                        home_six_rl.setVisibility(View.GONE);
-                    } else {
-                        if (data2Bean.getBorrowType() != 5) {
-                            //用户标
-                            yonghu.setText(data2Bean.getBorrowTitle());
-                            yonghudate.setText("出借期限:" + T1changerString.t2chager(data2Bean.getDeadline(), data2Bean.getDeadlineType()));
-                            yonghulilv.setText((data2Bean.getAnnualRate() - 1) + "%+1%");
-                            yonghufangshi.setText("计息方式:" + T1changerString.t4chager(data2Bean.getRepayType()));
-                            home_six_rl.setVisibility(View.VISIBLE);
-
-                            handler.sendEmptyMessage(2);
-
-                        } else {
-                            home_six_rl.setVisibility(View.GONE);
-
-                        }
-
-                    }
-
-
-                } else {
-//                    layoutContiant.setStatus(LoadingLayout.Error);
+                    SharedPreferencesUtils.savaHome(getActivity(), oneBean);
+                    setDate(oneBean);
                 }
 
 
@@ -449,30 +306,30 @@ public class Fragment_Home extends BaseFragment {
         });
     }
 
-    Handler handler = new Handler() {
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    //通知view，进度值有变化
-                    progressSeek.setProgressValue((int) (data1Bean.getProgress() * 100));
-                    progressSeek.postInvalidate();
+
+    private void setDate(OneBean oneBean) {
+        drawables.clear();
+        drawables.addAll(oneBean.getBanners());
+        banner.setDataSource(drawables);
+
+        // 设置 广播消息
+        data4Beens.clear();
+        data4Beens.addAll(oneBean.getData4());
+
+//                    new myThread().start();
+        bitHandler.removeMessages(0);
+        bitHandler.sendEmptyMessage(0);
+        if (oneBean.getData2().size() > 0) {
+            biaoBeenList.clear();
+            biaoBeenList.addAll(oneBean.getData2());
+        } else {
+            publicLv.setVisibility(View.GONE);
 
 
-                    break;
-                case 2:
-
-                    double progress2 = data2Bean.getProgress() * 100;
-                    progressBaryonghu.setProgressValue((int) progress2);
-
-                    progressBaryonghu.postInvalidate();
-                    break;
-            }
-
-            super.handleMessage(msg);
         }
-
-        ;
-    };
+        homeAdapter.notifyDataSetChanged();
+        swipeRefreshLayout.setRefreshing(false);
+    }
 
 
     private class myThread extends Thread {
@@ -517,11 +374,19 @@ public class Fragment_Home extends BaseFragment {
     }
 
 
-    @OnClick({R.id.gonggao, R.id.home_four_rl, R.id.home_five_rl, R.id.home_six_rl, R.id.re_weixin1, R.id.re_contact_list1, R.id.re_find1
-            , R.id.re_four})
+    @OnClick({R.id.gonggao, R.id.re_weixin1, R.id.re_contact_list1, R.id.re_find1
+            , R.id.re_four, R.id.more_invest})
     public void onClick(View view) {
+        if (AntiShake.check(view.getId())) {    //判断是否多次点击
+            return;
+        }
         Intent intent = null;
         switch (view.getId()) {
+            case R.id.more_invest:
+                intent = new Intent(getActivity(), MainActivity.class);
+                intent.putExtra("index", 1);
+                startActivity(intent);
+                break;
             case R.id.re_four:
                 intent = new Intent(getActivity(), WebNoTitileActivity.class);
                 intent.putExtra("url", NetService.API_SERVER_Url + "wechat/recommend.html");
@@ -549,21 +414,8 @@ public class Fragment_Home extends BaseFragment {
                 startActivity(intent);
 
                 break;
-            case R.id.home_five_rl:
-                intent = new Intent(getActivity(), DetailsRegularActivity.class);
-                if (data1Bean != null)
-                    intent.putExtra("id", data1Bean.getId() + "");
-                startActivity(intent);
-                break;
-            case R.id.home_six_rl:
-                intent = new Intent(getActivity(), DetailsRegularActivity.class);
-                intent.putExtra("id", data2Bean.getId() + "");
-                startActivity(intent);
-                break;
-            case R.id.home_four_rl:
-                intent = new Intent(getActivity(), DetailsActivity.class);
-                startActivity(intent);
-                break;
+
+
             case R.id.gonggao:
 
 

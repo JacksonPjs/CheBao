@@ -4,24 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.chebao.Adapter.BiaoAdapter;
 import com.chebao.Adapter.InvestAdapter;
 import com.chebao.App.Constant;
 import com.chebao.R;
 import com.chebao.bean.BiaoBean;
 import com.chebao.net.NetWorks;
-import com.chebao.ui.activity.DetailsActivity;
-import com.chebao.ui.activity.InvestSellOutActivity;
-import com.chebao.widget.DividerItemDecoration;
-import com.chebao.widget.ScrollLinearLayoutManager;
+import com.chebao.ui.activity.invest.InvestSellOutActivity;
+import com.chebao.utils.onclick.AntiShake;
 import com.pvj.xlibrary.loadinglayout.LoadingLayout;
 import com.pvj.xlibrary.loadinglayout.Utils;
 import com.pvj.xlibrary.loadingrecyclerview.LoadMoreRecyclerLoadingLayout;
@@ -46,10 +40,8 @@ public class Fragment_Invest extends Fragment implements LoadingLayout.OnReloadL
 
     int page = 1;
     int pagesize = 10;
-    @Bind(R.id.didibao_lilv)
-    TextView lilv;
-    @Bind(R.id.invest_item1)
-    RelativeLayout item;
+
+
 
     @Bind(R.id.public_listview)
     LoadMoreRecyclerLoadingLayout publicLv;
@@ -85,15 +77,14 @@ public class Fragment_Invest extends Fragment implements LoadingLayout.OnReloadL
         }
     }
 
-    @OnClick({R.id.invest_item1, R.id.sellout})
+    @OnClick({ R.id.sellout})
     public void onClick(View v) {
+        if (AntiShake.check(v.getId())) {    //判断是否多次点击
+            return;
+        }
         Intent intent = null;
         switch (v.getId()) {
-            case R.id.invest_item1:
 
-                intent = new Intent(getActivity(), DetailsActivity.class);
-                startActivity(intent);
-                break;
             case R.id.sellout:
 
                 intent = new Intent(getActivity(), InvestSellOutActivity.class);

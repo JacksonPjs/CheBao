@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/bg_white_circular"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <TextView
         style="@style/Home_padding"
@@ -14,206 +13,195 @@
         android:background="@drawable/shape_left_round"
         android:text="项目介绍"
         android:textColor="@color/white" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@mipmap/tips"
-        android:drawablePadding="@dimen/home_margin"
-        android:layout_marginTop="@dimen/home_margin_top"
-        android:layout_marginLeft="@dimen/home_margin"
-        android:text="项目类型"
-        android:textColor="@color/black_home_four_larger"
-        />
-
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/bg_org_circular"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
-        android:padding="@dimen/home_margin"
-        >
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/home_margin">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/tips"
+            android:drawablePadding="@dimen/home_margin"
+            android:text="项目类型"
+            android:textColor="@color/black_home_four_larger" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/home_margin"
+            android:background="@drawable/bg_org_circular"
+            android:padding="@dimen/home_margin"
             android:text="车辆抵押"
             android:textColor="@color/black_home_four_midle"
+
             />
 
     </LinearLayout>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@mipmap/tips"
-        android:drawablePadding="@dimen/home_margin"
-        android:layout_marginTop="@dimen/home_margin_top"
-        android:layout_marginLeft="@dimen/home_margin"
-        android:text="产品特点"
-        android:textColor="@color/black_home_four_larger"
-        />
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/bg_org_circular"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
-        android:padding="@dimen/home_margin"
-        >
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/home_margin">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/tips"
+            android:drawablePadding="@dimen/home_margin"
+            android:text="产品特点"
+            android:textColor="@color/black_home_four_larger" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/home_margin"
+            android:background="@drawable/bg_org_circular"
+            android:padding="@dimen/home_margin"
             android:text="借款抵押物足额抵押，利息稳定高效"
-            android:textColor="@color/black_home_four_midle"
-            />
+            android:textColor="@color/black_home_four_midle" />
 
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@mipmap/tips"
-        android:drawablePadding="@dimen/home_margin"
-        android:layout_marginTop="@dimen/home_margin_top"
-        android:layout_marginLeft="@dimen/home_margin"
-        android:text="起息时间"
-        android:textColor="@color/black_home_four_larger"
-        />
-
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/bg_org_circular"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
+        android:orientation="horizontal"
         android:padding="@dimen/home_margin"
 
         >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/tips"
+            android:drawablePadding="@dimen/home_margin"
+            android:text="起息时间"
+            android:textColor="@color/black_home_four_larger" />
+
+
         <TextView
             android:id="@+id/interestbearingtime"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/home_margin"
+            android:background="@drawable/bg_org_circular"
+            android:padding="@dimen/home_margin"
             android:text="@string/details_item1_1"
-            android:textColor="@color/black_home_four_midle"
-            />
+
+            android:textColor="@color/black_home_four_midle" />
 
     </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@mipmap/tips"
-        android:drawablePadding="@dimen/home_margin"
-        android:layout_marginTop="@dimen/home_margin_top"
-        android:layout_marginLeft="@dimen/home_margin"
-        android:text="还款方式"
-        android:textColor="@color/black_home_four_larger"
-        />
-
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/bg_org_circular"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
-        android:padding="@dimen/home_margin"
-        >
+        android:orientation="horizontal"
+        android:padding="@dimen/home_margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/tips"
+            android:drawablePadding="@dimen/home_margin"
+            android:text="还款方式"
+            android:textColor="@color/black_home_four_larger" />
+
         <TextView
             android:id="@+id/type"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/home_margin"
+            android:background="@drawable/bg_org_circular"
+            android:padding="@dimen/home_margin"
             android:text="@string/details_item1_1"
-            android:textColor="@color/black_home_four_midle"
-            />
+            android:textColor="@color/black_home_four_midle" />
 
     </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@mipmap/tips"
-        android:drawablePadding="@dimen/home_margin"
-        android:layout_marginTop="@dimen/home_margin_top"
-        android:layout_marginLeft="@dimen/home_margin"
-        android:text="起投金额"
-        android:textColor="@color/black_home_four_larger"
-        />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/bg_org_circular"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
+
         android:padding="@dimen/home_margin"
+
         >
+
         <TextView
-            android:id="@+id/mininvestamount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/tips"
+            android:drawablePadding="@dimen/home_margin"
+            android:text="起投金额"
+            android:textColor="@color/black_home_four_larger" />
+
+        <TextView
+            android:id="@+id/mininvestamount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/home_margin"
+            android:background="@drawable/bg_org_circular"
+            android:padding="@dimen/home_margin"
             android:text="@string/details_item1_1"
             android:textColor="@color/black_home_four_midle"
+
             />
 
 
     </LinearLayout>
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@mipmap/tips"
-        android:drawablePadding="@dimen/home_margin"
-        android:layout_marginTop="@dimen/home_margin_top"
-        android:layout_marginLeft="@dimen/home_margin"
-        android:text="产品介绍"
-        android:textColor="@color/black_home_four_larger"
-        />
-
-
-
-    <RelativeLayout
-        android:id="@+id/details_product"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:background="@drawable/bg_org_circular"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
         android:padding="@dimen/home_margin"
         >
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="查看产品介绍"
-            android:textColor="@color/org_home"
-            />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/tiaozhuan_chanpinxiangqing"
-            android:layout_alignParentRight="true"
-            />
+            android:drawableLeft="@mipmap/tips"
+            android:drawablePadding="@dimen/home_margin"
+            android:text="产品介绍"
+            android:textColor="@color/black_home_four_larger" />
 
-    </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/details_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_org_circular"
+            android:layout_marginLeft="@dimen/home_margin"
+            android:orientation="horizontal"
+            android:padding="@dimen/home_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="查看产品介绍"
+                android:textColor="@color/org_home" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/tiaozhuan_chanpinxiangqing" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
 
 </LinearLayout>

@@ -70,6 +70,7 @@ public class LoadMoreRecycleView extends RecyclerView {
 
         private static final int TYPE_NORMAL = 0x11;
         private static final int TYPE_BOTTOM = 0x12;
+        private static final int TYPE_HEADER = 0x13;
 
         private RecyclerView.Adapter adapter;
 
@@ -83,6 +84,9 @@ public class LoadMoreRecycleView extends RecyclerView {
 
             } else if (viewType == TYPE_BOTTOM) {
                 return new LoadMoreViewHolder(mFootView);
+            }
+            else if (viewType==TYPE_HEADER){
+
             }
 
             return adapter.onCreateViewHolder(parent, viewType);
@@ -167,7 +171,7 @@ public class LoadMoreRecycleView extends RecyclerView {
             }
 
         } else {
-//            mFootView.setVisibility(View.GONE);
+            mFootView.setVisibility(View.GONE);
         }
 
 

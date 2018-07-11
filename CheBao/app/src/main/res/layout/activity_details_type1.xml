@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_huise"
     android:orientation="vertical">
-   <ScrollView
+    <include layout="@layout/titlebar_back"
+        android:id="@+id/title_ll"
+        ></include>
+
+    <ScrollView
+        android:layout_below="@+id/title_ll"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:paddingBottom="50dp"
@@ -15,7 +20,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-    <include layout="@layout/titlebar_back"></include>
     <include layout="@layout/activity_details_type1_item1"></include>
     <include layout="@layout/activity_details_type1_item2"></include>
 
@@ -30,8 +34,9 @@
         android:layout_weight="1"
         android:height="50dp"
         android:background="@color/text_org"
+        android:layout_alignParentBottom="true"
         android:gravity="center"
         android:text="立即购买"
         android:textColor="#fff" />
 
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

@@ -1,43 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_height="50dp"
+    android:background="@color/ll_nor"
     >
+
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/ll_nor"
+        android:layout_height="match_parent">
 
-        >
-        <RelativeLayout
-            android:layout_width="55dp"
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
             android:onClick="onBack"
-            android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/back"
-                android:layout_width="20dp"
-                android:padding="3dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:src="@mipmap/back"
-                android:layout_height="wrap_content" />
-        </RelativeLayout>
+            android:padding="@dimen/home_margin"
+            android:src="@mipmap/back" />
+
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:layout_marginLeft="60dp"
-            android:textSize="@dimen/title_size"
             android:layout_centerInParent="true"
-            android:maxLines="1"
+            android:layout_marginLeft="60dp"
             android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/black_home_four_larger"
+            android:textSize="@dimen/title_size"
+            tools:text="@string/about"
 
             />
     </RelativeLayout>
-    <include
 
-        layout="@layout/line_match_parent"></include>
-</LinearLayout>
+</android.support.design.widget.AppBarLayout>
+

@@ -74,7 +74,7 @@
             android:layout_alignStart="@+id/data"
             android:layout_alignTop="@+id/text"
             android:layout_weight="1"
-            android:text="利息方式：满标计息，到期还本息"
+            android:text="满标计息，到期还本息"
             android:textColor="@color/black_home_four_midle"
             android:textSize="@dimen/text_samll_size" />
 
@@ -134,7 +134,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_toRightOf="@+id/symbol"
                 android:background="@null"
-                android:inputType="number"
+                android:inputType="number|numberDecimal"
                 android:maxLength="9"
                 android:padding="5dp" />
 
@@ -167,7 +167,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/tv_money_title"
-                android:text="300.00"
+                android:text="0.00"
                 android:textColor="@color/blue_pay"
 
                 />
@@ -309,13 +309,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_samll_size"
-                android:text="我已阅读并同意" />
+                android:text="@string/readandagree" />
 
             <TextView
                 android:id="@+id/fuwutiaolie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="《车宝金融点对点借款合同》"
+                android:text="@string/tv_contracts_lease"
                 android:textSize="@dimen/text_samll_size"
                 android:textColor="@color/org_home" />
         </LinearLayout>

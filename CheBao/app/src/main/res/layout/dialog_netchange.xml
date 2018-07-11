@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:padding="20dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_white_radd"
+        android:gravity="center"
+        android:orientation="vertical"
+
+        >
+        <TextView
+            android:id="@+id/msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="网络已断开"
+            android:textColor="@color/red_share"
+            android:layout_margin="@dimen/home_margin"
+            android:textSize="@dimen/text_18_size"
+            />
+
+
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="10dp"
+        android:background="@color/white"
+        ></View>
+    <ImageView
+        android:id="@+id/del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon_del"
+        />
+</LinearLayout>

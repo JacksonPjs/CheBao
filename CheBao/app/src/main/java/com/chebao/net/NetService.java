@@ -29,6 +29,7 @@ import com.chebao.bean.PayBean;
 import com.chebao.bean.ProductDetialBean;
 import com.chebao.bean.RandomListBean;
 import com.chebao.bean.RansomBean;
+import com.chebao.bean.ShareNoteBean;
 import com.chebao.bean.WithdrawBean;
 
 import retrofit2.http.POST;
@@ -41,12 +42,12 @@ public interface NetService {
 
 
     //服务器路径
-//    public static final String API_SERVER = "http://192.168.1.138:8080/jp/app/";//测试地址
-
+//    public static final String API_SERVER = "http://192.168.1.171:8080/jp/app/";//测试地址
+//
 
     public static String API_SERVER = "http://www.chebaojr.com/app/";  //上线地址
     //网址路径
-//    public static final String API_SERVER_Url = "http://192.168.1.138:8080/jp/";
+//    public static final String API_SERVER_Url = "http://192.168.1.171:8080/jp/";
     public static String API_SERVER_Url = "http://www.chebaojr.com/";
 
 
@@ -55,8 +56,8 @@ public interface NetService {
     //测试主程序地址
 //    public static final String API_SERVER_Main = "http://172.18.5.252:8080/jp/";
     //图片地址
-//    public static final String API_SERVER_Photo = "http://192.168.1.138:8080/jp/";
-
+//    public static final String API_SERVER_Photo = "http://192.168.1.171:8080/jp/";
+//
     public static final String API_SERVER_Photo = "http://www.chebaojr.com/";
 
 
@@ -398,6 +399,13 @@ public interface NetService {
     @POST("appInvestHqRecord.html")
     Observable<DepositListBean> appInvestHqRecord(@Query("Cookie") String Cookie, @Query("curPage") String curPage);
 
+    /**
+     * 邀请记录
+     *
+     * @return
+     */
+    @POST("selectReferee.html")
+    Observable<ShareNoteBean> selectReferee(@Query("Cookie") String Cookie, @Query("curPage") String curPage);
 
     /**
      * 版本升级

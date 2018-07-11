@@ -6,166 +6,46 @@
     android:orientation="vertical"
     android:background="@color/bg_huise"
     >
-
-    <RelativeLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/ll_nor"
-
-        >
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/title_hight"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="@string/app_name"
-            android:textColor="#000"
-            android:textSize="@dimen/title_size"
-            />
-
-        <TextView
-            android:id="@+id/sellout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="售罄"
-            android:textColor="#000"
-            android:padding="@dimen/home_margin"
-            android:textSize="@dimen/title_size"
-            android:layout_alignParentRight="true"
-            />
-
-    </RelativeLayout>
-    <View
-        android:background="@color/xixian"
-        android:layout_width="match_parent"
-        android:layout_height="1dp" />
-
+        android:layout_height="wrap_content">
         <RelativeLayout
-            android:id="@+id/invest_item1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/home_margin"
-            android:background="@mipmap/didibao_shouye"
-            android:paddingBottom="@dimen/home_margin_top"
+            android:layout_height="@dimen/title_hight"
+            android:background="@color/ll_nor"
 
             >
 
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/title_hight"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textColor="#000"
+                android:textSize="@dimen/title_size"
+                />
 
             <TextView
-                style="@style/Home_padding"
+                android:id="@+id/sellout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:background="@drawable/shape_left_round"
-                android:text="滴滴宝"
-                android:textColor="@color/white" />
-
-
-            <TextView
-                style="@style/Home_padding"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="售罄"
+                android:textColor="#000"
+                android:padding="@dimen/home_margin"
+                android:textSize="@dimen/title_size"
                 android:layout_alignParentRight="true"
-                android:layout_margin="@dimen/home_margin"
-                android:background="@drawable/rect_rounded_left_right_arc"
-                android:text="限时加息2%"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_samll_size"
                 />
-
-            <TextView
-                android:id="@+id/didibao_lilv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/home_four_margin_top"
-                android:text="7.8%+2%"
-                android:textColor="@color/num_color"
-                android:textSize="@dimen/text_larger_size"
-                tools:text="7.8%+2%" />
-
-            <TextView
-                android:id="@+id/nianhua"
-                android:layout_below="@+id/didibao_lilv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black_home_four_midle"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/home_margin"
-                tools:text="@string/nianhuashouyi"
-                android:text="@string/nianhuashouyi"
-                />
-
-            <LinearLayout
-                android:id="@+id/didibao_ll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/nianhua"
-                android:layout_marginTop="@dimen/home_margin"
-                android:layout_centerHorizontal="true"
-                android:orientation="horizontal"
-                android:gravity="center"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/linghuocunqu"
-                    android:textColor="@color/black_home_four_small"
-                    android:layout_marginRight="@dimen/home_margin"
-                    />
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/black_home_four_small"
-
-                    ></View>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/dangri"
-                    android:textColor="@color/black_home_four_small"
-                    android:layout_marginRight="@dimen/home_margin"
-                    android:layout_marginLeft="@dimen/home_margin"
-                    />
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/black_home_four_small"
-
-                    ></View>
-                <TextView
-                    android:layout_marginLeft="@dimen/home_margin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/gaoxiao"
-                    android:textColor="@color/black_home_four_small"
-                    />
-
-            </LinearLayout>
-
-            <TextView
-                style="@style/Home_padding"
-                android:layout_below="@+id/didibao_ll"
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/oval_gradient_linear"
-                android:gravity="center"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/home_margin"
-                android:text="@string/liji"
-                android:textColor="@color/white"
-                />
-
 
         </RelativeLayout>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
+
 
         <com.pvj.xlibrary.loadingrecyclerview.LoadMoreRecyclerLoadingLayout
             android:id="@+id/public_listview"

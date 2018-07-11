@@ -8,35 +8,41 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chebao.Adapter.RecycleAdapter;
 import com.chebao.App.Constant;
 import com.chebao.R;
 import com.chebao.bean.CenterIndexBean;
 import com.chebao.bean.LoginBean;
 import com.chebao.net.NetWorks;
-import com.chebao.ui.activity.Activity_discount;
-import com.chebao.ui.activity.AnnouncementListActivity;
+import com.chebao.ui.activity.mine.Activity_discount;
+import com.chebao.ui.activity.mine.AnnouncementListActivity;
 import com.chebao.ui.activity.mine.ChagerActivity;
-import com.chebao.ui.activity.HuiKuanActivity;
-import com.chebao.ui.activity.InvestmentActivity;
-import com.chebao.ui.activity.MyActivtity;
-import com.chebao.ui.activity.SecurityActivity;
-import com.chebao.ui.activity.TransactionActivity;
-import com.chebao.ui.activity.WithdrawActivity;
+import com.chebao.ui.activity.mine.HuiKuanActivity;
+import com.chebao.ui.activity.mine.InvestmentActivity;
+import com.chebao.ui.activity.security.SecurityActivity;
+import com.chebao.ui.activity.mine.TransactionActivity;
+import com.chebao.ui.activity.pay.WithdrawActivity;
 import com.chebao.ui.activity.login2register.LoginActivity;
 import com.chebao.ui.activity.mine.ShareActivity;
+import com.chebao.ui.activity.mine.ShareNoteActivity;
 import com.chebao.utils.IntentUtils;
-import com.chebao.utils.PermissionsManager;
 import com.chebao.utils.SharedPreferencesUtils;
+import com.chebao.utils.onclick.AntiShake;
 import com.pvj.xlibrary.log.Logger;
 import com.pvj.xlibrary.utils.T;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -45,18 +51,10 @@ import rx.Subscriber;
 
 public class Fragment_Mine extends BaseFragment {
 
-    //    @Bind(R.id.user_head)
-//    CircleImageView userHead;
+
     @Bind(R.id.chager)
     TextView chager;
-    @Bind(R.id.count_to)
-    LinearLayout countTo;
-    @Bind(R.id.touzi_to)
-    LinearLayout touziTo;
-    @Bind(R.id.money_to)
-    LinearLayout moneyTo;
-    @Bind(R.id.measgg_to)
-    LinearLayout measggTo;
+
     @Bind(R.id.set)
     ImageView set;
     @Bind(R.id.name)
@@ -77,6 +75,12 @@ public class Fragment_Mine extends BaseFragment {
     View withdraw;
     boolean IsGone = false;
 
+    @Bind(R.id.recyclerView)
+    RecyclerView recyclerView;
+    List<String> explain;
+    RecycleAdapter adapter;
+    @Bind(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     /**
      * find view from layout and set listener
@@ -87,18 +91,145 @@ public class Fragment_Mine extends BaseFragment {
      */
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        if (Build.VERSION.SDK_INT >= 21) {
+//            getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+//            getActivity().getWindow().setStatusBarColor(Color.TRANSPARENT);
+//        }
+//        //透明状态栏
+//              if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            Window window = getActivity().getWindow();
+//            window.setFlags(
+//                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+//                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//        }
+
+
+
+
         View rootView = inflater.inflate(R.layout.fragment_mine,
                 null);
         ButterKnife.bind(this, rootView);
 
         //标题内容  ChagerActivity
         SharedPreferencesUtils.getUserName(getContext());
-
+        netLogin();
+        init();
         return rootView;
     }
 
     public void init() {
+        List<String> list = new ArrayList<String>();
+        list.add("出借记录");
+        list.add("回款查询");
+        list.add("我的红包");
+        list.add("交易记录");
+        list.add("实名认证");
+        list.add("邀请好友");
+        list.add("邀请记录");
+        list.add("更多");
 
+        explain = new ArrayList<String>();
+        explain.add("查看出借明细");
+        explain.add("查看回款明细");
+        explain.add("查看红包明细");
+        explain.add("查看交易明细");
+        explain.add("让账户更安全");
+        explain.add("返利加息");
+        explain.add("返利加息");
+        explain.add("敬请期待");
+
+        List<Integer> drawbles = new ArrayList<Integer>();
+        drawbles.add(R.mipmap.icon_mine_investment);
+        drawbles.add(R.mipmap.icon_mine_huikuan);
+        drawbles.add(R.mipmap.icon_mine_hongbao);
+        drawbles.add(R.mipmap.icon_mine_transaction);
+        drawbles.add(R.mipmap.icon_mine_certification);
+        drawbles.add(R.mipmap.icon_mine_share);
+        drawbles.add(R.mipmap.icon_share_note);
+        drawbles.add(R.mipmap.icon_mine_more);
+
+
+        adapter = new RecycleAdapter(getActivity(), list, explain, drawbles);
+        //设置布局管理器
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+//        recyclerView.addItemDecoration(new DividerGridItemDecoration(getActivity()));
+//        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.HORIZONTAL_LIST));
+//        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL_LIST));
+        //添加分割线
+        //设置Adapter
+        recyclerView.setAdapter(adapter);
+        swipeRefreshLayout.setColorSchemeResources(new int[]{R.color.colorAccent, R.color.colorPrimary});
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Intent intent = null;
+                if ((Boolean) SharedPreferencesUtils.getParam(getActivity(), "islogin", false)) {
+                    selectUserIndex();
+                } else {
+                    swipeRefreshLayout.setRefreshing(false);
+                    intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                    T.ShowToastForLong(getActivity(), "未登录");
+                }
+
+
+            }
+        });
+        //解决滑动冲突
+        recyclerView.setNestedScrollingEnabled(false);
+        adapter.setOnItemClickLitener(new RecycleAdapter.OnItemClickLitener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                if (AntiShake.check(view.getId())) {    //判断是否多次点击
+                    return;
+                }
+
+                if (!(Boolean) SharedPreferencesUtils.getParam(getActivity(), "islogin", false)) {
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                    T.ShowToastForLong(getActivity(), "未登录");
+                    return;
+                }
+                Intent intent = null;
+                switch (position) {
+                    case 0:
+                        //出借记录
+                        intent = new Intent(getActivity(), InvestmentActivity.class);
+                        getActivity().startActivity(intent);
+                        break;
+                    case 1:
+                        //回款查询
+                        intent = new Intent(getActivity(), HuiKuanActivity.class);
+                        getActivity().startActivity(intent);
+                        break;
+                    case 2:
+                        //我的红包
+                        intent = new Intent(getActivity(), Activity_discount.class);
+                        getActivity().startActivity(intent);
+                        break;
+                    case 3:
+                        //交易记录
+                        intent = new Intent(getActivity(), TransactionActivity.class);
+                        getActivity().startActivity(intent);
+                        break;
+                    case 4:
+                        //实名认证
+                        intent = new Intent(getActivity(), SecurityActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 5:
+                        //邀请好友
+                        intent = new Intent(getActivity(), ShareActivity.class);
+                        getActivity().startActivity(intent);
+                        break;
+                    case 6:
+                        //邀请好友记录
+                        intent = new Intent(getActivity(), ShareNoteActivity.class);
+                        getActivity().startActivity(intent);
+                        break;
+                }
+            }
+        });
     }
 
     /**
@@ -109,8 +240,7 @@ public class Fragment_Mine extends BaseFragment {
 
     }
 
-
-
+    //动态权限结果返回
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -138,7 +268,6 @@ public class Fragment_Mine extends BaseFragment {
         eableuse.setText((String) SharedPreferencesUtils.getParam(getActivity(), "total3", "0"));
         usableamount.setText((String) SharedPreferencesUtils.getParam(getActivity(), "usableAmount", "0"));
         toatal2.setText((String) SharedPreferencesUtils.getParam(getActivity(), "toatal2", "0"));
-        netLogin();
 
 
     }
@@ -148,27 +277,26 @@ public class Fragment_Mine extends BaseFragment {
      */
     @Override
     public void requestData() {
-
+//        selectUserIndex();
     }
 
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
-
-
-    @OnClick({R.id.count_to, R.id.withdraw, R.id.chager, R.id.touzi_to, R.id.money_to,
-            R.id.measgg_to, R.id.set, R.id.eye_set, R.id.mine_to, R.id.cell_phohe, R.id.xiaoxi,
-            R.id.certification_go, R.id.share_to})
+    @OnClick({R.id.withdraw, R.id.chager, R.id.set, R.id.eye_set, R.id.cell_phohe, R.id.xiaoxi})
     public void onClick(View view) {
         Intent intent = null;
+        if (AntiShake.check(view.getId())) {    //判断是否多次点击
+            return;
+        }
+        if (!(Boolean) SharedPreferencesUtils.getParam(getActivity(), "islogin", false)) {
+
+            intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+            T.ShowToastForLong(getActivity(), "未登录");
+            return;
+        }
+
         switch (view.getId()) {
-            case R.id.certification_go:
-                intent = new Intent(getActivity(), SecurityActivity.class);
-                startActivity(intent);
-                break;
+
             case R.id.cell_phohe:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
                         && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE)
@@ -197,31 +325,17 @@ public class Fragment_Mine extends BaseFragment {
                 } else {
                     eyeSet.setImageDrawable(getResources().getDrawable(R.mipmap.icon_eye));
                     toatal.setText((String) SharedPreferencesUtils.getParam(getActivity(), "total1", "0"));
-                    eableuse.setText((String) SharedPreferencesUtils.getParam(getActivity(), "usableAmount", "0"));
+                    eableuse.setText((String) SharedPreferencesUtils.getParam(getActivity(), "total3", "0"));
                     toatal2.setText((String) SharedPreferencesUtils.getParam(getActivity(), "total2", "0"));
                     IsGone = false;
                 }
 
                 break;
-            case R.id.mine_to:
-                //我的滴滴宝
-                intent = new Intent(getActivity(), MyActivtity.class);
-                getActivity().startActivity(intent);
-                break;
 
-            case R.id.count_to:
-                //我的红包
-                intent = new Intent(getActivity(), Activity_discount.class);
-                getActivity().startActivity(intent);
-                break;
+
             case R.id.set:
                 //安全设置
                 intent = new Intent(getActivity(), SecurityActivity.class);
-                getActivity().startActivity(intent);
-                break;
-            case R.id.touzi_to:
-                //回款查询
-                intent = new Intent(getActivity(), HuiKuanActivity.class);
                 getActivity().startActivity(intent);
                 break;
 
@@ -250,21 +364,7 @@ public class Fragment_Mine extends BaseFragment {
                 }
 
                 break;
-            case R.id.money_to:
-                //交易记录
-                intent = new Intent(getActivity(), TransactionActivity.class);
-                getActivity().startActivity(intent);
-                break;
 
-            case R.id.measgg_to:
-                //出借记录
-                intent = new Intent(getActivity(), InvestmentActivity.class);
-                getActivity().startActivity(intent);
-                break;
-            case R.id.share_to:
-                intent = new Intent(getActivity(), ShareActivity.class);
-                getActivity().startActivity(intent);
-                break;
 
         }
     }
@@ -283,17 +383,17 @@ public class Fragment_Mine extends BaseFragment {
     }
 
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        if (!hidden) {
-//            name.setText((String) SharedPreferencesUtils.getParam(getActivity(), "name", ""));
-            toatal.setText((String) SharedPreferencesUtils.getParam(getActivity(), "total1", "0"));
-            eableuse.setText((String) SharedPreferencesUtils.getParam(getActivity(), "usableAmount", "0"));
-
-
-            selectUserIndex();
-        }
-    }
+//    @Override
+//    public void onHiddenChanged(boolean hidden) {
+//        if (!hidden) {
+////            name.setText((String) SharedPreferencesUtils.getParam(getActivity(), "name", ""));
+//            toatal.setText((String) SharedPreferencesUtils.getParam(getActivity(), "total1", "0"));
+//            eableuse.setText((String) SharedPreferencesUtils.getParam(getActivity(), "total3", "0"));
+//
+//
+//            selectUserIndex();
+//        }
+//    }
 
     private void selectUserIndex() {
 
@@ -305,19 +405,33 @@ public class Fragment_Mine extends BaseFragment {
 
                                      @Override
                                      public void onError(Throwable e) {
-
+                                         swipeRefreshLayout.setRefreshing(false);
+                                         T.ShowToastForShort(getActivity(), "网络异常");
                                          Logger.json(e.toString());
                                      }
 
                                      @Override
                                      public void onNext(CenterIndexBean loginBean) {
+                                         swipeRefreshLayout.setRefreshing(false);
                                          if (loginBean.getState().getStatus() == 0) {
+
+
                                              SharedPreferencesUtils.savaUser2(getActivity(), loginBean);
 //                                             name.setText(SharedPreferencesUtils.getUserName(getActivity()));
                                              toatal.setText(loginBean.getTotal1() + "");
                                              toatal2.setText(loginBean.getTotal2() + "");
                                              eableuse.setText(loginBean.getTotal3() + "");
+
                                              usableamount.setText(loginBean.getUsableAmount() + "");
+                                             String huankuan = "暂无回款";
+                                             BigDecimal huank = loginBean.getDhksum();
+                                             int i = huank.compareTo(new BigDecimal(0));
+                                             if (i != 0) {
+                                                 huankuan = "回款金额" + huank + "元";
+                                             }
+                                             explain.set(1, huankuan);
+                                             explain.set(2, "还剩" + loginBean.getSumhb() + "张");
+                                             adapter.notifyDataSetChanged();
                                          } else if (loginBean.getState().getStatus() == 99) {
                                              netLogin();
                                          }
@@ -350,11 +464,13 @@ public class Fragment_Mine extends BaseFragment {
 
                             selectUserIndex();
 
-                        } else if (loginBean.getState().getStatus() == 15) {
-                            SharedPreferencesUtils.setParam(getContext(), "islogin", false);
-                            Intent intent = new Intent(getActivity(), LoginActivity.class);
-                            startActivity(intent);
-                        } else {
+                        }
+//                        else if (loginBean.getState().getStatus() == 15) {
+//                            SharedPreferencesUtils.setParam(getContext(), "islogin", false);
+//                            Intent intent = new Intent(getActivity(), LoginActivity.class);
+//                            startActivity(intent);
+//                        }
+                        else {
                             SharedPreferencesUtils.setParam(getContext(), "islogin", false);
                             Intent intent = new Intent(getActivity(), LoginActivity.class);
                             startActivity(intent);
@@ -363,4 +479,11 @@ public class Fragment_Mine extends BaseFragment {
                 }
         );
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+
 }

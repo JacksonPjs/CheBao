@@ -7,173 +7,33 @@
     android:divider="@drawable/divider"
     android:scrollbars="none"
     android:paddingBottom="@dimen/home_margin"
+    android:orientation="vertical"
     >
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="@dimen/home_margin"
+        android:background="@drawable/elevation_home_bg"
+        android:paddingBottom="3dp"
+        tools:listitem="@layout/recycle_item"
+        tools:layoutManager="GridLayoutManager"
+        tools:spanCount="2"
+        ></android.support.v7.widget.RecyclerView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:showDividers="middle"
-
         >
-        <LinearLayout
-            android:id="@+id/certification_go"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:src="@mipmap/icon_mine_bank" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="实名认证"
-                android:textSize="@dimen/text_size"
-                android:textColor="@color/black_home_four_small"
-                tools:text="我的滴滴宝" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/mine_to"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:src="@mipmap/mine_mine" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="我的滴滴宝"
-                android:textSize="@dimen/text_size"
-                android:textColor="@color/black_home_four_small"
-                tools:text="我的滴滴宝" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/measgg_to"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:src="@mipmap/touzi_wode" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:textColor="@color/black_home_four_small"
-                android:text="出借记录"
-                android:textSize="@dimen/text_size" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/count_to"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:src="@mipmap/hongbao_wode" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="@string/mine_count"
-                android:textSize="@dimen/text_size"
-                android:textColor="@color/black_home_four_small"
-                tools:text="我的红包" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/touzi_to"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:src="@mipmap/huikuan_wode" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:textColor="@color/black_home_four_small"
-                android:text="回款查询"
-                android:textSize="@dimen/text_size" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/money_to"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:src="@mipmap/jiaoyi_wode" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:textColor="@color/black_home_four_small"
-                android:text="交易记录"
-                android:textSize="@dimen/text_size" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/share_to"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:src="@mipmap/icon_share" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:textColor="@color/black_home_four_small"
-                android:text="@string/share"
-                android:textSize="@dimen/text_size" />
-        </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="@dimen/home_margin"
-
             >
 
             <LinearLayout
@@ -181,12 +41,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_oval_white"
+                android:paddingLeft="@dimen/home_margin"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="客服电话:  400-****-***"
+                    android:text="客服电话:  400-065-1520"
                     android:layout_gravity="center_vertical"
 
                     />
@@ -203,7 +64,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="工作日：9:00-18:00  |  节假日：9:00-18:00"
+            android:text="@string/mine_kefu"
+            android:textColor="@color/black_mine_small"
+            android:textSize="@dimen/text_samll_size"
+
+            /> <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/mine_date"
             android:textColor="@color/black_mine_small"
             android:textSize="@dimen/text_samll_size"
 

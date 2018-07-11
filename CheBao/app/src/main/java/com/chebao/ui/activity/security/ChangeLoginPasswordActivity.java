@@ -3,6 +3,7 @@ package com.chebao.ui.activity.security;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -18,6 +19,7 @@ import com.chebao.ui.activity.login2register.LoginActivity;
 import com.chebao.utils.DialogUtils;
 import com.chebao.utils.LoginRegisterUtils;
 import com.chebao.utils.SharedPreferencesUtils;
+import com.chebao.utils.onclick.AntiShake;
 import com.pvj.xlibrary.log.Logger;
 import com.pvj.xlibrary.utils.T;
 
@@ -57,7 +59,10 @@ public class ChangeLoginPasswordActivity extends BaseActivity {
     }
 
     @OnClick(R.id.chagerloginpwd_go)
-    public void onClick() {
+    public void onClick(View view) {
+        if (AntiShake.check(view.getId())) {    //判断是否多次点击
+            return;
+        }
         if(LoginRegisterUtils.isNullOrEmpty(fword)){
             T.ShowToastForShort(this,"密码不能为空");
             return;

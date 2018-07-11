@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -28,14 +29,14 @@ import com.chebao.geetest_sdk.SdkUtilsNEW;
 import com.chebao.net.NetService;
 import com.chebao.net.NetWorks;
 import com.chebao.ui.activity.BaseActivity;
-import com.chebao.ui.activity.WebActivity;
-import com.chebao.ui.activity.WebNoTitileActivity;
+import com.chebao.ui.activity.web.WebNoTitileActivity;
 import com.chebao.utils.CodeUtils;
 import com.chebao.utils.DialogUtils;
 import com.chebao.utils.LoginRegisterUtils;
 import com.chebao.utils.SharedPreferencesUtils;
 import com.chebao.utils.TimeUtils;
 import com.chebao.utils.UUIDs;
+import com.chebao.utils.onclick.AntiShake;
 import com.pvj.xlibrary.log.Logger;
 import com.pvj.xlibrary.utils.CountDownButtonHelper;
 import com.pvj.xlibrary.utils.T;
@@ -72,6 +73,8 @@ public class RegisterActivity extends BaseActivity {
     ImageView codeImageview;
     @Bind(R.id.cbox)
     CheckBox checkBox;
+    @Bind(R.id.ll_tuijain)
+    LinearLayout linearLayout;
 
     Dialog dialog;
 
@@ -90,7 +93,7 @@ public class RegisterActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
-        activity=this;
+        activity = this;
         title.setText("注册");
 
         codeUtils = CodeUtils.getInstance();
@@ -102,13 +105,26 @@ public class RegisterActivity extends BaseActivity {
                 isCheck = isChecked;
             }
         });
-         channel_name= AppUtils.getChannelName(activity);
-        Log.i("channel_name==",channel_name+"");
+        channel_name = AppUtils.getChannelName(activity);
+        Log.i("channel_name==", channel_name + "");
+        if (channel_name.equals("chenku")){
+            linearLayout.setVisibility(View.GONE);
+        }else if (channel_name.equals("mizuan")){
+
+            linearLayout.setVisibility(View.GONE);
+        }else if (channel_name.equals("zhongyi")){
+
+            linearLayout.setVisibility(View.GONE);
+        }
+
     }
 
 
     @OnClick({R.id.get_regist, R.id.regist_go, R.id.code_img, R.id.fuwutiaolie})
     public void onClick(View view) {
+        if (AntiShake.check(view.getId())) {    //判断是否多次点击
+            return;
+        }
         Intent intent = null;
         switch (view.getId()) {
 
@@ -176,12 +192,12 @@ public class RegisterActivity extends BaseActivity {
                     return;
                 }
                 if (!isCheck) {
-                    T.ShowToastForShort(this, "尚未阅读或同意《车宝金融注册服务协议》");
+                    T.ShowToastForShort(this, getString(R.string.tv_not_readandagree));
                     return;
                 }
 
 
-                regist(phone.getText().toString(), password.getText().toString(), yzm.getText().toString(), tuijian.getText().toString()+"");
+                regist(phone.getText().toString(), password.getText().toString(), yzm.getText().toString(), tuijian.getText().toString() + "");
 
 
 //
@@ -302,7 +318,6 @@ public class RegisterActivity extends BaseActivity {
     }
 
 
-
     /**
      * 验证推荐人是否正确
      *
@@ -365,9 +380,10 @@ public class RegisterActivity extends BaseActivity {
             }
         });
     }
+
     private void regist(final String cellPhone, final String pwd, String regCode, String regReferee) {
 
-        NetWorks.regist(cellPhone, pwd, regCode, regReferee,channel_name,"1", new Subscriber<InfoBean>() {
+        NetWorks.regist(cellPhone, pwd, regCode, regReferee, channel_name, "1", new Subscriber<InfoBean>() {
             @Override
             public void onStart() {
                 if (dialog == null) {
@@ -436,7 +452,7 @@ public class RegisterActivity extends BaseActivity {
             @Override
             public void onNext(LoginBean s) {
                 if (s.getState().getStatus() == 0) {
-                    Intent intent=new Intent(RegisterActivity.this, MainActivity.class);
+                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                     startActivity(intent);
 
                     finish();

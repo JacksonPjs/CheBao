@@ -99,7 +99,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="利息方式：满标计息，到期还本息"
+            android:text="满标计息，到期还本息"
             android:textColor="@color/black_home_four_midle"
             android:textSize="@dimen/text_samll_size" />
 

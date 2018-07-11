@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-import com.chebao.App.Constant;
 import com.chebao.MyApplication;
 import com.chebao.R;
 import com.chebao.bean.CertificationBean;
@@ -19,12 +18,11 @@ import com.chebao.bean.LoginBean;
 import com.chebao.net.NetService;
 import com.chebao.net.NetWorks;
 import com.chebao.ui.activity.BaseActivity;
-import com.chebao.ui.activity.SecurityActivity;
 import com.chebao.ui.activity.login2register.LoginActivity;
 import com.chebao.utils.DialogUtils;
-import com.chebao.utils.IntentUtils;
 import com.chebao.utils.LoginRegisterUtils;
 import com.chebao.utils.SharedPreferencesUtils;
+import com.chebao.utils.onclick.AntiShake;
 import com.chebao.widget.dialog.ToastDialog;
 import com.pvj.xlibrary.loadinglayout.LoadingLayout;
 import com.pvj.xlibrary.log.Logger;
@@ -91,6 +89,9 @@ public class AddBankActivity extends BaseActivity {
 
     @OnClick({R.id.login_go})
     public void onClick(View view) {
+        if (AntiShake.check(view.getId())) {    //判断是否多次点击
+            return;
+        }
         switch (view.getId()) {
 
             case R.id.login_go:

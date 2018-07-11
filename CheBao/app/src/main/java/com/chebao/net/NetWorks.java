@@ -29,6 +29,7 @@ import com.chebao.bean.PayBean;
 import com.chebao.bean.ProductDetialBean;
 import com.chebao.bean.RandomListBean;
 import com.chebao.bean.RansomBean;
+import com.chebao.bean.ShareNoteBean;
 import com.chebao.bean.WithdrawBean;
 
 import rx.Observable;
@@ -483,7 +484,14 @@ public class NetWorks extends RetrofitUtils {
     public static void appInvestHqRecord(String Cookie,String page,Subscriber<DepositListBean> observer) {
         setSubscribe(service.appInvestHqRecord(Cookie,page), observer);
     }
-
+    /**
+     *邀请记录
+     *
+     * @param observer
+     */
+    public static void selectReferee(String Cookie,String page,Subscriber<ShareNoteBean> observer) {
+        setSubscribe(service.selectReferee(Cookie,page), observer);
+    }
     /**
      * 插入观察者-泛型
      *

@@ -10,17 +10,11 @@ import android.widget.TextView;
 
 import com.chebao.Adapter.ViewPagerFramentAdapter;
 import com.chebao.R;
-import com.chebao.bean.BorrowDetailBean;
 import com.chebao.ui.activity.BaseActivity;
-import com.chebao.ui.activity.PayActivity;
 import com.chebao.ui.activity.pay.RandomFragment.Fragment_Random;
 import com.chebao.ui.activity.pay.RandomFragment.Fragment_invest;
-import com.chebao.ui.fragment.Fragemt_Explain;
-import com.chebao.ui.fragment.Fragemt_Notes;
-import com.chebao.ui.fragment.Fragment_Data;
 import com.pvj.xlibrary.loadinglayout.Utils;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 

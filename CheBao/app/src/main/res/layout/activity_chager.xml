@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/layout_back" />
+        <include layout="@layout/titlebar_back" />
         <com.pvj.xlibrary.loadinglayout.LoadingLayout
             android:id="@+id/layout_contiant"
             android:layout_width="match_parent"
@@ -57,7 +57,7 @@
                     android:layout_toRightOf="@+id/text"
                     android:background="@null"
                     android:hint="金额不低于100.00元"
-                    android:inputType="number"
+                    android:inputType="number|numberDecimal"
                     android:maxLength="6"
                     android:maxLines="1"
                     android:textColor="@color/status4"

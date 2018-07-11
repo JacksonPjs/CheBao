@@ -1,248 +1,260 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/bg_mine"
-        >
-
-        <RelativeLayout
-            android:id="@+id/rl_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp">
-
-            <ImageView
-                android:id="@+id/set"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/shezhi_wode"
-                android:padding="@dimen/home_margin"
-                android:layout_centerVertical="true"
-                />
-
-
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="@string/mine"
-                android:textColor="#fff"
-                android:textSize="@dimen/title_size" />
-
-
-            <ImageView
-                android:id="@+id/xiaoxi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:padding="@dimen/home_margin"
-                android:src="@mipmap/xiaoxi_wode"
-
-                />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/textview_money"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rl_title"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:text="总资产（元）"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_12_size"
-
-            />
-
-        <TextView
-            android:id="@+id/toatal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textview_money"
-            android:layout_centerHorizontal="true"
-            android:text="500000000.00"
-            android:textColor="@color/white"
-            android:textSize="29sp"
-
-            />
-
-        <ImageView
-            android:id="@+id/eye_set"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/textview_money"
-            android:layout_marginLeft="5dp"
-            android:layout_toRightOf="@+id/textview_money"
-            android:src="@mipmap/icon_eye" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/toatal"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:paddingBottom="10dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="待收利息（元）"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/eableuse"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2222222.00"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="累计利息（元）"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/toatal2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2222222.00"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-        </LinearLayout>
-    </RelativeLayout>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none"
-
-        >
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     android:orientation="vertical"
     >
-    <RelativeLayout
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="15dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="可用余额(元)："
-            android:textColor="@color/black_home_four_small"
-            android:textSize="@dimen/text_15_size" />
+        >
 
-        <TextView
-            android:id="@+id/usableamount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@mipmap/bg_mine"
+            app:contentScrim="@color/org_home"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:fitsSystemWindows="true"
+            android:clipToPadding="true"
 
-            android:text="1111111.11" />
+            >
 
 
-    </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:paddingBottom="20dp"
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:background="@color/xixian" />
+                >
 
-    <LinearLayout
+
+                <TextView
+                    android:id="@+id/textview_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="总资产（元）"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_12_size"
+
+                    />
+
+                <TextView
+                    android:id="@+id/toatal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textview_money"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/white"
+                    android:textSize="29sp"
+                    tools:text="500000000.00"
+
+                    />
+
+                <ImageView
+                    android:id="@+id/eye_set"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/textview_money"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/textview_money"
+                    android:src="@mipmap/icon_eye" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/toatal"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="待收利息（元）"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/eableuse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2222222.00"
+                            android:textColor="@color/white"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="累计利息（元）"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/toatal2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2222222.00"
+                            android:textColor="@color/white"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/title_hight"
+                app:layout_collapseMode="pin"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/set"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/home_margin"
+                        android:src="@mipmap/shezhi_wode" />
+
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/mine"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/title_size" />
+
+
+                    <ImageView
+                        android:id="@+id/xiaoxi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/home_margin"
+                        android:src="@mipmap/xiaoxi_wode"
+
+                        />
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="10dp">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_white_black"
-            android:gravity="center"
+            android:scrollbars="none"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
 
-            android:orientation="horizontal">
+            >
 
-            <Button
-                android:id="@+id/chager"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@null"
-                android:text="充值"
-                android:textColor="@color/black_home_four_midle"
-                android:textSize="@dimen/text_15_size"
+                android:orientation="vertical">
 
-                />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/elevaton_white_bg"
+                    android:padding="15dp">
 
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="可用余额(元)："
+                        android:textSize="@dimen/text_15_size" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="50dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_org_radd"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/withdraw"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:text="提现"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_15_size"
-
-                />
-
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/usableamount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_money"
+                        android:text="1111111.11"
+                        android:textColor="@color/org_home"
+                        android:textSize="@dimen/text_18_size" />
 
 
-    </LinearLayout>
+                    <TextView
+                        android:id="@+id/withdraw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/oval_gradient_linear"
+                        android:paddingBottom="@dimen/home_margin"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:paddingTop="@dimen/home_margin"
+                        android:text="提现"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_15_size"
 
-    <include
+                        />
 
-        layout="@layout/include_mine_item" />
-</LinearLayout>
+                    <TextView
+                        android:id="@+id/chager"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/home_margin"
+                        android:layout_toLeftOf="@+id/withdraw"
+                        android:background="@drawable/shape_blue_oval_gradient"
+                        android:paddingBottom="@dimen/home_margin"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:paddingTop="@dimen/home_margin"
+                        android:text="充值"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_15_size"
 
-    </ScrollView>
-</LinearLayout>
+                        />
+                </RelativeLayout>
+
+
+                <include
+
+                    layout="@layout/include_mine_item" />
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</android.support.design.widget.CoordinatorLayout>

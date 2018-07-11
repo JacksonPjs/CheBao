@@ -18,6 +18,7 @@ import com.chebao.ui.activity.BaseActivity;
 import com.chebao.utils.ImageUtil;
 import com.chebao.utils.QRCodeUtil;
 import com.chebao.utils.SharedPreferencesUtils;
+import com.chebao.utils.onclick.AntiShake;
 import com.chebao.widget.dialog.ShareDialog;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
@@ -74,11 +75,13 @@ public class ShareActivity extends BaseActivity {
 
     @OnClick({R.id.iv_qrcode,R.id.share_umeng,R.id.share_dialog})
     public void onClick(View view) {
+        if (AntiShake.check(view.getId())) {    //判断是否多次点击
+            return;
+        }
        switch (view.getId()){
            case R.id.share_dialog:
                final ShareDialog shareDialog=new ShareDialog(activity);
                shareDialog.setBitmap(bitmap);
-
                shareDialog.show();
                shareDialog.setOnLongClickShareListener(new ShareDialog.OnLongClickShareListener() {
                    @Override
@@ -104,15 +107,15 @@ public class ShareActivity extends BaseActivity {
                            Manifest.permission.WRITE_APN_SETTINGS};
                    ActivityCompat.requestPermissions(this,mPermissionList,123);
                }
-               UMImage image = new UMImage(ShareActivity.this, R.mipmap.ic_share);
+               UMImage image = new UMImage(ShareActivity.this, R.mipmap.ic_launcher_round);
 
                UMWeb web = new UMWeb(url);
-               web.setTitle("车宝金融-人脉总动员，邀请送现金红包，可提现！");//标题
+               web.setTitle("鑫贝通宝-人脉总动员，邀请送现金红包，可提现！");//标题
                web.setThumb(image);  //缩略图
                web.setDescription("邀请好友注册，百元现金红包+现金券壕礼送不停，邀请多多，现金多多，可提至银行卡！");//描述
                new ShareAction(activity).withMedia(web)
                        .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE
-                       ,SHARE_MEDIA.SINA)
+                      , SHARE_MEDIA.SINA)
                        .setCallback(shareListener).open();
                break;
 
